@@ -40,7 +40,7 @@ CFASimplified/
 
 ```bash
 git clone https://github.com/sanmitra-b/CounterFactualAgentic-Simplified.git
-cd Counterfactual-Driven-Agentic-AI-Framework
+cd CounterFactualAgentic-Simplified
 ```
 
 ## Step 2: Create and Activate Conda Environment
@@ -55,7 +55,7 @@ conda activate Counterfactual
 
 ## Setup
 
-Ensure you are in root folder (../CFASimplified/)
+Ensure you are in the project root folder.
 
 ```bash
 pip install -r requirements.txt
