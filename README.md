@@ -30,8 +30,30 @@ CFASimplified/
 └── requirements.txt
 ```
 
-## Setup
+## Prerequisites
 
+- Python 3.11+
+- Conda or venv for environment management
+- Git for version control
+
+## Step 1: Clone the Repository
+
+```bash
+git clone https://github.com/sanmitra-b/CounterFactualAgentic-Simplified.git
+cd Counterfactual-Driven-Agentic-AI-Framework
+```
+
+## Step 2: Create and Activate Conda Environment
+
+```bash
+# Create environment
+conda create -n Counterfactual python=3.11 -y
+
+# Activate environment
+conda activate Counterfactual
+```
+
+## Setup
 
 Ensure you are in root folder (../CFASimplified/)
 
