@@ -1,0 +1,76 @@
+{
+  "sources": {
+    "news": {
+      "enabled": true,
+      "methods": {
+        "newsapi": {
+          "enabled": true,
+          "api_key": "3eca2036c90a426e9513d8b04ec70599",
+          "note": "NewsAPI for financial news articles"
+        },
+        "rss": {
+          "enabled": true,
+          "feeds": [
+            "https://feeds.finance.yahoo.com/rss/2.0/headline",
+            "https://feeds.bloomberg.com/markets/news.rss",
+            "https://feeds.reuters.com/finance/markets"
+          ]
+        }
+      },
+      "keywords": ["stock market", "economic news", "financial crisis", "market crash", "inflation", "interest rates"],
+      "max_results_per_source": 50
+    },
+    "financial": {
+      "enabled": true,
+      "alpha_vantage": {
+        "enabled": true,
+        "api_key": "N4JMB7XG63V126PM",
+        "tickers": ["AAPL", "MSFT", "GOOGL", "TSLA", "GLD", "USO"],
+        "note": "Stock price data via Alpha Vantage API"
+      },
+      "yfinance": {
+        "enabled": true,
+        "tickers": ["^GSPC", "^IXIC", "^DJI", "VIX"],
+        "note": "Index data (yfinance, no API key needed)"
+      },
+      "fred": {
+        "enabled": true,
+        "api_key": "2027ed85461b99f7e41641fa767602f9",
+        "indicators": ["UNRATE", "CPIAUCSL", "DEXUSEU", "DCOILWTICO", "DGS10"],
+        "note": "Economic indicators from Federal Reserve"
+      }
+    },
+    "weather": {
+      "enabled": true,
+      "openweather": {
+        "enabled": true,
+        "api_key": "dd1e5ab028a86c6306b49f5037ed96d8",
+        "cities": ["New York", "London", "Tokyo", "Shanghai", "Singapore", "Hong Kong", "Sydney", "Dubai"],
+        "note": "Weather data for major economic cities"
+      }
+    },
+    "social": {
+      "enabled": true,
+      "pushshift": {
+        "enabled": true,
+        "base_url": "https://api.pushshift.io/reddit/search/submission/",
+        "fallback_urls": [
+          "https://api.pullpush.io/reddit/search/submission/"
+        ],
+        "subreddits": ["stocks", "investing", "economy", "finance"],
+        "keywords": ["market", "inflation", "recession", "earnings", "rate hike"],
+        "max_results_per_query": 25,
+        "days_back": 7,
+        "note": "Pushshift public API (no API key required)"
+      }
+    }
+  },
+  "output": {
+    "formats": ["json", "csv"],
+    "output_dir": "../data/"
+  },
+  "logging": {
+    "level": "INFO",
+    "log_file": "data_collection.log"
+  }
+}

@@ -1,0 +1,139 @@
+{
+  "analysed_at": "2026-04-16T19:26:53.299977Z",
+  "domain": "supply_chain",
+  "top_risks": [
+    {
+      "rank": 1,
+      "category": "Commodity Price Volatility",
+      "title": "Oil Price Fluctuations",
+      "severity": "HIGH",
+      "confidence": 0.85,
+      "probability_next_30d": 0.7,
+      "evidence": [
+        "Norse Atlantic ASA cuts LA flights due to high jet fuel costs",
+        "Oil supplies tightened due to war in Iran"
+      ],
+      "affected_entities": [
+        "Norse Atlantic ASA",
+        "Oil suppliers"
+      ],
+      "affected_geo": [
+        "US",
+        "Iran"
+      ],
+      "causal_chain": "War in Iran \u2192 Oil supply disruptions \u2192 High jet fuel costs \u2192 Flight cancellations",
+      "recommended_action": "Diversify fuel sources and consider hedging against price volatility"
+    },
+    {
+      "rank": 2,
+      "category": "Trade Disruptions",
+      "title": "Tariff Impacts",
+      "severity": "MEDIUM",
+      "confidence": 0.8,
+      "probability_next_30d": 0.6,
+      "evidence": [
+        "Tariffs risk reigniting inflation",
+        "Student lender's securitization push falters due to Trump visa curbs"
+      ],
+      "affected_entities": [
+        "Student lenders",
+        "Importers"
+      ],
+      "affected_geo": [
+        "US",
+        "Wall Street"
+      ],
+      "causal_chain": "Tariffs \u2192 Inflation \u2192 Economic instability",
+      "recommended_action": "Monitor tariff developments and adjust supply chain strategies accordingly"
+    },
+    {
+      "rank": 3,
+      "category": "Economic Instability",
+      "title": "Recession Fears",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "probability_next_30d": 0.5,
+      "evidence": [
+        "Reddit posts discussing recession fears",
+        "Economic instability due to tariffs and war"
+      ],
+      "affected_entities": [
+        "Investors",
+        "Consumers"
+      ],
+      "affected_geo": [
+        "US",
+        "Global"
+      ],
+      "causal_chain": "Economic instability \u2192 Recession fears \u2192 Reduced consumer spending",
+      "recommended_action": "Diversify investments and maintain a flexible supply chain"
+    },
+    {
+      "rank": 4,
+      "category": "Commodity Market Volatility",
+      "title": "Gold Price Fluctuations",
+      "severity": "LOW",
+      "confidence": 0.6,
+      "probability_next_30d": 0.4,
+      "evidence": [
+        "Gold price fallen about 9% since the start of the war"
+      ],
+      "affected_entities": [
+        "Gold investors",
+        "Jewelry manufacturers"
+      ],
+      "affected_geo": [
+        "Global"
+      ],
+      "causal_chain": "War \u2192 Gold price fluctuations \u2192 Investment uncertainty",
+      "recommended_action": "Monitor gold price developments and adjust investment strategies"
+    },
+    {
+      "rank": 5,
+      "category": "Weather Disruptions",
+      "title": "Global Weather Patterns",
+      "severity": "LOW",
+      "confidence": 0.5,
+      "probability_next_30d": 0.3,
+      "evidence": [
+        "Broken clouds and overcast clouds in major cities"
+      ],
+      "affected_entities": [
+        "Airlines",
+        "Shipping companies"
+      ],
+      "affected_geo": [
+        "Tokyo",
+        "Singapore",
+        "Shanghai",
+        "Dubai",
+        "London"
+      ],
+      "causal_chain": "Weather patterns \u2192 Flight disruptions \u2192 Supply chain delays",
+      "recommended_action": "Monitor weather forecasts and adjust logistics plans accordingly"
+    }
+  ],
+  "soft_risks": [
+    {
+      "category": "Social Unrest",
+      "title": "Public Sentiment",
+      "note": "Negative sentiment on social media platforms regarding economic policies and trade disruptions"
+    },
+    {
+      "category": "Regulatory Changes",
+      "title": "Visa Curbs",
+      "note": "Trump visa curbs affecting student lenders and international students"
+    },
+    {
+      "category": "Market Trends",
+      "title": "Investor Confidence",
+      "note": "Investors expressing concerns about market volatility and economic instability"
+    }
+  ],
+  "data_quality_note": "The intelligence bundle has a layer1 completeness of 75% and an average reliability of 0.93, indicating a moderate level of confidence in the data. However, the lack of data in the stocks and ports sections may impact the accuracy of the analysis.",
+  "model_used": "llama-3.3-70b-versatile",
+  "layer1_completeness": 0.75,
+  "layer2_enriched_at": "2026-04-16T19:26:53.299977",
+  "aggregate_sentiment": "neutral",
+  "avg_reliability": 0.9275
+}

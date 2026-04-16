@@ -1,0 +1,24 @@
+﻿# Shared project dependencies (Layer 1 + Layer 2 + Layer 3)
+# Install with: pip install -r requirements.txt
+
+# Core utilities
+python-dotenv>=0.19.0
+requests>=2.28.0
+numpy>=1.23.0
+pandas>=1.5.0
+
+# Layer 1 collectors
+feedparser>=6.0.0
+yfinance>=0.2.0
+
+# Layer 2 NLP
+torch>=2.1.0
+transformers>=4.40.0
+
+# Layer 3 LLM + schema validation
+groq>=0.9.0
+pydantic>=2.7.0
+
+# Optional development tools
+pytest>=7.0.0
+black>=22.0.0
