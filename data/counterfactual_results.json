@@ -1,0 +1,462 @@
+[
+  {
+    "risk_id": "risk_1",
+    "risk_title": "Oil Price Fluctuations",
+    "category": "Commodity Price Volatility",
+    "all_iterations": [
+      {
+        "risk_id": "risk_1",
+        "risk_title": "Oil Price Fluctuations",
+        "category": "Commodity Price Volatility",
+        "iteration": 2,
+        "intervention": {
+          "variable": "demand_shock",
+          "intervened_value": 0.5499999999999999,
+          "rationale": "Reduce demand_shock from 0.67 to 0.55 based on causal leverage and prior ITE feedback.",
+          "iteration": 2
+        },
+        "observed_risk_severity": 0.7575000000000001,
+        "cf_risk_severity_mean": 0.7258728448686097,
+        "ite_mean": -0.03162715513139029,
+        "ite_ci95_low": -0.07554131908844654,
+        "ite_ci95_high": 0.014156172578936092,
+        "probability_of_improvement": 0.935,
+        "explained_causal_path": "demand_shock -> risk_severity",
+        "threshold_cleared": false,
+        "created_at": "2026-04-17T19:12:24.772105"
+      },
+      {
+        "risk_id": "risk_1",
+        "risk_title": "Oil Price Fluctuations",
+        "category": "Commodity Price Volatility",
+        "iteration": 3,
+        "intervention": {
+          "variable": "inventory_shortage",
+          "intervened_value": 0.49874999999999997,
+          "rationale": "Reduce inventory_shortage from 0.67 to 0.50 based on causal leverage and prior ITE feedback.",
+          "iteration": 3
+        },
+        "observed_risk_severity": 0.7575000000000001,
+        "cf_risk_severity_mean": 0.671918491022516,
+        "ite_mean": -0.08558150897748412,
+        "ite_ci95_low": -0.13110642442503023,
+        "ite_ci95_high": -0.04222216644717728,
+        "probability_of_improvement": 1.0,
+        "explained_causal_path": "inventory_shortage -> risk_severity",
+        "threshold_cleared": false,
+        "created_at": "2026-04-17T19:12:25.861620"
+      },
+      {
+        "risk_id": "risk_1",
+        "risk_title": "Oil Price Fluctuations",
+        "category": "Commodity Price Volatility",
+        "iteration": 4,
+        "intervention": {
+          "variable": "inventory_shortage",
+          "intervened_value": 0.44875,
+          "rationale": "Reduce inventory_shortage from 0.67 to 0.45 based on causal leverage and prior ITE feedback.",
+          "iteration": 4
+        },
+        "observed_risk_severity": 0.7575000000000001,
+        "cf_risk_severity_mean": 0.6500487215300386,
+        "ite_mean": -0.10745127846996151,
+        "ite_ci95_low": -0.15502589986367843,
+        "ite_ci95_high": -0.06315868679711174,
+        "probability_of_improvement": 1.0,
+        "explained_causal_path": "inventory_shortage -> risk_severity",
+        "threshold_cleared": true,
+        "created_at": "2026-04-17T19:12:26.898378"
+      }
+    ],
+    "best_intervention": {
+      "risk_id": "risk_1",
+      "risk_title": "Oil Price Fluctuations",
+      "category": "Commodity Price Volatility",
+      "iteration": 4,
+      "intervention": {
+        "variable": "inventory_shortage",
+        "intervened_value": 0.44875,
+        "rationale": "Reduce inventory_shortage from 0.67 to 0.45 based on causal leverage and prior ITE feedback.",
+        "iteration": 4
+      },
+      "observed_risk_severity": 0.7575000000000001,
+      "cf_risk_severity_mean": 0.6500487215300386,
+      "ite_mean": -0.10745127846996151,
+      "ite_ci95_low": -0.15502589986367843,
+      "ite_ci95_high": -0.06315868679711174,
+      "probability_of_improvement": 1.0,
+      "explained_causal_path": "inventory_shortage -> risk_severity",
+      "threshold_cleared": true,
+      "created_at": "2026-04-17T19:12:26.898378"
+    },
+    "total_iterations": 3
+  },
+  {
+    "risk_id": "risk_2",
+    "risk_title": "Tariff Impacts",
+    "category": "Trade Disruptions",
+    "all_iterations": [
+      {
+        "risk_id": "risk_2",
+        "risk_title": "Tariff Impacts",
+        "category": "Trade Disruptions",
+        "iteration": 2,
+        "intervention": {
+          "variable": "geopolitical_tension",
+          "intervened_value": 0.5599999999999999,
+          "rationale": "Reduce geopolitical_tension from 0.68 to 0.56 based on causal leverage and prior ITE feedback.",
+          "iteration": 2
+        },
+        "observed_risk_severity": 0.5850000000000001,
+        "cf_risk_severity_mean": 0.5544017334353768,
+        "ite_mean": -0.030598266564623243,
+        "ite_ci95_low": -0.06558423543063487,
+        "ite_ci95_high": 0.0067497044634604935,
+        "probability_of_improvement": 0.91,
+        "explained_causal_path": "geopolitical_tension -> risk_severity",
+        "threshold_cleared": false,
+        "created_at": "2026-04-17T19:12:27.946457"
+      },
+      {
+        "risk_id": "risk_2",
+        "risk_title": "Tariff Impacts",
+        "category": "Trade Disruptions",
+        "iteration": 3,
+        "intervention": {
+          "variable": "shipping_delay",
+          "intervened_value": 0.36400000000000005,
+          "rationale": "Reduce shipping_delay from 0.53 to 0.36 based on causal leverage and prior ITE feedback.",
+          "iteration": 3
+        },
+        "observed_risk_severity": 0.5850000000000001,
+        "cf_risk_severity_mean": 0.49532187768343816,
+        "ite_mean": -0.08967812231656186,
+        "ite_ci95_low": -0.13070524742703968,
+        "ite_ci95_high": -0.046649439726539794,
+        "probability_of_improvement": 1.0,
+        "explained_causal_path": "shipping_delay -> risk_severity",
+        "threshold_cleared": false,
+        "created_at": "2026-04-17T19:12:28.980165"
+      },
+      {
+        "risk_id": "risk_2",
+        "risk_title": "Tariff Impacts",
+        "category": "Trade Disruptions",
+        "iteration": 4,
+        "intervention": {
+          "variable": "shipping_delay",
+          "intervened_value": 0.31400000000000006,
+          "rationale": "Reduce shipping_delay from 0.53 to 0.31 based on causal leverage and prior ITE feedback.",
+          "iteration": 4
+        },
+        "observed_risk_severity": 0.5850000000000001,
+        "cf_risk_severity_mean": 0.46810403522473415,
+        "ite_mean": -0.11689596477526588,
+        "ite_ci95_low": -0.16881506586189474,
+        "ite_ci95_high": -0.07162148766495506,
+        "probability_of_improvement": 1.0,
+        "explained_causal_path": "shipping_delay -> risk_severity",
+        "threshold_cleared": true,
+        "created_at": "2026-04-17T19:12:30.058167"
+      }
+    ],
+    "best_intervention": {
+      "risk_id": "risk_2",
+      "risk_title": "Tariff Impacts",
+      "category": "Trade Disruptions",
+      "iteration": 4,
+      "intervention": {
+        "variable": "shipping_delay",
+        "intervened_value": 0.31400000000000006,
+        "rationale": "Reduce shipping_delay from 0.53 to 0.31 based on causal leverage and prior ITE feedback.",
+        "iteration": 4
+      },
+      "observed_risk_severity": 0.5850000000000001,
+      "cf_risk_severity_mean": 0.46810403522473415,
+      "ite_mean": -0.11689596477526588,
+      "ite_ci95_low": -0.16881506586189474,
+      "ite_ci95_high": -0.07162148766495506,
+      "probability_of_improvement": 1.0,
+      "explained_causal_path": "shipping_delay -> risk_severity",
+      "threshold_cleared": true,
+      "created_at": "2026-04-17T19:12:30.058167"
+    },
+    "total_iterations": 3
+  },
+  {
+    "risk_id": "risk_3",
+    "risk_title": "Recession Fears",
+    "category": "Economic Instability",
+    "all_iterations": [
+      {
+        "risk_id": "risk_3",
+        "risk_title": "Recession Fears",
+        "category": "Economic Instability",
+        "iteration": 2,
+        "intervention": {
+          "variable": "demand_shock",
+          "intervened_value": 0.3,
+          "rationale": "Reduce demand_shock from 0.42 to 0.30 based on causal leverage and prior ITE feedback.",
+          "iteration": 2
+        },
+        "observed_risk_severity": 0.54,
+        "cf_risk_severity_mean": 0.5071297746204209,
+        "ite_mean": -0.03287022537957911,
+        "ite_ci95_low": -0.07931027290338996,
+        "ite_ci95_high": 0.014042135340516067,
+        "probability_of_improvement": 0.91,
+        "explained_causal_path": "demand_shock -> risk_severity",
+        "threshold_cleared": false,
+        "created_at": "2026-04-17T19:12:31.115183"
+      },
+      {
+        "risk_id": "risk_3",
+        "risk_title": "Recession Fears",
+        "category": "Economic Instability",
+        "iteration": 3,
+        "intervention": {
+          "variable": "inventory_shortage",
+          "intervened_value": 0.34,
+          "rationale": "Reduce inventory_shortage from 0.51 to 0.34 based on causal leverage and prior ITE feedback.",
+          "iteration": 3
+        },
+        "observed_risk_severity": 0.54,
+        "cf_risk_severity_mean": 0.45427081079162124,
+        "ite_mean": -0.08572918920837887,
+        "ite_ci95_low": -0.12870722769537205,
+        "ite_ci95_high": -0.04412438084559783,
+        "probability_of_improvement": 1.0,
+        "explained_causal_path": "inventory_shortage -> risk_severity",
+        "threshold_cleared": false,
+        "created_at": "2026-04-17T19:12:32.147442"
+      },
+      {
+        "risk_id": "risk_3",
+        "risk_title": "Recession Fears",
+        "category": "Economic Instability",
+        "iteration": 4,
+        "intervention": {
+          "variable": "inventory_shortage",
+          "intervened_value": 0.29000000000000004,
+          "rationale": "Reduce inventory_shortage from 0.51 to 0.29 based on causal leverage and prior ITE feedback.",
+          "iteration": 4
+        },
+        "observed_risk_severity": 0.54,
+        "cf_risk_severity_mean": 0.43031301567705277,
+        "ite_mean": -0.10968698432294724,
+        "ite_ci95_low": -0.15557251855861262,
+        "ite_ci95_high": -0.06582772600262146,
+        "probability_of_improvement": 1.0,
+        "explained_causal_path": "inventory_shortage -> risk_severity",
+        "threshold_cleared": true,
+        "created_at": "2026-04-17T19:12:33.175826"
+      }
+    ],
+    "best_intervention": {
+      "risk_id": "risk_3",
+      "risk_title": "Recession Fears",
+      "category": "Economic Instability",
+      "iteration": 4,
+      "intervention": {
+        "variable": "inventory_shortage",
+        "intervened_value": 0.29000000000000004,
+        "rationale": "Reduce inventory_shortage from 0.51 to 0.29 based on causal leverage and prior ITE feedback.",
+        "iteration": 4
+      },
+      "observed_risk_severity": 0.54,
+      "cf_risk_severity_mean": 0.43031301567705277,
+      "ite_mean": -0.10968698432294724,
+      "ite_ci95_low": -0.15557251855861262,
+      "ite_ci95_high": -0.06582772600262146,
+      "probability_of_improvement": 1.0,
+      "explained_causal_path": "inventory_shortage -> risk_severity",
+      "threshold_cleared": true,
+      "created_at": "2026-04-17T19:12:33.175826"
+    },
+    "total_iterations": 3
+  },
+  {
+    "risk_id": "risk_4",
+    "risk_title": "Gold Price Fluctuations",
+    "category": "Commodity Market Volatility",
+    "all_iterations": [
+      {
+        "risk_id": "risk_4",
+        "risk_title": "Gold Price Fluctuations",
+        "category": "Commodity Market Volatility",
+        "iteration": 2,
+        "intervention": {
+          "variable": "demand_shock",
+          "intervened_value": 0.5499999999999999,
+          "rationale": "Reduce demand_shock from 0.67 to 0.55 based on causal leverage and prior ITE feedback.",
+          "iteration": 2
+        },
+        "observed_risk_severity": 0.35750000000000004,
+        "cf_risk_severity_mean": 0.3256935789648403,
+        "ite_mean": -0.03180642103515975,
+        "ite_ci95_low": -0.07202718685856413,
+        "ite_ci95_high": 0.01042407505540614,
+        "probability_of_improvement": 0.93,
+        "explained_causal_path": "demand_shock -> risk_severity",
+        "threshold_cleared": false,
+        "created_at": "2026-04-17T19:12:34.325908"
+      },
+      {
+        "risk_id": "risk_4",
+        "risk_title": "Gold Price Fluctuations",
+        "category": "Commodity Market Volatility",
+        "iteration": 3,
+        "intervention": {
+          "variable": "inventory_shortage",
+          "intervened_value": 0.29875,
+          "rationale": "Reduce inventory_shortage from 0.47 to 0.30 based on causal leverage and prior ITE feedback.",
+          "iteration": 3
+        },
+        "observed_risk_severity": 0.35750000000000004,
+        "cf_risk_severity_mean": 0.27137303506742155,
+        "ite_mean": -0.08612696493257847,
+        "ite_ci95_low": -0.1284908511209623,
+        "ite_ci95_high": -0.04577059575476859,
+        "probability_of_improvement": 1.0,
+        "explained_causal_path": "inventory_shortage -> risk_severity",
+        "threshold_cleared": false,
+        "created_at": "2026-04-17T19:12:35.439819"
+      },
+      {
+        "risk_id": "risk_4",
+        "risk_title": "Gold Price Fluctuations",
+        "category": "Commodity Market Volatility",
+        "iteration": 4,
+        "intervention": {
+          "variable": "inventory_shortage",
+          "intervened_value": 0.24875,
+          "rationale": "Reduce inventory_shortage from 0.47 to 0.25 based on causal leverage and prior ITE feedback.",
+          "iteration": 4
+        },
+        "observed_risk_severity": 0.35750000000000004,
+        "cf_risk_severity_mean": 0.2483077955200892,
+        "ite_mean": -0.10919220447991079,
+        "ite_ci95_low": -0.15324519054254146,
+        "ite_ci95_high": -0.07180148030857036,
+        "probability_of_improvement": 1.0,
+        "explained_causal_path": "inventory_shortage -> risk_severity",
+        "threshold_cleared": true,
+        "created_at": "2026-04-17T19:12:36.490720"
+      }
+    ],
+    "best_intervention": {
+      "risk_id": "risk_4",
+      "risk_title": "Gold Price Fluctuations",
+      "category": "Commodity Market Volatility",
+      "iteration": 4,
+      "intervention": {
+        "variable": "inventory_shortage",
+        "intervened_value": 0.24875,
+        "rationale": "Reduce inventory_shortage from 0.47 to 0.25 based on causal leverage and prior ITE feedback.",
+        "iteration": 4
+      },
+      "observed_risk_severity": 0.35750000000000004,
+      "cf_risk_severity_mean": 0.2483077955200892,
+      "ite_mean": -0.10919220447991079,
+      "ite_ci95_low": -0.15324519054254146,
+      "ite_ci95_high": -0.07180148030857036,
+      "probability_of_improvement": 1.0,
+      "explained_causal_path": "inventory_shortage -> risk_severity",
+      "threshold_cleared": true,
+      "created_at": "2026-04-17T19:12:36.490720"
+    },
+    "total_iterations": 3
+  },
+  {
+    "risk_id": "risk_5",
+    "risk_title": "Global Weather Patterns",
+    "category": "Weather Disruptions",
+    "all_iterations": [
+      {
+        "risk_id": "risk_5",
+        "risk_title": "Global Weather Patterns",
+        "category": "Weather Disruptions",
+        "iteration": 2,
+        "intervention": {
+          "variable": "weather_severity",
+          "intervened_value": 0.58,
+          "rationale": "Reduce weather_severity from 0.70 to 0.58 based on causal leverage and prior ITE feedback.",
+          "iteration": 2
+        },
+        "observed_risk_severity": 0.3125,
+        "cf_risk_severity_mean": 0.2976879447117701,
+        "ite_mean": -0.0148120552882299,
+        "ite_ci95_low": -0.054905114787540746,
+        "ite_ci95_high": 0.02427753873960386,
+        "probability_of_improvement": 0.745,
+        "explained_causal_path": "weather_severity -> shipping_delay -> risk_severity",
+        "threshold_cleared": false,
+        "created_at": "2026-04-17T19:12:37.580214"
+      },
+      {
+        "risk_id": "risk_5",
+        "risk_title": "Global Weather Patterns",
+        "category": "Weather Disruptions",
+        "iteration": 3,
+        "intervention": {
+          "variable": "shipping_delay",
+          "intervened_value": 0.34500000000000003,
+          "rationale": "Reduce shipping_delay from 0.52 to 0.35 based on causal leverage and prior ITE feedback.",
+          "iteration": 3
+        },
+        "observed_risk_severity": 0.3125,
+        "cf_risk_severity_mean": 0.22319302388922302,
+        "ite_mean": -0.08930697611077694,
+        "ite_ci95_low": -0.13049332857593865,
+        "ite_ci95_high": -0.041881170260336956,
+        "probability_of_improvement": 1.0,
+        "explained_causal_path": "shipping_delay -> risk_severity",
+        "threshold_cleared": false,
+        "created_at": "2026-04-17T19:12:38.626740"
+      },
+      {
+        "risk_id": "risk_5",
+        "risk_title": "Global Weather Patterns",
+        "category": "Weather Disruptions",
+        "iteration": 4,
+        "intervention": {
+          "variable": "shipping_delay",
+          "intervened_value": 0.29500000000000004,
+          "rationale": "Reduce shipping_delay from 0.52 to 0.30 based on causal leverage and prior ITE feedback.",
+          "iteration": 4
+        },
+        "observed_risk_severity": 0.3125,
+        "cf_risk_severity_mean": 0.195587244034025,
+        "ite_mean": -0.116912755965975,
+        "ite_ci95_low": -0.15747318193566295,
+        "ite_ci95_high": -0.07615337558459429,
+        "probability_of_improvement": 1.0,
+        "explained_causal_path": "shipping_delay -> risk_severity",
+        "threshold_cleared": true,
+        "created_at": "2026-04-17T19:12:39.673690"
+      }
+    ],
+    "best_intervention": {
+      "risk_id": "risk_5",
+      "risk_title": "Global Weather Patterns",
+      "category": "Weather Disruptions",
+      "iteration": 4,
+      "intervention": {
+        "variable": "shipping_delay",
+        "intervened_value": 0.29500000000000004,
+        "rationale": "Reduce shipping_delay from 0.52 to 0.30 based on causal leverage and prior ITE feedback.",
+        "iteration": 4
+      },
+      "observed_risk_severity": 0.3125,
+      "cf_risk_severity_mean": 0.195587244034025,
+      "ite_mean": -0.116912755965975,
+      "ite_ci95_low": -0.15747318193566295,
+      "ite_ci95_high": -0.07615337558459429,
+      "probability_of_improvement": 1.0,
+      "explained_causal_path": "shipping_delay -> risk_severity",
+      "threshold_cleared": true,
+      "created_at": "2026-04-17T19:12:39.673690"
+    },
+    "total_iterations": 3
+  }
+]

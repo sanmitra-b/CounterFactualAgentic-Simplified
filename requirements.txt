@@ -18,6 +18,12 @@ transformers>=4.40.0
 # Layer 3 LLM + schema validation
 groq>=0.9.0
 pydantic>=2.7.0
+regex>=2024.9.11,<2025.0.0
+
+# Layer 4 counterfactual + causal graph + agent loop
+networkx>=3.2.0
+dowhy>=0.11.0
+cloudpickle>=3.0.0
 
 # Optional development tools
 pytest>=7.0.0
