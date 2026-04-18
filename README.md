@@ -5,7 +5,7 @@ This repository is organized as a 4-layer pipeline:
 1. Layer 1: Data collection and normalization
 2. Layer 2: NLP enrichment (sentiment, entities, geo tags)
 3. Layer 3: LLM risk analysis report generation
-4. Layer 4: Counterfactual-driven agentic optimization (causal interventions)
+4. Layer 4: Counterfactual-driven agentic optimization (Causal interventions and SCM)
 
 ## Folder Structure
 
