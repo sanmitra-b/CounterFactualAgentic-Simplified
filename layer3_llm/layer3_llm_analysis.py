@@ -1,36 +1,3 @@
-"""
-layer3_llm_analysis.py — Layer 3: LLM Risk Analysis (Groq · LLaMA-3 70B)
-=========================================================================
-Architecture (from design):
-  ┌──────────────────────────────────────────────────────────────┐
-  │                  Top 5 Risk Report (JSON)                    │
-  │   rank · category · severity · confidence · evidence · entities│
-  └──────────────────────────────────────────────────────────────┘
-        ▲                       ▲
-  Prompt Orchestrator      Groq Inference
-  LangChain PromptTemplate  llama3-70b-8192
-  Token budget / ctx window  Structured JSON output
-  Fallback: Together.AI       Top 5 + soft risks
- 
-Input  : enriched_risk_bundle.json  (Layer 2 output)
-Output : risk_report.json           (Layer 4 input)
- 
-Pipeline steps:
-  1. Load EnrichedRiskInputBundle from JSON
-  2. Prompt Orchestrator — build context window within token budget
-       · Rank signals by reliability × |sentiment_score|
-       · Serialise top-N signals per category into XML sections
-       · Inject aggregate NLP metadata + geo_tags
-  3. Groq Inference — structured JSON output (Top 5 risks + soft risks)
-  4. Parse + validate via Pydantic (RiskReport)
-  5. Persist risk_report.json → ready for Layer 4
- 
-Usage:
-    python layer3_llm/layer3_llm_analysis.py
-    python layer3_llm/layer3_llm_analysis.py --input data/enriched_risk_bundle.json
-    python layer3_llm/layer3_llm_analysis.py --output data/risk_report.json
-"""
- 
 from __future__ import annotations
  
 import os
