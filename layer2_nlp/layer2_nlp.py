@@ -1,35 +1,3 @@
-"""
-layer2_nlp.py — Layer 2: NLP Pre-Processing (HuggingFace Transformers)
-=======================================================================
-Architecture (from design):
-  ┌─────────────────────────────────────────────────────────────┐
-  │                  EnrichedRiskInputBundle                    │
-  │   sentiment_scores · NER entities · geo_tags · reliability  │
-  └─────────────────────────────────────────────────────────────┘
-        ▲                  ▲                    ▲
-   FinBERT          Twitter-RoBERTa         BERT-NER
-   ProsusAI/finbert  cardiffnlp model     dslim/bert-base-NER
-   Financial sent.   Social sentiment     Entity extraction
- 
-Input  : RiskInputBundle  (risk_input_bundle.json from Layer 1)
-Output : EnrichedRiskInputBundle (enriched_risk_bundle.json → Layer 3)
- 
-Pipeline steps:
-  1. Load RiskInputBundle from JSON (or accept object directly)
-  2. For each text source decide which model(s) to run:
-       News / Port / Commodity   → FinBERT (financial sentiment)
-       Social signals            → Twitter-RoBERTa (social sentiment)
-       All text                  → BERT-NER (entity + geo extraction)
-  3. Aggregate scores, attach to enriched schemas
-  4. Compute per-item reliability weights (source credibility heuristic)
-  5. Persist EnrichedRiskInputBundle to JSON
- 
-Usage:
-    python layer2_nlp/layer2_nlp.py
-    python layer2_nlp/layer2_nlp.py --input data/risk_input_bundle.json
-    python layer2_nlp/layer2_nlp.py --output data/enriched_risk_bundle.json
-"""
- 
 from __future__ import annotations
  
 import os
