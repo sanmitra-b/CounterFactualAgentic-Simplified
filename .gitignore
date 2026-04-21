@@ -1,9 +1,19 @@
 # Python cache and bytecode
 __pycache__/
 *.py[cod]
+*.pyc
 
 # Local environment files
 .env
 
 # Local logs
 *.log
+
+# Data and DBs
+data/*.json
+data/chroma_db/
+data/faiss_index.pkl
+data/numpy_index.pkl
+
+# Cache
+.cache/
