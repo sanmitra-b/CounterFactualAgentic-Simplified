@@ -27,9 +27,6 @@ CFASimplified/
 │   │   ├── job_collector.py          # Adzuna + USAJOBS collection
 │   │   ├── news_collector.py
 │   │   ├── social_collector.py       # Multi-platform: Reddit, YouTube, Mastodon, HackerNews
-│   │   ├── youtube_collector.py      # NEW: YouTube Data API v3
-│   │   ├── mastodon_collector.py     # NEW: Mastodon social network
-│   │   ├── hackernews_collector.py   # NEW: HackerNews sentiment
 │   │   └── __init__.py
 │   ├── collect_data.py
 │   ├── config.json

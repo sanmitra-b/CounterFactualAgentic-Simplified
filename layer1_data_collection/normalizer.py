@@ -28,18 +28,22 @@ class DataNormalizer:
     def _parse_date(date_str: str) -> str:
         """
         Parse various date formats to ISO format (YYYY-MM-DD).
-        
-        Args:
-            date_str: Date string in various formats.
-        
-        Returns:
-            Normalized date string in YYYY-MM-DD format.
+        Uses dateutil as primary parser, falls back to manual formats.
         """
         if not date_str:
             return datetime.now().strftime("%Y-%m-%d")
         
-        # Try common formats
+        # Primary: dateutil handles Z, +00:00, milliseconds, all ISO 8601 variants
+        try:
+            from dateutil import parser as dateparser
+            return dateparser.parse(date_str).strftime("%Y-%m-%d")
+        except Exception:
+            pass
+        
+        # Fallback: manual formats for edge cases
         formats = [
+            "%Y-%m-%dT%H:%M:%S.%fZ",       # 2026-04-23T21:50:05.259Z  ← was missing
+            "%Y-%m-%dT%H:%M:%S.%f%z",      # with milliseconds + timezone
             "%Y-%m-%dT%H:%M:%S%z",
             "%Y-%m-%dT%H:%M:%SZ",
             "%Y-%m-%dT%H:%M:%S",
@@ -51,15 +55,14 @@ class DataNormalizer:
         
         for fmt in formats:
             try:
-                dt = datetime.strptime(date_str.replace("Z", "+0000"), fmt)
-                return dt.strftime("%Y-%m-%d")
+                return datetime.strptime(date_str, fmt).strftime("%Y-%m-%d")
             except ValueError:
                 continue
         
-        # If parsing fails, return today's date
         logger.warning(f"Could not parse date: {date_str}")
         return datetime.now().strftime("%Y-%m-%d")
-    
+
+
     @staticmethod
     def normalize_news_article(article: Dict) -> Dict:
         """

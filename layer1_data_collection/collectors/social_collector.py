@@ -391,7 +391,7 @@ class SocialCollector:
                         params={
                             "query": keyword,
                             "tags": "story",
-                            "numericFilters": f"comments>={min_comments}",
+                            "numericFilters": f"num_comments>={min_comments}",
                             "hitsPerPage": 20
                         },
                         headers=headers,
@@ -399,6 +399,7 @@ class SocialCollector:
                     )
                     response.raise_for_status()
                     results = response.json()
+                    logger.debug(f"HackerNews raw hits for '{keyword}': {results.get('nbHits', 0)} total, {len(results.get('hits', []))} returned")
                     
                     for hit in results.get("hits", []):
                         items.append({
