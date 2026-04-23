@@ -24,7 +24,7 @@ CFASimplified/
 ├── layer1_data_collection/
 │   ├── collectors/
 │   │   ├── financial_collector.py
-│   │   ├── job_collector.py          # Dual job collection (Adzuna + USAJOBS)
+│   │   ├── job_collector.py          # Adzuna + USAJOBS collection
 │   │   ├── news_collector.py
 │   │   ├── social_collector.py       # Multi-platform: Reddit, YouTube, Mastodon, HackerNews
 │   │   ├── youtube_collector.py      # NEW: YouTube Data API v3
@@ -63,7 +63,6 @@ CFASimplified/
 
 - Python 3.11+
 - Conda or venv for environment management
-- Git for version control
 
 ## Step 1: Clone the Repository
 
@@ -134,59 +133,6 @@ Expected output:
 - `data/risk_input_bundle.json`
 - `data/risk_input_bundle.csv`
 
-**Layer 1 Data Sources:**
-- **News:** NewsAPI and RSS feeds (130+ articles)
-- **Financial:** Alpha Vantage, FRED, yfinance (800+ records)
-- **Jobs:** Adzuna API (50 jobs) + USAJOBS API (40 jobs) = **90 total job records**
-  - Job titles: Financial Analyst, Economist, Data Scientist, Risk Analyst, Actuary
-  - Adzuna API rate limiting: 1 call/second (respects free tier: 2,500/month max)
-- **Social:** Multi-platform social sentiment collection (500+ posts/comments)
-  - **Reddit (Pushshift):** r/jobs, r/careerguidance, r/cscareerquestions, r/datascience (359 posts)
-  - **YouTube Data API v3:** Comments from AI/jobs impact videos (novel data source for papers)
-  - **Mastodon:** Decentralized social network via public API, tech communities (no approval needed)
-  - **HackerNews:** Tech worker sentiment via Algolia search API (free, citable)
-
-**Layer 1 Configuration:**
-- Edit `layer1_data_collection/config.json` to enable/disable sources
-
-#### Layer 1 Job Collection Details
-
-The `job_collector.py` module fetches job postings from two major APIs:
-
-**Adzuna API (Free Tier):**
-- Endpoint: `https://api.adzuna.com/v1/api/jobs/us/search/1`
-- Search terms: Financial Analyst, Economist, Data Scientist, Risk Analyst, Actuary
-
-**USAJOBS API (Federal Jobs):**
-- Endpoint: `https://data.usajobs.gov/api/search`
-- Agencies: Treasury (TR), SEC (SE), Commerce (CM)
-- Same search terms as Adzuna
-
-
-#### Layer 1 Social Data Collection Details
-
-The `social_collector.py` module collects from four independent platforms:
-
-**Reddit via Pushshift/PullPush (Free, Archive Mirror):**
-- Endpoint: `https://api.pullpush.io/reddit/search/submission/`
-- Subreddits: r/jobs, r/careerguidance, r/cscareerquestions, r/datascience
-- Keywords: AI layoffs, job displacement, automation, hiring freeze, reskilling
-
-**YouTube Data API v3 (Requires Google API Key):**
-- Keywords: AI replacing jobs, artificial intelligence jobs, automation workforce
-
-
-**Mastodon (Decentralized, No Approval):**
-- Instances: fosstodon.org, techhub.social, mstdn.social
-- Keywords: AI jobs, automation, tech layoffs, artificial intelligence, hiring freeze
-- Hashtags: #ai, #jobs, #automation, #techcommunity
-
-
-**HackerNews via Algolia Search (Free, Citable):**
-- Endpoint: `https://hn.algolia.com/api/v1/search`
-- Keywords: AI jobs, automation, tech layoffs, displacement, hiring freeze
-- Filters: Stories with minimum 5 comments (signal filtering)
-
 ### Layer 2
 
 ```bash
@@ -225,6 +171,56 @@ This section shows how one run flows from Layer 1 to Layer 5.
 ### Step A: Layer 1 output (`data/risk_input_bundle.json`)
 
 Layer 1 creates a structured bundle from raw APIs.
+
+**Layer 1 Configuration:**
+- Edit `layer1_data_collection/config.json` to enable/disable sources
+
+**Layer 1 Data Sources:**
+- **News:** NewsAPI and RSS feeds (130+ articles)
+- **Financial:** Alpha Vantage, FRED, yfinance (800+ records)
+
+#### Layer 1 Job Collection Details
+
+The `job_collector.py` module fetches job postings from two major APIs:
+
+**Adzuna API (Free Tier):**
+- Endpoint: `https://api.adzuna.com/v1/api/jobs/us/search/1`
+- Search terms: Financial Analyst, Economist, Data Scientist, Risk Analyst, Actuary
+
+**USAJOBS API (Federal Jobs):**
+- Endpoint: `https://data.usajobs.gov/api/search`
+- Agencies: Treasury (TR), SEC (SE), Commerce (CM)
+- Same search terms as Adzuna
+
+
+**Layer 1 Configuration:**
+- Edit `layer1_data_collection/config.json` to enable/disable sources
+
+
+#### Layer 1 Social Data Collection Details
+
+The `social_collector.py` module collects from four independent platforms:
+
+**Reddit via Pushshift/PullPush (Free, Archive Mirror):**
+- Endpoint: `https://api.pullpush.io/reddit/search/submission/`
+- Subreddits: r/jobs, r/careerguidance, r/cscareerquestions, r/datascience
+- Keywords: AI layoffs, job displacement, automation, hiring freeze, reskilling
+
+**YouTube Data API v3 (Requires Google API Key):**
+- Keywords: AI replacing jobs, artificial intelligence jobs, automation workforce
+
+
+**Mastodon (Decentralized, No Approval):**
+- Instances: fosstodon.org, techhub.social, mstdn.social
+- Keywords: AI jobs, automation, tech layoffs, artificial intelligence, hiring freeze
+- Hashtags: #ai, #jobs, #automation, #techcommunity
+
+
+**HackerNews via Algolia Search (Free, Citable):**
+- Endpoint: `https://hn.algolia.com/api/v1/search`
+- Keywords: AI jobs, automation, tech layoffs, displacement, hiring freeze
+- Filters: Stories with minimum 5 comments (signal filtering)
+
 
 Example:
 
@@ -350,19 +346,8 @@ Example from current output:
 ```
 
 What this means:
-- You now have ranked, practical actions linked to causal evidence.
+- We now have ranked, practical actions linked to causal evidence.
 - This is the final handoff for decision support.
-
-## API Keys
-
-Keep API keys in `.env` at the repository root.
-
-Typical keys:
-- `NEWSAPI_KEY`
-- `ALPHA_VANTAGE_KEY`
-- `FRED_API_KEY`
-- `OPENWEATHER_API_KEY`
-- `GROQ_API_KEY`
 
 ## Notes
 
