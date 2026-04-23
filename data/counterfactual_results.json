@@ -1,12 +1,12 @@
 [
   {
     "risk_id": "risk_1",
-    "risk_title": "Meta Plans 8,000 Job Cuts",
+    "risk_title": "AI-driven job cuts",
     "category": "Job Displacement Risk",
     "all_iterations": [
       {
         "risk_id": "risk_1",
-        "risk_title": "Meta Plans 8,000 Job Cuts",
+        "risk_title": "AI-driven job cuts",
         "category": "Job Displacement Risk",
         "iteration": 2,
         "intervention": {
@@ -15,19 +15,19 @@
           "rationale": "Reduce automation_exposure from 0.80 to 0.68 based on causal leverage and prior ITE feedback.",
           "iteration": 2
         },
-        "observed_risk_severity": 0.7575000000000001,
-        "cf_risk_severity_mean": 0.6783137523099275,
-        "ite_mean": -0.07918624769007261,
-        "ite_ci95_low": -0.12377066576443703,
-        "ite_ci95_high": -0.035133115998911904,
+        "observed_risk_severity": 0.7475,
+        "cf_risk_severity_mean": 0.6709814685636007,
+        "ite_mean": -0.07651853143639935,
+        "ite_ci95_low": -0.12350831316666884,
+        "ite_ci95_high": -0.03574930417372019,
         "probability_of_improvement": 1.0,
         "explained_causal_path": "automation_exposure -> risk_severity",
         "threshold_cleared": false,
-        "created_at": "2026-04-22T10:44:48.673182"
+        "created_at": "2026-04-23T22:09:15.140632"
       },
       {
         "risk_id": "risk_1",
-        "risk_title": "Meta Plans 8,000 Job Cuts",
+        "risk_title": "AI-driven job cuts",
         "category": "Job Displacement Risk",
         "iteration": 3,
         "intervention": {
@@ -36,20 +36,20 @@
           "rationale": "Reduce automation_exposure from 0.80 to 0.63 based on causal leverage and prior ITE feedback.",
           "iteration": 3
         },
-        "observed_risk_severity": 0.7575000000000001,
-        "cf_risk_severity_mean": 0.6440692241058105,
-        "ite_mean": -0.11343077589418965,
-        "ite_ci95_low": -0.1673677265355631,
-        "ite_ci95_high": -0.0673297014354742,
+        "observed_risk_severity": 0.7475,
+        "cf_risk_severity_mean": 0.6369130415193033,
+        "ite_mean": -0.11058695848069675,
+        "ite_ci95_low": -0.15387440919523124,
+        "ite_ci95_high": -0.06947729658430035,
         "probability_of_improvement": 1.0,
         "explained_causal_path": "automation_exposure -> risk_severity",
         "threshold_cleared": true,
-        "created_at": "2026-04-22T10:44:50.340011"
+        "created_at": "2026-04-23T22:09:16.891376"
       }
     ],
     "best_intervention": {
       "risk_id": "risk_1",
-      "risk_title": "Meta Plans 8,000 Job Cuts",
+      "risk_title": "AI-driven job cuts",
       "category": "Job Displacement Risk",
       "iteration": 3,
       "intervention": {
@@ -58,139 +58,252 @@
         "rationale": "Reduce automation_exposure from 0.80 to 0.63 based on causal leverage and prior ITE feedback.",
         "iteration": 3
       },
-      "observed_risk_severity": 0.7575000000000001,
-      "cf_risk_severity_mean": 0.6440692241058105,
-      "ite_mean": -0.11343077589418965,
-      "ite_ci95_low": -0.1673677265355631,
-      "ite_ci95_high": -0.0673297014354742,
+      "observed_risk_severity": 0.7475,
+      "cf_risk_severity_mean": 0.6369130415193033,
+      "ite_mean": -0.11058695848069675,
+      "ite_ci95_low": -0.15387440919523124,
+      "ite_ci95_high": -0.06947729658430035,
       "probability_of_improvement": 1.0,
       "explained_causal_path": "automation_exposure -> risk_severity",
       "threshold_cleared": true,
-      "created_at": "2026-04-22T10:44:50.340011"
+      "created_at": "2026-04-23T22:09:16.891376"
     },
     "total_iterations": 2
   },
   {
     "risk_id": "risk_2",
-    "risk_title": "China Closes AI Performance Gap",
+    "risk_title": "Outdated skills due to AI",
     "category": "Skills Obsolescence Risk",
     "all_iterations": [
       {
         "risk_id": "risk_2",
-        "risk_title": "China Closes AI Performance Gap",
+        "risk_title": "Outdated skills due to AI",
         "category": "Skills Obsolescence Risk",
         "iteration": 2,
         "intervention": {
           "variable": "transition_friction",
-          "intervened_value": 0.5280000000000001,
-          "rationale": "Reduce transition_friction from 0.65 to 0.53 based on causal leverage and prior ITE feedback.",
+          "intervened_value": 0.51,
+          "rationale": "Reduce transition_friction from 0.63 to 0.51 based on causal leverage and prior ITE feedback.",
           "iteration": 2
         },
-        "observed_risk_severity": 0.56,
-        "cf_risk_severity_mean": 0.5121027911990251,
-        "ite_mean": -0.047897208800975,
-        "ite_ci95_low": -0.0919317781646498,
-        "ite_ci95_high": -0.0036640609896108375,
-        "probability_of_improvement": 0.975,
+        "observed_risk_severity": 0.52,
+        "cf_risk_severity_mean": 0.4700577108161809,
+        "ite_mean": -0.049942289183819044,
+        "ite_ci95_low": -0.08333033223826206,
+        "ite_ci95_high": -0.013118607819788675,
+        "probability_of_improvement": 1.0,
         "explained_causal_path": "transition_friction -> risk_severity",
         "threshold_cleared": false,
-        "created_at": "2026-04-22T10:44:52.030431"
+        "created_at": "2026-04-23T22:09:18.417235"
       },
       {
         "risk_id": "risk_2",
-        "risk_title": "China Closes AI Performance Gap",
+        "risk_title": "Outdated skills due to AI",
         "category": "Skills Obsolescence Risk",
         "iteration": 3,
         "intervention": {
           "variable": "transition_friction",
-          "intervened_value": 0.47800000000000015,
-          "rationale": "Reduce transition_friction from 0.65 to 0.48 based on causal leverage and prior ITE feedback.",
+          "intervened_value": 0.46,
+          "rationale": "Reduce transition_friction from 0.63 to 0.46 based on causal leverage and prior ITE feedback.",
           "iteration": 3
         },
-        "observed_risk_severity": 0.56,
-        "cf_risk_severity_mean": 0.4898865103796986,
-        "ite_mean": -0.0701134896203014,
-        "ite_ci95_low": -0.11531609856329043,
-        "ite_ci95_high": -0.03139721816143488,
+        "observed_risk_severity": 0.52,
+        "cf_risk_severity_mean": 0.4479833926142536,
+        "ite_mean": -0.07201660738574643,
+        "ite_ci95_low": -0.12034844582279092,
+        "ite_ci95_high": -0.028643026127416118,
         "probability_of_improvement": 1.0,
         "explained_causal_path": "transition_friction -> risk_severity",
         "threshold_cleared": false,
-        "created_at": "2026-04-22T10:44:53.818173"
+        "created_at": "2026-04-23T22:09:19.934100"
       },
       {
         "risk_id": "risk_2",
-        "risk_title": "China Closes AI Performance Gap",
+        "risk_title": "Outdated skills due to AI",
         "category": "Skills Obsolescence Risk",
         "iteration": 4,
         "intervention": {
           "variable": "transition_friction",
-          "intervened_value": 0.42800000000000016,
-          "rationale": "Reduce transition_friction from 0.65 to 0.43 based on causal leverage and prior ITE feedback.",
+          "intervened_value": 0.41000000000000003,
+          "rationale": "Reduce transition_friction from 0.63 to 0.41 based on causal leverage and prior ITE feedback.",
           "iteration": 4
         },
-        "observed_risk_severity": 0.56,
-        "cf_risk_severity_mean": 0.4658228127434796,
-        "ite_mean": -0.0941771872565205,
-        "ite_ci95_low": -0.13082208701583856,
-        "ite_ci95_high": -0.05576538112712691,
+        "observed_risk_severity": 0.52,
+        "cf_risk_severity_mean": 0.4267914149684493,
+        "ite_mean": -0.0932085850315507,
+        "ite_ci95_low": -0.13093063139509056,
+        "ite_ci95_high": -0.045833317017243726,
         "probability_of_improvement": 1.0,
         "explained_causal_path": "transition_friction -> risk_severity",
         "threshold_cleared": false,
-        "created_at": "2026-04-22T10:44:55.497080"
+        "created_at": "2026-04-23T22:09:21.475126"
       },
       {
         "risk_id": "risk_2",
-        "risk_title": "China Closes AI Performance Gap",
+        "risk_title": "Outdated skills due to AI",
         "category": "Skills Obsolescence Risk",
         "iteration": 5,
         "intervention": {
           "variable": "transition_friction",
-          "intervened_value": 0.3780000000000001,
-          "rationale": "Reduce transition_friction from 0.65 to 0.38 based on causal leverage and prior ITE feedback.",
+          "intervened_value": 0.36,
+          "rationale": "Reduce transition_friction from 0.63 to 0.36 based on causal leverage and prior ITE feedback.",
           "iteration": 5
         },
-        "observed_risk_severity": 0.56,
-        "cf_risk_severity_mean": 0.4460691048366985,
-        "ite_mean": -0.1139308951633015,
-        "ite_ci95_low": -0.15796107177504276,
-        "ite_ci95_high": -0.07130973016475659,
+        "observed_risk_severity": 0.52,
+        "cf_risk_severity_mean": 0.4062996150237818,
+        "ite_mean": -0.11370038497621827,
+        "ite_ci95_low": -0.15582607457375341,
+        "ite_ci95_high": -0.06803020131648597,
         "probability_of_improvement": 1.0,
         "explained_causal_path": "transition_friction -> risk_severity",
         "threshold_cleared": true,
-        "created_at": "2026-04-22T10:44:57.189176"
+        "created_at": "2026-04-23T22:09:23.178332"
       }
     ],
     "best_intervention": {
       "risk_id": "risk_2",
-      "risk_title": "China Closes AI Performance Gap",
+      "risk_title": "Outdated skills due to AI",
       "category": "Skills Obsolescence Risk",
       "iteration": 5,
       "intervention": {
         "variable": "transition_friction",
-        "intervened_value": 0.3780000000000001,
-        "rationale": "Reduce transition_friction from 0.65 to 0.38 based on causal leverage and prior ITE feedback.",
+        "intervened_value": 0.36,
+        "rationale": "Reduce transition_friction from 0.63 to 0.36 based on causal leverage and prior ITE feedback.",
         "iteration": 5
       },
-      "observed_risk_severity": 0.56,
-      "cf_risk_severity_mean": 0.4460691048366985,
-      "ite_mean": -0.1139308951633015,
-      "ite_ci95_low": -0.15796107177504276,
-      "ite_ci95_high": -0.07130973016475659,
+      "observed_risk_severity": 0.52,
+      "cf_risk_severity_mean": 0.4062996150237818,
+      "ite_mean": -0.11370038497621827,
+      "ite_ci95_low": -0.15582607457375341,
+      "ite_ci95_high": -0.06803020131648597,
       "probability_of_improvement": 1.0,
       "explained_causal_path": "transition_friction -> risk_severity",
       "threshold_cleared": true,
-      "created_at": "2026-04-22T10:44:57.189176"
+      "created_at": "2026-04-23T22:09:23.178332"
     },
     "total_iterations": 4
   },
   {
     "risk_id": "risk_3",
-    "risk_title": "Stock Market Highlights: Sensex, Nifty Settle Lower",
-    "category": "Hiring Slowdown Risk",
+    "risk_title": "AI-driven wage stagnation",
+    "category": "Wage Suppression Risk",
     "all_iterations": [
       {
         "risk_id": "risk_3",
-        "risk_title": "Stock Market Highlights: Sensex, Nifty Settle Lower",
+        "risk_title": "AI-driven wage stagnation",
+        "category": "Wage Suppression Risk",
+        "iteration": 2,
+        "intervention": {
+          "variable": "wage_pressure",
+          "intervened_value": 0.5319999999999999,
+          "rationale": "Reduce wage_pressure from 0.65 to 0.53 based on causal leverage and prior ITE feedback.",
+          "iteration": 2
+        },
+        "observed_risk_severity": 0.475,
+        "cf_risk_severity_mean": 0.44022916648622273,
+        "ite_mean": -0.0347708335137773,
+        "ite_ci95_low": -0.07524775878659516,
+        "ite_ci95_high": 0.008036794111000757,
+        "probability_of_improvement": 0.965,
+        "explained_causal_path": "wage_pressure -> risk_severity",
+        "threshold_cleared": false,
+        "created_at": "2026-04-23T22:09:24.839824"
+      },
+      {
+        "risk_id": "risk_3",
+        "risk_title": "AI-driven wage stagnation",
+        "category": "Wage Suppression Risk",
+        "iteration": 3,
+        "intervention": {
+          "variable": "wage_pressure",
+          "intervened_value": 0.48199999999999993,
+          "rationale": "Reduce wage_pressure from 0.65 to 0.48 based on causal leverage and prior ITE feedback.",
+          "iteration": 3
+        },
+        "observed_risk_severity": 0.475,
+        "cf_risk_severity_mean": 0.42427160961078647,
+        "ite_mean": -0.050728390389213535,
+        "ite_ci95_low": -0.09034187878264437,
+        "ite_ci95_high": -0.010875862232199326,
+        "probability_of_improvement": 0.995,
+        "explained_causal_path": "wage_pressure -> risk_severity",
+        "threshold_cleared": false,
+        "created_at": "2026-04-23T22:09:26.470402"
+      },
+      {
+        "risk_id": "risk_3",
+        "risk_title": "AI-driven wage stagnation",
+        "category": "Wage Suppression Risk",
+        "iteration": 4,
+        "intervention": {
+          "variable": "wage_pressure",
+          "intervened_value": 0.43199999999999994,
+          "rationale": "Reduce wage_pressure from 0.65 to 0.43 based on causal leverage and prior ITE feedback.",
+          "iteration": 4
+        },
+        "observed_risk_severity": 0.475,
+        "cf_risk_severity_mean": 0.4093014622083138,
+        "ite_mean": -0.06569853779168615,
+        "ite_ci95_low": -0.10053173126765164,
+        "ite_ci95_high": -0.022263233787419557,
+        "probability_of_improvement": 1.0,
+        "explained_causal_path": "wage_pressure -> risk_severity",
+        "threshold_cleared": false,
+        "created_at": "2026-04-23T22:09:28.254909"
+      },
+      {
+        "risk_id": "risk_3",
+        "risk_title": "AI-driven wage stagnation",
+        "category": "Wage Suppression Risk",
+        "iteration": 5,
+        "intervention": {
+          "variable": "wage_pressure",
+          "intervened_value": 0.3819999999999999,
+          "rationale": "Reduce wage_pressure from 0.65 to 0.38 based on causal leverage and prior ITE feedback.",
+          "iteration": 5
+        },
+        "observed_risk_severity": 0.475,
+        "cf_risk_severity_mean": 0.3933242040796911,
+        "ite_mean": -0.08167579592030882,
+        "ite_ci95_low": -0.1252845556667123,
+        "ite_ci95_high": -0.044511151183632684,
+        "probability_of_improvement": 1.0,
+        "explained_causal_path": "wage_pressure -> risk_severity",
+        "threshold_cleared": false,
+        "created_at": "2026-04-23T22:09:29.936876"
+      }
+    ],
+    "best_intervention": {
+      "risk_id": "risk_3",
+      "risk_title": "AI-driven wage stagnation",
+      "category": "Wage Suppression Risk",
+      "iteration": 5,
+      "intervention": {
+        "variable": "wage_pressure",
+        "intervened_value": 0.3819999999999999,
+        "rationale": "Reduce wage_pressure from 0.65 to 0.38 based on causal leverage and prior ITE feedback.",
+        "iteration": 5
+      },
+      "observed_risk_severity": 0.475,
+      "cf_risk_severity_mean": 0.3933242040796911,
+      "ite_mean": -0.08167579592030882,
+      "ite_ci95_low": -0.1252845556667123,
+      "ite_ci95_high": -0.044511151183632684,
+      "probability_of_improvement": 1.0,
+      "explained_causal_path": "wage_pressure -> risk_severity",
+      "threshold_cleared": false,
+      "created_at": "2026-04-23T22:09:29.936876"
+    },
+    "total_iterations": 4
+  },
+  {
+    "risk_id": "risk_4",
+    "risk_title": "AI-driven hiring slowdown",
+    "category": "Hiring Slowdown Risk",
+    "all_iterations": [
+      {
+        "risk_id": "risk_4",
+        "risk_title": "AI-driven hiring slowdown",
         "category": "Hiring Slowdown Risk",
         "iteration": 2,
         "intervention": {
@@ -199,111 +312,111 @@
           "rationale": "Increase labor_market_demand from 0.30 to 0.42 because higher support capacity reduces downstream job-risk severity.",
           "iteration": 2
         },
-        "observed_risk_severity": 0.35750000000000004,
-        "cf_risk_severity_mean": 0.347356329551878,
-        "ite_mean": -0.010143670448121967,
-        "ite_ci95_low": -0.04948020121317087,
-        "ite_ci95_high": 0.024872901415162123,
-        "probability_of_improvement": 0.7,
+        "observed_risk_severity": 0.29250000000000004,
+        "cf_risk_severity_mean": 0.2795282938401826,
+        "ite_mean": -0.012971706159817475,
+        "ite_ci95_low": -0.05078474296774448,
+        "ite_ci95_high": 0.024032752857605356,
+        "probability_of_improvement": 0.725,
         "explained_causal_path": "labor_market_demand -> transition_friction -> risk_severity",
         "threshold_cleared": false,
-        "created_at": "2026-04-22T10:44:59.051701"
+        "created_at": "2026-04-23T22:09:31.499991"
       },
       {
-        "risk_id": "risk_3",
-        "risk_title": "Stock Market Highlights: Sensex, Nifty Settle Lower",
+        "risk_id": "risk_4",
+        "risk_title": "AI-driven hiring slowdown",
         "category": "Hiring Slowdown Risk",
         "iteration": 3,
         "intervention": {
           "variable": "transition_friction",
-          "intervened_value": 0.3318750000000001,
-          "rationale": "Reduce transition_friction from 0.50 to 0.33 based on causal leverage and prior ITE feedback.",
+          "intervened_value": 0.3026250000000001,
+          "rationale": "Reduce transition_friction from 0.47 to 0.30 based on causal leverage and prior ITE feedback.",
           "iteration": 3
         },
-        "observed_risk_severity": 0.35750000000000004,
-        "cf_risk_severity_mean": 0.28652530830781003,
-        "ite_mean": -0.07097469169219002,
-        "ite_ci95_low": -0.1176968153565442,
-        "ite_ci95_high": -0.0214514839844825,
+        "observed_risk_severity": 0.29250000000000004,
+        "cf_risk_severity_mean": 0.22193892344522176,
+        "ite_mean": -0.0705610765547783,
+        "ite_ci95_low": -0.10838979228580366,
+        "ite_ci95_high": -0.022819537223218122,
         "probability_of_improvement": 1.0,
         "explained_causal_path": "transition_friction -> risk_severity",
         "threshold_cleared": false,
-        "created_at": "2026-04-22T10:45:00.752386"
+        "created_at": "2026-04-23T22:09:33.320264"
       },
       {
-        "risk_id": "risk_3",
-        "risk_title": "Stock Market Highlights: Sensex, Nifty Settle Lower",
+        "risk_id": "risk_4",
+        "risk_title": "AI-driven hiring slowdown",
         "category": "Hiring Slowdown Risk",
         "iteration": 4,
         "intervention": {
           "variable": "transition_friction",
-          "intervened_value": 0.2818750000000001,
-          "rationale": "Reduce transition_friction from 0.50 to 0.28 based on causal leverage and prior ITE feedback.",
+          "intervened_value": 0.2526250000000001,
+          "rationale": "Reduce transition_friction from 0.47 to 0.25 based on causal leverage and prior ITE feedback.",
           "iteration": 4
         },
-        "observed_risk_severity": 0.35750000000000004,
-        "cf_risk_severity_mean": 0.266389356704903,
-        "ite_mean": -0.09111064329509704,
-        "ite_ci95_low": -0.13141889857380973,
-        "ite_ci95_high": -0.04720132835714818,
+        "observed_risk_severity": 0.29250000000000004,
+        "cf_risk_severity_mean": 0.20304632892062904,
+        "ite_mean": -0.08945367107937101,
+        "ite_ci95_low": -0.13038591920182266,
+        "ite_ci95_high": -0.04997242541885975,
         "probability_of_improvement": 1.0,
         "explained_causal_path": "transition_friction -> risk_severity",
         "threshold_cleared": false,
-        "created_at": "2026-04-22T10:45:02.540479"
+        "created_at": "2026-04-23T22:09:34.888552"
       },
       {
-        "risk_id": "risk_3",
-        "risk_title": "Stock Market Highlights: Sensex, Nifty Settle Lower",
+        "risk_id": "risk_4",
+        "risk_title": "AI-driven hiring slowdown",
         "category": "Hiring Slowdown Risk",
         "iteration": 5,
         "intervention": {
           "variable": "transition_friction",
-          "intervened_value": 0.23187500000000005,
-          "rationale": "Reduce transition_friction from 0.50 to 0.23 based on causal leverage and prior ITE feedback.",
+          "intervened_value": 0.20262500000000006,
+          "rationale": "Reduce transition_friction from 0.47 to 0.20 based on causal leverage and prior ITE feedback.",
           "iteration": 5
         },
-        "observed_risk_severity": 0.35750000000000004,
-        "cf_risk_severity_mean": 0.24588093079431908,
-        "ite_mean": -0.111619069205681,
-        "ite_ci95_low": -0.15587586515913449,
-        "ite_ci95_high": -0.06485244778768906,
+        "observed_risk_severity": 0.29250000000000004,
+        "cf_risk_severity_mean": 0.1796623299271022,
+        "ite_mean": -0.11283767007289786,
+        "ite_ci95_low": -0.15987315194850849,
+        "ite_ci95_high": -0.07169290684239603,
         "probability_of_improvement": 1.0,
         "explained_causal_path": "transition_friction -> risk_severity",
         "threshold_cleared": true,
-        "created_at": "2026-04-22T10:45:04.482942"
+        "created_at": "2026-04-23T22:09:36.415091"
       }
     ],
     "best_intervention": {
-      "risk_id": "risk_3",
-      "risk_title": "Stock Market Highlights: Sensex, Nifty Settle Lower",
+      "risk_id": "risk_4",
+      "risk_title": "AI-driven hiring slowdown",
       "category": "Hiring Slowdown Risk",
       "iteration": 5,
       "intervention": {
         "variable": "transition_friction",
-        "intervened_value": 0.23187500000000005,
-        "rationale": "Reduce transition_friction from 0.50 to 0.23 based on causal leverage and prior ITE feedback.",
+        "intervened_value": 0.20262500000000006,
+        "rationale": "Reduce transition_friction from 0.47 to 0.20 based on causal leverage and prior ITE feedback.",
         "iteration": 5
       },
-      "observed_risk_severity": 0.35750000000000004,
-      "cf_risk_severity_mean": 0.24588093079431908,
-      "ite_mean": -0.111619069205681,
-      "ite_ci95_low": -0.15587586515913449,
-      "ite_ci95_high": -0.06485244778768906,
+      "observed_risk_severity": 0.29250000000000004,
+      "cf_risk_severity_mean": 0.1796623299271022,
+      "ite_mean": -0.11283767007289786,
+      "ite_ci95_low": -0.15987315194850849,
+      "ite_ci95_high": -0.07169290684239603,
       "probability_of_improvement": 1.0,
       "explained_causal_path": "transition_friction -> risk_severity",
       "threshold_cleared": true,
-      "created_at": "2026-04-22T10:45:04.482942"
+      "created_at": "2026-04-23T22:09:36.415091"
     },
     "total_iterations": 4
   },
   {
-    "risk_id": "risk_4",
-    "risk_title": "US Government Job Openings",
+    "risk_id": "risk_5",
+    "risk_title": "IRS workforce reduction",
     "category": "Public Sector Workforce Transition Risk",
     "all_iterations": [
       {
-        "risk_id": "risk_4",
-        "risk_title": "US Government Job Openings",
+        "risk_id": "risk_5",
+        "risk_title": "IRS workforce reduction",
         "category": "Public Sector Workforce Transition Risk",
         "iteration": 2,
         "intervention": {
@@ -312,19 +425,19 @@
           "rationale": "Increase policy_support from 0.22 to 0.34 because higher support capacity reduces downstream job-risk severity.",
           "iteration": 2
         },
-        "observed_risk_severity": 0.40249999999999997,
-        "cf_risk_severity_mean": 0.39403958541387035,
-        "ite_mean": -0.0084604145861296,
-        "ite_ci95_low": -0.049348105614755666,
-        "ite_ci95_high": 0.028300241067213284,
-        "probability_of_improvement": 0.64,
+        "observed_risk_severity": 0.2475,
+        "cf_risk_severity_mean": 0.23912035815422988,
+        "ite_mean": -0.008379641845770105,
+        "ite_ci95_low": -0.04351011785490506,
+        "ite_ci95_high": 0.03431520191552975,
+        "probability_of_improvement": 0.65,
         "explained_causal_path": "policy_support -> reskilling_capacity -> transition_friction -> risk_severity",
         "threshold_cleared": false,
-        "created_at": "2026-04-22T10:45:06.419352"
+        "created_at": "2026-04-23T22:09:38.049164"
       },
       {
-        "risk_id": "risk_4",
-        "risk_title": "US Government Job Openings",
+        "risk_id": "risk_5",
+        "risk_title": "IRS workforce reduction",
         "category": "Public Sector Workforce Transition Risk",
         "iteration": 3,
         "intervention": {
@@ -333,151 +446,80 @@
           "rationale": "Increase reskilling_capacity from 0.35 to 0.52 because higher support capacity reduces downstream job-risk severity.",
           "iteration": 3
         },
-        "observed_risk_severity": 0.40249999999999997,
-        "cf_risk_severity_mean": 0.38257970174637657,
-        "ite_mean": -0.019920298253623372,
-        "ite_ci95_low": -0.054936876150258954,
-        "ite_ci95_high": 0.013908230150223846,
-        "probability_of_improvement": 0.85,
+        "observed_risk_severity": 0.2475,
+        "cf_risk_severity_mean": 0.22773360047501193,
+        "ite_mean": -0.019766399524988064,
+        "ite_ci95_low": -0.05965063880183661,
+        "ite_ci95_high": 0.01595924371278094,
+        "probability_of_improvement": 0.835,
         "explained_causal_path": "reskilling_capacity -> transition_friction -> risk_severity",
         "threshold_cleared": false,
-        "created_at": "2026-04-22T10:45:08.378362"
+        "created_at": "2026-04-23T22:09:39.563945"
       },
       {
-        "risk_id": "risk_4",
-        "risk_title": "US Government Job Openings",
+        "risk_id": "risk_5",
+        "risk_title": "IRS workforce reduction",
         "category": "Public Sector Workforce Transition Risk",
         "iteration": 4,
         "intervention": {
           "variable": "transition_friction",
-          "intervened_value": 0.236125,
-          "rationale": "Reduce transition_friction from 0.46 to 0.24 based on causal leverage and prior ITE feedback.",
+          "intervened_value": 0.16637500000000002,
+          "rationale": "Reduce transition_friction from 0.39 to 0.17 based on causal leverage and prior ITE feedback.",
           "iteration": 4
         },
-        "observed_risk_severity": 0.40249999999999997,
-        "cf_risk_severity_mean": 0.3121186819648798,
-        "ite_mean": -0.0903813180351202,
-        "ite_ci95_low": -0.12353990919042261,
-        "ite_ci95_high": -0.0460967029084221,
+        "observed_risk_severity": 0.2475,
+        "cf_risk_severity_mean": 0.15709638561403108,
+        "ite_mean": -0.09040361438596893,
+        "ite_ci95_low": -0.12601456107056463,
+        "ite_ci95_high": -0.053215229221123594,
         "probability_of_improvement": 1.0,
         "explained_causal_path": "transition_friction -> risk_severity",
         "threshold_cleared": false,
-        "created_at": "2026-04-22T10:45:10.381136"
+        "created_at": "2026-04-23T22:09:41.222126"
       },
       {
-        "risk_id": "risk_4",
-        "risk_title": "US Government Job Openings",
+        "risk_id": "risk_5",
+        "risk_title": "IRS workforce reduction",
         "category": "Public Sector Workforce Transition Risk",
         "iteration": 5,
         "intervention": {
           "variable": "transition_friction",
-          "intervened_value": 0.18612499999999998,
-          "rationale": "Reduce transition_friction from 0.46 to 0.19 based on causal leverage and prior ITE feedback.",
+          "intervened_value": 0.116375,
+          "rationale": "Reduce transition_friction from 0.39 to 0.12 based on causal leverage and prior ITE feedback.",
           "iteration": 5
         },
-        "observed_risk_severity": 0.40249999999999997,
-        "cf_risk_severity_mean": 0.2866653455424965,
-        "ite_mean": -0.11583465445750343,
-        "ite_ci95_low": -0.15830038103092964,
-        "ite_ci95_high": -0.07115824932100724,
+        "observed_risk_severity": 0.2475,
+        "cf_risk_severity_mean": 0.13574646347776842,
+        "ite_mean": -0.11175353652223158,
+        "ite_ci95_low": -0.15016806936705626,
+        "ite_ci95_high": -0.06446910899359536,
         "probability_of_improvement": 1.0,
         "explained_causal_path": "transition_friction -> risk_severity",
         "threshold_cleared": true,
-        "created_at": "2026-04-22T10:45:12.112586"
-      }
-    ],
-    "best_intervention": {
-      "risk_id": "risk_4",
-      "risk_title": "US Government Job Openings",
-      "category": "Public Sector Workforce Transition Risk",
-      "iteration": 5,
-      "intervention": {
-        "variable": "transition_friction",
-        "intervened_value": 0.18612499999999998,
-        "rationale": "Reduce transition_friction from 0.46 to 0.19 based on causal leverage and prior ITE feedback.",
-        "iteration": 5
-      },
-      "observed_risk_severity": 0.40249999999999997,
-      "cf_risk_severity_mean": 0.2866653455424965,
-      "ite_mean": -0.11583465445750343,
-      "ite_ci95_low": -0.15830038103092964,
-      "ite_ci95_high": -0.07115824932100724,
-      "probability_of_improvement": 1.0,
-      "explained_causal_path": "transition_friction -> risk_severity",
-      "threshold_cleared": true,
-      "created_at": "2026-04-22T10:45:12.112586"
-    },
-    "total_iterations": 4
-  },
-  {
-    "risk_id": "risk_5",
-    "risk_title": "Regional Job Market Impacts",
-    "category": "Regional Employment Shock Risk",
-    "all_iterations": [
-      {
-        "risk_id": "risk_5",
-        "risk_title": "Regional Job Market Impacts",
-        "category": "Regional Employment Shock Risk",
-        "iteration": 2,
-        "intervention": {
-          "variable": "automation_exposure",
-          "intervened_value": 0.43000000000000005,
-          "rationale": "Reduce automation_exposure from 0.55 to 0.43 based on causal leverage and prior ITE feedback.",
-          "iteration": 2
-        },
-        "observed_risk_severity": 0.3125,
-        "cf_risk_severity_mean": 0.23252626488984263,
-        "ite_mean": -0.07997373511015736,
-        "ite_ci95_low": -0.11944156273101716,
-        "ite_ci95_high": -0.03361658767779352,
-        "probability_of_improvement": 1.0,
-        "explained_causal_path": "automation_exposure -> risk_severity",
-        "threshold_cleared": false,
-        "created_at": "2026-04-22T10:45:13.918331"
-      },
-      {
-        "risk_id": "risk_5",
-        "risk_title": "Regional Job Market Impacts",
-        "category": "Regional Employment Shock Risk",
-        "iteration": 3,
-        "intervention": {
-          "variable": "automation_exposure",
-          "intervened_value": 0.38000000000000006,
-          "rationale": "Reduce automation_exposure from 0.55 to 0.38 based on causal leverage and prior ITE feedback.",
-          "iteration": 3
-        },
-        "observed_risk_severity": 0.3125,
-        "cf_risk_severity_mean": 0.20123300166803698,
-        "ite_mean": -0.11126699833196302,
-        "ite_ci95_low": -0.1568089917186432,
-        "ite_ci95_high": -0.06310541663138915,
-        "probability_of_improvement": 1.0,
-        "explained_causal_path": "automation_exposure -> risk_severity",
-        "threshold_cleared": true,
-        "created_at": "2026-04-22T10:45:15.603431"
+        "created_at": "2026-04-23T22:09:42.761327"
       }
     ],
     "best_intervention": {
       "risk_id": "risk_5",
-      "risk_title": "Regional Job Market Impacts",
-      "category": "Regional Employment Shock Risk",
-      "iteration": 3,
+      "risk_title": "IRS workforce reduction",
+      "category": "Public Sector Workforce Transition Risk",
+      "iteration": 5,
       "intervention": {
-        "variable": "automation_exposure",
-        "intervened_value": 0.38000000000000006,
-        "rationale": "Reduce automation_exposure from 0.55 to 0.38 based on causal leverage and prior ITE feedback.",
-        "iteration": 3
+        "variable": "transition_friction",
+        "intervened_value": 0.116375,
+        "rationale": "Reduce transition_friction from 0.39 to 0.12 based on causal leverage and prior ITE feedback.",
+        "iteration": 5
       },
-      "observed_risk_severity": 0.3125,
-      "cf_risk_severity_mean": 0.20123300166803698,
-      "ite_mean": -0.11126699833196302,
-      "ite_ci95_low": -0.1568089917186432,
-      "ite_ci95_high": -0.06310541663138915,
+      "observed_risk_severity": 0.2475,
+      "cf_risk_severity_mean": 0.13574646347776842,
+      "ite_mean": -0.11175353652223158,
+      "ite_ci95_low": -0.15016806936705626,
+      "ite_ci95_high": -0.06446910899359536,
       "probability_of_improvement": 1.0,
-      "explained_causal_path": "automation_exposure -> risk_severity",
+      "explained_causal_path": "transition_friction -> risk_severity",
       "threshold_cleared": true,
-      "created_at": "2026-04-22T10:45:15.603431"
+      "created_at": "2026-04-23T22:09:42.761327"
     },
-    "total_iterations": 2
+    "total_iterations": 4
   }
 ]

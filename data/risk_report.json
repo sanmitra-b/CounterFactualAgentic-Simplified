@@ -1,126 +1,135 @@
 {
-  "analysed_at": "2026-04-22T10:41:18.082851Z",
+  "analysed_at": "2026-04-23T22:07:21.802333Z",
   "domain": "ai_job_risk",
   "top_risks": [
     {
       "rank": 1,
       "category": "Job Displacement Risk",
-      "title": "Meta Plans 8,000 Job Cuts",
+      "title": "AI-driven job cuts",
       "severity": "HIGH",
-      "confidence": 0.85,
+      "confidence": 0.8,
       "probability_next_30d": 0.7,
       "evidence": [
-        "Meta Platforms Inc. plans to reduce its global workforce by approximately 10%, eliminating nearly 8,000 jobs"
+        "Meta Plans 8,000 Job Cuts in May",
+        "Stanford\u2019s AI Index finds China has nearly closed the performance gap with the US"
       ],
       "affected_entities": [
-        "Meta Platforms Inc."
+        "Meta Platforms Inc.",
+        "US tech industry"
       ],
       "affected_geo": [
-        "US"
+        "US",
+        "China"
       ],
-      "causal_chain": "Job cuts due to company restructuring and AI-driven automation",
-      "recommended_action": "Monitor Meta's job market and adjust workforce strategies accordingly"
+      "causal_chain": "Advancements in AI lead to increased automation, resulting in job displacement.",
+      "recommended_action": "Invest in retraining and upskilling programs for workers at risk of displacement."
     },
     {
       "rank": 2,
       "category": "Skills Obsolescence Risk",
-      "title": "China Closes AI Performance Gap",
+      "title": "Outdated skills due to AI",
       "severity": "MEDIUM",
-      "confidence": 0.8,
+      "confidence": 0.6,
       "probability_next_30d": 0.5,
       "evidence": [
-        "Stanford\u2019s 2026 AI Index Report finds the performance gap between the best American and Chinese AI models has collapsed to 2.7%"
+        "Stanford\u2019s AI Index finds China has nearly closed the performance gap with the US"
       ],
       "affected_entities": [
-        "US and Chinese AI companies"
+        "US workforce",
+        "Global tech industry"
       ],
       "affected_geo": [
+        "US",
         "China",
-        "US"
+        "India"
       ],
-      "causal_chain": "Rapid AI advancements in China may render some US skills obsolete",
-      "recommended_action": "Invest in continuous AI-related skills training and education"
+      "causal_chain": "Rapid advancements in AI lead to outdated skills, making workers less competitive.",
+      "recommended_action": "Encourage continuous learning and professional development to stay up-to-date with AI-driven changes."
     },
     {
       "rank": 3,
-      "category": "Hiring Slowdown Risk",
-      "title": "Stock Market Highlights: Sensex, Nifty Settle Lower",
-      "severity": "LOW",
-      "confidence": 0.6,
+      "category": "Wage Suppression Risk",
+      "title": "AI-driven wage stagnation",
+      "severity": "MEDIUM",
+      "confidence": 0.5,
       "probability_next_30d": 0.4,
       "evidence": [
-        "Benchmark indices Sensex and Nifty closed lower on profit-taking in financial shares"
+        "Stanford\u2019s AI Index finds China has nearly closed the performance gap with the US"
       ],
       "affected_entities": [
-        "Financial companies"
+        "US workforce",
+        "Global tech industry"
       ],
       "affected_geo": [
+        "US",
+        "China",
         "India"
       ],
-      "causal_chain": "Economic uncertainty may lead to hiring slowdown",
-      "recommended_action": "Monitor economic trends and adjust hiring strategies accordingly"
+      "causal_chain": "Increased automation due to AI leads to wage stagnation as workers are replaced or see reduced hours.",
+      "recommended_action": "Monitor wage trends and consider implementing policies to mitigate wage suppression."
     },
     {
       "rank": 4,
-      "category": "Public Sector Workforce Transition Risk",
-      "title": "US Government Job Openings",
+      "category": "Hiring Slowdown Risk",
+      "title": "AI-driven hiring slowdown",
       "severity": "LOW",
-      "confidence": 0.7,
-      "probability_next_30d": 0.5,
+      "confidence": 0.4,
+      "probability_next_30d": 0.3,
       "evidence": [
-        "Job openings for data scientists and machine learning professionals in the US government"
+        "Meta Plans 8,000 Job Cuts in May"
       ],
       "affected_entities": [
-        "US government agencies"
+        "Meta Platforms Inc.",
+        "US tech industry"
       ],
       "affected_geo": [
         "US"
       ],
-      "causal_chain": "Government agencies may struggle to transition to AI-driven workforce",
-      "recommended_action": "Develop strategies for public sector workforce transition and upskilling"
+      "causal_chain": "Economic uncertainty and AI-driven job displacement lead to a hiring slowdown.",
+      "recommended_action": "Encourage companies to invest in AI-driven hiring tools to streamline the hiring process."
     },
     {
       "rank": 5,
-      "category": "Regional Employment Shock Risk",
-      "title": "Regional Job Market Impacts",
+      "category": "Public Sector Workforce Transition Risk",
+      "title": "IRS workforce reduction",
       "severity": "LOW",
-      "confidence": 0.5,
-      "probability_next_30d": 0.3,
+      "confidence": 0.3,
+      "probability_next_30d": 0.2,
       "evidence": [
-        "Job openings and layoffs in various regions, including Maryland and Virginia"
+        "IRS Enforcement Takes Another Big Hit As Budget Request Shrinks"
       ],
       "affected_entities": [
-        "Regional companies and governments"
+        "IRS",
+        "US public sector"
       ],
       "affected_geo": [
-        "Maryland",
-        "Virginia"
+        "US"
       ],
-      "causal_chain": "Regional job market may experience shocks due to AI-driven changes",
-      "recommended_action": "Monitor regional job market trends and develop strategies for mitigation"
+      "causal_chain": "Budget cuts lead to workforce reduction, potentially impacting public services.",
+      "recommended_action": "Invest in retraining and upskilling programs for public sector workers at risk of displacement."
     }
   ],
   "soft_risks": [
     {
       "category": "Inequality Amplification Risk",
-      "title": "AI-Driven Inequality",
-      "note": "The intelligence bundle does not provide sufficient evidence to assess the risk of AI-driven inequality amplification"
+      "title": "AI-driven inequality",
+      "note": "There is a potential risk of AI exacerbating existing social and economic inequalities, but more evidence is needed to confirm this."
     },
     {
       "category": "Regulatory Lag Risk",
-      "title": "Regulatory Frameworks",
-      "note": "The bundle lacks information on regulatory frameworks and their potential impact on AI-driven job risks"
+      "title": "Outdated regulations",
+      "note": "The rapid development of AI may outpace regulatory frameworks, potentially leading to unintended consequences."
     },
     {
       "category": "Education-Pipeline Mismatch Risk",
-      "title": "Education and Skills Training",
-      "note": "There is limited data on education and skills training programs that address AI-driven job market changes"
+      "title": "Education pipeline mismatch",
+      "note": "There may be a mismatch between the skills taught in educational institutions and the skills required for an AI-driven workforce, but more data is needed to confirm this."
     }
   ],
-  "data_quality_note": "The intelligence bundle has a layer1_completeness of 50% and an average reliability of 0.89, indicating some limitations in the data quality and completeness",
+  "data_quality_note": "The data quality is generally good, with a high layer1_completeness score and a reliable average sentiment. However, some signals have low reliability scores, which may impact the accuracy of the analysis.",
   "model_used": "llama-3.3-70b-versatile",
-  "layer1_completeness": 0.5,
-  "layer2_enriched_at": "2026-04-22T10:41:18.082851",
+  "layer1_completeness": 1.0,
+  "layer2_enriched_at": "2026-04-23T22:07:21.802333",
   "aggregate_sentiment": "neutral",
-  "avg_reliability": 0.8877
+  "avg_reliability": 0.7547
 }
