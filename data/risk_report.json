@@ -1,139 +1,126 @@
 {
-  "analysed_at": "2026-04-16T19:26:53.299977Z",
-  "domain": "supply_chain",
+  "analysed_at": "2026-04-22T10:41:18.082851Z",
+  "domain": "ai_job_risk",
   "top_risks": [
     {
       "rank": 1,
-      "category": "Commodity Price Volatility",
-      "title": "Oil Price Fluctuations",
+      "category": "Job Displacement Risk",
+      "title": "Meta Plans 8,000 Job Cuts",
       "severity": "HIGH",
       "confidence": 0.85,
       "probability_next_30d": 0.7,
       "evidence": [
-        "Norse Atlantic ASA cuts LA flights due to high jet fuel costs",
-        "Oil supplies tightened due to war in Iran"
+        "Meta Platforms Inc. plans to reduce its global workforce by approximately 10%, eliminating nearly 8,000 jobs"
       ],
       "affected_entities": [
-        "Norse Atlantic ASA",
-        "Oil suppliers"
+        "Meta Platforms Inc."
       ],
       "affected_geo": [
-        "US",
-        "Iran"
+        "US"
       ],
-      "causal_chain": "War in Iran \u2192 Oil supply disruptions \u2192 High jet fuel costs \u2192 Flight cancellations",
-      "recommended_action": "Diversify fuel sources and consider hedging against price volatility"
+      "causal_chain": "Job cuts due to company restructuring and AI-driven automation",
+      "recommended_action": "Monitor Meta's job market and adjust workforce strategies accordingly"
     },
     {
       "rank": 2,
-      "category": "Trade Disruptions",
-      "title": "Tariff Impacts",
+      "category": "Skills Obsolescence Risk",
+      "title": "China Closes AI Performance Gap",
       "severity": "MEDIUM",
       "confidence": 0.8,
-      "probability_next_30d": 0.6,
+      "probability_next_30d": 0.5,
       "evidence": [
-        "Tariffs risk reigniting inflation",
-        "Student lender's securitization push falters due to Trump visa curbs"
+        "Stanford\u2019s 2026 AI Index Report finds the performance gap between the best American and Chinese AI models has collapsed to 2.7%"
       ],
       "affected_entities": [
-        "Student lenders",
-        "Importers"
+        "US and Chinese AI companies"
       ],
       "affected_geo": [
-        "US",
-        "Wall Street"
+        "China",
+        "US"
       ],
-      "causal_chain": "Tariffs \u2192 Inflation \u2192 Economic instability",
-      "recommended_action": "Monitor tariff developments and adjust supply chain strategies accordingly"
+      "causal_chain": "Rapid AI advancements in China may render some US skills obsolete",
+      "recommended_action": "Invest in continuous AI-related skills training and education"
     },
     {
       "rank": 3,
-      "category": "Economic Instability",
-      "title": "Recession Fears",
-      "severity": "MEDIUM",
-      "confidence": 0.7,
-      "probability_next_30d": 0.5,
-      "evidence": [
-        "Reddit posts discussing recession fears",
-        "Economic instability due to tariffs and war"
-      ],
-      "affected_entities": [
-        "Investors",
-        "Consumers"
-      ],
-      "affected_geo": [
-        "US",
-        "Global"
-      ],
-      "causal_chain": "Economic instability \u2192 Recession fears \u2192 Reduced consumer spending",
-      "recommended_action": "Diversify investments and maintain a flexible supply chain"
-    },
-    {
-      "rank": 4,
-      "category": "Commodity Market Volatility",
-      "title": "Gold Price Fluctuations",
+      "category": "Hiring Slowdown Risk",
+      "title": "Stock Market Highlights: Sensex, Nifty Settle Lower",
       "severity": "LOW",
       "confidence": 0.6,
       "probability_next_30d": 0.4,
       "evidence": [
-        "Gold price fallen about 9% since the start of the war"
+        "Benchmark indices Sensex and Nifty closed lower on profit-taking in financial shares"
       ],
       "affected_entities": [
-        "Gold investors",
-        "Jewelry manufacturers"
+        "Financial companies"
       ],
       "affected_geo": [
-        "Global"
+        "India"
       ],
-      "causal_chain": "War \u2192 Gold price fluctuations \u2192 Investment uncertainty",
-      "recommended_action": "Monitor gold price developments and adjust investment strategies"
+      "causal_chain": "Economic uncertainty may lead to hiring slowdown",
+      "recommended_action": "Monitor economic trends and adjust hiring strategies accordingly"
+    },
+    {
+      "rank": 4,
+      "category": "Public Sector Workforce Transition Risk",
+      "title": "US Government Job Openings",
+      "severity": "LOW",
+      "confidence": 0.7,
+      "probability_next_30d": 0.5,
+      "evidence": [
+        "Job openings for data scientists and machine learning professionals in the US government"
+      ],
+      "affected_entities": [
+        "US government agencies"
+      ],
+      "affected_geo": [
+        "US"
+      ],
+      "causal_chain": "Government agencies may struggle to transition to AI-driven workforce",
+      "recommended_action": "Develop strategies for public sector workforce transition and upskilling"
     },
     {
       "rank": 5,
-      "category": "Weather Disruptions",
-      "title": "Global Weather Patterns",
+      "category": "Regional Employment Shock Risk",
+      "title": "Regional Job Market Impacts",
       "severity": "LOW",
       "confidence": 0.5,
       "probability_next_30d": 0.3,
       "evidence": [
-        "Broken clouds and overcast clouds in major cities"
+        "Job openings and layoffs in various regions, including Maryland and Virginia"
       ],
       "affected_entities": [
-        "Airlines",
-        "Shipping companies"
+        "Regional companies and governments"
       ],
       "affected_geo": [
-        "Tokyo",
-        "Singapore",
-        "Shanghai",
-        "Dubai",
-        "London"
+        "Maryland",
+        "Virginia"
       ],
-      "causal_chain": "Weather patterns \u2192 Flight disruptions \u2192 Supply chain delays",
-      "recommended_action": "Monitor weather forecasts and adjust logistics plans accordingly"
+      "causal_chain": "Regional job market may experience shocks due to AI-driven changes",
+      "recommended_action": "Monitor regional job market trends and develop strategies for mitigation"
     }
   ],
   "soft_risks": [
     {
-      "category": "Social Unrest",
-      "title": "Public Sentiment",
-      "note": "Negative sentiment on social media platforms regarding economic policies and trade disruptions"
+      "category": "Inequality Amplification Risk",
+      "title": "AI-Driven Inequality",
+      "note": "The intelligence bundle does not provide sufficient evidence to assess the risk of AI-driven inequality amplification"
     },
     {
-      "category": "Regulatory Changes",
-      "title": "Visa Curbs",
-      "note": "Trump visa curbs affecting student lenders and international students"
+      "category": "Regulatory Lag Risk",
+      "title": "Regulatory Frameworks",
+      "note": "The bundle lacks information on regulatory frameworks and their potential impact on AI-driven job risks"
     },
     {
-      "category": "Market Trends",
-      "title": "Investor Confidence",
-      "note": "Investors expressing concerns about market volatility and economic instability"
+      "category": "Education-Pipeline Mismatch Risk",
+      "title": "Education and Skills Training",
+      "note": "There is limited data on education and skills training programs that address AI-driven job market changes"
     }
   ],
-  "data_quality_note": "The intelligence bundle has a layer1 completeness of 75% and an average reliability of 0.93, indicating a moderate level of confidence in the data. However, the lack of data in the stocks and ports sections may impact the accuracy of the analysis.",
+  "data_quality_note": "The intelligence bundle has a layer1_completeness of 50% and an average reliability of 0.89, indicating some limitations in the data quality and completeness",
   "model_used": "llama-3.3-70b-versatile",
-  "layer1_completeness": 0.75,
-  "layer2_enriched_at": "2026-04-16T19:26:53.299977",
+  "layer1_completeness": 0.5,
+  "layer2_enriched_at": "2026-04-22T10:41:18.082851",
   "aggregate_sentiment": "neutral",
-  "avg_reliability": 0.9275
+  "avg_reliability": 0.8877
 }

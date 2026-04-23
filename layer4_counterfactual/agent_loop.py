@@ -17,12 +17,10 @@ DEFAULT_MODEL = "llama3-70b-8192"
 
 def _is_reduction_variable(var: str) -> bool:
     return var in {
-        "port_congestion",
-        "weather_severity",
-        "geopolitical_tension",
-        "shipping_delay",
-        "inventory_shortage",
-        "demand_shock",
+        "ai_adoption_rate",
+        "automation_exposure",
+        "wage_pressure",
+        "transition_friction",
     }
 
 
@@ -47,7 +45,7 @@ def _propose_intervention(
     else:
         new_value = min(1.0, current_value + delta)
         rationale = (
-            f"Increase {variable} from {current_value:.2f} to {new_value:.2f} because higher reliability reduces downstream shortage."
+            f"Increase {variable} from {current_value:.2f} to {new_value:.2f} because higher support capacity reduces downstream job-risk severity."
         )
 
     return InterventionParams(
@@ -133,7 +131,7 @@ def run_agentic_counterfactual_loop(
     causal_info = get_causal_paths_tool(observed_state, dag)
     recommended = list(causal_info["recommended_variables"])
     if not recommended:
-        recommended = ["inventory_shortage", "shipping_delay", "demand_shock"]
+        recommended = ["transition_friction", "automation_exposure", "reskilling_capacity"]
 
     memory.metadata["causal_info"] = causal_info
     memory.notes.append("Iteration 1: causal paths computed.")

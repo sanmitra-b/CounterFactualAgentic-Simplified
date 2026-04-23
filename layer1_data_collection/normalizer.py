@@ -138,9 +138,10 @@ class DataNormalizer:
         Returns:
             Normalized weather data dictionary.
         """
+        source_label = data.get("source", "OpenWeather")
         return {
             "source_type": "weather",
-            "source_name": f"OpenWeather - {data.get('city', 'Unknown')}",
+            "source_name": f"{source_label} - {data.get('city', 'Unknown')}",
             "date": DataNormalizer._parse_date(data.get("date", "")),
             "content": f"{data.get('weather_description', '').title()}: {data.get('temperature', 0):.1f}°C",
             "metadata": {

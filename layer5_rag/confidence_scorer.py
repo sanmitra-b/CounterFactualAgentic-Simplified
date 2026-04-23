@@ -24,13 +24,13 @@ SEVERITY_SCORE = {
  
 # Causal variable → compatible intervention types
 VARIABLE_TO_INTERVENTIONS = {
-    "port_congestion":      {"reroute", "monitor", "escalate"},
-    "weather_severity":     {"stockpile", "reroute", "monitor"},
-    "geopolitical_tension": {"diversify", "hedge", "escalate", "stockpile"},
-    "shipping_delay":       {"stockpile", "reroute", "escalate"},
-    "supplier_reliability": {"diversify", "insure", "escalate"},
-    "inventory_shortage":   {"stockpile", "diversify", "escalate"},
-    "demand_shock":         {"hedge", "monitor", "diversify"},
+    "automation_exposure":  {"redeploy", "reskill", "policy_reform", "monitor"},
+    "transition_friction":  {"reskill", "hiring_incentive", "safety_net", "policy_reform"},
+    "wage_pressure":        {"wage_support", "policy_reform", "safety_net"},
+    "reskilling_capacity":  {"reskill", "policy_reform", "hiring_incentive"},
+    "labor_market_demand":  {"hiring_incentive", "redeploy", "monitor"},
+    "policy_support":       {"policy_reform", "safety_net", "wage_support"},
+    "ai_adoption_rate":     {"redeploy", "reskill", "monitor"},
 }
  
  

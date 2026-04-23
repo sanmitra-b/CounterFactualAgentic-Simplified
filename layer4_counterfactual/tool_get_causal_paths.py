@@ -8,11 +8,12 @@ from schemas_layer4 import ObservedRiskState
 
 
 CATEGORY_TO_ROOT = {
-    "commodity price volatility": "demand_shock",
-    "trade disruptions": "geopolitical_tension",
-    "economic instability": "demand_shock",
-    "commodity market volatility": "demand_shock",
-    "weather disruptions": "weather_severity",
+    "job displacement risk": "automation_exposure",
+    "skills obsolescence risk": "transition_friction",
+    "wage suppression risk": "wage_pressure",
+    "hiring slowdown risk": "labor_market_demand",
+    "public sector workforce transition risk": "policy_support",
+    "inequality amplification risk": "transition_friction",
 }
 
 
@@ -23,16 +24,18 @@ def map_category_to_root_node(category: str) -> str:
         return CATEGORY_TO_ROOT[c]
 
     # Fallback fuzzy mapping for near-matching labels.
-    if "weather" in c:
-        return "weather_severity"
-    if "trade" in c or "geopolit" in c or "tariff" in c or "war" in c:
-        return "geopolitical_tension"
-    if "commodity" in c or "economic" in c or "demand" in c or "market" in c:
-        return "demand_shock"
-    if "port" in c or "shipping" in c:
-        return "port_congestion"
+    if "displacement" in c or "automation" in c:
+        return "automation_exposure"
+    if "skill" in c or "reskilling" in c or "transition" in c:
+        return "transition_friction"
+    if "wage" in c or "pay" in c:
+        return "wage_pressure"
+    if "hiring" in c or "labor demand" in c or "job opening" in c:
+        return "labor_market_demand"
+    if "policy" in c or "regulation" in c or "public" in c:
+        return "policy_support"
 
-    return "demand_shock"
+    return "automation_exposure"
 
 
 def get_causal_paths_tool(observed_state: ObservedRiskState, dag: nx.DiGraph) -> Dict[str, object]:

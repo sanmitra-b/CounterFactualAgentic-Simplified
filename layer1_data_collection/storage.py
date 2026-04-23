@@ -17,14 +17,16 @@ logger = logging.getLogger(__name__)
 class DataStorage:
     """Stores normalized data in multiple formats."""
     
-    def __init__(self, output_dir: str = "../data/"):
+    def __init__(self, output_dir: str = "../data/", domain: str = "supply_chain"):
         """
         Initialize storage with output directory.
         
         Args:
             output_dir: Directory where data will be saved.
+            domain: Risk domain label written into Layer 2 bundle.
         """
         self.output_dir = Path(output_dir)
+        self.domain = domain
         self.output_dir.mkdir(parents=True, exist_ok=True)
         logger.info(f"Storage initialized. Output dir: {self.output_dir}")
     
@@ -129,17 +131,34 @@ class DataStorage:
                     )
 
             elif source_type == "weather":
+                source_lower = (source_name or "").lower()
+                is_usajobs = "usajobs" in source_lower
+
                 wind_speed_ms = float(metadata.get("wind_speed", 0) or 0)
                 wind_kmh = round(wind_speed_ms * 3.6, 2)
                 weather_main = (metadata.get("weather_main", "") or "").lower()
-                disruption_flag = wind_kmh >= 40 or weather_main in {
-                    "thunderstorm",
-                    "tornado",
-                    "squall",
-                    "ash",
-                    "sand",
-                    "dust",
-                }
+                if is_usajobs:
+                    text_blob = (
+                        f"{metadata.get('weather_main', '')} {metadata.get('weather_description', '')}"
+                    ).lower()
+                    risk_terms = {
+                        "layoff",
+                        "downsizing",
+                        "displace",
+                        "automation",
+                        "redundant",
+                        "job cut",
+                    }
+                    disruption_flag = any(term in text_blob for term in risk_terms)
+                else:
+                    disruption_flag = wind_kmh >= 40 or weather_main in {
+                        "thunderstorm",
+                        "tornado",
+                        "squall",
+                        "ash",
+                        "sand",
+                        "dust",
+                    }
                 weather_items.append(
                     {
                         "city": metadata.get("city", ""),
@@ -148,7 +167,7 @@ class DataStorage:
                         "temperature_c": float(metadata.get("temperature", 0) or 0),
                         "wind_kmh": wind_kmh,
                         "disruption_flag": disruption_flag,
-                        "source": "openweather",
+                        "source": "usajobs" if is_usajobs else "openweather",
                         "fetched_at": self._to_iso_datetime(date_val),
                     }
                 )
@@ -163,7 +182,7 @@ class DataStorage:
         completeness_score = round(non_empty / len(active_groups), 2) if active_groups else 0.0
 
         bundle = {
-            "domain": "supply_chain",
+            "domain": self.domain,
             "fetched_at": datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ"),
             "completeness_score": completeness_score,
             "news": news_items,

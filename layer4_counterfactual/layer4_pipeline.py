@@ -8,7 +8,7 @@ from typing import Dict, List
 import networkx as nx
 
 from agent_loop import run_agentic_counterfactual_loop
-from causal_graph import build_supply_chain_dag
+from causal_graph import build_job_risk_dag
 from schemas_layer4 import ObservedRiskState
 from scm_fitter import load_or_fit_scm
 
@@ -32,27 +32,29 @@ def _clip01(v: float) -> float:
 def _base_state_from_category(category: str) -> Dict[str, float]:
     c = (category or "").lower()
     base = {
-        "port_congestion": 0.45,
-        "weather_severity": 0.40,
-        "geopolitical_tension": 0.38,
-        "shipping_delay": 0.50,
-        "supplier_reliability": 0.62,
-        "inventory_shortage": 0.48,
-        "demand_shock": 0.42,
+        "ai_adoption_rate": 0.60,
+        "automation_exposure": 0.55,
+        "reskilling_capacity": 0.45,
+        "labor_market_demand": 0.50,
+        "policy_support": 0.40,
+        "wage_pressure": 0.52,
+        "transition_friction": 0.50,
     }
 
-    if "weather" in c:
-        base["weather_severity"] += 0.30
-        base["shipping_delay"] += 0.15
-    if "port" in c or "shipping" in c:
-        base["port_congestion"] += 0.25
-        base["shipping_delay"] += 0.20
-    if "geopolit" in c or "trade" in c or "tariff" in c or "war" in c:
-        base["geopolitical_tension"] += 0.30
-        base["supplier_reliability"] -= 0.18
-    if "demand" in c or "recession" in c or "commodity" in c or "market" in c:
-        base["demand_shock"] += 0.25
-        base["inventory_shortage"] += 0.10
+    if "displacement" in c or "automation" in c:
+        base["automation_exposure"] += 0.25
+        base["transition_friction"] += 0.15
+    if "skills" in c or "reskilling" in c:
+        base["transition_friction"] += 0.22
+        base["reskilling_capacity"] -= 0.15
+    if "wage" in c or "pay" in c:
+        base["wage_pressure"] += 0.25
+    if "hiring" in c or "labor demand" in c:
+        base["labor_market_demand"] -= 0.20
+        base["transition_friction"] += 0.12
+    if "policy" in c or "regulation" in c or "public" in c:
+        base["policy_support"] -= 0.18
+        base["reskilling_capacity"] -= 0.10
 
     for key in list(base.keys()):
         base[key] = _clip01(base[key])
@@ -73,8 +75,8 @@ def risk_item_to_observed_state(item: Dict[str, object]) -> ObservedRiskState:
     risk_severity = _clip01(0.55 * sev_score + 0.25 * p_next + 0.20 * confidence)
 
     # Keep downstream causal variables coherent with severity signal.
-    base["inventory_shortage"] = _clip01(0.5 * base["inventory_shortage"] + 0.5 * risk_severity)
-    base["shipping_delay"] = _clip01(0.6 * base["shipping_delay"] + 0.4 * risk_severity)
+    base["transition_friction"] = _clip01(0.55 * base["transition_friction"] + 0.45 * risk_severity)
+    base["wage_pressure"] = _clip01(0.60 * base["wage_pressure"] + 0.40 * risk_severity)
 
     return ObservedRiskState(
         risk_id=f"risk_{int(item.get('rank', 0))}",
@@ -89,13 +91,13 @@ def risk_item_to_observed_state(item: Dict[str, object]) -> ObservedRiskState:
         affected_geo=[str(x) for x in item.get("affected_geo", [])],
         causal_chain=str(item.get("causal_chain", "")),
         recommended_action=str(item.get("recommended_action", "")),
-        port_congestion=base["port_congestion"],
-        weather_severity=base["weather_severity"],
-        geopolitical_tension=base["geopolitical_tension"],
-        shipping_delay=base["shipping_delay"],
-        supplier_reliability=base["supplier_reliability"],
-        inventory_shortage=base["inventory_shortage"],
-        demand_shock=base["demand_shock"],
+        ai_adoption_rate=base["ai_adoption_rate"],
+        automation_exposure=base["automation_exposure"],
+        reskilling_capacity=base["reskilling_capacity"],
+        labor_market_demand=base["labor_market_demand"],
+        policy_support=base["policy_support"],
+        wage_pressure=base["wage_pressure"],
+        transition_friction=base["transition_friction"],
         risk_severity=risk_severity,
     )
 
@@ -109,7 +111,7 @@ def run_layer4_pipeline(
 
     top_risks = report.get("top_risks", [])[:5]
 
-    dag: nx.DiGraph = build_supply_chain_dag()
+    dag: nx.DiGraph = build_job_risk_dag()
     fitted_scm = load_or_fit_scm()
 
     output_path.parent.mkdir(parents=True, exist_ok=True)

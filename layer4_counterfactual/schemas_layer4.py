@@ -22,14 +22,14 @@ class ObservedRiskState(BaseModel):
     causal_chain: str = ""
     recommended_action: str = ""
 
-    # Normalized causal variables in [0, 1]
-    port_congestion: float = Field(ge=0.0, le=1.0)
-    weather_severity: float = Field(ge=0.0, le=1.0)
-    geopolitical_tension: float = Field(ge=0.0, le=1.0)
-    shipping_delay: float = Field(ge=0.0, le=1.0)
-    supplier_reliability: float = Field(ge=0.0, le=1.0)
-    inventory_shortage: float = Field(ge=0.0, le=1.0)
-    demand_shock: float = Field(ge=0.0, le=1.0)
+    # Normalized AI job-risk causal variables in [0, 1]
+    ai_adoption_rate: float = Field(ge=0.0, le=1.0)
+    automation_exposure: float = Field(ge=0.0, le=1.0)
+    reskilling_capacity: float = Field(ge=0.0, le=1.0)
+    labor_market_demand: float = Field(ge=0.0, le=1.0)
+    policy_support: float = Field(ge=0.0, le=1.0)
+    wage_pressure: float = Field(ge=0.0, le=1.0)
+    transition_friction: float = Field(ge=0.0, le=1.0)
     risk_severity: float = Field(ge=0.0, le=1.0)
 
 

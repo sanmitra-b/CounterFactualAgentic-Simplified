@@ -49,13 +49,13 @@ def build_retrieval_query(risk_data: Dict[str, Any]) -> str:
     causal_readable = causal_var.replace("_", " ")
  
     query = (
-        f"Supply chain risk: {risk_title}. "
+        f"AI-driven job risk: {risk_title}. "
         f"Risk category: {category}. "
         f"Root causal variable: {causal_readable}. "
         f"Causal path: {causal_path}. "
         f"Severity: {severity}. "
         f"Probability of improvement with intervention: {p_improve:.0%}. "
-        f"Mitigation strategy for {causal_readable} in {category.lower()} supply chain disruption."
+        f"Mitigation strategy for {causal_readable} in {category.lower()} workforce transition risk."
     )
     return query
  
@@ -109,7 +109,7 @@ def process_risk(
     best       = risk_data.get("best_intervention", {})
     intervention = best.get("intervention", {})
  
-    causal_var    = intervention.get("variable", "inventory_shortage")
+    causal_var    = intervention.get("variable", "transition_friction")
     ite_mean      = float(best.get("ite_mean", 0.0))
     p_improve     = float(best.get("probability_of_improvement", 0.5))
     obs_severity  = float(best.get("observed_risk_severity", 0.5))
@@ -123,7 +123,7 @@ def process_risk(
  
     if not retrieved:
         # Broaden query if no results
-        retrieved = store.query(f"{category} supply chain risk mitigation", n_results=RETRIEVE_N)
+        retrieved = store.query(f"{category} AI workforce risk mitigation", n_results=RETRIEVE_N)
  
     # ── Step 3: Score and rank ────────────────────────────────────────────────
     solutions = build_mitigation_solutions(
@@ -257,7 +257,7 @@ def run_layer5(
     ranked = sorted(all_solutions, key=lambda s: s.confidence_score, reverse=True)
  
     bundle = RiskSolutionBundle(
-        domain                = "supply_chain",
+        domain                = "ai_job_risk",
         mapped_at             = datetime.utcnow().isoformat(),
         layer4_source         = str(input_path),
         total_risks_mapped    = len(mappings),

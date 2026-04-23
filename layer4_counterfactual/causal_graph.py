@@ -6,37 +6,42 @@ import networkx as nx
 
 
 CAUSAL_NODES = [
-    "port_congestion",
-    "weather_severity",
-    "geopolitical_tension",
-    "shipping_delay",
-    "supplier_reliability",
-    "inventory_shortage",
-    "demand_shock",
+    "ai_adoption_rate",
+    "automation_exposure",
+    "reskilling_capacity",
+    "labor_market_demand",
+    "policy_support",
+    "wage_pressure",
+    "transition_friction",
     "risk_severity",
 ]
 
 CAUSAL_EDGES = [
-    ("port_congestion", "shipping_delay"),
-    ("weather_severity", "shipping_delay"),
-    ("geopolitical_tension", "shipping_delay"),
-    ("shipping_delay", "inventory_shortage"),
-    ("supplier_reliability", "inventory_shortage"),
-    ("demand_shock", "inventory_shortage"),
-    ("inventory_shortage", "risk_severity"),
-    ("shipping_delay", "risk_severity"),
-    ("demand_shock", "risk_severity"),
-    ("geopolitical_tension", "risk_severity"),
+    ("ai_adoption_rate", "automation_exposure"),
+    ("ai_adoption_rate", "transition_friction"),
+    ("policy_support", "reskilling_capacity"),
+    ("reskilling_capacity", "transition_friction"),
+    ("labor_market_demand", "transition_friction"),
+    ("automation_exposure", "wage_pressure"),
+    ("automation_exposure", "transition_friction"),
+    ("transition_friction", "risk_severity"),
+    ("wage_pressure", "risk_severity"),
+    ("automation_exposure", "risk_severity"),
 ]
 
 
-def build_supply_chain_dag() -> nx.DiGraph:
+def build_job_risk_dag() -> nx.DiGraph:
     dag = nx.DiGraph()
     dag.add_nodes_from(CAUSAL_NODES)
     dag.add_edges_from(CAUSAL_EDGES)
     if not nx.is_directed_acyclic_graph(dag):
         raise ValueError("Configured causal graph is not a DAG.")
     return dag
+
+
+def build_supply_chain_dag() -> nx.DiGraph:
+    """Backward-compatible wrapper used by existing imports."""
+    return build_job_risk_dag()
 
 
 def _path_weight(path: List[str]) -> float:

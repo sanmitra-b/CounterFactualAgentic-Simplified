@@ -36,18 +36,18 @@ FALLBACK_MODEL = "llama-3.1-8b-instant"
 MAX_CONTEXT_CHARS = 12_000               # safe token budget (~3 000 tokens)
 TOP_N_PER_CATEGORY = 3                   # max signals per category in prompt
  
-# Risk categories aligned with supply chain domain
+# Risk categories aligned with AI-driven job-risk domain
 RISK_CATEGORIES = [
-    "Port Congestion",
-    "Shipping Delay",
-    "Commodity Price Shock",
-    "Geopolitical Disruption",
-    "Weather / Natural Disaster",
-    "Financial Market Volatility",
-    "Supplier Insolvency",
-    "Demand Shock",
-    "Regulatory / Trade Policy",
-    "Cyber / Infrastructure Risk",
+    "Job Displacement Risk",
+    "Skills Obsolescence Risk",
+    "Wage Suppression Risk",
+    "Hiring Slowdown Risk",
+    "Public Sector Workforce Transition Risk",
+    "Regional Employment Shock Risk",
+    "Inequality Amplification Risk",
+    "Regulatory Lag Risk",
+    "AI Governance and Trust Risk",
+    "Education-Pipeline Mismatch Risk",
 ]
  
 # ─────────────────────────────────────────────────────────────────────────────
@@ -55,11 +55,11 @@ RISK_CATEGORIES = [
 # ─────────────────────────────────────────────────────────────────────────────
  
 SYSTEM_PROMPT = """\
-You are a world-class supply chain risk analyst with expertise in global logistics,
-commodity markets, geopolitics, and financial risk modelling.
+You are a world-class labor-market and workforce transition risk analyst with expertise in
+AI adoption, automation economics, hiring dynamics, and workforce policy.
  
 Your task is to analyse a structured intelligence bundle collected from news feeds,
-social media, financial markets, port data, weather stations, and commodity prices.
+social media, financial markets, and USAJOBS labor-demand signals.
 Each signal has already been enriched with NLP sentiment scores and named entity tags.
  
 You MUST return ONLY a valid JSON object — no prose, no markdown, no code fences.
@@ -131,7 +131,8 @@ HUMAN_PROMPT_TEMPLATE = """\
  
 </intelligence_bundle>
  
-Based on this intelligence bundle, identify the TOP 5 supply chain risks and 3-5 soft/emerging risks.
+Based on this intelligence bundle, identify the TOP 5 AI-driven job risks and 3-5 soft/emerging risks.
+Use categories from this set when possible: {risk_categories}.
 Return ONLY the JSON object as specified.
 """
  
@@ -283,7 +284,7 @@ def build_prompt(bundle: dict) -> str:
     commodity_section = _format_commodity_section(bundle.get("commodities", []))
  
     prompt = HUMAN_PROMPT_TEMPLATE.format(
-        domain             = bundle.get("domain", "supply_chain"),
+        domain             = bundle.get("domain", "ai_job_risk"),
         fetched_at         = bundle.get("fetched_at", ""),
         enriched_at        = bundle.get("enriched_at", ""),
         completeness       = f"{bundle.get('layer1_completeness', 0.0) * 100:.0f}%",
@@ -298,6 +299,7 @@ def build_prompt(bundle: dict) -> str:
         port_section       = port_section,
         weather_section    = weather_section,
         commodity_section  = commodity_section,
+        risk_categories    = ", ".join(RISK_CATEGORIES),
     )
  
     # Hard-trim to stay within token budget
@@ -394,7 +396,7 @@ def parse_risk_report(raw: dict, bundle_meta: dict) -> RiskReport:
  
     return RiskReport(
         analysed_at          = raw.get("analysed_at", datetime.utcnow().isoformat()),
-        domain               = raw.get("domain", bundle_meta.get("domain", "supply_chain")),
+        domain               = raw.get("domain", bundle_meta.get("domain", "ai_job_risk")),
         top_risks            = top_risks,
         soft_risks           = soft_risks,
         data_quality_note    = raw.get("data_quality_note", ""),
@@ -483,7 +485,7 @@ def run_layer3(
  
     # ── 3. Groq inference ─────────────────────────────────────────────────────
     print("\n[3/4] Running Groq inference …")
-    raw_output = call_groq(prompt, bundle.get("domain", "supply_chain"))
+    raw_output = call_groq(prompt, bundle.get("domain", "ai_job_risk"))
  
     # ── 4. Parse + persist ────────────────────────────────────────────────────
     print("\n[4/4] Parsing risk report and writing to JSON …")

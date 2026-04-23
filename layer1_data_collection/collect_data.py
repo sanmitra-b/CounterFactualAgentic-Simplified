@@ -171,7 +171,8 @@ def main():
     if not output_dir_path.is_absolute():
         output_dir_path = (Path(__file__).resolve().parent / output_dir_path).resolve()
 
-    storage = DataStorage(output_dir=str(output_dir_path))
+    configured_domain = config.get("output", {}).get("domain", "supply_chain")
+    storage = DataStorage(output_dir=str(output_dir_path), domain=configured_domain)
     
     # Verify data quality before saving
     stats = DataStorage.verify_data(normalized_data)

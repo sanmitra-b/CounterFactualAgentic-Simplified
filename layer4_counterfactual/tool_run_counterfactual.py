@@ -6,18 +6,18 @@ import numpy as np
 import pandas as pd
 from dowhy import gcm
 
-from causal_graph import build_supply_chain_dag
+from causal_graph import build_job_risk_dag
 from schemas_layer4 import CounterfactualResult, InterventionParams, ObservedRiskState
 
 
 STATE_COLUMNS = [
-    "port_congestion",
-    "weather_severity",
-    "geopolitical_tension",
-    "shipping_delay",
-    "supplier_reliability",
-    "inventory_shortage",
-    "demand_shock",
+    "ai_adoption_rate",
+    "automation_exposure",
+    "reskilling_capacity",
+    "labor_market_demand",
+    "policy_support",
+    "wage_pressure",
+    "transition_friction",
     "risk_severity",
 ]
 
@@ -40,7 +40,7 @@ def _create_intervention_callable(value: float):
 
 
 def _best_explanatory_path(intervened_variable: str) -> str:
-    dag = build_supply_chain_dag()
+    dag = build_job_risk_dag()
     try:
         paths = list(nx_path_to_target(dag, intervened_variable, "risk_severity"))
     except Exception:

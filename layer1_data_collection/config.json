@@ -6,18 +6,25 @@
         "newsapi": {
           "enabled": true,
           "api_key": "3eca2036c90a426e9513d8b04ec70599",
-          "note": "NewsAPI for financial news articles"
+          "note": "NewsAPI for AI workforce and job-risk news"
         },
         "rss": {
           "enabled": true,
           "feeds": [
-            "https://feeds.finance.yahoo.com/rss/2.0/headline",
-            "https://feeds.bloomberg.com/markets/news.rss",
-            "https://feeds.reuters.com/finance/markets"
+            "https://feeds.reuters.com/reuters/technologyNews",
+            "https://feeds.feedburner.com/oreilly/radar",
+            "https://www.artificialintelligence-news.com/feed/"
           ]
         }
       },
-      "keywords": ["stock market", "economic news", "financial crisis", "market crash", "inflation", "interest rates"],
+      "keywords": [
+        "AI job displacement",
+        "automation layoffs",
+        "generative AI workforce impact",
+        "AI hiring trends",
+        "reskilling for AI",
+        "job cuts technology"
+      ],
       "max_results_per_source": 50
     },
     "financial": {
@@ -25,28 +32,43 @@
       "alpha_vantage": {
         "enabled": true,
         "api_key": "N4JMB7XG63V126PM",
-        "tickers": ["AAPL", "MSFT", "GOOGL", "TSLA", "GLD", "USO"],
-        "note": "Stock price data via Alpha Vantage API"
+        "tickers": ["MSFT", "GOOGL", "AMZN", "META", "NVDA", "ADBE"],
+        "note": "AI economy and labor-market proxy equities"
       },
       "yfinance": {
         "enabled": true,
-        "tickers": ["^GSPC", "^IXIC", "^DJI", "VIX"],
-        "note": "Index data (yfinance, no API key needed)"
+        "tickers": ["^NDX", "^GSPC", "^DJI", "^VIX"],
+        "note": "Broad market + volatility indices"
       },
       "fred": {
         "enabled": true,
         "api_key": "2027ed85461b99f7e41641fa767602f9",
-        "indicators": ["UNRATE", "CPIAUCSL", "DEXUSEU", "DCOILWTICO", "DGS10"],
-        "note": "Economic indicators from Federal Reserve"
+        "indicators": ["UNRATE", "ICSA", "PAYEMS", "JTSJOL", "LNS13000000"],
+        "note": "US labor market indicators from FRED"
       }
     },
     "weather": {
       "enabled": true,
       "openweather": {
+        "enabled": false,
+        "api_key": "",
+        "cities": [],
+        "note": "Disabled for AI job-risk mode"
+      },
+      "usajobs": {
         "enabled": true,
-        "api_key": "dd1e5ab028a86c6306b49f5037ed96d8",
-        "cities": ["New York", "London", "Tokyo", "Shanghai", "Singapore", "Hong Kong", "Sydney", "Dubai"],
-        "note": "Weather data for major economic cities"
+        "base_url": "https://data.usajobs.gov/api/search",
+        "api_key": "",
+        "user_agent": "",
+        "keywords": [
+          "artificial intelligence",
+          "machine learning",
+          "automation",
+          "data scientist",
+          "prompt engineer"
+        ],
+        "results_per_query": 25,
+        "note": "USAJOBS labor-demand and role-transition signals (credentials from .env preferred)"
       }
     },
     "social": {
@@ -57,15 +79,16 @@
         "fallback_urls": [
           "https://api.pullpush.io/reddit/search/submission/"
         ],
-        "subreddits": ["stocks", "investing", "economy", "finance"],
-        "keywords": ["market", "inflation", "recession", "earnings", "rate hike"],
+        "subreddits": ["jobs", "careerguidance", "cscareerquestions", "datascience"],
+        "keywords": ["AI layoffs", "job displacement", "automation", "hiring freeze", "reskilling"],
         "max_results_per_query": 25,
         "days_back": 7,
-        "note": "Pushshift public API (no API key required)"
+        "note": "Social sentiment about AI and jobs"
       }
     }
   },
   "output": {
+    "domain": "ai_job_risk",
     "formats": ["json", "csv"],
     "output_dir": "../data/"
   },
