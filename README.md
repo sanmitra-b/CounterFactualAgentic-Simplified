@@ -1,4 +1,4 @@
-﻿# CFA Simplified Pipeline
+﻿# Counterfactual driven Agentic AI 
 
 This repository is organized as a 5-layer pipeline:
 
