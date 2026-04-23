@@ -12,7 +12,7 @@ from datetime import datetime
 # Add collectors to path
 from collectors.news_collector import collect_news
 from collectors.financial_collector import collect_financial
-from collectors.weather_collector import collect_weather
+from collectors.job_collector import collect_jobs
 from collectors.social_collector import collect_social
 from normalizer import DataNormalizer
 from storage import DataStorage
@@ -87,7 +87,7 @@ def collect_data(config: dict) -> dict:
     collected_data = {
         "news": [],
         "financial": [],
-        "weather": [],
+        "jobs": [],
         "social": []
     }
     
@@ -111,15 +111,15 @@ def collect_data(config: dict) -> dict:
     except Exception as e:
         logging.error(f"Financial collection failed: {e}")
     
-    # Collect from Weather
+    # Collect from Jobs
     try:
-        if config.get("sources", {}).get("weather", {}).get("enabled"):
-            logging.info("\n>>> Collecting WEATHER data...")
-            collected_data["weather"] = collect_weather(config["sources"]["weather"])
+        if config.get("sources", {}).get("jobs", {}).get("enabled"):
+            logging.info("\n>>> Collecting JOBS data...")
+            collected_data["jobs"] = collect_jobs(config["sources"]["jobs"])
         else:
-            logging.info("Weather collection disabled in config")
+            logging.info("Jobs collection disabled in config")
     except Exception as e:
-        logging.error(f"Weather collection failed: {e}")
+        logging.error(f"Jobs collection failed: {e}")
     
     # Collect from Social
     try:
@@ -157,7 +157,7 @@ def main():
     normalized_data = DataNormalizer.normalize_all(
         collected_data["news"],
         collected_data["financial"],
-        collected_data["weather"],
+        collected_data["jobs"],
         collected_data["social"]
     )
     

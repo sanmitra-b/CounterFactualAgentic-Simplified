@@ -11,9 +11,13 @@
         "rss": {
           "enabled": true,
           "feeds": [
-            "https://feeds.reuters.com/reuters/technologyNews",
-            "https://feeds.feedburner.com/oreilly/radar",
-            "https://www.artificialintelligence-news.com/feed/"
+            "https://www.technologyreview.com/feed/",
+            "https://www.theverge.com/rss/index.xml",
+            "https://feeds.arstechnica.com/arstechnica/index",
+            "https://www.wired.com/feed/rss",
+            "https://rss.nytimes.com/services/xml/rss/nyt/Technology.xml",
+            "https://arxiv.org/rss/cs.AI",
+            "https://huggingface.co/blog/feed.xml"
           ]
         }
       },
@@ -32,29 +36,21 @@
       "alpha_vantage": {
         "enabled": true,
         "api_key": "N4JMB7XG63V126PM",
+        "outputsize": "compact",
         "tickers": ["MSFT", "GOOGL", "AMZN", "META", "NVDA", "ADBE"],
-        "note": "AI economy and labor-market proxy equities"
+        "note": "AI economy and labor-market proxy equities (compact mode for free tier)",
+        "rate_limit_seconds": 1.5
       },
-      "yfinance": {
-        "enabled": true,
-        "tickers": ["^NDX", "^GSPC", "^DJI", "^VIX"],
-        "note": "Broad market + volatility indices"
-      },
+
       "fred": {
         "enabled": true,
         "api_key": "2027ed85461b99f7e41641fa767602f9",
-        "indicators": ["UNRATE", "ICSA", "PAYEMS", "JTSJOL", "LNS13000000"],
-        "note": "US labor market indicators from FRED"
+        "indicators": ["UNRATE", "ICSA", "PAYEMS", "JTSJOL"],
+        "note": "US labor market indicators from FRED (LNS13000000 removed - invalid series)"
       }
     },
-    "weather": {
+    "jobs": {
       "enabled": true,
-      "openweather": {
-        "enabled": false,
-        "api_key": "",
-        "cities": [],
-        "note": "Disabled for AI job-risk mode"
-      },
       "usajobs": {
         "enabled": true,
         "base_url": "https://data.usajobs.gov/api/search",
@@ -71,6 +67,10 @@
         "note": "USAJOBS labor-demand and role-transition signals (credentials from .env preferred)"
       }
     },
+    "weather": {
+      "enabled": false,
+      "note": "Disabled for AI job-risk mode"
+    },
     "social": {
       "enabled": true,
       "pushshift": {
@@ -84,6 +84,29 @@
         "max_results_per_query": 25,
         "days_back": 7,
         "note": "Social sentiment about AI and jobs"
+      },
+      "youtube": {
+        "enabled": true,
+        "api_key": "YOUR_YOUTUBE_API_KEY",
+        "keywords": ["AI replacing jobs", "artificial intelligence jobs", "automation workforce", "AI job displacement"],
+        "max_results": 50,
+        "note": "Comments from AI/jobs impact videos - novel data source for conference papers",
+        "order": "relevance"
+      },
+      "mastodon": {
+        "enabled": true,
+        "instances": ["fosstodon.org", "techhub.social", "mstdn.social"],
+        "keywords": ["AI jobs", "automation", "tech layoffs", "artificial intelligence", "hiring freeze"],
+        "hashtags": ["ai", "jobs", "automation", "techcommunity"],
+        "max_results_per_instance": 20,
+        "note": "Decentralized social network - tech community sentiment, no API approval needed"
+      },
+      "hackernews": {
+        "enabled": true,
+        "keywords": ["AI jobs", "automation", "tech layoffs", "displacement", "hiring freeze"],
+        "max_results": 50,
+        "min_comments": 5,
+        "note": "Tech worker sentiment on HackerNews - citable, live data, free access"
       }
     }
   },

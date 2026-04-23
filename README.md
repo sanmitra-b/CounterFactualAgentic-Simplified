@@ -8,6 +8,7 @@ This repository is organized as a 5-layer pipeline:
 4. Layer 4: Counterfactual-driven agentic optimization (Causal interventions and SCM)
 5. Layer 5: RAG-based mitigation mapping (retrieve and rank actions)
 
+
 ## Folder Structure
 
 ```text
@@ -22,6 +23,14 @@ CFASimplified/
 │   └── risk_solution_bundle.json
 ├── layer1_data_collection/
 │   ├── collectors/
+│   │   ├── financial_collector.py
+│   │   ├── job_collector.py          # Dual job collection (Adzuna + USAJOBS)
+│   │   ├── news_collector.py
+│   │   ├── social_collector.py       # Multi-platform: Reddit, YouTube, Mastodon, HackerNews
+│   │   ├── youtube_collector.py      # NEW: YouTube Data API v3
+│   │   ├── mastodon_collector.py     # NEW: Mastodon social network
+│   │   ├── hackernews_collector.py   # NEW: HackerNews sentiment
+│   │   └── __init__.py
 │   ├── collect_data.py
 │   ├── config.json
 │   ├── normalizer.py
@@ -73,9 +82,41 @@ conda create -n Counterfactual python=3.11 -y
 conda activate Counterfactual
 ```
 
+## Step 3: Configure API Keys
+
+Layer 1 data collection requires API keys for multiple services. Create a `.env` file in the project root:
+
+```bash
+cp .env.example .env  # or create manually
+```
+
+Edit `.env` with your API credentials:
+
+```env
+# LLM
+GROQ_API_KEY="your_groq_api_key"
+
+# News
+NEWSAPI_KEY="your_newsapi_key"
+
+# Financial
+ALPHA_VANTAGE_KEY="your_alpha_vantage_key"
+FRED_API_KEY="your_fred_api_key"
+
+# Jobs (REQUIRED for Layer 1)
+ADZUNA_ID="your_adzuna_id"
+ADZUNA_API_KEY="your_adzuna_api_key"
+USAJOBS_API_KEY="your_usajobs_api_key"
+USAJOBS_USER_AGENT="your_email@example.com"
+
+# Social (Optional)
+YOUTUBE_API_KEY="your_youtube_api_key"  # For YouTube Data API v3 (optional, novel data source)
+# Mastodon and HackerNews require no API keys
+```
+
 ## Setup
 
-Ensure you are in the project root folder.
+Ensure you are in the project root folder with the Counterfactual conda environment activated.
 
 ```bash
 pip install -r requirements.txt
@@ -92,6 +133,59 @@ python layer1_data_collection/collect_data.py
 Expected output:
 - `data/risk_input_bundle.json`
 - `data/risk_input_bundle.csv`
+
+**Layer 1 Data Sources:**
+- **News:** NewsAPI and RSS feeds (130+ articles)
+- **Financial:** Alpha Vantage, FRED, yfinance (800+ records)
+- **Jobs:** Adzuna API (50 jobs) + USAJOBS API (40 jobs) = **90 total job records**
+  - Job titles: Financial Analyst, Economist, Data Scientist, Risk Analyst, Actuary
+  - Adzuna API rate limiting: 1 call/second (respects free tier: 2,500/month max)
+- **Social:** Multi-platform social sentiment collection (500+ posts/comments)
+  - **Reddit (Pushshift):** r/jobs, r/careerguidance, r/cscareerquestions, r/datascience (359 posts)
+  - **YouTube Data API v3:** Comments from AI/jobs impact videos (novel data source for papers)
+  - **Mastodon:** Decentralized social network via public API, tech communities (no approval needed)
+  - **HackerNews:** Tech worker sentiment via Algolia search API (free, citable)
+
+**Layer 1 Configuration:**
+- Edit `layer1_data_collection/config.json` to enable/disable sources
+
+#### Layer 1 Job Collection Details
+
+The `job_collector.py` module fetches job postings from two major APIs:
+
+**Adzuna API (Free Tier):**
+- Endpoint: `https://api.adzuna.com/v1/api/jobs/us/search/1`
+- Search terms: Financial Analyst, Economist, Data Scientist, Risk Analyst, Actuary
+
+**USAJOBS API (Federal Jobs):**
+- Endpoint: `https://data.usajobs.gov/api/search`
+- Agencies: Treasury (TR), SEC (SE), Commerce (CM)
+- Same search terms as Adzuna
+
+
+#### Layer 1 Social Data Collection Details
+
+The `social_collector.py` module collects from four independent platforms:
+
+**Reddit via Pushshift/PullPush (Free, Archive Mirror):**
+- Endpoint: `https://api.pullpush.io/reddit/search/submission/`
+- Subreddits: r/jobs, r/careerguidance, r/cscareerquestions, r/datascience
+- Keywords: AI layoffs, job displacement, automation, hiring freeze, reskilling
+
+**YouTube Data API v3 (Requires Google API Key):**
+- Keywords: AI replacing jobs, artificial intelligence jobs, automation workforce
+
+
+**Mastodon (Decentralized, No Approval):**
+- Instances: fosstodon.org, techhub.social, mstdn.social
+- Keywords: AI jobs, automation, tech layoffs, artificial intelligence, hiring freeze
+- Hashtags: #ai, #jobs, #automation, #techcommunity
+
+
+**HackerNews via Algolia Search (Free, Citable):**
+- Endpoint: `https://hn.algolia.com/api/v1/search`
+- Keywords: AI jobs, automation, tech layoffs, displacement, hiring freeze
+- Filters: Stories with minimum 5 comments (signal filtering)
 
 ### Layer 2
 
@@ -259,14 +353,6 @@ What this means:
 - You now have ranked, practical actions linked to causal evidence.
 - This is the final handoff for decision support.
 
-## Quick Mental Model
-
-- Layer 1: Collect signals
-- Layer 2: Add intelligence (sentiment/entities/reliability)
-- Layer 3: Decide top risks
-- Layer 4: Test what intervention works causally
-- Layer 5: Retrieve and rank concrete mitigations
-
 ## API Keys
 
 Keep API keys in `.env` at the repository root.
@@ -280,6 +366,5 @@ Typical keys:
 
 ## Notes
 
-- Layer 2 and Layer 3 now default to using files in `data/`.
 - Layer 4 computes interventions using causal counterfactual simulation; optional GROQ reflection does not change core intervention math.
 - Layer 5 retrieves mitigation playbooks from a vector store (Chroma/FAISS/NumPy fallback) and ranks them with a confidence scorer.

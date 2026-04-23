@@ -15,8 +15,8 @@ class DataNormalizer:
     
     # Common schema for all data
     SCHEMA = {
-        "source_type": "news|financial|weather|social",
-        "source_name": "NewsAPI|RSS|yfinance|Alpha Vantage|FRED|OpenWeather|Pushshift",
+        "source_type": "news|financial|jobs|social",
+        "source_name": "NewsAPI|RSS|Alpha Vantage|FRED|Adzuna|USAJOBS|Pushshift",
         "date": "YYYY-MM-DD or ISO format",
         "content": "main text or primary value",
         "metadata": {
@@ -128,40 +128,42 @@ class DataNormalizer:
             }
     
     @staticmethod
-    def normalize_weather_data(data: Dict) -> Dict:
+    def normalize_job_data(data: Dict) -> Dict:
         """
-        Normalize weather data to common schema.
+        Normalize job data to common schema.
         
         Args:
-            data: Raw weather data dictionary from weather collector.
+            data: Raw job data dictionary from job collector.
         
         Returns:
-            Normalized weather data dictionary.
+            Normalized job data dictionary.
         """
-        source_label = data.get("source", "OpenWeather")
+        source_label = data.get("source", "USAJOBS")
+        job_title = data.get("job_title", data.get("position_title", "Unknown"))
+        company = data.get("company", data.get("organization_name", "Unknown"))
+        
         return {
-            "source_type": "weather",
-            "source_name": f"{source_label} - {data.get('city', 'Unknown')}",
-            "date": DataNormalizer._parse_date(data.get("date", "")),
-            "content": f"{data.get('weather_description', '').title()}: {data.get('temperature', 0):.1f}°C",
+            "source_type": "jobs",
+            "source_name": f"{source_label} - {job_title}",
+            "date": DataNormalizer._parse_date(data.get("posting_date", data.get("date", ""))),
+            "content": data.get("job_description", data.get("position_title", "")),
+            "title": job_title,
             "metadata": {
-                "city": data.get("city", ""),
-                "country": data.get("country", ""),
-                "temperature": data.get("temperature", 0),
-                "feels_like": data.get("feels_like", 0),
-                "humidity": data.get("humidity", 0),
-                "pressure": data.get("pressure", 0),
-                "weather_main": data.get("weather_main", ""),
-                "weather_description": data.get("weather_description", ""),
-                "wind_speed": data.get("wind_speed", 0),
-                "cloudiness": data.get("cloudiness", 0)
+                "company": company,
+                "location": data.get("location", data.get("location_name", "")),
+                "salary_min": data.get("salary_min"),
+                "salary_max": data.get("salary_max"),
+                "salary_currency": data.get("salary_currency", "USD"),
+                "url": data.get("url", data.get("position_uri", "")),
+                "source": source_label
             }
         }
     
     @staticmethod
     def normalize_social_post(data: Dict) -> Dict:
         """
-        Normalize social media data to common schema.
+        Normalize social media data from multiple sources to common schema.
+        Handles: Reddit (Pushshift), YouTube, Mastodon, HackerNews
         
         Args:
             data: Raw social post dictionary from social collector.
@@ -169,37 +171,85 @@ class DataNormalizer:
         Returns:
             Normalized social data dictionary.
         """
-        return {
-            "source_type": "social",
-            "source_name": f"Pushshift - r/{data.get('subreddit', 'unknown')}",
-            "date": DataNormalizer._parse_date(data.get("date", "")),
-            "content": data.get("content", ""),
-            "title": data.get("title", ""),
-            "metadata": {
+        # Detect source from available fields
+        if "subreddit" in data:
+            # Reddit/Pushshift
+            source_name = f"Reddit - r/{data.get('subreddit', 'unknown')}"
+            metadata = {
                 "author": data.get("author", "unknown"),
                 "subreddit": data.get("subreddit", "unknown"),
                 "score": data.get("score", 0),
                 "num_comments": data.get("num_comments", 0),
                 "url": data.get("url", "")
             }
+        elif "video_id" in data:
+            # YouTube
+            source_name = "YouTube"
+            metadata = {
+                "author": data.get("author", "unknown"),
+                "channel": data.get("channel", "unknown"),
+                "video_id": data.get("video_id", ""),
+                "video_title": data.get("video_title", ""),
+                "likes": data.get("likes", 0),
+                "replies": data.get("replies", 0),
+                "url": data.get("url", "")
+            }
+        elif "instance" in data:
+            # Mastodon
+            source_name = f"Mastodon - {data.get('instance', 'unknown')}"
+            metadata = {
+                "author": data.get("author", "unknown"),
+                "instance": data.get("instance", "unknown"),
+                "favorites": data.get("favorites", 0),
+                "reblogs": data.get("reblogs", 0),
+                "replies": data.get("replies", 0),
+                "hashtag": data.get("hashtag", ""),
+                "url": data.get("url", "")
+            }
+        elif data.get("source") == "hackernews_story" or "story_id" in data:
+            # HackerNews
+            source_name = "HackerNews"
+            metadata = {
+                "author": data.get("author", "unknown"),
+                "story_id": data.get("story_id", ""),
+                "points": data.get("points", 0),
+                "num_comments": data.get("num_comments", 0),
+                "url": data.get("url", ""),
+                "source": "hackernews"
+            }
+        else:
+            # Default/unknown social source
+            source_name = "Social Media"
+            metadata = {
+                "author": data.get("author", "unknown"),
+                "url": data.get("url", "")
+            }
+        
+        return {
+            "source_type": "social",
+            "source_name": source_name,
+            "date": DataNormalizer._parse_date(data.get("date", "")),
+            "content": data.get("content", ""),
+            "title": data.get("title", ""),
+            "metadata": metadata
         }
     
     @classmethod
-    def normalize_all(cls, news: List[Dict], financial: List[Dict], weather: List[Dict] = None, social: List[Dict] = None) -> List[Dict]:
+    def normalize_all(cls, news: List[Dict], financial: List[Dict], jobs: List[Dict] = None, social: List[Dict] = None) -> List[Dict]:
         """
         Normalize all collected data from all sources.
         
         Args:
             news: List of news articles.
             financial: List of financial data.
-            weather: List of weather data (optional).
+            jobs: List of job data (optional).
             social: List of social media records (optional).
         
         Returns:
             Unified list of normalized data records.
         """
-        if weather is None:
-            weather = []
+        if jobs is None:
+            jobs = []
         if social is None:
             social = []
         
@@ -225,15 +275,15 @@ class DataNormalizer:
         
         logger.info(f"Normalized {len(financial)} financial records")
         
-        # Normalize weather data
-        for record in weather:
+        # Normalize job data
+        for record in jobs:
             try:
-                normalized.append(cls.normalize_weather_data(record))
+                normalized.append(cls.normalize_job_data(record))
             except Exception as e:
-                logger.error(f"Failed to normalize weather data: {e}")
+                logger.error(f"Failed to normalize job data: {e}")
                 continue
         
-        logger.info(f"Normalized {len(weather)} weather records")
+        logger.info(f"Normalized {len(jobs)} job records")
         
         # Normalize social data
         for record in social:

@@ -41,12 +41,14 @@ class EnrichedSocialSignal:
     text: str
     source: str
     platform: str
-    subreddit: str
-    post_id: str
+    platform_id: str
     created_at: str
     score: int
     num_comments: int
     sentiment: SentimentScore
+    subreddit: str = ""  # For Reddit/backward compatibility
+    post_id: str = ""  # For backward compatibility
+    engagement_metrics: Dict[str, int] = field(default_factory=dict)  # likes, reblogs, replies, points
     entities: List[NEREntity] = field(default_factory=list)
     geo_tags: List[str] = field(default_factory=list)
     reliability: float = 0.0

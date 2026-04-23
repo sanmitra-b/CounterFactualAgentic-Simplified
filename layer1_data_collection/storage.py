@@ -81,18 +81,43 @@ class DataStorage:
                 )
 
             elif source_type == "social":
-                subreddit = metadata.get("subreddit", "unknown")
                 text = record.get("content", "")
+                source_lower = source_name.lower() if source_name else "unknown"
+                
+                # Detect platform from source metadata
+                if "reddit" in source_lower or "r/" in source_lower:
+                    platform = "reddit"
+                    platform_id = self._stable_post_id(metadata.get("subreddit", "unknown"), text, date_val)
+                elif "youtube" in source_lower:
+                    platform = "youtube"
+                    platform_id = metadata.get("video_id", self._stable_post_id("youtube", text, date_val))
+                elif "mastodon" in source_lower:
+                    platform = "mastodon"
+                    platform_id = self._stable_post_id(metadata.get("instance", "mastodon"), text, date_val)
+                elif "hackernews" in source_lower:
+                    platform = "hackernews"
+                    platform_id = metadata.get("story_id", self._stable_post_id("hackernews", text, date_val))
+                else:
+                    platform = "social"
+                    platform_id = self._stable_post_id(source_name, text, date_val)
+                
                 social_items.append(
                     {
                         "text": text,
-                        "source": "reddit",
-                        "platform": "reddit",
-                        "subreddit": subreddit,
-                        "post_id": self._stable_post_id(subreddit, text, date_val),
+                        "source": source_lower,
+                        "platform": platform,
+                        "platform_id": platform_id,
+                        "subreddit": metadata.get("subreddit", ""),  # For Reddit compatibility
+                        "post_id": platform_id,  # For backward compatibility
                         "created_at": self._to_iso_datetime(date_val),
                         "score": int(metadata.get("score", 0) or 0),
                         "num_comments": int(metadata.get("num_comments", 0) or 0),
+                        "engagement_metrics": {
+                            "likes": int(metadata.get("likes", 0) or 0),
+                            "reblogs": int(metadata.get("reblogs", 0) or 0),
+                            "replies": int(metadata.get("replies", 0) or 0),
+                            "points": int(metadata.get("points", 0) or 0),
+                        },
                     }
                 )
 
@@ -129,6 +154,39 @@ class DataStorage:
                             "fetched_at": self._to_iso_datetime(date_val),
                         }
                     )
+
+            elif source_type == "jobs":
+                job_title = metadata.get("company", "") or record.get("title", "")
+                description = record.get("content", "")
+                
+                # Detect labor disruption risk signals
+                risk_terms = {
+                    "layoff",
+                    "downsizing",
+                    "displace",
+                    "automation",
+                    "redundant",
+                    "job cut",
+                    "ai",
+                    "artificial intelligence",
+                    "reskilling",
+                    "hiring freeze",
+                }
+                description_lower = (description or "").lower()
+                disruption_flag = any(term in description_lower for term in risk_terms)
+                
+                weather_items.append(
+                    {
+                        "city": metadata.get("location", ""),
+                        "country": "USA",
+                        "description": job_title,
+                        "temperature_c": 0.0,
+                        "wind_kmh": 0.0,
+                        "disruption_flag": disruption_flag,
+                        "source": "usajobs" if "usajobs" in source_name.lower() else "adzuna",
+                        "fetched_at": self._to_iso_datetime(date_val),
+                    }
+                )
 
             elif source_type == "weather":
                 source_lower = (source_name or "").lower()
@@ -167,7 +225,7 @@ class DataStorage:
                         "temperature_c": float(metadata.get("temperature", 0) or 0),
                         "wind_kmh": wind_kmh,
                         "disruption_flag": disruption_flag,
-                        "source": "usajobs" if is_usajobs else "openweather",
+                        "source": "openweather",
                         "fetched_at": self._to_iso_datetime(date_val),
                     }
                 )

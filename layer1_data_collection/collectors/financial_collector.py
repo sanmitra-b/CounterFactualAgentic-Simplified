@@ -1,6 +1,6 @@
 """
 Financial Data Collector Module
-Fetches stock prices from Alpha Vantage and yfinance, economic indicators from FRED.
+Fetches stock prices from Alpha Vantage and economic indicators from FRED.
 """
 
 import logging
@@ -41,11 +41,14 @@ class FinancialCollector:
         
         try:
             import requests
+            import time
         except ImportError:
             logger.error("requests library not installed")
             return []
         
         tickers = self.config["alpha_vantage"].get("tickers", [])
+        outputsize = self.config["alpha_vantage"].get("outputsize", "compact")
+        rate_limit = self.config["alpha_vantage"].get("rate_limit_seconds", 1.5)
         prices = []
         
         base_url = "https://www.alphavantage.co/query"
@@ -57,7 +60,7 @@ class FinancialCollector:
                     "function": "TIME_SERIES_DAILY",
                     "symbol": ticker,
                     "apikey": api_key,
-                    "outputsize": "full"  # Get full 20 years of data
+                    "outputsize": outputsize  # Use compact for free tier
                 }
                 
                 response = requests.get(base_url, params=params, timeout=15)
@@ -104,61 +107,9 @@ class FinancialCollector:
             except Exception as e:
                 logger.error(f"Failed to process Alpha Vantage data for {ticker}: {e}")
                 continue
-        
-        return prices
-    
-    def collect_from_yfinance(self) -> List[Dict]:
-        """
-        Fetch index prices from yfinance (no API key needed).
-        
-        Returns:
-            List of price data dictionaries.
-        """
-        if not self.config.get("yfinance", {}).get("enabled"):
-            logger.info("yfinance disabled in config")
-            return []
-        
-        try:
-            import yfinance as yf
-        except ImportError:
-            logger.error("yfinance library not installed. Run: pip install yfinance")
-            return []
-        
-        tickers = self.config["yfinance"].get("tickers", [])
-        prices = []
-        
-        # Get data for the past 2 years
-        end_date = datetime.now()
-        start_date = end_date - timedelta(days=730)
-        
-        for ticker in tickers:
-            try:
-                # Download historical data
-                data = yf.download(
-                    ticker,
-                    start=start_date.strftime("%Y-%m-%d"),
-                    end=end_date.strftime("%Y-%m-%d"),
-                    progress=False
-                )
-                
-                # Convert to list of records
-                for date, row in data.iterrows():
-                    prices.append({
-                        "ticker": ticker,
-                        "date": date.strftime("%Y-%m-%d"),
-                        "price": float(row["Close"]),
-                        "open": float(row["Open"]),
-                        "high": float(row["High"]),
-                        "low": float(row["Low"]),
-                        "volume": int(row["Volume"]),
-                        "source": "yfinance"
-                    })
-                
-                logger.info(f"yfinance: Downloaded {len(data)} days of data for {ticker}")
-                
-            except Exception as e:
-                logger.error(f"Failed to download data for {ticker} from yfinance: {e}")
-                continue
+            
+            # Rate limiting for free tier
+            time.sleep(rate_limit)
         
         return prices
     
@@ -242,9 +193,6 @@ class FinancialCollector:
         
         # Collect from Alpha Vantage
         all_data.extend(self.collect_from_alpha_vantage())
-        
-        # Collect from yfinance (indices)
-        all_data.extend(self.collect_from_yfinance())
         
         # Collect economic indicators
         all_data.extend(self.collect_from_fred())
