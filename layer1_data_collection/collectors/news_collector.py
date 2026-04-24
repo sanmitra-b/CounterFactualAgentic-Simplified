@@ -5,6 +5,7 @@ Fetches news from NewsAPI and RSS feeds.
 
 import json
 import logging
+import os
 from datetime import datetime, timedelta
 from typing import List, Dict
 import requests
@@ -37,9 +38,9 @@ class NewsCollector:
             logger.info("NewsAPI disabled in config")
             return []
         
-        api_key = self.config["methods"]["newsapi"].get("api_key")
-        if api_key == "YOUR_NEWSAPI_KEY_HERE":
-            logger.warning("NewsAPI key not configured. Skipping NewsAPI.")
+        api_key = os.getenv("NEWSAPI_KEY", "").strip()
+        if not api_key:
+            logger.warning("NEWSAPI_KEY not set in .env. Skipping NewsAPI.")
             return []
         
         base_url = "https://newsapi.org/v2/everything"
@@ -80,6 +81,75 @@ class NewsCollector:
                     
             except requests.exceptions.RequestException as e:
                 logger.error(f"NewsAPI request failed for '{keyword}': {e}")
+                continue
+        
+        return articles
+    
+    def collect_from_gnews(self) -> List[Dict]:
+        """
+        Fetch articles from GNews API.
+        
+        Respects free tier limits:
+          - 100 requests/day
+          - 10 articles max per request
+          - 1 request per second rate limit
+          - 12-hour data delay
+          - 30-day history
+        
+        Returns:
+            List of article dictionaries with normalized fields.
+        """
+        import time
+        
+        if not self.config.get("methods", {}).get("gnews", {}).get("enabled"):
+            logger.info("GNews disabled in config")
+            return []
+        
+        api_key = os.getenv("GNEWS_API_KEY", "").strip()
+        base_url = self.config.get("methods", {}).get("gnews", {}).get("base_url", "https://gnews.io/api/v4/search")
+        max_per_request = self.config.get("methods", {}).get("gnews", {}).get("max_articles_per_request", 10)
+        rate_limit_sec = self.config.get("methods", {}).get("gnews", {}).get("rate_limit_seconds", 1.0)
+        articles = []
+        
+        for keyword in self.config.get("keywords", []):
+            try:
+                params = {
+                    "q": keyword,
+                    "lang": "en",
+                    "sortby": "publishedAt",
+                    "max": max_per_request  # Respects 10-article free tier limit
+                }
+                
+                # Add API key if available (for higher rate limits and better freshness)
+                if api_key:
+                    params["token"] = api_key
+                
+                response = requests.get(base_url, params=params, timeout=10)
+                response.raise_for_status()
+                
+                data = response.json()
+                if data.get("articles"):
+                    for article in data.get("articles", []):
+                        articles.append({
+                            "title": article.get("title", ""),
+                            "source": "gnews",
+                            "date": article.get("publishedAt", ""),
+                            "url": article.get("url", ""),
+                            "content": article.get("description", ""),
+                            "author": article.get("source", {}).get("name", "Unknown")
+                        })
+                    logger.info(f"GNews: Found {len(data.get('articles', []))} articles for '{keyword}'")
+                else:
+                    logger.warning(f"GNews: No articles found for '{keyword}'")
+                
+                # Respect rate limit: 1 request per second
+                time.sleep(rate_limit_sec)
+                    
+            except requests.exceptions.RequestException as e:
+                logger.error(f"GNews request failed for '{keyword}': {e}")
+                continue
+            except ValueError as e:
+                logger.error(f"GNews JSON parsing failed: {e}")
                 continue
         
         return articles
@@ -144,6 +214,9 @@ class NewsCollector:
         
         # Collect from NewsAPI
         all_articles.extend(self.collect_from_newsapi())
+        
+        # Collect from GNews
+        all_articles.extend(self.collect_from_gnews())
         
         # Collect from RSS feeds
         all_articles.extend(self.collect_from_rss())

@@ -1,135 +1,137 @@
 {
-  "analysed_at": "2026-04-23T22:07:21.802333Z",
+  "analysed_at": "2026-04-24T19:00:00Z",
   "domain": "ai_job_risk",
   "top_risks": [
     {
       "rank": 1,
       "category": "Job Displacement Risk",
-      "title": "AI-driven job cuts",
-      "severity": "HIGH",
-      "confidence": 0.8,
+      "title": "AI-driven layoffs accelerate",
+      "severity": "CRITICAL",
+      "confidence": 0.85,
       "probability_next_30d": 0.7,
       "evidence": [
-        "Meta Plans 8,000 Job Cuts in May",
-        "Stanford\u2019s AI Index finds China has nearly closed the performance gap with the US"
+        "Amazon, Citi, Dell lead fresh wave of layoffs as AI reshapes jobs in 2026",
+        "TCS' FY27 starts with 25,000 fresher offers, the lowest since FY20",
+        "Nike announced 1,400 job cuts in global operations"
       ],
       "affected_entities": [
-        "Meta Platforms Inc.",
-        "US tech industry"
+        "Amazon",
+        "Citi",
+        "Dell",
+        "TCS",
+        "Nike"
       ],
       "affected_geo": [
         "US",
-        "China"
+        "India",
+        "UK",
+        "Germany"
       ],
-      "causal_chain": "Advancements in AI lead to increased automation, resulting in job displacement.",
-      "recommended_action": "Invest in retraining and upskilling programs for workers at risk of displacement."
+      "causal_chain": "AI adoption \u2192 automation \u2192 job displacement",
+      "recommended_action": "Upskill and reskill workforce to adapt to AI-driven changes"
     },
     {
       "rank": 2,
-      "category": "Skills Obsolescence Risk",
-      "title": "Outdated skills due to AI",
-      "severity": "MEDIUM",
-      "confidence": 0.6,
-      "probability_next_30d": 0.5,
+      "category": "Hiring Slowdown Risk",
+      "title": "Slowing campus recruitment",
+      "severity": "HIGH",
+      "confidence": 0.8,
+      "probability_next_30d": 0.6,
       "evidence": [
-        "Stanford\u2019s AI Index finds China has nearly closed the performance gap with the US"
+        "TCS rolls out 25,000 fresher offers for FY27, its slowest start in years"
       ],
       "affected_entities": [
-        "US workforce",
-        "Global tech industry"
+        "TCS"
       ],
       "affected_geo": [
-        "US",
-        "China",
         "India"
       ],
-      "causal_chain": "Rapid advancements in AI lead to outdated skills, making workers less competitive.",
-      "recommended_action": "Encourage continuous learning and professional development to stay up-to-date with AI-driven changes."
+      "causal_chain": "AI-led skill gaps \u2192 cautious hiring \u2192 slowing recruitment",
+      "recommended_action": "Invest in AI-driven recruitment tools to improve hiring efficiency"
     },
     {
       "rank": 3,
-      "category": "Wage Suppression Risk",
-      "title": "AI-driven wage stagnation",
-      "severity": "MEDIUM",
-      "confidence": 0.5,
-      "probability_next_30d": 0.4,
+      "category": "Skills Obsolescence Risk",
+      "title": "AI-led skill gaps widen",
+      "severity": "HIGH",
+      "confidence": 0.75,
+      "probability_next_30d": 0.55,
       "evidence": [
-        "Stanford\u2019s AI Index finds China has nearly closed the performance gap with the US"
+        "TCS rolls out 25,000 fresher offers for FY27, its slowest start in years, as AI-led skill gaps and cautious hiring reshape campus recruitment trends"
       ],
       "affected_entities": [
-        "US workforce",
-        "Global tech industry"
+        "TCS"
       ],
       "affected_geo": [
-        "US",
-        "China",
         "India"
       ],
-      "causal_chain": "Increased automation due to AI leads to wage stagnation as workers are replaced or see reduced hours.",
-      "recommended_action": "Monitor wage trends and consider implementing policies to mitigate wage suppression."
+      "causal_chain": "AI adoption \u2192 changing skill requirements \u2192 skill gaps",
+      "recommended_action": "Develop AI-driven training programs to address skill gaps"
     },
     {
       "rank": 4,
-      "category": "Hiring Slowdown Risk",
-      "title": "AI-driven hiring slowdown",
-      "severity": "LOW",
-      "confidence": 0.4,
-      "probability_next_30d": 0.3,
+      "category": "Regional Employment Shock Risk",
+      "title": "Regional job market disruption",
+      "severity": "MEDIUM",
+      "confidence": 0.65,
+      "probability_next_30d": 0.45,
       "evidence": [
-        "Meta Plans 8,000 Job Cuts in May"
+        "Amazon, Citi, Dell lead fresh wave of layoffs as AI reshapes jobs in 2026"
       ],
       "affected_entities": [
-        "Meta Platforms Inc.",
-        "US tech industry"
+        "Amazon",
+        "Citi",
+        "Dell"
       ],
       "affected_geo": [
-        "US"
+        "US",
+        "UK",
+        "Germany"
       ],
-      "causal_chain": "Economic uncertainty and AI-driven job displacement lead to a hiring slowdown.",
-      "recommended_action": "Encourage companies to invest in AI-driven hiring tools to streamline the hiring process."
+      "causal_chain": "AI-driven layoffs \u2192 regional job market disruption",
+      "recommended_action": "Implement regional job market support programs"
     },
     {
       "rank": 5,
-      "category": "Public Sector Workforce Transition Risk",
-      "title": "IRS workforce reduction",
+      "category": "Inequality Amplification Risk",
+      "title": "Widening income inequality",
       "severity": "LOW",
-      "confidence": 0.3,
-      "probability_next_30d": 0.2,
+      "confidence": 0.5,
+      "probability_next_30d": 0.35,
       "evidence": [
-        "IRS Enforcement Takes Another Big Hit As Budget Request Shrinks"
+        "Social media posts expressing concern about job losses and economic instability"
       ],
       "affected_entities": [
-        "IRS",
-        "US public sector"
+        "General public"
       ],
       "affected_geo": [
-        "US"
+        "Global"
       ],
-      "causal_chain": "Budget cuts lead to workforce reduction, potentially impacting public services.",
-      "recommended_action": "Invest in retraining and upskilling programs for public sector workers at risk of displacement."
+      "causal_chain": "AI-driven job displacement \u2192 income inequality",
+      "recommended_action": "Monitor and address income inequality through social welfare programs"
     }
   ],
   "soft_risks": [
     {
-      "category": "Inequality Amplification Risk",
-      "title": "AI-driven inequality",
-      "note": "There is a potential risk of AI exacerbating existing social and economic inequalities, but more evidence is needed to confirm this."
-    },
-    {
-      "category": "Regulatory Lag Risk",
-      "title": "Outdated regulations",
-      "note": "The rapid development of AI may outpace regulatory frameworks, potentially leading to unintended consequences."
+      "category": "AI Governance and Trust Risk",
+      "title": "Lack of transparency in AI decision-making",
+      "note": "Social media posts expressing concern about AI-driven decision-making and job losses"
     },
     {
       "category": "Education-Pipeline Mismatch Risk",
-      "title": "Education pipeline mismatch",
-      "note": "There may be a mismatch between the skills taught in educational institutions and the skills required for an AI-driven workforce, but more data is needed to confirm this."
+      "title": "Insufficient AI-related education and training",
+      "note": "TCS' slowest start in years in campus recruitment may indicate a mismatch between education and industry needs"
+    },
+    {
+      "category": "Regulatory Lag Risk",
+      "title": "Inadequate regulations for AI adoption",
+      "note": "The rapid pace of AI adoption may outpace regulatory frameworks, leading to potential risks and challenges"
     }
   ],
-  "data_quality_note": "The data quality is generally good, with a high layer1_completeness score and a reliable average sentiment. However, some signals have low reliability scores, which may impact the accuracy of the analysis.",
+  "data_quality_note": "The intelligence bundle has a layer1 completeness of 75% and an average reliability of 0.80, indicating a moderate level of confidence in the data. However, the lack of data in certain sections, such as stocks and ports, may limit the comprehensiveness of the analysis.",
   "model_used": "llama-3.3-70b-versatile",
-  "layer1_completeness": 1.0,
-  "layer2_enriched_at": "2026-04-23T22:07:21.802333",
+  "layer1_completeness": 0.75,
+  "layer2_enriched_at": "2026-04-24T18:58:57.050976",
   "aggregate_sentiment": "neutral",
-  "avg_reliability": 0.7547
+  "avg_reliability": 0.7987
 }

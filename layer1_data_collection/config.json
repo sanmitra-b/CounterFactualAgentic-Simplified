@@ -4,9 +4,15 @@
       "enabled": true,
       "methods": {
         "newsapi": {
-          "enabled": true,
-          "api_key": "3eca2036c90a426e9513d8b04ec70599",
+          "enabled": false,
           "note": "NewsAPI for AI workforce and job-risk news"
+        },
+        "gnews": {
+          "enabled": true,
+          "base_url": "https://gnews.io/api/v4/search",
+          "max_articles_per_request": 10,
+          "rate_limit_seconds": 1.0,
+          "note": "GNews free tier: 100 req/day, 10 articles/request, 1 req/sec rate limit"
         },
         "rss": {
           "enabled": true,
@@ -16,15 +22,14 @@
             "https://feeds.arstechnica.com/arstechnica/index",
             "https://www.wired.com/feed/rss",
             "https://rss.nytimes.com/services/xml/rss/nyt/Technology.xml",
-            "https://arxiv.org/rss/cs.AI",
-            "https://huggingface.co/blog/feed.xml"
+            "https://arxiv.org/rss/cs.AI"
           ]
         }
       },
       "keywords": [
         "AI job displacement",
         "automation layoffs",
-        "generative AI workforce impact",
+        "AI workforce impact",
         "AI hiring trends",
         "reskilling for AI",
         "job cuts technology"
@@ -35,7 +40,6 @@
       "enabled": true,
       "alpha_vantage": {
         "enabled": true,
-        "api_key": "N4JMB7XG63V126PM",
         "outputsize": "compact",
         "tickers": ["MSFT", "GOOGL", "AMZN", "META", "NVDA", "ADBE"],
         "note": "AI economy and labor-market proxy equities (compact mode for free tier)",
@@ -44,7 +48,6 @@
 
       "fred": {
         "enabled": true,
-        "api_key": "2027ed85461b99f7e41641fa767602f9",
         "indicators": ["UNRATE", "ICSA", "PAYEMS", "JTSJOL"],
         "note": "US labor market indicators from FRED (LNS13000000 removed - invalid series)"
       }
@@ -54,8 +57,6 @@
       "usajobs": {
         "enabled": true,
         "base_url": "https://data.usajobs.gov/api/search",
-        "api_key": "",
-        "user_agent": "",
         "keywords": [
           "artificial intelligence",
           "machine learning",
@@ -64,7 +65,7 @@
           "prompt engineer"
         ],
         "results_per_query": 25,
-        "note": "USAJOBS labor-demand and role-transition signals (credentials from .env preferred)"
+        "note": "USAJOBS labor-demand and role-transition signals (credentials from .env)"
       }
     },
     "weather": {
@@ -74,7 +75,7 @@
     "social": {
       "enabled": true,
       "pushshift": {
-        "enabled": true,
+        "enabled": false,
         "base_url": "https://api.pushshift.io/reddit/search/submission/",
         "fallback_urls": [
           "https://api.pullpush.io/reddit/search/submission/"
@@ -87,9 +88,11 @@
       },
       "youtube": {
         "enabled": true,
-        "api_key": "YOUR_YOUTUBE_API_KEY",
         "keywords": ["AI replacing jobs", "artificial intelligence jobs", "automation workforce", "AI job displacement"],
-        "max_results": 50,
+        "max_results": 700,
+        "videos_per_keyword": 5,
+        "comments_per_video": 30,
+        "comment_order": "time",
         "note": "Comments from AI/jobs impact videos - novel data source for conference papers",
         "order": "relevance"
       },

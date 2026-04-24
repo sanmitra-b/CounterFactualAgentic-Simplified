@@ -1,12 +1,13 @@
 ﻿# Counterfactual driven Agentic AI 
 
-This repository is organized as a 5-layer pipeline:
+This repository is organized as a 6-layer pipeline:
 
 1. Layer 1: Data collection and normalization
 2. Layer 2: NLP enrichment (sentiment, entities, geo tags)
 3. Layer 3: LLM risk analysis report generation
 4. Layer 4: Counterfactual-driven agentic optimization (Causal interventions and SCM)
 5. Layer 5: RAG-based mitigation mapping (retrieve and rank actions)
+6. Layer 6: Streamlit dashboard for end-to-end risk intelligence visualization
 
 
 ## Folder Structure
@@ -53,6 +54,8 @@ CFASimplified/
 │   ├── vector_store.py
 │   ├── playbook_kb.py
 │   └── schemas_layer5.py
+├── layer6/
+│   └── layer6_dashboard.py
 └── requirements.txt
 ```
 
@@ -94,6 +97,7 @@ GROQ_API_KEY="your_groq_api_key"
 
 # News
 NEWSAPI_KEY="your_newsapi_key"
+GNEWS_API_KEY="your_gnews_api_key"  # optional for higher limits on GNews
 
 # Financial
 ALPHA_VANTAGE_KEY="your_alpha_vantage_key"
@@ -160,6 +164,23 @@ python layer5_rag/layer5_rag.py --input data/counterfactual_results.json --outpu
 
 Expected Layer 5 output:
 - `data/risk_solution_bundle.json`
+
+### Layer 6 (Dashboard)
+
+Run the Streamlit dashboard after Layers 1-5 outputs are available.
+
+```bash
+streamlit run layer6/layer6_dashboard.py
+```
+
+Layer 6 reads only pipeline outputs from `data/` (no demo fallback data):
+- `data/risk_input_bundle.json`
+- `data/enriched_risk_bundle.json`
+- `data/risk_report.json`
+- `data/counterfactual_results.json`
+- `data/risk_solution_bundle.json`
+
+If a required file is missing, the relevant page shows an empty-state message.
 
 ## End-to-End Data Flow (Simple)
 
@@ -345,6 +366,15 @@ Example from current output:
 What this means:
 - We now have ranked, practical actions linked to causal evidence.
 - This is the final handoff for decision support.
+
+### Step F: Layer 6 visualization (`layer6/layer6_dashboard.py`)
+
+Layer 6 presents all outputs in a single UI:
+- Overview: aggregate sentiment, completeness, total signals, geo heatmap
+- Sources: filterable all-source table with Layer 2 sentiment labels
+- Risk Report: severity cards, confidence bars, probability, cause-effect chains
+- Counterfactuals: ITE per risk, P(improve), causal variable traces
+- Solutions: top mitigations ranked by confidence and similarity
 
 ## Notes
 

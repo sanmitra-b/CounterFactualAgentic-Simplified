@@ -4,6 +4,7 @@ Fetches social posts from Pushshift Reddit archive.
 """
 
 import logging
+import os
 from datetime import datetime, timedelta
 from typing import Dict, List
 
@@ -163,15 +164,18 @@ class SocialCollector:
             logger.warning("google-api-python-client not installed. Install with: pip install google-api-python-client")
             return []
 
-        api_key = youtube_cfg.get("api_key", "").strip()
-        if api_key == "YOUR_YOUTUBE_API_KEY" or not api_key:
-            logger.warning("YouTube API key not configured or set to placeholder")
+        api_key = os.getenv("YOUTUBE_API_KEY", "").strip()
+        if not api_key:
+            logger.warning("YOUTUBE_API_KEY not set in .env. Skipping YouTube collection.")
             return []
 
         try:
             youtube = build("youtube", "v3", developerKey=api_key)
             keywords = youtube_cfg.get("keywords", ["AI jobs"])
             max_results = int(youtube_cfg.get("max_results", 50))
+            videos_per_keyword = int(youtube_cfg.get("videos_per_keyword", 5))
+            comments_per_video = int(youtube_cfg.get("comments_per_video", 20))
+            comment_order = youtube_cfg.get("comment_order", "relevance")
             order = youtube_cfg.get("order", "relevance")
             
             comments = []
@@ -183,9 +187,8 @@ class SocialCollector:
                         q=keyword,
                         part="snippet",
                         type="video",
-                        maxResults=5,
-                        order=order,
-                        textFormat="plainText"
+                        maxResults=videos_per_keyword,
+                        order=order
                     ).execute()
 
                     video_ids = [item["id"]["videoId"] for item in search_response.get("items", [])]
@@ -212,8 +215,8 @@ class SocialCollector:
                                 videoId=video_id,
                                 part="snippet",
                                 textFormat="plainText",
-                                maxResults=20,
-                                order="relevance"
+                                maxResults=comments_per_video,
+                                order=comment_order
                             ).execute()
 
                             for comment_thread in comments_response.get("items", []):

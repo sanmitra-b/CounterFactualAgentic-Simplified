@@ -28,8 +28,15 @@ def setup_logging(log_file: str = "data_collection.log"):
     """
     log_format = "[%(asctime)s] %(levelname)s - %(name)s - %(message)s"
     
+    # Ensure stdout can handle unicode titles/comments on Windows terminals.
+    if hasattr(sys.stdout, "reconfigure"):
+        try:
+            sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+        except Exception:
+            pass
+
     # File handler
-    file_handler = logging.FileHandler(log_file)
+    file_handler = logging.FileHandler(log_file, encoding="utf-8")
     file_handler.setLevel(logging.INFO)
     file_handler.setFormatter(logging.Formatter(log_format))
     
@@ -41,6 +48,10 @@ def setup_logging(log_file: str = "data_collection.log"):
     # Root logger
     root_logger = logging.getLogger()
     root_logger.setLevel(logging.INFO)
+
+    # Avoid duplicate handlers when script is re-run in the same process/session.
+    root_logger.handlers.clear()
+
     root_logger.addHandler(file_handler)
     root_logger.addHandler(console_handler)
     
