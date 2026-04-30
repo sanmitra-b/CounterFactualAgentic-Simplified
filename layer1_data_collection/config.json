@@ -12,7 +12,7 @@
           "base_url": "https://gnews.io/api/v4/search",
           "max_articles_per_request": 10,
           "rate_limit_seconds": 1.0,
-          "note": "GNews free tier: 100 req/day, 10 articles/request, 1 req/sec rate limit"
+          "note": "GNews for Jobs Impact domain"
         },
         "rss": {
           "enabled": true,
@@ -23,16 +23,13 @@
             "https://www.wired.com/feed/rss",
             "https://rss.nytimes.com/services/xml/rss/nyt/Technology.xml",
             "https://arxiv.org/rss/cs.AI"
-          ]
+          ],
+          "note": "RSS feeds for Jobs Impact domain"
         }
       },
       "keywords": [
-        "AI job displacement",
-        "automation layoffs",
-        "AI workforce impact",
-        "AI hiring trends",
-        "reskilling for AI",
-        "job cuts technology"
+        "AI job  disruption",
+        "AI taking jobs"
       ],
       "max_results_per_source": 50
     },
@@ -41,14 +38,45 @@
       "alpha_vantage": {
         "enabled": true,
         "outputsize": "compact",
-        "tickers": ["MSFT", "GOOGL", "AMZN", "META", "NVDA", "ADBE"],
+        "tickers": [
+          "UPS",
+          "FDX",
+          "CHRW",
+          "JBHT",
+          "KNX",
+          "ODFL",
+          "XPO",
+          "GXO",
+          "DSX",
+          "RLI",
+          "CMG",
+          "COST",
+          "WMT",
+          "AMZN",
+          "MSFT"
+        ],
         "note": "AI economy and labor-market proxy equities (compact mode for free tier)",
         "rate_limit_seconds": 1.5
       },
-
       "fred": {
         "enabled": true,
-        "indicators": ["UNRATE", "ICSA", "PAYEMS", "JTSJOL"],
+        "indicators": [
+          "IPCN",
+          "PPIACO",
+          "CPIAUCSL",
+          "M2SL",
+          "UNRATE",
+          "ICSA",
+          "WPSID",
+          "TRF",
+          "T10Y2Y",
+          "VIXCLS",
+          "EXPINTS",
+          "IMPBO",
+          "EXPORTS",
+          "GDPC1",
+          "INDPRO"
+        ],
         "note": "US labor market indicators from FRED (LNS13000000 removed - invalid series)"
       }
     },
@@ -58,15 +86,16 @@
         "enabled": true,
         "base_url": "https://data.usajobs.gov/api/search",
         "keywords": [
-          "artificial intelligence",
-          "machine learning",
-          "automation",
-          "data scientist",
-          "prompt engineer"
+          "AI job  disruption",
+          "AI taking jobs"
         ],
         "results_per_query": 25,
-        "note": "USAJOBS labor-demand and role-transition signals (credentials from .env)"
-      }
+        "note": "USAJOBS signals for Jobs Impact domain"
+      },
+      "keywords": [
+        "AI job  disruption",
+        "AI taking jobs"
+      ]
     },
     "weather": {
       "enabled": false,
@@ -80,15 +109,26 @@
         "fallback_urls": [
           "https://api.pullpush.io/reddit/search/submission/"
         ],
-        "subreddits": ["jobs", "careerguidance", "cscareerquestions", "datascience"],
-        "keywords": ["AI layoffs", "job displacement", "automation", "hiring freeze", "reskilling"],
+        "subreddits": [
+          "jobs",
+          "careerguidance",
+          "cscareerquestions",
+          "datascience"
+        ],
+        "keywords": [
+          "AI job  disruption",
+          "AI taking jobs"
+        ],
         "max_results_per_query": 25,
         "days_back": 7,
         "note": "Social sentiment about AI and jobs"
       },
       "youtube": {
         "enabled": true,
-        "keywords": ["AI replacing jobs", "artificial intelligence jobs", "automation workforce", "AI job displacement"],
+        "keywords": [
+          "AI job  disruption",
+          "AI taking jobs"
+        ],
         "max_results": 700,
         "videos_per_keyword": 5,
         "comments_per_video": 30,
@@ -98,15 +138,28 @@
       },
       "mastodon": {
         "enabled": true,
-        "instances": ["fosstodon.org", "techhub.social", "mstdn.social"],
-        "keywords": ["AI jobs", "automation", "tech layoffs", "artificial intelligence", "hiring freeze"],
-        "hashtags": ["ai", "jobs", "automation", "techcommunity"],
+        "instances": [
+          "fosstodon.org",
+          "techhub.social",
+          "mstdn.social"
+        ],
+        "keywords": [
+          "AI job  disruption",
+          "AI taking jobs"
+        ],
+        "hashtags": [
+          "aijobdisruption",
+          "aitakingjobs"
+        ],
         "max_results_per_instance": 20,
         "note": "Decentralized social network - tech community sentiment, no API approval needed"
       },
       "hackernews": {
         "enabled": true,
-        "keywords": ["AI jobs", "automation", "tech layoffs", "displacement", "hiring freeze"],
+        "keywords": [
+          "AI job  disruption",
+          "AI taking jobs"
+        ],
         "max_results": 50,
         "min_comments": 5,
         "note": "Tech worker sentiment on HackerNews - citable, live data, free access"
@@ -114,12 +167,36 @@
     }
   },
   "output": {
-    "domain": "ai_job_risk",
-    "formats": ["json", "csv"],
+    "domain": "jobs_impact",
+    "formats": [
+      "json",
+      "csv"
+    ],
     "output_dir": "../data/"
   },
   "logging": {
     "level": "INFO",
-    "log_file": "data_collection.log"
+    "log_file": "jobs_impact_data_collection.log"
+  },
+  "domain_profile": {
+    "name": "Jobs Impact",
+    "slug": "jobs_impact",
+    "description": "Risk signals for AI driven job impact",
+    "keywords": [
+      "AI job  disruption",
+      "AI taking jobs"
+    ],
+    "news_keywords": [
+      "AI job  disruption",
+      "AI taking jobs"
+    ],
+    "job_keywords": [
+      "AI job  disruption",
+      "AI taking jobs"
+    ],
+    "social_keywords": [
+      "AI job  disruption",
+      "AI taking jobs"
+    ]
   }
 }

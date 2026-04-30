@@ -1,13 +1,14 @@
 ﻿# Counterfactual driven Agentic AI 
 
-This repository is organized as a 6-layer pipeline:
+This repository is organized as a 7-layer pipeline:
 
-1. Layer 1: Data collection and normalization
-2. Layer 2: NLP enrichment (sentiment, entities, geo tags)
-3. Layer 3: LLM risk analysis report generation
-4. Layer 4: Counterfactual-driven agentic optimization (Causal interventions and SCM)
-5. Layer 5: RAG-based mitigation mapping (retrieve and rank actions)
-6. Layer 6: Streamlit dashboard for end-to-end risk intelligence visualization
+0. **Layer 0: Domain selector** — Accept risk domain dynamically, generate domain-specific config
+1. **Layer 1: Data collection and normalization** — Gather multi-source risk signals
+2. **Layer 2: NLP enrichment** — Sentiment, entities, geo tags, reliability scoring
+3. **Layer 3: LLM risk analysis** — Generate risk report via Groq
+4. **Layer 4: Counterfactual-driven agentic optimization** — Causal interventions and SCM fitting
+5. **Layer 5: RAG-based mitigation mapping** — Retrieve and rank mitigation actions
+6. **Layer 6: Streamlit dashboard** — End-to-end risk intelligence visualization
 
 
 ## Folder Structure
@@ -22,6 +23,10 @@ CFASimplified/
 │   ├── fitted_scm.pkl
 │   ├── counterfactual_results.json
 │   └── risk_solution_bundle.json
+├── layer0_domain_selector/
+│   ├── __init__.py
+│   ├── domain_profile.py
+│   └── layer0.py                   # Entry point: interactive domain setup
 ├── layer1_data_collection/
 │   ├── collectors/
 │   │   ├── financial_collector.py
@@ -94,6 +99,7 @@ Edit `.env` with your API credentials:
 ```env
 # LLM
 GROQ_API_KEY="your_groq_api_key"
+GEMINI_API_KEY="your_gemini_api_key"  # For Layer 0 domain config suggestions (optional)
 
 # News
 NEWSAPI_KEY="your_newsapi_key"
@@ -124,7 +130,43 @@ pip install -r requirements.txt
 
 ## Run Pipeline
 
-### Layer 1
+### Layer 0 (Entry Point)
+
+Layer 0 accepts a risk domain and orchestrates the full pipeline (Layers 1-3).
+
+**Interactive mode:**
+```bash
+python layer0_domain_selector/layer0.py
+```
+Prompts you for:
+- Domain name (e.g., "Supply Chain", "Healthcare", "Cybersecurity")
+- Domain description
+- Core keywords (comma-separated)
+- Whether to use Gemini 2.5 Flash Lite for config suggestions
+
+**CLI mode:**
+```bash
+python layer0_domain_selector/layer0.py --domain "Supply Chain" --description "Risk signals for logistics and procurement" --keywords "supply chain disruption,supplier risk,logistics delay" --use-gemini
+```
+
+Layer 0 will:
+1. Generate domain-specific `layer1_data_collection/config.json`
+2. Run Layer 1 (data collection) with domain-specific keywords
+3. Run Layer 2 (NLP enrichment)
+4. Run Layer 3 (LLM risk analysis)
+5. Output final `data/risk_report.json`
+
+**Expected outputs after Layer 0 → Layer 3:**
+- `layer1_data_collection/config.json` (updated with domain)
+- `data/risk_input_bundle.json`
+- `data/enriched_risk_bundle.json`
+- `data/risk_report.json`
+
+---
+
+### Layer 1 (Manual Execution)
+
+If running Layer 1 independently (without Layer 0):
 
 ```bash
 python layer1_data_collection/collect_data.py
@@ -134,13 +176,17 @@ Expected output:
 - `data/risk_input_bundle.json`
 - `data/risk_input_bundle.csv`
 
-### Layer 2
+### Layer 2 (Manual Execution)
+
+If running Layer 2 independently:
 
 ```bash
 python layer2_nlp/layer2_nlp.py --input data/risk_input_bundle.json --output data/enriched_risk_bundle.json
 ```
 
-### Layer 3
+### Layer 3 (Manual Execution)
+
+If running Layer 3 independently:
 
 ```bash
 python layer3_llm/layer3_llm_analysis.py --input data/enriched_risk_bundle.json --output data/risk_report.json
@@ -184,7 +230,16 @@ If a required file is missing, the relevant page shows an empty-state message.
 
 ## End-to-End Data Flow (Simple)
 
-This section shows how one run flows from Layer 1 to Layer 5.
+This section shows how one complete run flows from Layer 0 through Layer 5.
+
+### Step 0: Layer 0 — Domain Setup
+
+User runs Layer 0 and enters:
+- Domain: "Supply Chain Resilience"
+- Description: "Risk signals across logistics, inventory, and supplier continuity"
+- Keywords: "supply chain disruption, supplier risk, logistics delay"
+
+Layer 0 generates domain-specific config, then orchestrates Layers 1-3.
 
 ### Step A: Layer 1 output (`data/risk_input_bundle.json`)
 

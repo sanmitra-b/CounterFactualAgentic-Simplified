@@ -39,9 +39,9 @@ class JobCollector:
         """
         self.config = config
         self.data = []
-        self.adzuna_id = os.getenv("ADZUNA_ID", "370adde6")
-        self.adzuna_key = os.getenv("ADZUNA_API_KEY", "341bc69c2e0a709c3fdedfaac7055a6f")
-        self.usajobs_key = os.getenv("USAJOBS_API_KEY", "kJqEdOC4WpMAcMpCiMI2QkJyCGrS1bKjU28VzTZVz5Q=")
+        self.adzuna_id = os.getenv("ADZUNA_ID", "").strip()
+        self.adzuna_key = os.getenv("ADZUNA_API_KEY", "").strip()
+        self.usajobs_key = os.getenv("USAJOBS_API_KEY", "").strip()
     
     def collect_from_adzuna(self) -> List[Dict]:
         """
@@ -61,8 +61,15 @@ class JobCollector:
         # Adzuna API endpoint (requires page number in path for this API version)
         base_url = "https://api.adzuna.com/v1/api/jobs/us/search/1"
         
-        # Search for various job categories
-        search_terms = ["financial analyst", "economist", "data scientist", "risk analyst", "actuary"]
+        search_terms = (
+            self.config.get("keywords")
+            or self.config.get("usajobs", {}).get("keywords")
+            or ["financial analyst", "economist", "data scientist", "risk analyst", "actuary"]
+        )
+
+        if not self.adzuna_id or not self.adzuna_key:
+            logger.warning("ADZUNA_ID or ADZUNA_API_KEY not set in .env. Skipping Adzuna collection.")
+            return job_data
         
         for search_term in search_terms:
             try:
@@ -134,11 +141,19 @@ class JobCollector:
         base_url = "https://data.usajobs.gov/api/search"
         
         # Search for various federal job categories
+        configured_keywords = (
+            self.config.get("keywords")
+            or self.config.get("usajobs", {}).get("keywords")
+            or ["economist", "financial analyst", "risk analyst", "data scientist"]
+        )
+
+        if not self.usajobs_key:
+            logger.warning("USAJOBS_API_KEY not set in .env. Skipping USAJOBS collection.")
+            return job_data
+
         search_params_list = [
-            {"keyword": "economist", "agency": "TR"},  # Treasury
-            {"keyword": "financial analyst", "agency": "SE"},  # Securities and Exchange Commission
-            {"keyword": "risk analyst", "agency": "TR"},
-            {"keyword": "data scientist", "agency": "CM"},  # Commerce
+            {"keyword": keyword, "agency": "TR" if i % 2 == 0 else "CM"}
+            for i, keyword in enumerate(configured_keywords)
         ]
         
         headers = {

@@ -342,7 +342,7 @@ def run_layer2(
     with open(input_path, "r", encoding="utf-8") as f:
         raw_bundle = json.load(f)
  
-    domain      = raw_bundle.get("domain", "supply_chain")
+    domain      = raw_bundle.get("domain", "custom_domain")
     fetched_at  = raw_bundle.get("fetched_at", datetime.utcnow().isoformat())
  
     news_raw       = raw_bundle.get("news", [])

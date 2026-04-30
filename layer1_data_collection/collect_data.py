@@ -182,7 +182,7 @@ def main():
     if not output_dir_path.is_absolute():
         output_dir_path = (Path(__file__).resolve().parent / output_dir_path).resolve()
 
-    configured_domain = config.get("output", {}).get("domain", "supply_chain")
+    configured_domain = config.get("output", {}).get("domain", "custom_domain")
     storage = DataStorage(output_dir=str(output_dir_path), domain=configured_domain)
     
     # Verify data quality before saving

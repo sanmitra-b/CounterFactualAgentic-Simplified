@@ -17,7 +17,7 @@ logger = logging.getLogger(__name__)
 class DataStorage:
     """Stores normalized data in multiple formats."""
     
-    def __init__(self, output_dir: str = "../data/", domain: str = "supply_chain"):
+    def __init__(self, output_dir: str = "../data/", domain: str = "custom_domain"):
         """
         Initialize storage with output directory.
         
