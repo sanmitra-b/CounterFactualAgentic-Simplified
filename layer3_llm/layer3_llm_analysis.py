@@ -5,6 +5,7 @@ import json
 import argparse
 import warnings
 import logging
+import re
 from pathlib import Path
 from datetime import datetime
 from typing import Optional, Any
@@ -37,6 +38,95 @@ MAX_CONTEXT_CHARS = 12_000               # safe token budget (~3 000 tokens)
 TOP_N_PER_CATEGORY = 3                   # max signals per category in prompt
  
 RISK_CATEGORIES = []
+
+
+def _normalize_terms(text: str) -> set[str]:
+    return {term for term in re.findall(r"[a-z0-9]+", (text or "").lower()) if term}
+
+
+def _extract_domain_context(bundle: dict) -> dict[str, Any]:
+    profile = bundle.get("domain_profile") or {}
+    if not isinstance(profile, dict):
+        profile = {}
+
+    terms: set[str] = set()
+    phrases: list[str] = []
+
+    domain = str(profile.get("name") or bundle.get("domain") or "").strip()
+    if domain:
+        phrases.append(domain.lower())
+        terms.update(_normalize_terms(domain))
+
+    description = str(profile.get("description") or "").strip()
+    if description:
+        phrases.extend([segment.strip().lower() for segment in re.split(r"[.;]", description) if segment.strip()])
+        terms.update(_normalize_terms(description))
+
+    for keyword in profile.get("keywords", []) or []:
+        keyword_text = str(keyword).strip().lower()
+        if keyword_text:
+            phrases.append(keyword_text)
+            terms.update(_normalize_terms(keyword_text))
+
+    source_usage = profile.get("source_usage", {})
+    if isinstance(source_usage, dict):
+        for source in source_usage.values():
+            if not isinstance(source, dict):
+                continue
+            for keyword in source.get("keywords", []) or []:
+                keyword_text = str(keyword).strip().lower()
+                if keyword_text:
+                    phrases.append(keyword_text)
+                    terms.update(_normalize_terms(keyword_text))
+
+    return {"name": domain, "terms": terms, "phrases": list(dict.fromkeys(phrases))}
+
+
+def _signal_text(item: dict) -> str:
+    parts = [
+        item.get("title", ""),
+        item.get("body", ""),
+        item.get("text", ""),
+        item.get("description", ""),
+        item.get("source", ""),
+        item.get("company", ""),
+        item.get("ticker", ""),
+        item.get("port_name", ""),
+        item.get("country", ""),
+        item.get("city", ""),
+        item.get("commodity", ""),
+    ]
+    return " ".join(str(part) for part in parts if part)
+
+
+def _domain_relevance_score(item: dict, domain_terms: set[str], domain_phrases: list[str]) -> float:
+    if not domain_terms and not domain_phrases:
+        return 1.0
+
+    text = _signal_text(item).lower()
+    tokens = _normalize_terms(text)
+
+    token_hits = len(tokens.intersection(domain_terms))
+    phrase_hits = sum(1 for phrase in domain_phrases if len(phrase) >= 4 and phrase in text)
+
+    score = (token_hits * 0.25) + (phrase_hits * 0.6)
+
+    if score == 0.0:
+        generic_terms = {
+            "world", "global", "international", "geopolitics", "war", "conflict", "economy",
+            "politics", "public", "health", "market", "technology", "news",
+        }
+        if tokens.intersection(generic_terms):
+            score = 0.05
+
+    return min(score, 1.0)
+
+
+def _domain_adjusted_weight(sig: dict, domain_terms: set[str], domain_phrases: list[str]) -> float:
+    relevance = _domain_relevance_score(sig, domain_terms, domain_phrases)
+    if relevance <= 0.0:
+        return 0.0
+    return _sentiment_weight(sig) * (0.35 + relevance)
  
 # ─────────────────────────────────────────────────────────────────────────────
 # PROMPT TEMPLATES
@@ -87,6 +177,8 @@ Rules:
 - severity must be one of: CRITICAL, HIGH, MEDIUM, LOW.
 - confidence and probability_next_30d must be floats between 0.0 and 1.0.
 - Base ALL claims strictly on the provided intelligence bundle.
+- Prefer risks that match the active domain profile keywords and descriptions.
+- Exclude generic global stories unless there is explicit causal evidence connecting them to the active domain.
 - If data is sparse, reflect lower confidence scores and note it in data_quality_note.
 - Do NOT hallucinate events not present in the bundle.
 """
@@ -95,6 +187,7 @@ HUMAN_PROMPT_TEMPLATE = """\
 <intelligence_bundle>
   <metadata>
     <domain>{domain}</domain>
+        <domain_profile>{domain_profile}</domain_profile>
     <fetched_at>{fetched_at}</fetched_at>
     <enriched_at>{enriched_at}</enriched_at>
     <layer1_completeness>{completeness}</layer1_completeness>
@@ -140,16 +233,21 @@ def _sentiment_weight(sig: dict) -> float:
     return reliability * (0.3 + sentiment_signal)
  
  
-def _top_n(signals: list[dict], n: int = TOP_N_PER_CATEGORY) -> list[dict]:
+def _top_n(signals: list[dict], n: int = TOP_N_PER_CATEGORY, domain_terms: set[str] | None = None, domain_phrases: list[str] | None = None) -> list[dict]:
     """Return top-N signals sorted by importance weight."""
-    return sorted(signals, key=_sentiment_weight, reverse=True)[:n]
+    domain_terms = domain_terms or set()
+    domain_phrases = domain_phrases or []
+
+    relevant = [item for item in signals if _domain_relevance_score(item, domain_terms, domain_phrases) >= 0.15]
+    candidates = relevant if relevant else signals
+    return sorted(candidates, key=lambda item: _domain_adjusted_weight(item, domain_terms, domain_phrases), reverse=True)[:n]
  
  
-def _format_news_section(news: list[dict]) -> str:
+def _format_news_section(news: list[dict], domain_terms: set[str], domain_phrases: list[str]) -> str:
     if not news:
         return "  <news>NO_DATA</news>"
     lines = ["  <news>"]
-    for i, item in enumerate(_top_n(news), 1):
+    for i, item in enumerate(_top_n(news, domain_terms=domain_terms, domain_phrases=domain_phrases), 1):
         sent  = (item.get("sentiment") or {}).get("label", "neutral")
         score = (item.get("sentiment") or {}).get("score", 0.0)
         geo   = ", ".join(item.get("geo_tags", [])[:3]) or "—"
@@ -165,11 +263,11 @@ def _format_news_section(news: list[dict]) -> str:
     return "\n".join(lines)
  
  
-def _format_social_section(social: list[dict]) -> str:
+def _format_social_section(social: list[dict], domain_terms: set[str], domain_phrases: list[str]) -> str:
     if not social:
         return "  <social>NO_DATA</social>"
     lines = ["  <social>"]
-    for i, item in enumerate(_top_n(social), 1):
+    for i, item in enumerate(_top_n(social, domain_terms=domain_terms, domain_phrases=domain_phrases), 1):
         sent  = (item.get("sentiment") or {}).get("label", "neutral")
         score = (item.get("sentiment") or {}).get("score", 0.0)
         lines.append(f"    <post id='{i}'>")
@@ -181,11 +279,11 @@ def _format_social_section(social: list[dict]) -> str:
     return "\n".join(lines)
  
  
-def _format_stock_section(stocks: list[dict]) -> str:
+def _format_stock_section(stocks: list[dict], domain_terms: set[str], domain_phrases: list[str]) -> str:
     if not stocks:
         return "  <stocks>NO_DATA</stocks>"
     lines = ["  <stocks>"]
-    for item in _top_n(stocks, n=6):
+    for item in _top_n(stocks, n=6, domain_terms=domain_terms, domain_phrases=domain_phrases):
         sent  = (item.get("sentiment") or {}).get("label", "neutral")
         chg   = item.get("change_pct", 0.0)
         vol   = item.get("volatility_30d")
@@ -202,11 +300,11 @@ def _format_stock_section(stocks: list[dict]) -> str:
     return "\n".join(lines)
  
  
-def _format_port_section(ports: list[dict]) -> str:
+def _format_port_section(ports: list[dict], domain_terms: set[str], domain_phrases: list[str]) -> str:
     if not ports:
         return "  <ports>NO_DATA</ports>"
     lines = ["  <ports>"]
-    for item in _top_n(ports):
+    for item in _top_n(ports, domain_terms=domain_terms, domain_phrases=domain_phrases):
         sent  = (item.get("sentiment") or {}).get("label", "neutral")
         geo   = ", ".join(item.get("geo_tags", [])[:3]) or "—"
         lines.append(
@@ -222,11 +320,11 @@ def _format_port_section(ports: list[dict]) -> str:
     return "\n".join(lines)
  
  
-def _format_weather_section(weather: list[dict]) -> str:
+def _format_weather_section(weather: list[dict], domain_terms: set[str], domain_phrases: list[str]) -> str:
     if not weather:
         return "  <weather>NO_DATA</weather>"
     lines = ["  <weather>"]
-    for item in _top_n(weather, n=5):
+    for item in _top_n(weather, n=5, domain_terms=domain_terms, domain_phrases=domain_phrases):
         sent  = (item.get("sentiment") or {}).get("label", "neutral")
         lines.append(
             f"    <reading city='{item.get('city')}' "
@@ -240,11 +338,11 @@ def _format_weather_section(weather: list[dict]) -> str:
     return "\n".join(lines)
  
  
-def _format_commodity_section(commodities: list[dict]) -> str:
+def _format_commodity_section(commodities: list[dict], domain_terms: set[str], domain_phrases: list[str]) -> str:
     if not commodities:
         return "  <commodities>NO_DATA</commodities>"
     lines = ["  <commodities>"]
-    for item in _top_n(commodities, n=6):
+    for item in _top_n(commodities, n=6, domain_terms=domain_terms, domain_phrases=domain_phrases):
         sent  = (item.get("sentiment") or {}).get("label", "neutral")
         lines.append(
             f"    <commodity name='{item.get('commodity')}' "
@@ -263,16 +361,21 @@ def build_prompt(bundle: dict) -> str:
     Stays within MAX_CONTEXT_CHARS token budget.
     """
     meta = bundle
- 
-    news_section      = _format_news_section(bundle.get("news", []))
-    social_section    = _format_social_section(bundle.get("social", []))
-    stock_section     = _format_stock_section(bundle.get("stocks", []))
-    port_section      = _format_port_section(bundle.get("ports", []))
-    weather_section   = _format_weather_section(bundle.get("weather", []))
-    commodity_section = _format_commodity_section(bundle.get("commodities", []))
+
+    domain_context = _extract_domain_context(bundle)
+    domain_terms = domain_context["terms"]
+    domain_phrases = domain_context["phrases"]
+
+    news_section      = _format_news_section(bundle.get("news", []), domain_terms, domain_phrases)
+    social_section    = _format_social_section(bundle.get("social", []), domain_terms, domain_phrases)
+    stock_section     = _format_stock_section(bundle.get("stocks", []), domain_terms, domain_phrases)
+    port_section      = _format_port_section(bundle.get("ports", []), domain_terms, domain_phrases)
+    weather_section   = _format_weather_section(bundle.get("weather", []), domain_terms, domain_phrases)
+    commodity_section = _format_commodity_section(bundle.get("commodities", []), domain_terms, domain_phrases)
  
     prompt = HUMAN_PROMPT_TEMPLATE.format(
         domain             = bundle.get("domain", "ai_job_risk"),
+        domain_profile     = json.dumps(bundle.get("domain_profile", {}), ensure_ascii=False),
         fetched_at         = bundle.get("fetched_at", ""),
         enriched_at        = bundle.get("enriched_at", ""),
         completeness       = f"{bundle.get('layer1_completeness', 0.0) * 100:.0f}%",
@@ -461,6 +564,8 @@ def run_layer3(
  
     total = bundle.get("total_items", 0)
     print(f"    Domain          : {bundle.get('domain', '?')}")
+    if bundle.get("domain_profile"):
+        print(f"    Active profile  : {bundle.get('domain_profile', {}).get('name', '?')}")
     print(f"    Total signals   : {total}")
     print(f"    Agg sentiment   : {bundle.get('aggregate_sentiment', '?')}")
     print(f"    Avg reliability : {bundle.get('avg_reliability', 0.0):.2f}")

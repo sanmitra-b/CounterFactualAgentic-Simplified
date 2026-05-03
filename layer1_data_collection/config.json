@@ -5,14 +5,14 @@
       "methods": {
         "newsapi": {
           "enabled": true,
-          "note": "NewsAPI for vaccine_cold_chain_risk domain"
+          "note": "NewsAPI for AI_and_Employment domain"
         },
         "gnews": {
           "enabled": true,
           "base_url": "https://gnews.io/api/v4/search",
           "max_articles_per_request": 10,
           "rate_limit_seconds": 1.0,
-          "note": "GNews for vaccine_cold_chain_risk domain"
+          "note": "GNews for AI_and_Employment domain"
         },
         "rss": {
           "enabled": true,
@@ -24,14 +24,13 @@
             "https://rss.nytimes.com/services/xml/rss/nyt/Technology.xml",
             "https://arxiv.org/rss/cs.AI"
           ],
-          "note": "RSS feeds for vaccine_cold_chain_risk domain"
+          "note": "RSS feeds for AI_and_Employment domain"
         }
       },
       "keywords": [
-        "vaccine cold chain",
-        "transportation risks",
-        "supply chain disruption",
-        "public health logistics"
+        "AI jobs",
+        "automation workforce",
+        "future of employment"
       ],
       "max_results_per_source": 50
     },
@@ -41,45 +40,53 @@
         "enabled": true,
         "outputsize": "compact",
         "tickers": [],
-        "note": "Alpha Vantage for vaccine_cold_chain_risk domain",
+        "note": "Alpha Vantage for AI_and_Employment domain",
         "rate_limit_seconds": 1.5
       },
       "fred": {
         "enabled": true,
         "indicators": [],
-        "note": "FRED indicators for vaccine_cold_chain_risk domain"
+        "note": "FRED indicators for AI_and_Employment domain"
       }
     },
     "jobs": {
-      "enabled": false,
+      "enabled": true,
       "adzuna": {
-        "enabled": false,
-        "keywords": [],
-        "note": "Disabled for this domain"
+        "enabled": true,
+        "keywords": [
+          "AI jobs",
+          "tech jobs",
+          "automation roles"
+        ],
+        "note": "Adzuna signals for AI_and_Employment domain"
       },
       "usajobs": {
-        "enabled": false,
+        "enabled": true,
         "base_url": "https://data.usajobs.gov/api/search",
-        "keywords": [],
+        "keywords": [
+          "AI jobs",
+          "tech jobs",
+          "automation roles"
+        ],
         "results_per_query": 25,
-        "note": "Disabled for this domain"
+        "note": "USAJOBS signals for AI_and_Employment domain"
       },
-      "keywords": []
+      "keywords": [
+        "AI jobs",
+        "tech jobs",
+        "automation roles"
+      ]
     },
     "weather": {
-      "enabled": true,
-      "keywords": [
-        "temperature",
-        "weather conditions",
-        "climate impact"
-      ],
+      "enabled": false,
+      "keywords": [],
       "cities": [],
       "openweather": {
-        "enabled": true,
+        "enabled": false,
         "base_url": "https://api.openweathermap.org/data/2.5/weather",
         "units": "metric",
         "language": "en",
-        "note": "OpenWeather signals for vaccine_cold_chain_risk domain"
+        "note": "Disabled for this domain"
       },
       "note": "Disabled for AI job-risk mode"
     },
@@ -98,10 +105,9 @@
           "datascience"
         ],
         "keywords": [
-          "vaccine logistics",
-          "cold chain management",
-          "transportation issues",
-          "public health"
+          "AI in workplace",
+          "future jobs",
+          "automation discussion"
         ],
         "max_results_per_query": 25,
         "days_back": 7,
@@ -110,10 +116,9 @@
       "youtube": {
         "enabled": true,
         "keywords": [
-          "vaccine logistics",
-          "cold chain management",
-          "transportation issues",
-          "public health"
+          "AI in workplace",
+          "future jobs",
+          "automation discussion"
         ],
         "max_results": 700,
         "videos_per_keyword": 5,
@@ -130,15 +135,14 @@
           "mstdn.social"
         ],
         "keywords": [
-          "vaccine logistics",
-          "cold chain management",
-          "transportation issues",
-          "public health"
+          "AI in workplace",
+          "future jobs",
+          "automation discussion"
         ],
         "hashtags": [
-          "#VaccineColdChain",
-          "#ColdChainLogistics",
-          "#VaccineTransport"
+          "#AIjobs",
+          "#FutureOfWork",
+          "#Automation"
         ],
         "max_results_per_instance": 20,
         "note": "Decentralized social network - tech community sentiment, no API approval needed"
@@ -146,10 +150,9 @@
       "hackernews": {
         "enabled": true,
         "keywords": [
-          "vaccine logistics",
-          "cold chain management",
-          "transportation issues",
-          "public health"
+          "AI in workplace",
+          "future jobs",
+          "automation discussion"
         ],
         "max_results": 50,
         "min_comments": 5,
@@ -158,7 +161,7 @@
     }
   },
   "output": {
-    "domain": "vaccine_cold_chain_risk",
+    "domain": "ai_and_employment",
     "formats": [
       "json",
       "csv"
@@ -167,20 +170,20 @@
   },
   "logging": {
     "level": "INFO",
-    "log_file": "vaccine_cold_chain_risk_data_collection.log"
+    "log_file": "ai_and_employment_data_collection.log"
   },
   "domain_profile": {
-    "name": "vaccine_cold_chain_risk",
-    "slug": "vaccine_cold_chain_risk",
-    "description": "Analyzes the risks associated with maintaining the cold chain during vaccine transportation. This includes potential disruptions, temperature excursions, and their impact on vaccine efficacy and safety.",
+    "name": "AI_and_Employment",
+    "slug": "ai_and_employment",
+    "description": "Analysis of how artificial intelligence impacts job markets, including job displacement, creation of new roles, and required skill shifts.",
     "keywords": [
-      "vaccine transport",
-      "cold chain integrity",
-      "refrigeration failure",
-      "temperature monitoring",
-      "supply chain risks",
-      "vaccine spoilage",
-      "logistics challenges"
+      "AI impact on jobs",
+      "future of work",
+      "automation and employment",
+      "AI job displacement",
+      "AI job creation",
+      "reskilling for AI",
+      "AI workforce trends"
     ],
     "source_usage": {
       "news": {
@@ -191,10 +194,9 @@
           "rss": true
         },
         "keywords": [
-          "vaccine cold chain",
-          "transportation risks",
-          "supply chain disruption",
-          "public health logistics"
+          "AI jobs",
+          "automation workforce",
+          "future of employment"
         ]
       },
       "financial": {
@@ -207,11 +209,16 @@
         "indicators": []
       },
       "jobs": {
-        "enabled": false,
+        "enabled": true,
         "methods": {
-          "adzuna": false,
-          "usajobs": false
-        }
+          "adzuna": true,
+          "usajobs": true
+        },
+        "keywords": [
+          "AI jobs",
+          "tech jobs",
+          "automation roles"
+        ]
       },
       "social": {
         "enabled": true,
@@ -222,29 +229,23 @@
           "hackernews": true
         },
         "keywords": [
-          "vaccine logistics",
-          "cold chain management",
-          "transportation issues",
-          "public health"
+          "AI in workplace",
+          "future jobs",
+          "automation discussion"
         ],
         "hashtags": [
-          "#VaccineColdChain",
-          "#ColdChainLogistics",
-          "#VaccineTransport"
+          "#AIjobs",
+          "#FutureOfWork",
+          "#Automation"
         ]
       },
       "weather": {
-        "enabled": true,
+        "enabled": false,
         "methods": {
-          "openweather": true
+          "openweather": false
         },
-        "keywords": [
-          "temperature",
-          "weather conditions",
-          "climate impact"
-        ],
         "cities": [],
-        "locations": []
+        "keywords": []
       }
     }
   }

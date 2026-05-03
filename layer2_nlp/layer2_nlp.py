@@ -344,6 +344,7 @@ def run_layer2(
  
     domain      = raw_bundle.get("domain", "custom_domain")
     fetched_at  = raw_bundle.get("fetched_at", datetime.utcnow().isoformat())
+    domain_profile = raw_bundle.get("domain_profile", {})
  
     news_raw       = raw_bundle.get("news", [])
     social_raw     = raw_bundle.get("social", [])
@@ -409,6 +410,7 @@ def run_layer2(
         domain            = domain,
         fetched_at        = fetched_at,
         enriched_at       = datetime.utcnow().isoformat(),
+        domain_profile    = domain_profile if isinstance(domain_profile, dict) else {},
         news              = enriched_news,
         social            = enriched_social,
         stocks            = enriched_stocks,

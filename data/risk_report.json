@@ -1,131 +1,136 @@
 {
-  "analysed_at": "2026-05-03T18:25:00Z",
+  "analysed_at": "2026-05-03T18:34:06.404179Z",
   "domain": "vaccine_cold_chain_risk",
   "top_risks": [
     {
       "rank": 1,
       "category": "Supply Chain Disruption",
-      "title": "Iran War Impacts Aid Delivery",
+      "title": "War-Related Disruptions",
       "severity": "CRITICAL",
       "confidence": 0.85,
-      "probability_next_30d": 0.8,
+      "probability_next_30d": 0.7,
       "evidence": [
-        "Iran crisis hampering aid to refugees as supply chain costs soar, UN warns",
-        "Dubai's Culinary Scene Faces Disruption Amid Gulf Tensions"
+        "Dubai's chefs face challenges sourcing key ingredients due to the Iran war",
+        "Supply chain disruptions from Middle East tensions caused raw material prices to hit four-year peaks",
+        "Iran war-related shipping disruptions have doubled the cost of aid to Sudan"
       ],
       "affected_entities": [
-        "UN",
-        "Refugees in Sudan"
-      ],
-      "affected_geo": [
+        "Dubai",
         "Iran",
         "Sudan",
-        "Gulf"
+        "US"
       ],
-      "causal_chain": "Iran war \u2192 supply chain disruption \u2192 increased aid delivery costs",
-      "recommended_action": "Diversify supply chain and explore alternative aid delivery routes"
+      "affected_geo": [
+        "Middle East"
+      ],
+      "causal_chain": "War in the Middle East disrupts supply chains, leading to increased costs and reduced availability of goods",
+      "recommended_action": "Diversify supply chain and explore alternative logistics options"
     },
     {
       "rank": 2,
-      "category": "Global Economic Impact",
-      "title": "China's Export Engine Stutters",
+      "category": "Logistical Challenges",
+      "title": "Aid Delivery Obstacles",
       "severity": "HIGH",
       "confidence": 0.8,
-      "probability_next_30d": 0.75,
+      "probability_next_30d": 0.6,
       "evidence": [
-        "China's export engine stutters as Iran war chills global demand"
+        "Iran war-related shipping disruptions have doubled the cost of aid to Sudan",
+        "Supply chain disruptions from Middle East tensions caused raw material prices to hit four-year peaks"
       ],
       "affected_entities": [
-        "China's export industry"
+        "Sudan",
+        "Iran"
       ],
       "affected_geo": [
-        "China",
-        "Middle East"
+        "Sudan",
+        "Iran"
       ],
-      "causal_chain": "Iran war \u2192 global demand decrease \u2192 China's export engine stutters",
-      "recommended_action": "Monitor global demand and adjust export strategies accordingly"
+      "causal_chain": "Supply chain disruptions hinder aid delivery, exacerbating humanitarian crises",
+      "recommended_action": "Collaborate with international organizations to establish alternative aid delivery routes"
     },
     {
       "rank": 3,
-      "category": "Public Perception",
-      "title": "Negative Sentiment Towards Public Health",
+      "category": "Economic Impact",
+      "title": "Inflationary Pressures",
       "severity": "MEDIUM",
       "confidence": 0.7,
-      "probability_next_30d": 0.65,
+      "probability_next_30d": 0.5,
       "evidence": [
-        "Public health 'officers' are the worst nazis of them all!",
-        "The public health service is a mockery of people."
+        "Supply chain disruptions from Middle East tensions caused raw material prices to hit four-year peaks",
+        "Inflationary concerns rise due to increased costs"
       ],
       "affected_entities": [
-        "Public health services"
+        "US",
+        "Middle East"
       ],
       "affected_geo": [
-        "Global"
+        "US",
+        "Middle East"
       ],
-      "causal_chain": "Negative social media posts \u2192 decreased public trust in public health services",
-      "recommended_action": "Improve public health communication and address negative sentiment"
+      "causal_chain": "Supply chain disruptions lead to increased costs, driving inflationary pressures",
+      "recommended_action": "Monitor economic indicators and adjust pricing strategies accordingly"
     },
     {
       "rank": 4,
-      "category": "Logistical Challenges",
-      "title": "Dubai's Culinary Scene Faces Disruption",
-      "severity": "MEDIUM",
-      "confidence": 0.75,
-      "probability_next_30d": 0.7,
+      "category": "Operational Challenges",
+      "title": "Reduced Menu Offerings",
+      "severity": "LOW",
+      "confidence": 0.6,
+      "probability_next_30d": 0.4,
       "evidence": [
-        "Dubai's chefs face challenges sourcing key ingredients due to the Iran war"
+        "Dubai's chefs face challenges sourcing key ingredients due to the Iran war",
+        "Supply chain disruptions have forced strategies like reduced menu offerings"
       ],
       "affected_entities": [
-        "Dubai's culinary industry"
+        "Dubai"
       ],
       "affected_geo": [
-        "Dubai",
-        "Gulf"
+        "Dubai"
       ],
-      "causal_chain": "Iran war \u2192 supply chain disruption \u2192 logistical challenges for Dubai's culinary industry",
-      "recommended_action": "Explore alternative ingredient sources and adjust menus accordingly"
+      "causal_chain": "Supply chain disruptions limit ingredient availability, forcing menu adjustments",
+      "recommended_action": "Explore local ingredient sourcing options to mitigate menu limitations"
     },
     {
       "rank": 5,
-      "category": "Weather-Related Disruptions",
-      "title": "Global Weather Patterns",
+      "category": "Social Media Sentiment",
+      "title": "Negative Supply Chain Perceptions",
       "severity": "LOW",
-      "confidence": 0.6,
-      "probability_next_30d": 0.55,
+      "confidence": 0.5,
+      "probability_next_30d": 0.3,
       "evidence": [
-        "Broken clouds in Singapore, London, and Sydney"
+        "Negative social media sentiment regarding supply chain and logistics"
       ],
       "affected_entities": [
-        "Global weather patterns"
+        "General public"
       ],
       "affected_geo": [
         "Global"
       ],
-      "causal_chain": "Weather patterns \u2192 potential disruptions to supply chains and logistics",
-      "recommended_action": "Monitor weather forecasts and adjust logistics strategies accordingly"
+      "causal_chain": "Negative social media sentiment may impact public perception of supply chain reliability",
+      "recommended_action": "Engage with social media influencers to promote positive supply chain narratives"
     }
   ],
   "soft_risks": [
     {
-      "category": "Social Unrest",
-      "title": "Increasing Negative Sentiment",
-      "note": "Social media posts indicate increasing negative sentiment towards public health services"
+      "category": "Weather-Related Disruptions",
+      "title": "Potential Weather-Related Disruptions",
+      "note": "Weather readings indicate potential disruptions in various locations, but lack concrete evidence"
     },
     {
-      "category": "Economic Instability",
-      "title": "Potential Trade Disruptions",
-      "note": "Iran war may lead to trade disruptions and economic instability in the region"
+      "category": "Commodity Price Volatility",
+      "title": "Potential Commodity Price Fluctuations",
+      "note": "No data available on commodity prices, but potential for volatility exists"
     },
     {
-      "category": "Infrastructure Challenges",
-      "title": "Potential Supply Chain Disruptions",
-      "note": "Supply chain disruptions may impact the delivery of vaccines and other essential goods"
+      "category": "Stock Market Fluctuations",
+      "title": "Potential Stock Market Impacts",
+      "note": "No data available on stock market trends, but potential for impact on supply chain exists"
     }
   ],
-  "data_quality_note": "The intelligence bundle has a layer1_completeness of 75% and an average reliability of 0.66, indicating some limitations in the data quality and potential for biases in the analysis",
+  "data_quality_note": "Layer 1 completeness is 75%, and average reliability is 0.66, indicating moderate data quality and potential for missing information",
   "model_used": "llama-3.3-70b-versatile",
   "layer1_completeness": 0.75,
-  "layer2_enriched_at": "2026-05-03T18:22:05.258986",
+  "layer2_enriched_at": "2026-05-03T18:34:06.404179",
   "aggregate_sentiment": "neutral",
   "avg_reliability": 0.662
 }
