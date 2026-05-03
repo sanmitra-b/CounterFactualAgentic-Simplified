@@ -1,104 +1,79 @@
 {
-  "analysed_at": "2026-05-03T18:34:06.404179Z",
-  "domain": "vaccine_cold_chain_risk",
+  "analysed_at": "2026-05-03T18:41:49.483765",
+  "domain": "ai_and_employment",
   "top_risks": [
     {
       "rank": 1,
-      "category": "Supply Chain Disruption",
-      "title": "War-Related Disruptions",
-      "severity": "CRITICAL",
+      "category": "Job Displacement",
+      "title": "AI Replaces Human Workers",
+      "severity": "HIGH",
       "confidence": 0.85,
       "probability_next_30d": 0.7,
       "evidence": [
-        "Dubai's chefs face challenges sourcing key ingredients due to the Iran war",
-        "Supply chain disruptions from Middle East tensions caused raw material prices to hit four-year peaks",
-        "Iran war-related shipping disruptions have doubled the cost of aid to Sudan"
+        "Indian banks reducing workforce due to digital transactions and AI",
+        "Cognizant layoffs to cut 4,000 jobs and boost AI and automation"
       ],
       "affected_entities": [
-        "Dubai",
-        "Iran",
-        "Sudan",
-        "US"
+        "Indian banks",
+        "Cognizant Technology Solutions"
       ],
       "affected_geo": [
-        "Middle East"
+        "India",
+        "US"
       ],
-      "causal_chain": "War in the Middle East disrupts supply chains, leading to increased costs and reduced availability of goods",
-      "recommended_action": "Diversify supply chain and explore alternative logistics options"
+      "causal_chain": "AI adoption leads to job displacement, affecting workforce and future leaders",
+      "recommended_action": "Implement retraining programs for workers displaced by AI"
     },
     {
       "rank": 2,
-      "category": "Logistical Challenges",
-      "title": "Aid Delivery Obstacles",
-      "severity": "HIGH",
-      "confidence": 0.8,
+      "category": "Skills Obsolescence",
+      "title": "AI Renders Skills Obsolete",
+      "severity": "MEDIUM",
+      "confidence": 0.75,
       "probability_next_30d": 0.6,
       "evidence": [
-        "Iran war-related shipping disruptions have doubled the cost of aid to Sudan",
-        "Supply chain disruptions from Middle East tensions caused raw material prices to hit four-year peaks"
+        "VFX and videography courses considered useless due to AI",
+        "Social media posts expressing concern about AI taking over jobs"
       ],
       "affected_entities": [
-        "Sudan",
-        "Iran"
+        "Workers in creative industries"
       ],
       "affected_geo": [
-        "Sudan",
-        "Iran"
+        "Global"
       ],
-      "causal_chain": "Supply chain disruptions hinder aid delivery, exacerbating humanitarian crises",
-      "recommended_action": "Collaborate with international organizations to establish alternative aid delivery routes"
+      "causal_chain": "AI advancements make certain skills obsolete, affecting workers' livelihoods",
+      "recommended_action": "Encourage workers to develop AI-related skills"
     },
     {
       "rank": 3,
-      "category": "Economic Impact",
-      "title": "Inflationary Pressures",
+      "category": "Workforce Development",
+      "title": "AI Hinders Workforce Development",
       "severity": "MEDIUM",
       "confidence": 0.7,
-      "probability_next_30d": 0.5,
+      "probability_next_30d": 0.55,
       "evidence": [
-        "Supply chain disruptions from Middle East tensions caused raw material prices to hit four-year peaks",
-        "Inflationary concerns rise due to increased costs"
+        "MIT expert warns against replacing Gen Z entry-level workers with AI",
+        "Social media posts expressing concern about AI's impact on workforce development"
       ],
       "affected_entities": [
-        "US",
-        "Middle East"
+        "Gen Z workers"
       ],
       "affected_geo": [
-        "US",
-        "Middle East"
+        "US"
       ],
-      "causal_chain": "Supply chain disruptions lead to increased costs, driving inflationary pressures",
-      "recommended_action": "Monitor economic indicators and adjust pricing strategies accordingly"
+      "causal_chain": "AI adoption hinders workforce development, affecting future leaders",
+      "recommended_action": "Balance AI adoption with workforce development initiatives"
     },
     {
       "rank": 4,
-      "category": "Operational Challenges",
-      "title": "Reduced Menu Offerings",
+      "category": "Public Perception",
+      "title": "Negative Public Perception of AI",
       "severity": "LOW",
-      "confidence": 0.6,
-      "probability_next_30d": 0.4,
+      "confidence": 0.65,
+      "probability_next_30d": 0.5,
       "evidence": [
-        "Dubai's chefs face challenges sourcing key ingredients due to the Iran war",
-        "Supply chain disruptions have forced strategies like reduced menu offerings"
-      ],
-      "affected_entities": [
-        "Dubai"
-      ],
-      "affected_geo": [
-        "Dubai"
-      ],
-      "causal_chain": "Supply chain disruptions limit ingredient availability, forcing menu adjustments",
-      "recommended_action": "Explore local ingredient sourcing options to mitigate menu limitations"
-    },
-    {
-      "rank": 5,
-      "category": "Social Media Sentiment",
-      "title": "Negative Supply Chain Perceptions",
-      "severity": "LOW",
-      "confidence": 0.5,
-      "probability_next_30d": 0.3,
-      "evidence": [
-        "Negative social media sentiment regarding supply chain and logistics"
+        "Social media posts expressing negative sentiments about AI",
+        "Concerns about AI's impact on jobs and workforce development"
       ],
       "affected_entities": [
         "General public"
@@ -106,31 +81,51 @@
       "affected_geo": [
         "Global"
       ],
-      "causal_chain": "Negative social media sentiment may impact public perception of supply chain reliability",
-      "recommended_action": "Engage with social media influencers to promote positive supply chain narratives"
+      "causal_chain": "Negative public perception of AI affects its adoption and development",
+      "recommended_action": "Improve public awareness and education about AI's benefits and risks"
+    },
+    {
+      "rank": 5,
+      "category": "Economic Impact",
+      "title": "AI's Economic Impact Uncertain",
+      "severity": "LOW",
+      "confidence": 0.6,
+      "probability_next_30d": 0.45,
+      "evidence": [
+        "Uncertainty about AI's economic impact on various industries",
+        "Concerns about job displacement and workforce development"
+      ],
+      "affected_entities": [
+        "Businesses and industries"
+      ],
+      "affected_geo": [
+        "Global"
+      ],
+      "causal_chain": "AI's economic impact is uncertain, affecting businesses and industries",
+      "recommended_action": "Monitor AI's economic impact and develop strategies to mitigate potential negative effects"
     }
   ],
   "soft_risks": [
     {
-      "category": "Weather-Related Disruptions",
-      "title": "Potential Weather-Related Disruptions",
-      "note": "Weather readings indicate potential disruptions in various locations, but lack concrete evidence"
+      "category": "Regulatory Framework",
+      "title": "Lack of AI Regulation",
+      "note": "There is a need for a regulatory framework to govern AI development and deployment"
     },
     {
-      "category": "Commodity Price Volatility",
-      "title": "Potential Commodity Price Fluctuations",
-      "note": "No data available on commodity prices, but potential for volatility exists"
+      "category": "Cybersecurity",
+      "title": "AI-Related Cybersecurity Risks",
+      "note": "AI systems may introduce new cybersecurity risks that need to be addressed"
     },
     {
-      "category": "Stock Market Fluctuations",
-      "title": "Potential Stock Market Impacts",
-      "note": "No data available on stock market trends, but potential for impact on supply chain exists"
+      "category": "Ethics",
+      "title": "AI Ethics Concerns",
+      "note": "There are concerns about the ethical implications of AI development and deployment"
     }
   ],
-  "data_quality_note": "Layer 1 completeness is 75%, and average reliability is 0.66, indicating moderate data quality and potential for missing information",
+  "data_quality_note": "The data quality is moderate, with some gaps in information and a reliance on news and social media sources. The analysis is based on the available data, but the confidence levels reflect the limitations of the input data.",
   "model_used": "llama-3.3-70b-versatile",
   "layer1_completeness": 0.75,
-  "layer2_enriched_at": "2026-05-03T18:34:06.404179",
+  "layer2_enriched_at": "2026-05-03T18:41:49.483765",
   "aggregate_sentiment": "neutral",
-  "avg_reliability": 0.662
+  "avg_reliability": 0.6615
 }
