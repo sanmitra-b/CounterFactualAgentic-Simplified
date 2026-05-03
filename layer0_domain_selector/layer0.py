@@ -51,7 +51,10 @@ ROOT_DIR = Path(__file__).resolve().parent.parent
 LAYER1_DIR = ROOT_DIR / "layer1_data_collection"
 BASE_CONFIG_PATH = LAYER1_DIR / "config.json"
 ENV_PATH = ROOT_DIR / ".env"
-GEMINI_MODEL = "gemini-2.5-flash-lite"
+GEMINI_MODEL = "gemini-2.5-flash"
+
+# Default FRED series IDs used when extracted indicators are not valid series codes.
+DEFAULT_FRED_SERIES_IDS = ["CPIAUCSL", "UNRATE", "PPIACO", "INDPRO"]
 
 
 def _slugify(value: str) -> str:
@@ -63,6 +66,61 @@ def _slugify(value: str) -> str:
 def _load_base_config() -> Dict[str, Any]:
     with open(BASE_CONFIG_PATH, "r", encoding="utf-8") as handle:
         return json.load(handle)
+
+
+def _sanitize_fred_indicators(indicators: Any) -> list[str]:
+    """Return valid-looking FRED series IDs, or domain-agnostic defaults.
+
+    FRED `series_id` values are compact identifiers (e.g., CPIAUCSL), not
+    natural-language phrases like "supply chain costs".
+    """
+    if not isinstance(indicators, list):
+        return DEFAULT_FRED_SERIES_IDS.copy()
+
+    cleaned: list[str] = []
+    for item in indicators:
+        code = str(item).strip().upper()
+        if re.fullmatch(r"[A-Z0-9._-]{2,20}", code):
+            cleaned.append(code)
+
+    # Keep order, remove duplicates
+    cleaned = list(dict.fromkeys(cleaned))
+    return cleaned if cleaned else DEFAULT_FRED_SERIES_IDS.copy()
+
+
+def _looks_relevant(source_name: str, text: str) -> bool:
+    text = text.lower()
+    if source_name == "news":
+        return True
+    if source_name == "financial":
+        return any(keyword in text for keyword in ["market", "price", "cost", "economic", "inflation", "demand", "supply", "business", "finance", "revenue"])
+    if source_name == "weather":
+        return any(keyword in text for keyword in ["weather", "temperature", "cold chain", "cold", "heat", "climate", "logistics", "transport", "shipment", "storage", "refrigeration"])
+    if source_name == "social":
+        return any(keyword in text for keyword in ["social", "sentiment", "public", "discussion", "opinion", "community", "trend", "news coverage"])
+    if source_name == "jobs":
+        return any(keyword in text for keyword in ["job", "employment", "hiring", "labor", "workforce", "vacancy", "career"])
+    return False
+
+
+def _prune_irrelevant_sources(profile: Dict[str, Any], user_input: str) -> Dict[str, Any]:
+    source_usage = profile.get("source_usage", {})
+    if not isinstance(source_usage, dict):
+        return profile
+
+    for source_name in ["jobs", "social", "financial", "weather"]:
+        source = source_usage.get(source_name)
+        if not isinstance(source, dict):
+            continue
+        if source.get("enabled") and not _looks_relevant(source_name, user_input + " " + str(profile.get("domain", "")) + " " + " ".join(map(str, profile.get("keywords", [])))):
+            source["enabled"] = False
+            methods = source.get("methods", {})
+            if isinstance(methods, dict):
+                for method_name in list(methods.keys()):
+                    methods[method_name] = False
+            source["methods"] = methods
+
+    return profile
 
 
 def _parse_gemini_json(text: str) -> Any:
@@ -91,6 +149,8 @@ def _refine_profile_with_gemini(profile: Dict[str, Any], error_message: str) -> 
         + error_message
         + "\n\nPlease return a corrected domain profile JSON only, with keys: domain, description, keywords, source_usage. "
         "Preserve as much of the original intent as possible, but adjust structure/types so the Layer 1 validator accepts it. "
+        "For source_usage.financial.indicators, return valid FRED series IDs only (e.g., CPIAUCSL, UNRATE, PPIACO, INDPRO), "
+        "not natural-language phrases. "
         "Do not include any additional text or commentary.\n\nOriginal profile:\n"
         + json.dumps(profile, ensure_ascii=False)
     )
@@ -111,6 +171,8 @@ def _refine_profile_with_gemini(profile: Dict[str, Any], error_message: str) -> 
     )
     try:
         resp = requests.post(url, json=prompt, timeout=30)
+        if resp.status_code == 429:
+            raise RuntimeError(f"Gemini rate-limited (429): {resp.text[:300]}")
         resp.raise_for_status()
         payload = resp.json()
         text = payload["candidates"][0]["content"]["parts"][0]["text"]
@@ -131,9 +193,9 @@ def _ensure_minimum_sources_enabled(profile: Dict[str, Any], user_input: str) ->
     if not isinstance(source_usage, dict):
         source_usage = {}
     
-    # Count currently enabled sources
+    # Count currently enabled sources (exclude 'jobs' from auto-enablement)
     enabled_sources = []
-    for source_name in ["news", "financial", "jobs", "social", "weather"]:
+    for source_name in ["news", "financial", "social", "weather"]:
         source = source_usage.get(source_name, {})
         if isinstance(source, dict):
             if source.get("enabled"):
@@ -144,7 +206,7 @@ def _ensure_minimum_sources_enabled(profile: Dict[str, Any], user_input: str) ->
                 if any(bool(m) for m in methods.values() if isinstance(m, bool)):
                     enabled_sources.append(source_name)
     
-    # If fewer than 4 sources enabled, enable more based on heuristics
+    # If fewer than 4 sources are enabled, enable more based on heuristics.
     if len(enabled_sources) < 4:
         keywords = profile.get("keywords", [])
         keywords_lower = " ".join(str(k).lower() for k in keywords)
@@ -155,7 +217,6 @@ def _ensure_minimum_sources_enabled(profile: Dict[str, Any], user_input: str) ->
             "weather": 1.8,  # Weather often relevant for logistics/environment
             "social": 1.5,  # Social sentiment valuable for risk context
             "financial": 1.3,  # Financial data for market/impact analysis
-            "jobs": 1.0,  # Jobs data lower priority but still useful
         }
         
         # Boost scores based on keywords
@@ -165,14 +226,14 @@ def _ensure_minimum_sources_enabled(profile: Dict[str, Any], user_input: str) ->
         if any(kw in keywords_lower for kw in ["market", "price", "stock", "financial", "economic"]):
             relevance_scores["financial"] = 2.0
             relevance_scores["news"] = 2.1
+        # Don't auto-enable 'jobs' based on keywords; keep other boosts
         if any(kw in keywords_lower for kw in ["job", "employment", "hiring", "labor", "workforce"]):
-            relevance_scores["jobs"] = 2.0
             relevance_scores["social"] = 1.8
         if any(kw in keywords_lower for kw in ["sentiment", "opinion", "public", "trend", "social", "community"]):
             relevance_scores["social"] = 2.2
         
-        # Sort by relevance and enable until we have 4-5 sources
-        available_sources = [s for s in ["news", "financial", "jobs", "social", "weather"] if s not in enabled_sources]
+        # Sort by relevance and enable until we have the minimum (4)
+        available_sources = [s for s in ["news", "financial", "social", "weather"] if s not in enabled_sources]
         available_sources.sort(key=lambda s: relevance_scores.get(s, 1.0), reverse=True)
         
         for source_name in available_sources:
@@ -204,10 +265,6 @@ def _ensure_minimum_sources_enabled(profile: Dict[str, Any], user_input: str) ->
                     source["tickers"] = []
                 if "indicators" not in source:
                     source["indicators"] = []
-            elif source_name == "jobs":
-                methods = {"adzuna": True, "usajobs": True}
-                if "keywords" not in source or not source.get("keywords"):
-                    source["keywords"] = profile.get("keywords", [])
             elif source_name == "social":
                 methods = {"pushshift": False, "youtube": True, "mastodon": True, "hackernews": True}  # pushshift disabled permanently
                 if "keywords" not in source or not source.get("keywords"):
@@ -259,8 +316,15 @@ def _auto_extract_domain_profile(user_input: str) -> Dict[str, Any]:
                             "For news, jobs, social, and weather, also include keywords arrays when relevant. "
                             "For weather, also include cities or locations arrays when relevant. "
                             "For social, also include hashtags when relevant. "
-                            "IMPORTANT: Enable at least 4-5 sources broadly. Favor enabling multiple methods per source. "
-                            "Only disable a source if it is clearly irrelevant. Default to ENABLING sources for broader risk coverage. "
+                            "IMPORTANT for financial.indicators: return valid FRED series IDs only (e.g., CPIAUCSL, UNRATE, PPIACO, INDPRO). "
+                            "Do NOT return natural-language indicator names like 'supply chain costs'. "
+                            "IMPORTANT: Enable only sources that are clearly relevant to the user text. "
+                            "Prefer a small, focused set of 2-3 sources over broad coverage. "
+                            "Disable jobs unless labor, hiring, employment, workforce, or vacancy risk is explicit. "
+                            "Disable social unless public sentiment, discussion, or social chatter is explicit. "
+                            "Disable financial unless market, price, cost, inflation, business, or economic impact is explicit. "
+                            "Disable weather unless temperature, climate, storage, shipment, logistics, or environmental risk is explicit. "
+                            "Do not enable sources just to increase the count. Quality and relevance are more important than breadth. "
                             "User text: " + user_input
                         )
                     }
@@ -276,18 +340,30 @@ def _auto_extract_domain_profile(user_input: str) -> Dict[str, Any]:
     )
     try:
         response = requests.post(url, json=prompt, timeout=30)
+        if response.status_code == 429:
+            raise RuntimeError(f"Gemini rate-limited (429): {response.text[:300]}")
         response.raise_for_status()
         payload = response.json()
         text = payload["candidates"][0]["content"]["parts"][0]["text"]
         profile = _parse_gemini_json(text)
         if not isinstance(profile, dict):
             raise RuntimeError("Gemini returned an invalid domain profile")
-        
-        # Enforce minimum 4-5 sources enabled
+
+        # Preserve Gemini's original source_usage for debugging
+        try:
+            original_usage = deepcopy(profile.get("source_usage", {}))
+        except Exception:
+            original_usage = profile.get("source_usage", {})
+        profile["__gemini_source_usage"] = original_usage
+
+        # Prune clearly irrelevant sources before any auto-enablement kicks in.
+        profile = _prune_irrelevant_sources(profile, user_input)
+
+        # Enforce minimum sources (relaxed rule)
         profile = _ensure_minimum_sources_enabled(profile, user_input)
         return profile
-    except Exception:
-        raise RuntimeError(f"Failed to extract a domain profile from: {user_input}")
+    except Exception as exc:
+        raise RuntimeError(f"Failed to extract a domain profile from: {user_input} — {exc}")
 
 
 def build_domain_config(
@@ -328,7 +404,7 @@ def build_domain_config(
     social_keywords = source_cfg("social").get("keywords") or keywords
     social_hashtags = source_cfg("social").get("hashtags") or []
     financial_tickers = source_cfg("financial").get("tickers") or []
-    fred_indicators = source_cfg("financial").get("indicators") or []
+    fred_indicators = _sanitize_fred_indicators(source_cfg("financial").get("indicators") or [])
 
     config["output"]["domain"] = slug
     config["logging"]["log_file"] = f"{slug}_data_collection.log"
@@ -444,6 +520,22 @@ def main() -> None:
         print(f"✓ Domain: {domain}")
         print(f"✓ Description: {description}")
         print(f"✓ Keywords: {', '.join(keywords)}")
+        # Show what Gemini originally reported for source usage (before auto-enabling)
+        gemini_usage = profile.get("__gemini_source_usage")
+        if isinstance(gemini_usage, dict):
+            print("\nSources reported by Gemini:")
+            for src in ["news", "financial", "jobs", "social", "weather"]:
+                val = gemini_usage.get(src)
+                if val is None:
+                    print(f"- {src}: (not present)")
+                else:
+                    enabled = val.get("enabled") if isinstance(val, dict) else bool(val)
+                    methods = val.get("methods") if isinstance(val, dict) else None
+                    methods_str = ", ".join([k for k, v in (methods or {}).items() if v]) if methods else ""
+                    note = f"enabled={enabled}"
+                    if methods_str:
+                        note += f" methods=[{methods_str}]"
+                    print(f"- {src}: {note}")
         print("\nApplying relevant API flags to Layer 1 config...")
         # Build the Layer 1 config from the profile
         config = build_domain_config(profile)

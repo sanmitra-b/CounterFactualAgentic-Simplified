@@ -36,6 +36,12 @@ PRIMARY_MODEL  = "llama-3.3-70b-versatile"
 FALLBACK_MODEL = "llama-3.1-8b-instant"      
 MAX_CONTEXT_CHARS = 12_000               # safe token budget (~3 000 tokens)
 TOP_N_PER_CATEGORY = 3                   # max signals per category in prompt
+
+GENERIC_DOMAIN_TERMS = {
+    "risk", "risks", "chain", "supply", "logistics", "transport", "global", "market",
+    "public", "health", "industry", "cost", "costs", "operations", "operation",
+    "management", "distribution", "system", "systems", "trend", "trends", "alerts",
+}
  
 RISK_CATEGORIES = []
 
@@ -106,10 +112,16 @@ def _domain_relevance_score(item: dict, domain_terms: set[str], domain_phrases: 
     text = _signal_text(item).lower()
     tokens = _normalize_terms(text)
 
-    token_hits = len(tokens.intersection(domain_terms))
+    specific_terms = {term for term in domain_terms if term not in GENERIC_DOMAIN_TERMS}
+    specific_hits = len(tokens.intersection(specific_terms))
+    generic_hits = len(tokens.intersection(domain_terms)) - specific_hits
     phrase_hits = sum(1 for phrase in domain_phrases if len(phrase) >= 4 and phrase in text)
 
-    score = (token_hits * 0.25) + (phrase_hits * 0.6)
+    score = (specific_hits * 0.45) + (generic_hits * 0.08) + (phrase_hits * 0.6)
+
+    # If only generic terms matched, keep score below inclusion threshold.
+    if specific_hits == 0 and phrase_hits == 0 and generic_hits > 0:
+        score = min(score, 0.12)
 
     if score == 0.0:
         generic_terms = {
@@ -239,6 +251,9 @@ def _top_n(signals: list[dict], n: int = TOP_N_PER_CATEGORY, domain_terms: set[s
     domain_phrases = domain_phrases or []
 
     relevant = [item for item in signals if _domain_relevance_score(item, domain_terms, domain_phrases) >= 0.15]
+    # If we have domain context, do not fall back to unrelated signals.
+    if (domain_terms or domain_phrases) and not relevant:
+        return []
     candidates = relevant if relevant else signals
     return sorted(candidates, key=lambda item: _domain_adjusted_weight(item, domain_terms, domain_phrases), reverse=True)[:n]
  
@@ -409,7 +424,10 @@ def call_groq(prompt: str, domain: str) -> dict:
     Call Groq API with primary model; fall back to smaller model on quota error.
     Returns parsed JSON dict from LLaMA response.
     """
-    client = Groq(api_key=os.getenv("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"))
+    api_key = os.getenv("GROQ_API_KEY", "").strip()
+    if not api_key:
+        raise EnvironmentError("GROQ_API_KEY not set — add it to .env")
+    client = Groq(api_key=api_key)
  
     for model in [PRIMARY_MODEL, FALLBACK_MODEL]:
         try:

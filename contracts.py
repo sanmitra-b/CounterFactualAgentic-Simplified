@@ -112,6 +112,7 @@ class AnalystWorkResult(BaseModel):
     scenarios:   List[CounterfactualScenario] = Field(..., min_length=1)
     model_used:  str
     error:       Optional[str] = None       # populated only on partial failure
+    model_config = {"protected_namespaces": ()}
 
 
 class CounterfactualBundle(BaseModel):
@@ -126,6 +127,7 @@ class CounterfactualBundle(BaseModel):
     total_scenarios:     int
     feasibility_dist:    dict[str, int]
     avg_delta:           float
+    model_config = {"protected_namespaces": ()}
 
 
 # ═══════════════════════════════════════════════════════════════════════════════
@@ -202,7 +204,7 @@ class SolutionMatch(BaseModel):
     kpis:                     List[str]     = Field(..., min_length=1)
     time_horizon:             TimeHorizon
     estimated_cost_usd:       Optional[str] = None
-    risk_reduction_estimate:  str
+    risk_reduction_estimate:  Optional[str] = None
     dependencies:             List[str]     = Field(default_factory=list)
     references:               List[str]     = Field(default_factory=list)
 
@@ -232,3 +234,4 @@ class SolutionMappingReport(BaseModel):
     coverage_note:  str
     risks_covered:  List[int]
     risks_missed:   List[int]
+    model_config = {"protected_namespaces": ()}

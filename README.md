@@ -20,8 +20,8 @@ CFASimplified/
 │   ├── risk_input_bundle.csv
 │   ├── enriched_risk_bundle.json
 │   ├── risk_report.json
-│   ├── counterfactual_results.json
-│   └── risk_solution_bundle.json
+│   ├── counterfactual_bundle.json
+│   └── solution_mapping_report.json
 ├── layer0_domain_selector/
 │   ├── __init__.py
 │   ├── config_validator.py         # Config schema validation
@@ -150,7 +150,7 @@ Layer 0 will:
 3. Run Layer 2 (NLP enrichment)
 4. Run Layer 3 (LLM risk analysis)
 5. Run Layer 4 (counterfactual analysis) and Layer 5 (RAG mitigation mapping)
-6. Output final artifacts including `data/risk_report.json`, `data/counterfactual_results.json`, and `data/risk_solution_bundle.json`
+6. Output final artifacts including `data/risk_report.json`, `data/counterfactual_bundle.json`, and `data/solution_mapping_report.json`
 
 
 ---
@@ -188,22 +188,22 @@ python layer3_llm/layer3_llm_analysis.py --input data/enriched_risk_bundle.json 
 If running Layer 4 independently:
 
 ```bash
-python layer4_counterfactual/layer4_supervisor.py --input data/risk_report.json --output data/counterfactual_results.json
+python layer4_counterfactual/layer4_supervisor.py --input data/risk_report.json --output data/counterfactual_bundle.json
 ```
 
 Expected Layer 4 output:
-- `data/counterfactual_results.json`
+- `data/counterfactual_bundle.json`
 
 ### Layer 5 (Manual Execution)
 
 If running Layer 5 independently:
 
 ```bash
-python layer5_rag/layer5_supervisor.py --input data/counterfactual_results.json --output data/risk_solution_bundle.json
+python layer5_rag/layer5_supervisor.py --input data/counterfactual_bundle.json --output data/solution_mapping_report.json
 ```
 
 Expected Layer 5 output:
-- `data/risk_solution_bundle.json`
+- `data/solution_mapping_report.json`
 
 ### Layer 6 (Dashboard)
 
@@ -217,8 +217,8 @@ Layer 6 reads only pipeline outputs from `data/` (no demo fallback data):
 - `data/risk_input_bundle.json`
 - `data/enriched_risk_bundle.json`
 - `data/risk_report.json`
-- `data/counterfactual_results.json`
-- `data/risk_solution_bundle.json`
+- `data/counterfactual_bundle.json`
+- `data/solution_mapping_report.json`
 
 If a required file is missing, the relevant page shows an empty-state message.
 
@@ -320,7 +320,7 @@ What this means:
 - Layer 3 picks and ranks the top 5 actionable risks.
 - Each risk gets severity, confidence, evidence, and suggested action.
 
-### Step D: Layer 4 output (`data/counterfactual_results.json`)
+### Step D: Layer 4 output (`data/counterfactual_bundle.json`)
 
 Layer 4 tests interventions iteratively and keeps the best one.
 
@@ -349,7 +349,7 @@ What this means:
 - The loop changed variable once effect was weak, then tuned magnitude.
 - Final accepted intervention crossed the threshold.
 
-### Step E: Layer 5 output (`data/risk_solution_bundle.json`)
+### Step E: Layer 5 output (`data/solution_mapping_report.json`)
 
 Layer 5 retrieves playbook actions and ranks mitigation solutions.
 

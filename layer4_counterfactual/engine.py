@@ -145,6 +145,20 @@ def _infer_intervention_types(order: AnalystWorkOrder) -> list[InterventionType]
     return selected[:order.n_scenarios]
 
 
+def _filter_types_by_domain(domain: str, types: list[InterventionType]) -> list[InterventionType]:
+    """
+    Apply lightweight domain-aware rules to avoid semantically inappropriate
+    intervention types. Returns a filtered list preserving order.
+    """
+    # Per-domain blocklist: add domains here to exclude certain intervention types
+    DOMAIN_BLOCKLIST: dict[str, list[InterventionType]] = {
+        # AI & employment risks should not produce SUPPLY-type interventions
+        "ai_and_employment": [InterventionType.SUPPLY],
+    }
+    blocked = set(DOMAIN_BLOCKLIST.get(domain, []))
+    return [t for t in types if t not in blocked]
+
+
 def _generate_intervention_text(
     order: AnalystWorkOrder,
     intervention_type: InterventionType,
@@ -317,6 +331,20 @@ def simulate(order: AnalystWorkOrder) -> list[dict[str, Any]]:
     that validation step is the Analyst Agent's responsibility).
     """
     intervention_types = _infer_intervention_types(order)
+    # Apply domain-aware filtering to avoid semantically inappropriate types
+    filtered = _filter_types_by_domain(order.domain, intervention_types)
+    if not filtered:
+        # If filtering removed everything, fall back to original list
+        filtered = intervention_types
+    # Ensure we have exactly n_scenarios (cycle if needed)
+    final_types: list[InterventionType] = []
+    i = 0
+    while len(final_types) < order.n_scenarios:
+        candidate = filtered[i % len(filtered)]
+        if candidate not in final_types:
+            final_types.append(candidate)
+        i += 1
+    intervention_types = final_types
     raw_scenarios: list[dict[str, Any]] = []
 
     for idx, i_type in enumerate(intervention_types, start=1):

@@ -1,131 +1,120 @@
 {
-  "analysed_at": "2026-05-03T18:41:49.483765",
-  "domain": "ai_and_employment",
+  "analysed_at": "2026-05-03T20:09:06.271230Z",
+  "domain": "cold_chain_risk",
   "top_risks": [
     {
       "rank": 1,
-      "category": "Job Displacement",
-      "title": "AI Replaces Human Workers",
+      "category": "Geopolitical Risk",
+      "title": "Strait of Hormuz Energy Chokepoint Tensions Escalate",
       "severity": "HIGH",
       "confidence": 0.85,
-      "probability_next_30d": 0.7,
+      "probability_next_30d": 0.75,
       "evidence": [
-        "Indian banks reducing workforce due to digital transactions and AI",
-        "Cognizant layoffs to cut 4,000 jobs and boost AI and automation"
+        "Iran war stalemate",
+        "US aims to box out China from the Panama Canal"
       ],
       "affected_entities": [
-        "Indian banks",
-        "Cognizant Technology Solutions"
+        "Iran",
+        "US",
+        "China"
       ],
       "affected_geo": [
-        "India",
-        "US"
+        "Strait of Hormuz"
       ],
-      "causal_chain": "AI adoption leads to job displacement, affecting workforce and future leaders",
-      "recommended_action": "Implement retraining programs for workers displaced by AI"
+      "causal_chain": "Escalating tensions between Iran and the US may lead to disruptions in global energy supplies.",
+      "recommended_action": "Monitor developments in the Strait of Hormuz and adjust supply chains accordingly."
     },
     {
       "rank": 2,
-      "category": "Skills Obsolescence",
-      "title": "AI Renders Skills Obsolete",
+      "category": "Market Risk",
+      "title": "China Healthcare Cold Chain Logistics Market Growth Forecast",
       "severity": "MEDIUM",
-      "confidence": 0.75,
-      "probability_next_30d": 0.6,
+      "confidence": 0.9,
+      "probability_next_30d": 0.65,
       "evidence": [
-        "VFX and videography courses considered useless due to AI",
-        "Social media posts expressing concern about AI taking over jobs"
+        "Growing demand for biopharmaceuticals in Asia-Pacific",
+        "Rising demand for cold chain logistics services in China"
       ],
       "affected_entities": [
-        "Workers in creative industries"
+        "China",
+        "Asia-Pacific"
       ],
-      "affected_geo": [
-        "Global"
-      ],
-      "causal_chain": "AI advancements make certain skills obsolete, affecting workers' livelihoods",
-      "recommended_action": "Encourage workers to develop AI-related skills"
+      "affected_geo": [],
+      "causal_chain": "Growing demand for biopharmaceuticals in Asia-Pacific may lead to increased demand for cold chain logistics services in China.",
+      "recommended_action": "Monitor market trends and adjust supply chains accordingly."
     },
     {
       "rank": 3,
-      "category": "Workforce Development",
-      "title": "AI Hinders Workforce Development",
+      "category": "Supply Chain Risk",
+      "title": "Cold Chain Logistics Disruptions in Asia-Pacific",
       "severity": "MEDIUM",
-      "confidence": 0.7,
-      "probability_next_30d": 0.55,
+      "confidence": 0.85,
+      "probability_next_30d": 0.6,
       "evidence": [
-        "MIT expert warns against replacing Gen Z entry-level workers with AI",
-        "Social media posts expressing concern about AI's impact on workforce development"
+        "Growing demand for biopharmaceuticals in Asia-Pacific",
+        "Potential disruptions in cold chain logistics services"
       ],
       "affected_entities": [
-        "Gen Z workers"
+        "Asia-Pacific"
       ],
-      "affected_geo": [
-        "US"
-      ],
-      "causal_chain": "AI adoption hinders workforce development, affecting future leaders",
-      "recommended_action": "Balance AI adoption with workforce development initiatives"
+      "affected_geo": [],
+      "causal_chain": "Growing demand for biopharmaceuticals in Asia-Pacific may lead to potential disruptions in cold chain logistics services.",
+      "recommended_action": "Monitor supply chain disruptions and adjust logistics accordingly."
     },
     {
       "rank": 4,
-      "category": "Public Perception",
-      "title": "Negative Public Perception of AI",
+      "category": "Reputation Risk",
+      "title": "Negative Sentiment in Hacker News Community",
       "severity": "LOW",
-      "confidence": 0.65,
+      "confidence": 0.8,
       "probability_next_30d": 0.5,
       "evidence": [
-        "Social media posts expressing negative sentiments about AI",
-        "Concerns about AI's impact on jobs and workforce development"
+        "Negative sentiment in hacker news community",
+        "Cold start problem for solo developers"
       ],
-      "affected_entities": [
-        "General public"
-      ],
-      "affected_geo": [
-        "Global"
-      ],
-      "causal_chain": "Negative public perception of AI affects its adoption and development",
-      "recommended_action": "Improve public awareness and education about AI's benefits and risks"
+      "affected_entities": [],
+      "affected_geo": [],
+      "causal_chain": "Negative sentiment in hacker news community may lead to reputational damage.",
+      "recommended_action": "Monitor online sentiment and adjust marketing strategies accordingly."
     },
     {
       "rank": 5,
-      "category": "Economic Impact",
-      "title": "AI's Economic Impact Uncertain",
+      "category": "Operational Risk",
+      "title": "Cold Email Marketing Challenges",
       "severity": "LOW",
-      "confidence": 0.6,
+      "confidence": 0.75,
       "probability_next_30d": 0.45,
       "evidence": [
-        "Uncertainty about AI's economic impact on various industries",
-        "Concerns about job displacement and workforce development"
+        "Cold email marketing challenges",
+        "Low chance of success"
       ],
-      "affected_entities": [
-        "Businesses and industries"
-      ],
-      "affected_geo": [
-        "Global"
-      ],
-      "causal_chain": "AI's economic impact is uncertain, affecting businesses and industries",
-      "recommended_action": "Monitor AI's economic impact and develop strategies to mitigate potential negative effects"
+      "affected_entities": [],
+      "affected_geo": [],
+      "causal_chain": "Cold email marketing challenges may lead to operational inefficiencies.",
+      "recommended_action": "Monitor marketing campaigns and adjust strategies accordingly."
     }
   ],
   "soft_risks": [
     {
-      "category": "Regulatory Framework",
-      "title": "Lack of AI Regulation",
-      "note": "There is a need for a regulatory framework to govern AI development and deployment"
+      "category": "Market Risk",
+      "title": "Growing Demand for Biopharmaceuticals in Asia-Pacific",
+      "note": "Potential for increased demand for cold chain logistics services in China."
     },
     {
-      "category": "Cybersecurity",
-      "title": "AI-Related Cybersecurity Risks",
-      "note": "AI systems may introduce new cybersecurity risks that need to be addressed"
+      "category": "Supply Chain Risk",
+      "title": "Potential Disruptions in Cold Chain Logistics Services",
+      "note": "Growing demand for biopharmaceuticals in Asia-Pacific may lead to potential disruptions in cold chain logistics services."
     },
     {
-      "category": "Ethics",
-      "title": "AI Ethics Concerns",
-      "note": "There are concerns about the ethical implications of AI development and deployment"
+      "category": "Reputation Risk",
+      "title": "Negative Sentiment in Hacker News Community",
+      "note": "Negative sentiment in hacker news community may lead to reputational damage."
     }
   ],
-  "data_quality_note": "The data quality is moderate, with some gaps in information and a reliance on news and social media sources. The analysis is based on the available data, but the confidence levels reflect the limitations of the input data.",
-  "model_used": "llama-3.3-70b-versatile",
+  "data_quality_note": "Layer 1 completeness is 75%, with an average reliability of 0.74. Sentiment breakdown is not available.",
+  "model_used": "llama-3.1-8b-instant",
   "layer1_completeness": 0.75,
-  "layer2_enriched_at": "2026-05-03T18:41:49.483765",
+  "layer2_enriched_at": "2026-05-03T20:09:06.271230",
   "aggregate_sentiment": "neutral",
-  "avg_reliability": 0.6615
+  "avg_reliability": 0.7417
 }

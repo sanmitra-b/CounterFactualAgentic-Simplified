@@ -5,14 +5,14 @@
       "methods": {
         "newsapi": {
           "enabled": true,
-          "note": "NewsAPI for AI_and_Employment domain"
+          "note": "NewsAPI for Cold Chain Risk domain"
         },
         "gnews": {
           "enabled": true,
           "base_url": "https://gnews.io/api/v4/search",
           "max_articles_per_request": 10,
           "rate_limit_seconds": 1.0,
-          "note": "GNews for AI_and_Employment domain"
+          "note": "GNews for Cold Chain Risk domain"
         },
         "rss": {
           "enabled": true,
@@ -24,13 +24,16 @@
             "https://rss.nytimes.com/services/xml/rss/nyt/Technology.xml",
             "https://arxiv.org/rss/cs.AI"
           ],
-          "note": "RSS feeds for AI_and_Employment domain"
+          "note": "RSS feeds for Cold Chain Risk domain"
         }
       },
       "keywords": [
-        "AI jobs",
-        "automation workforce",
-        "future of employment"
+        "cold chain",
+        "vaccine transport",
+        "logistics",
+        "pharmaceutical supply chain",
+        "temperature excursion",
+        "drug spoilage"
       ],
       "max_results_per_source": 50
     },
@@ -40,53 +43,52 @@
         "enabled": true,
         "outputsize": "compact",
         "tickers": [],
-        "note": "Alpha Vantage for AI_and_Employment domain",
+        "note": "Alpha Vantage for Cold Chain Risk domain",
         "rate_limit_seconds": 1.5
       },
       "fred": {
         "enabled": true,
-        "indicators": [],
-        "note": "FRED indicators for AI_and_Employment domain"
+        "indicators": [
+          "PPIACO",
+          "INDPRO",
+          "CPIAUCSL"
+        ],
+        "note": "FRED indicators for Cold Chain Risk domain"
       }
     },
     "jobs": {
-      "enabled": true,
+      "enabled": false,
       "adzuna": {
-        "enabled": true,
-        "keywords": [
-          "AI jobs",
-          "tech jobs",
-          "automation roles"
-        ],
-        "note": "Adzuna signals for AI_and_Employment domain"
+        "enabled": false,
+        "keywords": [],
+        "note": "Disabled for this domain"
       },
       "usajobs": {
-        "enabled": true,
+        "enabled": false,
         "base_url": "https://data.usajobs.gov/api/search",
-        "keywords": [
-          "AI jobs",
-          "tech jobs",
-          "automation roles"
-        ],
+        "keywords": [],
         "results_per_query": 25,
-        "note": "USAJOBS signals for AI_and_Employment domain"
+        "note": "Disabled for this domain"
       },
-      "keywords": [
-        "AI jobs",
-        "tech jobs",
-        "automation roles"
-      ]
+      "keywords": []
     },
     "weather": {
-      "enabled": false,
-      "keywords": [],
+      "enabled": true,
+      "keywords": [
+        "temperature",
+        "cold wave",
+        "heat wave",
+        "storm",
+        "logistics disruption",
+        "transport conditions"
+      ],
       "cities": [],
       "openweather": {
-        "enabled": false,
+        "enabled": true,
         "base_url": "https://api.openweathermap.org/data/2.5/weather",
         "units": "metric",
         "language": "en",
-        "note": "Disabled for this domain"
+        "note": "OpenWeather signals for Cold Chain Risk domain"
       },
       "note": "Disabled for AI job-risk mode"
     },
@@ -105,9 +107,14 @@
           "datascience"
         ],
         "keywords": [
-          "AI in workplace",
-          "future jobs",
-          "automation discussion"
+          "cold chain",
+          "vaccine transport",
+          "logistics risk",
+          "temperature control",
+          "pharmaceutical supply chain",
+          "spoilage",
+          "distribution",
+          "efficacy loss"
         ],
         "max_results_per_query": 25,
         "days_back": 7,
@@ -116,9 +123,14 @@
       "youtube": {
         "enabled": true,
         "keywords": [
-          "AI in workplace",
-          "future jobs",
-          "automation discussion"
+          "cold chain",
+          "vaccine transport",
+          "logistics risk",
+          "temperature control",
+          "pharmaceutical supply chain",
+          "spoilage",
+          "distribution",
+          "efficacy loss"
         ],
         "max_results": 700,
         "videos_per_keyword": 5,
@@ -135,24 +147,30 @@
           "mstdn.social"
         ],
         "keywords": [
-          "AI in workplace",
-          "future jobs",
-          "automation discussion"
+          "cold chain",
+          "vaccine transport",
+          "logistics risk",
+          "temperature control",
+          "pharmaceutical supply chain",
+          "spoilage",
+          "distribution",
+          "efficacy loss"
         ],
-        "hashtags": [
-          "#AIjobs",
-          "#FutureOfWork",
-          "#Automation"
-        ],
+        "hashtags": [],
         "max_results_per_instance": 20,
         "note": "Decentralized social network - tech community sentiment, no API approval needed"
       },
       "hackernews": {
         "enabled": true,
         "keywords": [
-          "AI in workplace",
-          "future jobs",
-          "automation discussion"
+          "cold chain",
+          "vaccine transport",
+          "logistics risk",
+          "temperature control",
+          "pharmaceutical supply chain",
+          "spoilage",
+          "distribution",
+          "efficacy loss"
         ],
         "max_results": 50,
         "min_comments": 5,
@@ -161,7 +179,7 @@
     }
   },
   "output": {
-    "domain": "ai_and_employment",
+    "domain": "cold_chain_risk",
     "formats": [
       "json",
       "csv"
@@ -170,20 +188,21 @@
   },
   "logging": {
     "level": "INFO",
-    "log_file": "ai_and_employment_data_collection.log"
+    "log_file": "cold_chain_risk_data_collection.log"
   },
   "domain_profile": {
-    "name": "AI_and_Employment",
-    "slug": "ai_and_employment",
-    "description": "Analysis of how artificial intelligence impacts job markets, including job displacement, creation of new roles, and required skill shifts.",
+    "name": "Cold Chain Risk",
+    "slug": "cold_chain_risk",
+    "description": "Analyzes risks associated with maintaining precise temperature control for sensitive products like vaccines throughout the supply chain. This includes potential for spoilage, efficacy loss, and regulatory non-compliance due to temperature excursions.",
     "keywords": [
-      "AI impact on jobs",
-      "future of work",
-      "automation and employment",
-      "AI job displacement",
-      "AI job creation",
-      "reskilling for AI",
-      "AI workforce trends"
+      "cold chain",
+      "vaccine transport",
+      "logistics risk",
+      "temperature control",
+      "pharmaceutical supply chain",
+      "spoilage",
+      "distribution",
+      "efficacy loss"
     ],
     "source_usage": {
       "news": {
@@ -194,9 +213,12 @@
           "rss": true
         },
         "keywords": [
-          "AI jobs",
-          "automation workforce",
-          "future of employment"
+          "cold chain",
+          "vaccine transport",
+          "logistics",
+          "pharmaceutical supply chain",
+          "temperature excursion",
+          "drug spoilage"
         ]
       },
       "financial": {
@@ -206,46 +228,49 @@
           "fred": true
         },
         "tickers": [],
-        "indicators": []
+        "indicators": [
+          "PPIACO",
+          "INDPRO",
+          "CPIAUCSL"
+        ]
       },
       "jobs": {
-        "enabled": true,
-        "methods": {
-          "adzuna": true,
-          "usajobs": true
-        },
-        "keywords": [
-          "AI jobs",
-          "tech jobs",
-          "automation roles"
-        ]
+        "enabled": false
       },
       "social": {
         "enabled": true,
+        "keywords": [
+          "cold chain",
+          "vaccine transport",
+          "logistics risk",
+          "temperature control",
+          "pharmaceutical supply chain",
+          "spoilage",
+          "distribution",
+          "efficacy loss"
+        ],
+        "hashtags": [],
         "methods": {
-          "pushshift": true,
+          "pushshift": false,
           "youtube": true,
           "mastodon": true,
           "hackernews": true
-        },
-        "keywords": [
-          "AI in workplace",
-          "future jobs",
-          "automation discussion"
-        ],
-        "hashtags": [
-          "#AIjobs",
-          "#FutureOfWork",
-          "#Automation"
-        ]
+        }
       },
       "weather": {
-        "enabled": false,
+        "enabled": true,
         "methods": {
-          "openweather": false
+          "openweather": true
         },
-        "cities": [],
-        "keywords": []
+        "keywords": [
+          "temperature",
+          "cold wave",
+          "heat wave",
+          "storm",
+          "logistics disruption",
+          "transport conditions"
+        ],
+        "cities": []
       }
     }
   }
