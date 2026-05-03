@@ -1,120 +1,127 @@
 {
-  "analysed_at": "2026-05-03T20:09:06.271230Z",
-  "domain": "cold_chain_risk",
+  "analysed_at": "2026-05-03T20:21:43.716896Z",
+  "domain": "healthcare_supply_chain_risk",
   "top_risks": [
     {
       "rank": 1,
-      "category": "Geopolitical Risk",
-      "title": "Strait of Hormuz Energy Chokepoint Tensions Escalate",
+      "category": "Talent_Shortage",
+      "title": "Doctor and medical talent shortages in Nigeria, India, and globally",
       "severity": "HIGH",
       "confidence": 0.85,
-      "probability_next_30d": 0.75,
+      "probability_next_30d": 0.7,
       "evidence": [
-        "Iran war stalemate",
-        "US aims to box out China from the Panama Canal"
+        "Nigeria's doctor shortage deepens as poor pay, migration strain health system",
+        "India's healthcare expansion faces a critical talent crunch, says Alisha Moopen"
       ],
       "affected_entities": [
-        "Iran",
-        "US",
-        "China"
+        "Nigeria",
+        "India"
       ],
       "affected_geo": [
-        "Strait of Hormuz"
+        "Nigeria",
+        "India"
       ],
-      "causal_chain": "Escalating tensions between Iran and the US may lead to disruptions in global energy supplies.",
-      "recommended_action": "Monitor developments in the Strait of Hormuz and adjust supply chains accordingly."
+      "causal_chain": "Talent shortages in key countries strain healthcare systems, impacting patient care and supply chain resilience.",
+      "recommended_action": "Develop targeted talent acquisition and retention strategies to mitigate shortages."
     },
     {
       "rank": 2,
-      "category": "Market Risk",
-      "title": "China Healthcare Cold Chain Logistics Market Growth Forecast",
+      "category": "Cybersecurity_Risk",
+      "title": "Medical device cyber-attacks on healthcare organizations",
       "severity": "MEDIUM",
-      "confidence": 0.9,
-      "probability_next_30d": 0.65,
+      "confidence": 0.8,
+      "probability_next_30d": 0.6,
       "evidence": [
-        "Growing demand for biopharmaceuticals in Asia-Pacific",
-        "Rising demand for cold chain logistics services in China"
+        "A Quarter of Healthcare Organizations Report Medical Device Cyber-Attacks"
       ],
       "affected_entities": [
-        "China",
-        "Asia-Pacific"
+        "Healthcare Organizations"
       ],
-      "affected_geo": [],
-      "causal_chain": "Growing demand for biopharmaceuticals in Asia-Pacific may lead to increased demand for cold chain logistics services in China.",
-      "recommended_action": "Monitor market trends and adjust supply chains accordingly."
+      "affected_geo": [
+        "Global"
+      ],
+      "causal_chain": "Cyber-attacks on medical devices disrupt patient care and compromise supply chain security.",
+      "recommended_action": "Implement robust cybersecurity measures to protect medical devices and patient data."
     },
     {
       "rank": 3,
-      "category": "Supply Chain Risk",
-      "title": "Cold Chain Logistics Disruptions in Asia-Pacific",
-      "severity": "MEDIUM",
-      "confidence": 0.85,
-      "probability_next_30d": 0.6,
+      "category": "Supply_Chain_Disruption",
+      "title": "Food supply chain breaking down, impacting healthcare",
+      "severity": "LOW",
+      "confidence": 0.7,
+      "probability_next_30d": 0.5,
       "evidence": [
-        "Growing demand for biopharmaceuticals in Asia-Pacific",
-        "Potential disruptions in cold chain logistics services"
+        "Tyson Foods takes out full-page ad: The food supply chain is breaking"
       ],
       "affected_entities": [
-        "Asia-Pacific"
+        "Food Supply Chain"
       ],
-      "affected_geo": [],
-      "causal_chain": "Growing demand for biopharmaceuticals in Asia-Pacific may lead to potential disruptions in cold chain logistics services.",
-      "recommended_action": "Monitor supply chain disruptions and adjust logistics accordingly."
+      "affected_geo": [
+        "Global"
+      ],
+      "causal_chain": "Supply chain disruptions impact healthcare organizations' ability to access essential goods and services.",
+      "recommended_action": "Monitor supply chain disruptions and develop contingency plans to mitigate their impact."
     },
     {
       "rank": 4,
-      "category": "Reputation Risk",
-      "title": "Negative Sentiment in Hacker News Community",
+      "category": "Regulatory_Risk",
+      "title": "Emerging regulatory challenges in healthcare",
       "severity": "LOW",
-      "confidence": 0.8,
-      "probability_next_30d": 0.5,
+      "confidence": 0.6,
+      "probability_next_30d": 0.4,
       "evidence": [
-        "Negative sentiment in hacker news community",
-        "Cold start problem for solo developers"
+        "No explicit evidence in the bundle"
       ],
-      "affected_entities": [],
-      "affected_geo": [],
-      "causal_chain": "Negative sentiment in hacker news community may lead to reputational damage.",
-      "recommended_action": "Monitor online sentiment and adjust marketing strategies accordingly."
+      "affected_entities": [
+        "Healthcare Organizations"
+      ],
+      "affected_geo": [
+        "Global"
+      ],
+      "causal_chain": "Emerging regulatory challenges impact healthcare organizations' compliance and risk management.",
+      "recommended_action": "Monitor regulatory developments and adapt to changing requirements."
     },
     {
       "rank": 5,
-      "category": "Operational Risk",
-      "title": "Cold Email Marketing Challenges",
+      "category": "Patient_Safety",
+      "title": "Pre-clinical hypertrophic cardiomyopathy (HCM) diagnosis and treatment",
       "severity": "LOW",
-      "confidence": 0.75,
-      "probability_next_30d": 0.45,
+      "confidence": 0.5,
+      "probability_next_30d": 0.3,
       "evidence": [
-        "Cold email marketing challenges",
-        "Low chance of success"
+        "Pre-clinical hypertrophic cardiomyopathy (HCM) diagnosis and treatment"
       ],
-      "affected_entities": [],
-      "affected_geo": [],
-      "causal_chain": "Cold email marketing challenges may lead to operational inefficiencies.",
-      "recommended_action": "Monitor marketing campaigns and adjust strategies accordingly."
+      "affected_entities": [
+        "Patients"
+      ],
+      "affected_geo": [
+        "Global"
+      ],
+      "causal_chain": "Pre-clinical hypertrophic cardiomyopathy (HCM) diagnosis and treatment impact patient safety and healthcare outcomes.",
+      "recommended_action": "Develop targeted patient safety initiatives to mitigate the impact of HCM."
     }
   ],
   "soft_risks": [
     {
-      "category": "Market Risk",
-      "title": "Growing Demand for Biopharmaceuticals in Asia-Pacific",
-      "note": "Potential for increased demand for cold chain logistics services in China."
+      "category": "Economic_Risk",
+      "title": "Potential economic impact of talent shortages on healthcare",
+      "note": "Talent shortages in key countries may lead to economic losses for healthcare organizations and the broader economy."
     },
     {
-      "category": "Supply Chain Risk",
-      "title": "Potential Disruptions in Cold Chain Logistics Services",
-      "note": "Growing demand for biopharmaceuticals in Asia-Pacific may lead to potential disruptions in cold chain logistics services."
+      "category": "Operational_Risk",
+      "title": "Operational challenges in responding to medical device cyber-attacks",
+      "note": "Healthcare organizations may face operational challenges in responding to medical device cyber-attacks, impacting patient care and supply chain resilience."
     },
     {
-      "category": "Reputation Risk",
-      "title": "Negative Sentiment in Hacker News Community",
-      "note": "Negative sentiment in hacker news community may lead to reputational damage."
+      "category": "Reputational_Risk",
+      "title": "Reputational risk associated with food supply chain disruptions",
+      "note": "Food supply chain disruptions may impact healthcare organizations' reputation and brand value."
     }
   ],
-  "data_quality_note": "Layer 1 completeness is 75%, with an average reliability of 0.74. Sentiment breakdown is not available.",
+  "data_quality_note": "Data completeness is 75%, with some gaps in sentiment analysis and reliability scores.",
   "model_used": "llama-3.1-8b-instant",
   "layer1_completeness": 0.75,
-  "layer2_enriched_at": "2026-05-03T20:09:06.271230",
+  "layer2_enriched_at": "2026-05-03T20:21:43.716896",
   "aggregate_sentiment": "neutral",
-  "avg_reliability": 0.7417
+  "avg_reliability": 0.8022
 }

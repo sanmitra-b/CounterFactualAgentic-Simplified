@@ -5,14 +5,14 @@
       "methods": {
         "newsapi": {
           "enabled": true,
-          "note": "NewsAPI for Cold Chain Risk domain"
+          "note": "NewsAPI for Healthcare Supply Chain Risk domain"
         },
         "gnews": {
           "enabled": true,
           "base_url": "https://gnews.io/api/v4/search",
           "max_articles_per_request": 10,
           "rate_limit_seconds": 1.0,
-          "note": "GNews for Cold Chain Risk domain"
+          "note": "GNews for Healthcare Supply Chain Risk domain"
         },
         "rss": {
           "enabled": true,
@@ -24,16 +24,15 @@
             "https://rss.nytimes.com/services/xml/rss/nyt/Technology.xml",
             "https://arxiv.org/rss/cs.AI"
           ],
-          "note": "RSS feeds for Cold Chain Risk domain"
+          "note": "RSS feeds for Healthcare Supply Chain Risk domain"
         }
       },
       "keywords": [
-        "cold chain",
-        "vaccine transport",
-        "logistics",
-        "pharmaceutical supply chain",
-        "temperature excursion",
-        "drug spoilage"
+        "healthcare supply chain disruption",
+        "medical shortages",
+        "patient safety incidents",
+        "hospital supply risk",
+        "drug availability crisis"
       ],
       "max_results_per_source": 50
     },
@@ -43,17 +42,17 @@
         "enabled": true,
         "outputsize": "compact",
         "tickers": [],
-        "note": "Alpha Vantage for Cold Chain Risk domain",
+        "note": "Alpha Vantage for Healthcare Supply Chain Risk domain",
         "rate_limit_seconds": 1.5
       },
       "fred": {
         "enabled": true,
         "indicators": [
+          "CPIAUCSL",
           "PPIACO",
-          "INDPRO",
-          "CPIAUCSL"
+          "INDPRO"
         ],
-        "note": "FRED indicators for Cold Chain Risk domain"
+        "note": "FRED indicators for Healthcare Supply Chain Risk domain"
       }
     },
     "jobs": {
@@ -75,20 +74,27 @@
     "weather": {
       "enabled": true,
       "keywords": [
-        "temperature",
-        "cold wave",
-        "heat wave",
-        "storm",
-        "logistics disruption",
-        "transport conditions"
+        "Healthcare supply chain",
+        "patient safety",
+        "medical supply disruption",
+        "cascading risk",
+        "patient outcomes",
+        "healthcare resilience",
+        "supply chain risk management",
+        "clinical impact"
       ],
-      "cities": [],
+      "cities": [
+        "New York",
+        "London",
+        "Tokyo",
+        "Singapore"
+      ],
       "openweather": {
         "enabled": true,
         "base_url": "https://api.openweathermap.org/data/2.5/weather",
         "units": "metric",
         "language": "en",
-        "note": "OpenWeather signals for Cold Chain Risk domain"
+        "note": "OpenWeather signals for Healthcare Supply Chain Risk domain"
       },
       "note": "Disabled for AI job-risk mode"
     },
@@ -107,14 +113,14 @@
           "datascience"
         ],
         "keywords": [
-          "cold chain",
-          "vaccine transport",
-          "logistics risk",
-          "temperature control",
-          "pharmaceutical supply chain",
-          "spoilage",
-          "distribution",
-          "efficacy loss"
+          "Healthcare supply chain",
+          "patient safety",
+          "medical supply disruption",
+          "cascading risk",
+          "patient outcomes",
+          "healthcare resilience",
+          "supply chain risk management",
+          "clinical impact"
         ],
         "max_results_per_query": 25,
         "days_back": 7,
@@ -123,14 +129,14 @@
       "youtube": {
         "enabled": true,
         "keywords": [
-          "cold chain",
-          "vaccine transport",
-          "logistics risk",
-          "temperature control",
-          "pharmaceutical supply chain",
-          "spoilage",
-          "distribution",
-          "efficacy loss"
+          "Healthcare supply chain",
+          "patient safety",
+          "medical supply disruption",
+          "cascading risk",
+          "patient outcomes",
+          "healthcare resilience",
+          "supply chain risk management",
+          "clinical impact"
         ],
         "max_results": 700,
         "videos_per_keyword": 5,
@@ -147,14 +153,14 @@
           "mstdn.social"
         ],
         "keywords": [
-          "cold chain",
-          "vaccine transport",
-          "logistics risk",
-          "temperature control",
-          "pharmaceutical supply chain",
-          "spoilage",
-          "distribution",
-          "efficacy loss"
+          "Healthcare supply chain",
+          "patient safety",
+          "medical supply disruption",
+          "cascading risk",
+          "patient outcomes",
+          "healthcare resilience",
+          "supply chain risk management",
+          "clinical impact"
         ],
         "hashtags": [],
         "max_results_per_instance": 20,
@@ -163,14 +169,14 @@
       "hackernews": {
         "enabled": true,
         "keywords": [
-          "cold chain",
-          "vaccine transport",
-          "logistics risk",
-          "temperature control",
-          "pharmaceutical supply chain",
-          "spoilage",
-          "distribution",
-          "efficacy loss"
+          "Healthcare supply chain",
+          "patient safety",
+          "medical supply disruption",
+          "cascading risk",
+          "patient outcomes",
+          "healthcare resilience",
+          "supply chain risk management",
+          "clinical impact"
         ],
         "max_results": 50,
         "min_comments": 5,
@@ -179,7 +185,7 @@
     }
   },
   "output": {
-    "domain": "cold_chain_risk",
+    "domain": "healthcare_supply_chain_risk",
     "formats": [
       "json",
       "csv"
@@ -188,21 +194,21 @@
   },
   "logging": {
     "level": "INFO",
-    "log_file": "cold_chain_risk_data_collection.log"
+    "log_file": "healthcare_supply_chain_risk_data_collection.log"
   },
   "domain_profile": {
-    "name": "Cold Chain Risk",
-    "slug": "cold_chain_risk",
-    "description": "Analyzes risks associated with maintaining precise temperature control for sensitive products like vaccines throughout the supply chain. This includes potential for spoilage, efficacy loss, and regulatory non-compliance due to temperature excursions.",
+    "name": "Healthcare Supply Chain Risk",
+    "slug": "healthcare_supply_chain_risk",
+    "description": "Analysis of interconnected risks originating from supply chain disruptions within the healthcare sector, specifically examining their cascading impact on patient safety, treatment efficacy, and overall health outcomes.",
     "keywords": [
-      "cold chain",
-      "vaccine transport",
-      "logistics risk",
-      "temperature control",
-      "pharmaceutical supply chain",
-      "spoilage",
-      "distribution",
-      "efficacy loss"
+      "Healthcare supply chain",
+      "patient safety",
+      "medical supply disruption",
+      "cascading risk",
+      "patient outcomes",
+      "healthcare resilience",
+      "supply chain risk management",
+      "clinical impact"
     ],
     "source_usage": {
       "news": {
@@ -213,12 +219,11 @@
           "rss": true
         },
         "keywords": [
-          "cold chain",
-          "vaccine transport",
-          "logistics",
-          "pharmaceutical supply chain",
-          "temperature excursion",
-          "drug spoilage"
+          "healthcare supply chain disruption",
+          "medical shortages",
+          "patient safety incidents",
+          "hospital supply risk",
+          "drug availability crisis"
         ]
       },
       "financial": {
@@ -229,9 +234,9 @@
         },
         "tickers": [],
         "indicators": [
+          "CPIAUCSL",
           "PPIACO",
-          "INDPRO",
-          "CPIAUCSL"
+          "INDPRO"
         ]
       },
       "jobs": {
@@ -240,14 +245,14 @@
       "social": {
         "enabled": true,
         "keywords": [
-          "cold chain",
-          "vaccine transport",
-          "logistics risk",
-          "temperature control",
-          "pharmaceutical supply chain",
-          "spoilage",
-          "distribution",
-          "efficacy loss"
+          "Healthcare supply chain",
+          "patient safety",
+          "medical supply disruption",
+          "cascading risk",
+          "patient outcomes",
+          "healthcare resilience",
+          "supply chain risk management",
+          "clinical impact"
         ],
         "hashtags": [],
         "methods": {
@@ -259,18 +264,25 @@
       },
       "weather": {
         "enabled": true,
+        "keywords": [
+          "Healthcare supply chain",
+          "patient safety",
+          "medical supply disruption",
+          "cascading risk",
+          "patient outcomes",
+          "healthcare resilience",
+          "supply chain risk management",
+          "clinical impact"
+        ],
+        "cities": [
+          "New York",
+          "London",
+          "Tokyo",
+          "Singapore"
+        ],
         "methods": {
           "openweather": true
-        },
-        "keywords": [
-          "temperature",
-          "cold wave",
-          "heat wave",
-          "storm",
-          "logistics disruption",
-          "transport conditions"
-        ],
-        "cities": []
+        }
       }
     }
   }
