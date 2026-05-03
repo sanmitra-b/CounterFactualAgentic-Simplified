@@ -117,6 +117,7 @@ class EnrichedRiskInputBundle:
     domain: str
     fetched_at: str
     enriched_at: str
+    domain_profile: Dict[str, Any] = field(default_factory=dict)
     news: List[EnrichedNewsItem] = field(default_factory=list)
     social: List[EnrichedSocialSignal] = field(default_factory=list)
     stocks: List[EnrichedStockSignal] = field(default_factory=list)

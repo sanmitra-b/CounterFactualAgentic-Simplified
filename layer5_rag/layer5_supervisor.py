@@ -88,6 +88,18 @@ CRITICAL RULES:
 - kpis: at least 2, each must be measurable (include thresholds or units).
 - Do NOT invent solutions not supported by the KB content.
 - If KB coverage is weak, lower relevance_score below 0.5 and say so in description.
+- If KB coverage is weak, lower relevance_score below 0.5 and say so in description.
+- Do NOT echo or repurpose the provided counterfactual numeric delta (e.g. "-16.13%") as
+    the `risk_reduction_estimate`. Instead, generate an independent, human-readable
+    `risk_reduction_estimate` string such as "10-20% probability reduction". If you
+    genuinely cannot estimate, return `null`.
+- `solution_type` selection guide:
+    * PROCESS: sourcing, procurement, operational workflow, staffing, training, execution playbooks.
+    * REGULATION: governance policy, compliance controls, legal or regulator-facing actions.
+    * TECHNOLOGY: software/systems/tools/automation are the primary mechanism.
+    * FRAMEWORK: structured methodology/reference architecture is the primary mechanism.
+    * PARTNERSHIP: explicit multi-organization collaboration is the primary mechanism.
+    Do NOT use Layer-4 intervention enums like SUPPLY/POLICY/OPERATIONAL as `solution_type`.
 """
 
 _HUMAN_TEMPLATE = """\
@@ -193,36 +205,43 @@ def _call_groq(human: str) -> tuple[dict[str, Any], str]:
     api_key = os.getenv("GROQ_API_KEY", "").strip()
     if not api_key:
         raise EnvironmentError("GROQ_API_KEY not set — add it to .env")
+    # Disable SDK-level retries so only supervisor-level retry/backoff is active.
+    client = Groq(api_key=api_key, max_retries=0)
+    import time
 
-    client = Groq(api_key=api_key)
-
+    # For robustness, attempt each model with modest in-process backoff
     for model in [PRIMARY_MODEL, FALLBACK_MODEL]:
-        try:
-            response = client.chat.completions.create(
-                model=model,
-                messages=[
-                    {"role": "system", "content": _SYSTEM_PROMPT},
-                    {"role": "user",   "content": human},
-                ],
-                temperature=0.2,
-                max_tokens=1500,
-                response_format={"type": "json_object"},
-            )
-            raw = response.choices[0].message.content.strip()
-            # Strip any accidental markdown fences
-            if raw.startswith("```"):
-                raw = raw.split("```")[1]
-                if raw.startswith("json"):
-                    raw = raw[4:]
-            return json.loads(raw), model
+        attempts = 0
+        while attempts < 3:
+            try:
+                response = client.chat.completions.create(
+                    model=model,
+                    messages=[
+                        {"role": "system", "content": _SYSTEM_PROMPT},
+                        {"role": "user",   "content": human},
+                    ],
+                    temperature=0.2,
+                    max_tokens=1500,
+                    response_format={"type": "json_object"},
+                )
+                raw = response.choices[0].message.content.strip()
+                # Strip any accidental markdown fences
+                if raw.startswith("```"):
+                    raw = raw.split("```")[1]
+                    if raw.startswith("json"):
+                        raw = raw[4:]
+                return json.loads(raw), model
 
-        except Exception as exc:
-            err = str(exc)
-            if "rate_limit" in err.lower() or "quota" in err.lower():
-                logger.warning("LLM %s rate-limited, retrying with fallback.", model)
-                continue
-            logger.error("LLM call failed (%s): %s", model, err)
-            raise
+            except Exception as exc:
+                err = str(exc)
+                attempts += 1
+                if "rate_limit" in err.lower() or "too many requests" in err.lower() or "quota" in err.lower():
+                    wait = min(1 * attempts, 16)
+                    logger.warning("LLM %s rate-limited (attempt %d) — sleeping %ds then retrying.", model, attempts, wait)
+                    time.sleep(wait)
+                    continue
+                logger.error("LLM call failed (%s): %s", model, err)
+                break
 
     raise RuntimeError("Both Groq models failed in Layer 5 Supervisor.")
 
@@ -252,6 +271,40 @@ def _validate_solution(
     ]:
         if enum_field in raw:
             raw[enum_field] = str(raw[enum_field]).upper()
+
+    # Coerce common Layer-4 intervention enum leaks into valid Layer-5 solution enums.
+    # This prevents needless drops when the model emits values like SUPPLY/POLICY.
+    raw_solution_type = str(raw.get("solution_type", "")).upper().strip()
+    intervention_to_solution = {
+        "SUPPLY": "PROCESS",
+        "OPERATIONAL": "PROCESS",
+        "FINANCIAL": "PROCESS",
+        "POLICY": "REGULATION",
+        "REGULATORY": "REGULATION",
+    }
+    if raw_solution_type in intervention_to_solution:
+        raw["solution_type"] = intervention_to_solution[raw_solution_type]
+
+    # Additional semantic guardrail for mis-typed classes.
+    allowed_solution_types = {member.value for member in SolutionType}
+    if str(raw.get("solution_type", "")).upper() not in allowed_solution_types:
+        text_blob = " ".join(
+            [
+                str(raw.get("solution_title", "")),
+                str(raw.get("description", "")),
+                " ".join(str(x) for x in raw.get("implementation_steps", [])[:3]),
+            ]
+        ).lower()
+        if any(term in text_blob for term in ["supplier", "sourcing", "procure", "dual source", "inventory", "workflow", "process"]):
+            raw["solution_type"] = "PROCESS"
+        elif any(term in text_blob for term in ["policy", "regulation", "compliance", "governance", "mandate"]):
+            raw["solution_type"] = "REGULATION"
+        elif any(term in text_blob for term in ["platform", "system", "software", "automation", "tool"]):
+            raw["solution_type"] = "TECHNOLOGY"
+        elif any(term in text_blob for term in ["framework", "playbook", "methodology"]):
+            raw["solution_type"] = "FRAMEWORK"
+        else:
+            raw["solution_type"] = "PROCESS"
 
     # Override solution_id / risk_rank to ensure consistency
     raw["solution_id"] = raw.get("solution_id", f"sol_{risk_rank}_{sol_idx}")
@@ -321,7 +374,7 @@ def _print_summary(report: SolutionMappingReport) -> None:
         print(f"      Type          : {sol.solution_type}")
         print(f"      Time horizon  : {t_icon} {sol.time_horizon}")
         print(f"      Relevance     : {sol.relevance_score:.0%}")
-        print(f"      Reduction est.: {sol.risk_reduction_estimate}")
+        print(f"      Reduction est.: {sol.risk_reduction_estimate or 'N/A'}")
         print(f"      Cost ≈        : {sol.estimated_cost_usd or 'N/A'}")
         print(f"      KB sources    : {', '.join(sol.source_chunks)}")
         if sol.implementation_steps:
@@ -457,6 +510,17 @@ def run_layer5(
             except Exception as exc:
                 logger.error("LLM synthesis failed for Risk #%d sol %d: %s", rank, sol_idx, exc)
                 continue
+
+            # Ensure linked scenario ID is preserved even if the LLM omitted it
+            if scenario and isinstance(raw_solution, dict):
+                if not raw_solution.get("scenario_id"):
+                    raw_solution["scenario_id"] = scenario.get("scenario_id")
+
+            # Normalise risk_reduction_estimate: prefer a non-empty string or explicit 'N/A'
+            if isinstance(raw_solution, dict):
+                rre = raw_solution.get("risk_reduction_estimate")
+                if rre is None or str(rre).strip().lower() in ("null", "none", ""):
+                    raw_solution["risk_reduction_estimate"] = "N/A"
 
             # ── Step E: Supervisor Guardrail — validate LLM output ────────────
             solution = _validate_solution(

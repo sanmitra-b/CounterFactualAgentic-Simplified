@@ -4,15 +4,15 @@
       "enabled": true,
       "methods": {
         "newsapi": {
-          "enabled": false,
-          "note": "NewsAPI for AI workforce and job-risk news"
+          "enabled": true,
+          "note": "NewsAPI for Healthcare Supply Chain Risk domain"
         },
         "gnews": {
           "enabled": true,
           "base_url": "https://gnews.io/api/v4/search",
           "max_articles_per_request": 10,
           "rate_limit_seconds": 1.0,
-          "note": "GNews for medicine domain"
+          "note": "GNews for Healthcare Supply Chain Risk domain"
         },
         "rss": {
           "enabled": true,
@@ -24,20 +24,15 @@
             "https://rss.nytimes.com/services/xml/rss/nyt/Technology.xml",
             "https://arxiv.org/rss/cs.AI"
           ],
-          "note": "RSS feeds for medicine domain"
+          "note": "RSS feeds for Healthcare Supply Chain Risk domain"
         }
       },
       "keywords": [
-        "drug recall",
-        "adverse event",
-        "medical error",
-        "patient safety",
-        "FDA warning",
-        "clinical trial failure",
-        "medication side effect",
-        "healthcare fraud",
-        "medical malpractice",
-        "public health crisis"
+        "healthcare supply chain disruption",
+        "medical shortages",
+        "patient safety incidents",
+        "hospital supply risk",
+        "drug availability crisis"
       ],
       "max_results_per_source": 50
     },
@@ -46,73 +41,61 @@
       "alpha_vantage": {
         "enabled": true,
         "outputsize": "compact",
-        "tickers": [
-          "PFE",
-          "MRK",
-          "JNJ",
-          "ABBV",
-          "BMY",
-          "LLY",
-          "AZN",
-          "NVS",
-          "ROG",
-          "GSK"
-        ],
-        "note": "AI economy and labor-market proxy equities (compact mode for free tier)",
+        "tickers": [],
+        "note": "Alpha Vantage for Healthcare Supply Chain Risk domain",
         "rate_limit_seconds": 1.5
       },
       "fred": {
         "enabled": true,
         "indicators": [
-          "GDP",
-          "UNRATE",
           "CPIAUCSL",
-          "MORTGAGE30US",
-          "FEDFUNDS",
-          "ICSA",
-          "HOUST",
-          "INDPRO",
           "PPIACO",
-          "UNEMPLOY"
+          "INDPRO"
         ],
-        "note": "US labor market indicators from FRED (LNS13000000 removed - invalid series)"
+        "note": "FRED indicators for Healthcare Supply Chain Risk domain"
       }
     },
     "jobs": {
-      "enabled": true,
-      "usajobs": {
-        "enabled": true,
-        "base_url": "https://data.usajobs.gov/api/search",
-        "keywords": [
-          "pharmacist",
-          "physician",
-          "nurse",
-          "medical researcher",
-          "clinical trial manager",
-          "regulatory affairs specialist",
-          "healthcare administrator",
-          "biostatistician",
-          "epidemiologist",
-          "medical device engineer"
-        ],
-        "results_per_query": 25,
-        "note": "USAJOBS signals for medicine domain"
+      "enabled": false,
+      "adzuna": {
+        "enabled": false,
+        "keywords": [],
+        "note": "Disabled for this domain"
       },
-      "keywords": [
-        "pharmacist",
-        "physician",
-        "nurse",
-        "medical researcher",
-        "clinical trial manager",
-        "regulatory affairs specialist",
-        "healthcare administrator",
-        "biostatistician",
-        "epidemiologist",
-        "medical device engineer"
-      ]
+      "usajobs": {
+        "enabled": false,
+        "base_url": "https://data.usajobs.gov/api/search",
+        "keywords": [],
+        "results_per_query": 25,
+        "note": "Disabled for this domain"
+      },
+      "keywords": []
     },
     "weather": {
-      "enabled": false,
+      "enabled": true,
+      "keywords": [
+        "Healthcare supply chain",
+        "patient safety",
+        "medical supply disruption",
+        "cascading risk",
+        "patient outcomes",
+        "healthcare resilience",
+        "supply chain risk management",
+        "clinical impact"
+      ],
+      "cities": [
+        "New York",
+        "London",
+        "Tokyo",
+        "Singapore"
+      ],
+      "openweather": {
+        "enabled": true,
+        "base_url": "https://api.openweathermap.org/data/2.5/weather",
+        "units": "metric",
+        "language": "en",
+        "note": "OpenWeather signals for Healthcare Supply Chain Risk domain"
+      },
       "note": "Disabled for AI job-risk mode"
     },
     "social": {
@@ -130,34 +113,30 @@
           "datascience"
         ],
         "keywords": [
-          "vaccine hesitancy",
-          "antibiotic resistance",
-          "opioid crisis",
-          "mental health stigma",
-          "chronic disease management",
-          "healthcare access",
-          "medical misinformation",
-          "patient advocacy",
-          "health disparities",
-          "emerging infectious disease"
+          "Healthcare supply chain",
+          "patient safety",
+          "medical supply disruption",
+          "cascading risk",
+          "patient outcomes",
+          "healthcare resilience",
+          "supply chain risk management",
+          "clinical impact"
         ],
         "max_results_per_query": 25,
         "days_back": 7,
-        "note": "Social sentiment about AI and jobs"
+        "note": "Disabled permanently"
       },
       "youtube": {
         "enabled": true,
         "keywords": [
-          "vaccine hesitancy",
-          "antibiotic resistance",
-          "opioid crisis",
-          "mental health stigma",
-          "chronic disease management",
-          "healthcare access",
-          "medical misinformation",
-          "patient advocacy",
-          "health disparities",
-          "emerging infectious disease"
+          "Healthcare supply chain",
+          "patient safety",
+          "medical supply disruption",
+          "cascading risk",
+          "patient outcomes",
+          "healthcare resilience",
+          "supply chain risk management",
+          "clinical impact"
         ],
         "max_results": 700,
         "videos_per_keyword": 5,
@@ -174,45 +153,30 @@
           "mstdn.social"
         ],
         "keywords": [
-          "vaccine hesitancy",
-          "antibiotic resistance",
-          "opioid crisis",
-          "mental health stigma",
-          "chronic disease management",
-          "healthcare access",
-          "medical misinformation",
-          "patient advocacy",
-          "health disparities",
-          "emerging infectious disease"
+          "Healthcare supply chain",
+          "patient safety",
+          "medical supply disruption",
+          "cascading risk",
+          "patient outcomes",
+          "healthcare resilience",
+          "supply chain risk management",
+          "clinical impact"
         ],
-        "hashtags": [
-          "#PatientSafety",
-          "#MedSafety",
-          "#DrugSafety",
-          "#Healthcare",
-          "#PublicHealth",
-          "#MedicalErrors",
-          "#AdverseEvents",
-          "#ClinicalTrials",
-          "#FDA",
-          "#HealthTech"
-        ],
+        "hashtags": [],
         "max_results_per_instance": 20,
         "note": "Decentralized social network - tech community sentiment, no API approval needed"
       },
       "hackernews": {
         "enabled": true,
         "keywords": [
-          "vaccine hesitancy",
-          "antibiotic resistance",
-          "opioid crisis",
-          "mental health stigma",
-          "chronic disease management",
-          "healthcare access",
-          "medical misinformation",
-          "patient advocacy",
-          "health disparities",
-          "emerging infectious disease"
+          "Healthcare supply chain",
+          "patient safety",
+          "medical supply disruption",
+          "cascading risk",
+          "patient outcomes",
+          "healthcare resilience",
+          "supply chain risk management",
+          "clinical impact"
         ],
         "max_results": 50,
         "min_comments": 5,
@@ -221,7 +185,7 @@
     }
   },
   "output": {
-    "domain": "medicine",
+    "domain": "healthcare_supply_chain_risk",
     "formats": [
       "json",
       "csv"
@@ -230,55 +194,96 @@
   },
   "logging": {
     "level": "INFO",
-    "log_file": "medicine_data_collection.log"
+    "log_file": "healthcare_supply_chain_risk_data_collection.log"
   },
   "domain_profile": {
-    "name": "medicine",
-    "slug": "medicine",
-    "description": "Risk analysis in medicine quantifies the probability and severity of adverse events associated with medical interventions, diagnostic procedures, and pharmaceutical products to inform decision-making and optimize patient safety. It involves systematic identification, assessment, and prioritization of potential hazards to mitigate harm and improve clinical outcomes.",
+    "name": "Healthcare Supply Chain Risk",
+    "slug": "healthcare_supply_chain_risk",
+    "description": "Analysis of interconnected risks originating from supply chain disruptions within the healthcare sector, specifically examining their cascading impact on patient safety, treatment efficacy, and overall health outcomes.",
     "keywords": [
-      "medical risk assessment",
-      "adverse event probability",
-      "patient safety analysis",
-      "clinical outcome optimization",
-      "hazard identification medicine",
-      "intervention risk quantification"
-    ],
-    "news_keywords": [
-      "drug recall",
-      "adverse event",
-      "medical error",
+      "Healthcare supply chain",
       "patient safety",
-      "FDA warning",
-      "clinical trial failure",
-      "medication side effect",
-      "healthcare fraud",
-      "medical malpractice",
-      "public health crisis"
+      "medical supply disruption",
+      "cascading risk",
+      "patient outcomes",
+      "healthcare resilience",
+      "supply chain risk management",
+      "clinical impact"
     ],
-    "job_keywords": [
-      "pharmacist",
-      "physician",
-      "nurse",
-      "medical researcher",
-      "clinical trial manager",
-      "regulatory affairs specialist",
-      "healthcare administrator",
-      "biostatistician",
-      "epidemiologist",
-      "medical device engineer"
-    ],
-    "social_keywords": [
-      "vaccine hesitancy",
-      "antibiotic resistance",
-      "opioid crisis",
-      "mental health stigma",
-      "chronic disease management",
-      "healthcare access",
-      "medical misinformation",
-      "patient advocacy",
-      "health disparities",
-      "emerging infectious disease"
-    ]
+    "source_usage": {
+      "news": {
+        "enabled": true,
+        "methods": {
+          "newsapi": true,
+          "gnews": true,
+          "rss": true
+        },
+        "keywords": [
+          "healthcare supply chain disruption",
+          "medical shortages",
+          "patient safety incidents",
+          "hospital supply risk",
+          "drug availability crisis"
+        ]
+      },
+      "financial": {
+        "enabled": true,
+        "methods": {
+          "alpha_vantage": true,
+          "fred": true
+        },
+        "tickers": [],
+        "indicators": [
+          "CPIAUCSL",
+          "PPIACO",
+          "INDPRO"
+        ]
+      },
+      "jobs": {
+        "enabled": false
+      },
+      "social": {
+        "enabled": true,
+        "keywords": [
+          "Healthcare supply chain",
+          "patient safety",
+          "medical supply disruption",
+          "cascading risk",
+          "patient outcomes",
+          "healthcare resilience",
+          "supply chain risk management",
+          "clinical impact"
+        ],
+        "hashtags": [],
+        "methods": {
+          "pushshift": false,
+          "youtube": true,
+          "mastodon": true,
+          "hackernews": true
+        }
+      },
+      "weather": {
+        "enabled": true,
+        "keywords": [
+          "Healthcare supply chain",
+          "patient safety",
+          "medical supply disruption",
+          "cascading risk",
+          "patient outcomes",
+          "healthcare resilience",
+          "supply chain risk management",
+          "clinical impact"
+        ],
+        "cities": [
+          "New York",
+          "London",
+          "Tokyo",
+          "Singapore"
+        ],
+        "methods": {
+          "openweather": true
+        }
+      }
+    }
   }
 }

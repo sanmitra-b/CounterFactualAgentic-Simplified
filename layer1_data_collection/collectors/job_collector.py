@@ -57,6 +57,10 @@ class JobCollector:
             return []
         
         job_data = []
+
+        if not self.config.get("adzuna", {}).get("enabled"):
+            logger.info("Adzuna disabled in config")
+            return job_data
         
         # Adzuna API endpoint (requires page number in path for this API version)
         base_url = "https://api.adzuna.com/v1/api/jobs/us/search/1"

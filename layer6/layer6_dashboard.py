@@ -493,8 +493,8 @@ with st.sidebar:
         "Layer 1 · Input Bundle":    (DATA_DIR / "risk_input_bundle.json").exists(),
         "Layer 2 · Enriched Bundle": (DATA_DIR / "enriched_risk_bundle.json").exists(),
         "Layer 3 · Risk Report":     (DATA_DIR / "risk_report.json").exists(),
-        "Layer 4 · Counterfactuals": (DATA_DIR / "counterfactual_results.json").exists(),
-        "Layer 5 · Solutions":       (DATA_DIR / "risk_solution_bundle.json").exists(),
+        "Layer 4 · Counterfactuals": (DATA_DIR / "counterfactual_bundle.json").exists(),
+        "Layer 5 · Solutions":       (DATA_DIR / "solution_mapping_report.json").exists(),
     }
     for label, exists in file_status.items():
         dot = "🟢" if exists else "🔴"
@@ -519,8 +519,8 @@ with st.sidebar:
 bundle      = load_input_bundle(DATA_DIR / "risk_input_bundle.json")
 enriched    = load_enriched_bundle(DATA_DIR / "enriched_risk_bundle.json")
 risk_report = load_risk_report(DATA_DIR / "risk_report.json")
-cf_results  = load_counterfactuals(DATA_DIR / "counterfactual_results.json")
-sol_bundle  = load_solution_bundle(DATA_DIR / "risk_solution_bundle.json")
+cf_results  = load_counterfactuals(DATA_DIR / "counterfactual_bundle.json")
+sol_bundle  = load_solution_bundle(DATA_DIR / "solution_mapping_report.json")
 
 # Derived counts (safe fallbacks)
 news_items    = bundle["news"]       if bundle else []

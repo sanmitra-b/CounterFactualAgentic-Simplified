@@ -20,20 +20,21 @@ CFASimplified/
 │   ├── risk_input_bundle.csv
 │   ├── enriched_risk_bundle.json
 │   ├── risk_report.json
-│   ├── fitted_scm.pkl
-│   ├── counterfactual_results.json
-│   └── risk_solution_bundle.json
+│   ├── counterfactual_bundle.json
+│   └── solution_mapping_report.json
 ├── layer0_domain_selector/
 │   ├── __init__.py
-│   ├── domain_profile.py
-│   └── layer0.py                   # Entry point: interactive domain setup
+│   ├── config_validator.py         # Config schema validation
+│   └── layer0.py                   # Entry point: CLI-only domain setup (validator + Gemini refinement)
 ├── layer1_data_collection/
+│   ├── __init__.py
 │   ├── collectors/
+│   │   ├── __init__.py
 │   │   ├── financial_collector.py
 │   │   ├── job_collector.py          # Adzuna + USAJOBS collection
 │   │   ├── news_collector.py
 │   │   ├── social_collector.py       # Multi-platform: Reddit, YouTube, Mastodon, HackerNews
-│   │   └── __init__.py
+│   │   └── weather_collector.py      # OpenWeather API (domain-specific cities)
 │   ├── collect_data.py
 │   ├── config.json
 │   ├── normalizer.py
@@ -45,20 +46,15 @@ CFASimplified/
 │   ├── layer3_llm_analysis.py
 │   └── schemas_layer3.py
 ├── layer4_counterfactual/
-│   ├── layer4_pipeline.py
-│   ├── agent_loop.py
-│   ├── tool_get_causal_paths.py
-│   ├── tool_run_counterfactual.py
-│   ├── tool_log_intervention.py
-│   ├── scm_fitter.py
-│   ├── causal_graph.py
-│   └── schemas_layer4.py
+│   ├── analyst_agent.py
+│   ├── engine.py
+│   ├── layer4_supervisor.py
+│   └── __init__.py
 ├── layer5_rag/
-│   ├── layer5_rag.py
-│   ├── confidence_scorer.py
-│   ├── vector_store.py
-│   ├── playbook_kb.py
-│   └── schemas_layer5.py
+│   ├── knowledge_base.json
+│   ├── layer5_supervisor.py
+│   ├── librarian_agent.py
+│   └── __init__.py
 ├── layer6/
 │   └── layer6_dashboard.py
 └── requirements.txt
@@ -88,7 +84,7 @@ conda activate Counterfactual
 
 ## Step 3: Configure API Keys
 
-Layer 1 data collection requires API keys for multiple services. Create a `.env` file in the project root:
+Layer 0 and Layer 1 require API keys for multiple services. Create a `.env` file in the project root:
 
 ```bash
 cp .env.example .env  # or create manually
@@ -99,11 +95,11 @@ Edit `.env` with your API credentials:
 ```env
 # LLM
 GROQ_API_KEY="your_groq_api_key"
-GEMINI_API_KEY="your_gemini_api_key"  # For Layer 0 domain config suggestions (optional)
+GEMINI_API_KEY="your_gemini_api_key"  # For Layer 0 domain extraction
 
 # News
 NEWSAPI_KEY="your_newsapi_key"
-GNEWS_API_KEY="your_gnews_api_key"  # optional for higher limits on GNews
+GNEWS_API_KEY="your_gnews_api_key"  # optional
 
 # Financial
 ALPHA_VANTAGE_KEY="your_alpha_vantage_key"
@@ -115,8 +111,11 @@ ADZUNA_API_KEY="your_adzuna_api_key"
 USAJOBS_API_KEY="your_usajobs_api_key"
 USAJOBS_USER_AGENT="your_email@example.com"
 
+# Weather
+OPENWEATHER_API_KEY="your_openweather_api_key"
+
 # Social (Optional)
-YOUTUBE_API_KEY="your_youtube_api_key"  # For YouTube Data API v3 (optional, novel data source)
+YOUTUBE_API_KEY="your_youtube_api_key"  # optional
 # Mastodon and HackerNews require no API keys
 ```
 
@@ -132,35 +131,27 @@ pip install -r requirements.txt
 
 ### Layer 0 (Entry Point)
 
-Layer 0 accepts a risk domain and orchestrates the full pipeline (Layers 1-3).
+Layer 0 accepts a risk domain and orchestrates the full pipeline (Layers 1-5).
 
-**Interactive mode:**
-```bash
-python layer0_domain_selector/layer0.py
-```
-Prompts you for:
-- Domain name (e.g., "Supply Chain", "Healthcare", "Cybersecurity")
-- Domain description
-- Core keywords (comma-separated)
-- Whether to use Gemini 2.5 Flash Lite for config suggestions
+Layer 0 runs in CLI-only mode. Provide a natural-language question or domain via `--query` or `--domain`.
 
 **CLI mode:**
 ```bash
-python layer0_domain_selector/layer0.py --domain "Supply Chain" --description "Risk signals for logistics and procurement" --keywords "supply chain disruption,supplier risk,logistics delay" --use-gemini
+# Provide a natural-language question or domain; Layer 0 will auto-extract description/keywords
+python layer0_domain_selector/layer0.py --query "What is the risk in cold chain in vaccine transport?"
+
+# Optional overrides (only needed if you want to replace the auto-extracted values):
+python layer0_domain_selector/layer0.py --domain "Supply Chain" --description "Risk signals for logistics and procurement" --keywords "supply chain disruption,supplier risk,logistics delay"
 ```
 
 Layer 0 will:
-1. Generate domain-specific `layer1_data_collection/config.json`
+1. Generate domain-specific `layer1_data_collection/config.json` (validated before write; will attempt automated Gemini refinement on errors)
 2. Run Layer 1 (data collection) with domain-specific keywords
 3. Run Layer 2 (NLP enrichment)
 4. Run Layer 3 (LLM risk analysis)
-5. Output final `data/risk_report.json`
+5. Run Layer 4 (counterfactual analysis) and Layer 5 (RAG mitigation mapping)
+6. Output final artifacts including `data/risk_report.json`, `data/counterfactual_bundle.json`, and `data/solution_mapping_report.json`
 
-**Expected outputs after Layer 0 → Layer 3:**
-- `layer1_data_collection/config.json` (updated with domain)
-- `data/risk_input_bundle.json`
-- `data/enriched_risk_bundle.json`
-- `data/risk_report.json`
 
 ---
 
@@ -192,24 +183,27 @@ If running Layer 3 independently:
 python layer3_llm/layer3_llm_analysis.py --input data/enriched_risk_bundle.json --output data/risk_report.json
 ```
 
-### Layer 4
+### Layer 4 (Manual Execution)
+
+If running Layer 4 independently:
 
 ```bash
-python layer4_counterfactual/layer4_pipeline.py --input data/risk_report.json --output data/counterfactual_results.json
+python layer4_counterfactual/layer4_supervisor.py --input data/risk_report.json --output data/counterfactual_bundle.json
 ```
 
 Expected Layer 4 output:
-- `data/fitted_scm.pkl`
-- `data/counterfactual_results.json`
+- `data/counterfactual_bundle.json`
 
-### Layer 5
+### Layer 5 (Manual Execution)
+
+If running Layer 5 independently:
 
 ```bash
-python layer5_rag/layer5_rag.py --input data/counterfactual_results.json --output data/risk_solution_bundle.json
+python layer5_rag/layer5_supervisor.py --input data/counterfactual_bundle.json --output data/solution_mapping_report.json
 ```
 
 Expected Layer 5 output:
-- `data/risk_solution_bundle.json`
+- `data/solution_mapping_report.json`
 
 ### Layer 6 (Dashboard)
 
@@ -223,8 +217,8 @@ Layer 6 reads only pipeline outputs from `data/` (no demo fallback data):
 - `data/risk_input_bundle.json`
 - `data/enriched_risk_bundle.json`
 - `data/risk_report.json`
-- `data/counterfactual_results.json`
-- `data/risk_solution_bundle.json`
+- `data/counterfactual_bundle.json`
+- `data/solution_mapping_report.json`
 
 If a required file is missing, the relevant page shows an empty-state message.
 
@@ -234,65 +228,27 @@ This section shows how one complete run flows from Layer 0 through Layer 5.
 
 ### Step 0: Layer 0 — Domain Setup
 
-User runs Layer 0 and enters:
-- Domain: "Supply Chain Resilience"
-- Description: "Risk signals across logistics, inventory, and supplier continuity"
-- Keywords: "supply chain disruption, supplier risk, logistics delay"
+User runs Layer 0 with a natural-language query:
 
-Layer 0 generates domain-specific config, then orchestrates Layers 1-3.
+```bash
+python layer0_domain_selector/layer0.py --query "What is the risk in cold chain in vaccine transport?"
+```
+
+Layer 0 auto-extracts domain, description, and keywords using Gemini, generates domain-specific config, then orchestrates Layers 1-5.
 
 ### Step A: Layer 1 output (`data/risk_input_bundle.json`)
 
 Layer 1 creates a structured bundle from raw APIs.
 
 **Layer 1 Configuration:**
-- Edit `layer1_data_collection/config.json` to enable/disable sources
+Layer 0 generates `layer1_data_collection/config.json` with domain-specific keywords, enabled/disabled sources, and relevant cities for weather collection.
 
 **Layer 1 Data Sources:**
-- **News:** NewsAPI and RSS feeds (130+ articles)
-- **Financial:** Alpha Vantage, FRED, yfinance (800+ records)
-
-#### Layer 1 Job Collection Details
-
-The `job_collector.py` module fetches job postings from two major APIs:
-
-**Adzuna API (Free Tier):**
-- Endpoint: `https://api.adzuna.com/v1/api/jobs/us/search/1`
-- Search terms: Financial Analyst, Economist, Data Scientist, Risk Analyst, Actuary
-
-**USAJOBS API (Federal Jobs):**
-- Endpoint: `https://data.usajobs.gov/api/search`
-- Agencies: Treasury (TR), SEC (SE), Commerce (CM)
-- Same search terms as Adzuna
-
-
-**Layer 1 Configuration:**
-- Edit `layer1_data_collection/config.json` to enable/disable sources
-
-
-#### Layer 1 Social Data Collection Details
-
-The `social_collector.py` module collects from four independent platforms:
-
-**Reddit via Pushshift/PullPush (Free, Archive Mirror):**
-- Endpoint: `https://api.pullpush.io/reddit/search/submission/`
-- Subreddits: r/jobs, r/careerguidance, r/cscareerquestions, r/datascience
-- Keywords: AI layoffs, job displacement, automation, hiring freeze, reskilling
-
-**YouTube Data API v3 (Requires Google API Key):**
-- Keywords: AI replacing jobs, artificial intelligence jobs, automation workforce
-
-
-**Mastodon (Decentralized, No Approval):**
-- Instances: fosstodon.org, techhub.social, mstdn.social
-- Keywords: AI jobs, automation, tech layoffs, artificial intelligence, hiring freeze
-- Hashtags: #ai, #jobs, #automation, #techcommunity
-
-
-**HackerNews via Algolia Search (Free, Citable):**
-- Endpoint: `https://hn.algolia.com/api/v1/search`
-- Keywords: AI jobs, automation, tech layoffs, displacement, hiring freeze
-- Filters: Stories with minimum 5 comments (signal filtering)
+- **News:** NewsAPI and RSS feeds
+- **Financial:** Alpha Vantage, FRED, yfinance
+- **Jobs:** Adzuna and USAJOBS APIs
+- **Social:** Reddit, YouTube, Mastodon, HackerNews
+- **Weather:** OpenWeather API (domain-specific cities)
 
 
 Example:
@@ -364,7 +320,7 @@ What this means:
 - Layer 3 picks and ranks the top 5 actionable risks.
 - Each risk gets severity, confidence, evidence, and suggested action.
 
-### Step D: Layer 4 output (`data/counterfactual_results.json`)
+### Step D: Layer 4 output (`data/counterfactual_bundle.json`)
 
 Layer 4 tests interventions iteratively and keeps the best one.
 
@@ -393,7 +349,7 @@ What this means:
 - The loop changed variable once effect was weak, then tuned magnitude.
 - Final accepted intervention crossed the threshold.
 
-### Step E: Layer 5 output (`data/risk_solution_bundle.json`)
+### Step E: Layer 5 output (`data/solution_mapping_report.json`)
 
 Layer 5 retrieves playbook actions and ranks mitigation solutions.
 
@@ -430,8 +386,3 @@ Layer 6 presents all outputs in a single UI:
 - Risk Report: severity cards, confidence bars, probability, cause-effect chains
 - Counterfactuals: ITE per risk, P(improve), causal variable traces
 - Solutions: top mitigations ranked by confidence and similarity
-
-## Notes
-
-- Layer 4 computes interventions using causal counterfactual simulation; optional GROQ reflection does not change core intervention math.
-- Layer 5 retrieves mitigation playbooks from a vector store (Chroma/FAISS/NumPy fallback) and ranks them with a confidence scorer.

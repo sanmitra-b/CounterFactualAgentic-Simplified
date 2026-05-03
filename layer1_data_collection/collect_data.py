@@ -13,9 +13,24 @@ from datetime import datetime
 from collectors.news_collector import collect_news
 from collectors.financial_collector import collect_financial
 from collectors.job_collector import collect_jobs
+from collectors.weather_collector import collect_weather
 from collectors.social_collector import collect_social
 from normalizer import DataNormalizer
 from storage import DataStorage
+import sys
+from pathlib import Path
+
+# Ensure repository root is on sys.path so we can import the validator from Layer 0
+ROOT = Path(__file__).resolve().parent.parent
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+try:
+    from layer0_domain_selector.config_validator import validate_config, ConfigValidationError
+except Exception:
+    # Fallback: no validator available
+    validate_config = None
+    ConfigValidationError = RuntimeError
 
 
 # Setup logging
@@ -72,6 +87,12 @@ def load_config(config_path: str = "config.json") -> dict:
         with open(config_path, "r") as f:
             config = json.load(f)
         logging.info(f"Configuration loaded from {config_path}")
+        # Validate configuration shape before proceeding
+        try:
+            validate_config(config)
+        except ConfigValidationError as exc:
+            logging.error(f"Configuration validation failed: {exc}")
+            sys.exit(1)
         return config
     except FileNotFoundError:
         logging.error(f"Config file not found: {config_path}")
@@ -99,6 +120,7 @@ def collect_data(config: dict) -> dict:
         "news": [],
         "financial": [],
         "jobs": [],
+        "weather": [],
         "social": []
     }
     
@@ -131,6 +153,16 @@ def collect_data(config: dict) -> dict:
             logging.info("Jobs collection disabled in config")
     except Exception as e:
         logging.error(f"Jobs collection failed: {e}")
+
+    # Collect from Weather
+    try:
+        if config.get("sources", {}).get("weather", {}).get("enabled"):
+            logging.info("\n>>> Collecting WEATHER data...")
+            collected_data["weather"] = collect_weather(config["sources"]["weather"])
+        else:
+            logging.info("Weather collection disabled in config")
+    except Exception as e:
+        logging.error(f"Weather collection failed: {e}")
     
     # Collect from Social
     try:
@@ -169,6 +201,7 @@ def main():
         collected_data["news"],
         collected_data["financial"],
         collected_data["jobs"],
+        collected_data["weather"],
         collected_data["social"]
     )
     

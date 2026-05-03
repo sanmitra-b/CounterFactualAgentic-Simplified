@@ -1,134 +1,127 @@
 {
-  "analysed_at": "2026-05-03T14:30:00Z",
-  "domain": "medicine",
+  "analysed_at": "2026-05-03T20:21:43.716896Z",
+  "domain": "healthcare_supply_chain_risk",
   "top_risks": [
     {
       "rank": 1,
-      "category": "Healthcare Access",
-      "title": "MEDISEP Claims Rejection",
+      "category": "Talent_Shortage",
+      "title": "Doctor and medical talent shortages in Nigeria, India, and globally",
       "severity": "HIGH",
       "confidence": 0.85,
       "probability_next_30d": 0.7,
       "evidence": [
-        "1.25 lakh MEDISEP claims rejected",
-        "Negligible amounts sanctioned for approved claims"
+        "Nigeria's doctor shortage deepens as poor pay, migration strain health system",
+        "India's healthcare expansion faces a critical talent crunch, says Alisha Moopen"
       ],
       "affected_entities": [
-        "MEDISEP",
-        "Kerala Health Insurance"
+        "Nigeria",
+        "India"
       ],
       "affected_geo": [
-        "Kerala"
+        "Nigeria",
+        "India"
       ],
-      "causal_chain": "MEDISEP claims rejection \u2192 Reduced healthcare access for beneficiaries",
-      "recommended_action": "Review and revise MEDISEP claims processing"
+      "causal_chain": "Talent shortages in key countries strain healthcare systems, impacting patient care and supply chain resilience.",
+      "recommended_action": "Develop targeted talent acquisition and retention strategies to mitigate shortages."
     },
     {
       "rank": 2,
-      "category": "Pharmaceutical Safety",
-      "title": "Xanax Recall",
-      "severity": "HIGH",
+      "category": "Cybersecurity_Risk",
+      "title": "Medical device cyber-attacks on healthcare organizations",
+      "severity": "MEDIUM",
       "confidence": 0.8,
       "probability_next_30d": 0.6,
       "evidence": [
-        "Xanax recall due to dosing error",
-        "FDA Class II designation"
+        "A Quarter of Healthcare Organizations Report Medical Device Cyber-Attacks"
       ],
       "affected_entities": [
-        "Xanax manufacturer"
-      ],
-      "affected_geo": [
-        "US"
-      ],
-      "causal_chain": "Xanax dosing error \u2192 Patient harm",
-      "recommended_action": "Monitor Xanax recall and patient reports"
-    },
-    {
-      "rank": 3,
-      "category": "Vaccine Hesitancy",
-      "title": "Vaccine Trust Issues",
-      "severity": "MEDIUM",
-      "confidence": 0.7,
-      "probability_next_30d": 0.5,
-      "evidence": [
-        "Social media posts expressing vaccine hesitancy",
-        "Concerns about rushed vaccine development"
-      ],
-      "affected_entities": [
-        "Vaccine manufacturers",
-        "Public health organizations"
-      ],
-      "affected_geo": [
-        "US"
-      ],
-      "causal_chain": "Vaccine hesitancy \u2192 Reduced vaccination rates",
-      "recommended_action": "Address vaccine concerns through public education"
-    },
-    {
-      "rank": 4,
-      "category": "Antibiotic Resistance",
-      "title": "Rising Antibiotic Resistance",
-      "severity": "MEDIUM",
-      "confidence": 0.65,
-      "probability_next_30d": 0.4,
-      "evidence": [
-        "Expert discussions on antibiotic resistance",
-        "Concerns about minor scratches becoming life-threatening"
-      ],
-      "affected_entities": [
-        "Healthcare systems",
-        "Pharmaceutical companies"
+        "Healthcare Organizations"
       ],
       "affected_geo": [
         "Global"
       ],
-      "causal_chain": "Antibiotic overuse \u2192 Rising resistance",
-      "recommended_action": "Promote antibiotic stewardship and research"
+      "causal_chain": "Cyber-attacks on medical devices disrupt patient care and compromise supply chain security.",
+      "recommended_action": "Implement robust cybersecurity measures to protect medical devices and patient data."
+    },
+    {
+      "rank": 3,
+      "category": "Supply_Chain_Disruption",
+      "title": "Food supply chain breaking down, impacting healthcare",
+      "severity": "LOW",
+      "confidence": 0.7,
+      "probability_next_30d": 0.5,
+      "evidence": [
+        "Tyson Foods takes out full-page ad: The food supply chain is breaking"
+      ],
+      "affected_entities": [
+        "Food Supply Chain"
+      ],
+      "affected_geo": [
+        "Global"
+      ],
+      "causal_chain": "Supply chain disruptions impact healthcare organizations' ability to access essential goods and services.",
+      "recommended_action": "Monitor supply chain disruptions and develop contingency plans to mitigate their impact."
+    },
+    {
+      "rank": 4,
+      "category": "Regulatory_Risk",
+      "title": "Emerging regulatory challenges in healthcare",
+      "severity": "LOW",
+      "confidence": 0.6,
+      "probability_next_30d": 0.4,
+      "evidence": [
+        "No explicit evidence in the bundle"
+      ],
+      "affected_entities": [
+        "Healthcare Organizations"
+      ],
+      "affected_geo": [
+        "Global"
+      ],
+      "causal_chain": "Emerging regulatory challenges impact healthcare organizations' compliance and risk management.",
+      "recommended_action": "Monitor regulatory developments and adapt to changing requirements."
     },
     {
       "rank": 5,
-      "category": "Opioid Crisis",
-      "title": "Xylazine Fueling Opioid Crisis",
+      "category": "Patient_Safety",
+      "title": "Pre-clinical hypertrophic cardiomyopathy (HCM) diagnosis and treatment",
       "severity": "LOW",
-      "confidence": 0.55,
+      "confidence": 0.5,
       "probability_next_30d": 0.3,
       "evidence": [
-        "Reports of xylazine use in opioid crisis",
-        "Concerns about new drug trends"
+        "Pre-clinical hypertrophic cardiomyopathy (HCM) diagnosis and treatment"
       ],
       "affected_entities": [
-        "Public health organizations",
-        "Law enforcement"
+        "Patients"
       ],
       "affected_geo": [
-        "Canada",
-        "US"
+        "Global"
       ],
-      "causal_chain": "Xylazine use \u2192 Exacerbating opioid crisis",
-      "recommended_action": "Monitor xylazine trends and adjust public health strategies"
+      "causal_chain": "Pre-clinical hypertrophic cardiomyopathy (HCM) diagnosis and treatment impact patient safety and healthcare outcomes.",
+      "recommended_action": "Develop targeted patient safety initiatives to mitigate the impact of HCM."
     }
   ],
   "soft_risks": [
     {
-      "category": "Economic Impact",
-      "title": "Pharmaceutical Stock Volatility",
-      "note": "Negative sentiment and price changes in pharmaceutical stocks"
+      "category": "Economic_Risk",
+      "title": "Potential economic impact of talent shortages on healthcare",
+      "note": "Talent shortages in key countries may lead to economic losses for healthcare organizations and the broader economy."
     },
     {
-      "category": "Regulatory Environment",
-      "title": "FDA Recall Processes",
-      "note": "Xanax recall highlights need for efficient recall processes"
+      "category": "Operational_Risk",
+      "title": "Operational challenges in responding to medical device cyber-attacks",
+      "note": "Healthcare organizations may face operational challenges in responding to medical device cyber-attacks, impacting patient care and supply chain resilience."
     },
     {
-      "category": "Global Health",
-      "title": "Antibiotic Resistance Research",
-      "note": "Need for continued research and development of new antibiotics"
+      "category": "Reputational_Risk",
+      "title": "Reputational risk associated with food supply chain disruptions",
+      "note": "Food supply chain disruptions may impact healthcare organizations' reputation and brand value."
     }
   ],
-  "data_quality_note": "The intelligence bundle provides a good coverage of news and social media signals, but the reliability of some sources is relatively low (0.65-0.80). The data quality is generally good, but some signals may require additional verification.",
-  "model_used": "llama-3.3-70b-versatile",
-  "layer1_completeness": 1.0,
-  "layer2_enriched_at": "2026-05-03T14:24:41.511710",
+  "data_quality_note": "Data completeness is 75%, with some gaps in sentiment analysis and reliability scores.",
+  "model_used": "llama-3.1-8b-instant",
+  "layer1_completeness": 0.75,
+  "layer2_enriched_at": "2026-05-03T20:21:43.716896",
   "aggregate_sentiment": "neutral",
-  "avg_reliability": 0.826
+  "avg_reliability": 0.8022
 }
