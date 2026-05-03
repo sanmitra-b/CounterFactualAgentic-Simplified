@@ -15,8 +15,8 @@ class DataNormalizer:
     
     # Common schema for all data
     SCHEMA = {
-        "source_type": "news|financial|jobs|social",
-        "source_name": "NewsAPI|RSS|Alpha Vantage|FRED|Adzuna|USAJOBS|Pushshift",
+        "source_type": "news|financial|jobs|weather|social",
+        "source_name": "NewsAPI|RSS|Alpha Vantage|FRED|Adzuna|USAJOBS|OpenWeather|Pushshift",
         "date": "YYYY-MM-DD or ISO format",
         "content": "main text or primary value",
         "metadata": {
@@ -161,6 +161,41 @@ class DataNormalizer:
                 "source": source_label
             }
         }
+
+    @staticmethod
+    def normalize_weather_data(data: Dict) -> Dict:
+        """
+        Normalize weather data to common schema.
+
+        Args:
+            data: Raw weather record from weather collector.
+
+        Returns:
+            Normalized weather dictionary.
+        """
+        city = data.get("city", "Unknown")
+        description = data.get("weather_description", data.get("description", ""))
+        return {
+            "source_type": "weather",
+            "source_name": f"OpenWeather - {city}",
+            "date": DataNormalizer._parse_date(data.get("date", "")),
+            "content": description,
+            "title": f"Weather - {city}",
+            "metadata": {
+                "city": city,
+                "country": data.get("country", ""),
+                "temperature": data.get("temperature", 0),
+                "wind_speed": data.get("wind_speed", 0),
+                "weather_main": data.get("weather_main", ""),
+                "weather_description": description,
+                "humidity": data.get("humidity", 0),
+                "pressure": data.get("pressure", 0),
+                "clouds": data.get("clouds", 0),
+                "lat": data.get("lat", 0),
+                "lon": data.get("lon", 0),
+                "source": data.get("source", "openweather"),
+            }
+        }
     
     @staticmethod
     def normalize_social_post(data: Dict) -> Dict:
@@ -238,7 +273,7 @@ class DataNormalizer:
         }
     
     @classmethod
-    def normalize_all(cls, news: List[Dict], financial: List[Dict], jobs: List[Dict] = None, social: List[Dict] = None) -> List[Dict]:
+    def normalize_all(cls, news: List[Dict], financial: List[Dict], jobs: List[Dict] = None, weather: List[Dict] = None, social: List[Dict] = None) -> List[Dict]:
         """
         Normalize all collected data from all sources.
         
@@ -246,6 +281,7 @@ class DataNormalizer:
             news: List of news articles.
             financial: List of financial data.
             jobs: List of job data (optional).
+            weather: List of weather records (optional).
             social: List of social media records (optional).
         
         Returns:
@@ -253,6 +289,8 @@ class DataNormalizer:
         """
         if jobs is None:
             jobs = []
+        if weather is None:
+            weather = []
         if social is None:
             social = []
         
@@ -287,6 +325,16 @@ class DataNormalizer:
                 continue
         
         logger.info(f"Normalized {len(jobs)} job records")
+
+        # Normalize weather data
+        for record in weather:
+            try:
+                normalized.append(cls.normalize_weather_data(record))
+            except Exception as e:
+                logger.error(f"Failed to normalize weather data: {e}")
+                continue
+
+        logger.info(f"Normalized {len(weather)} weather records")
         
         # Normalize social data
         for record in social:

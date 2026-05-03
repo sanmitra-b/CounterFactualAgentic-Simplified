@@ -4,15 +4,15 @@
       "enabled": true,
       "methods": {
         "newsapi": {
-          "enabled": false,
-          "note": "NewsAPI for AI workforce and job-risk news"
+          "enabled": true,
+          "note": "NewsAPI for vaccine_cold_chain_risk domain"
         },
         "gnews": {
           "enabled": true,
           "base_url": "https://gnews.io/api/v4/search",
           "max_articles_per_request": 10,
           "rate_limit_seconds": 1.0,
-          "note": "GNews for medicine domain"
+          "note": "GNews for vaccine_cold_chain_risk domain"
         },
         "rss": {
           "enabled": true,
@@ -24,20 +24,14 @@
             "https://rss.nytimes.com/services/xml/rss/nyt/Technology.xml",
             "https://arxiv.org/rss/cs.AI"
           ],
-          "note": "RSS feeds for medicine domain"
+          "note": "RSS feeds for vaccine_cold_chain_risk domain"
         }
       },
       "keywords": [
-        "drug recall",
-        "adverse event",
-        "medical error",
-        "patient safety",
-        "FDA warning",
-        "clinical trial failure",
-        "medication side effect",
-        "healthcare fraud",
-        "medical malpractice",
-        "public health crisis"
+        "vaccine cold chain",
+        "transportation risks",
+        "supply chain disruption",
+        "public health logistics"
       ],
       "max_results_per_source": 50
     },
@@ -46,73 +40,47 @@
       "alpha_vantage": {
         "enabled": true,
         "outputsize": "compact",
-        "tickers": [
-          "PFE",
-          "MRK",
-          "JNJ",
-          "ABBV",
-          "BMY",
-          "LLY",
-          "AZN",
-          "NVS",
-          "ROG",
-          "GSK"
-        ],
-        "note": "AI economy and labor-market proxy equities (compact mode for free tier)",
+        "tickers": [],
+        "note": "Alpha Vantage for vaccine_cold_chain_risk domain",
         "rate_limit_seconds": 1.5
       },
       "fred": {
         "enabled": true,
-        "indicators": [
-          "GDP",
-          "UNRATE",
-          "CPIAUCSL",
-          "MORTGAGE30US",
-          "FEDFUNDS",
-          "ICSA",
-          "HOUST",
-          "INDPRO",
-          "PPIACO",
-          "UNEMPLOY"
-        ],
-        "note": "US labor market indicators from FRED (LNS13000000 removed - invalid series)"
+        "indicators": [],
+        "note": "FRED indicators for vaccine_cold_chain_risk domain"
       }
     },
     "jobs": {
-      "enabled": true,
-      "usajobs": {
-        "enabled": true,
-        "base_url": "https://data.usajobs.gov/api/search",
-        "keywords": [
-          "pharmacist",
-          "physician",
-          "nurse",
-          "medical researcher",
-          "clinical trial manager",
-          "regulatory affairs specialist",
-          "healthcare administrator",
-          "biostatistician",
-          "epidemiologist",
-          "medical device engineer"
-        ],
-        "results_per_query": 25,
-        "note": "USAJOBS signals for medicine domain"
+      "enabled": false,
+      "adzuna": {
+        "enabled": false,
+        "keywords": [],
+        "note": "Disabled for this domain"
       },
-      "keywords": [
-        "pharmacist",
-        "physician",
-        "nurse",
-        "medical researcher",
-        "clinical trial manager",
-        "regulatory affairs specialist",
-        "healthcare administrator",
-        "biostatistician",
-        "epidemiologist",
-        "medical device engineer"
-      ]
+      "usajobs": {
+        "enabled": false,
+        "base_url": "https://data.usajobs.gov/api/search",
+        "keywords": [],
+        "results_per_query": 25,
+        "note": "Disabled for this domain"
+      },
+      "keywords": []
     },
     "weather": {
-      "enabled": false,
+      "enabled": true,
+      "keywords": [
+        "temperature",
+        "weather conditions",
+        "climate impact"
+      ],
+      "cities": [],
+      "openweather": {
+        "enabled": true,
+        "base_url": "https://api.openweathermap.org/data/2.5/weather",
+        "units": "metric",
+        "language": "en",
+        "note": "OpenWeather signals for vaccine_cold_chain_risk domain"
+      },
       "note": "Disabled for AI job-risk mode"
     },
     "social": {
@@ -130,34 +98,22 @@
           "datascience"
         ],
         "keywords": [
-          "vaccine hesitancy",
-          "antibiotic resistance",
-          "opioid crisis",
-          "mental health stigma",
-          "chronic disease management",
-          "healthcare access",
-          "medical misinformation",
-          "patient advocacy",
-          "health disparities",
-          "emerging infectious disease"
+          "vaccine logistics",
+          "cold chain management",
+          "transportation issues",
+          "public health"
         ],
         "max_results_per_query": 25,
         "days_back": 7,
-        "note": "Social sentiment about AI and jobs"
+        "note": "Disabled permanently"
       },
       "youtube": {
         "enabled": true,
         "keywords": [
-          "vaccine hesitancy",
-          "antibiotic resistance",
-          "opioid crisis",
-          "mental health stigma",
-          "chronic disease management",
-          "healthcare access",
-          "medical misinformation",
-          "patient advocacy",
-          "health disparities",
-          "emerging infectious disease"
+          "vaccine logistics",
+          "cold chain management",
+          "transportation issues",
+          "public health"
         ],
         "max_results": 700,
         "videos_per_keyword": 5,
@@ -174,28 +130,15 @@
           "mstdn.social"
         ],
         "keywords": [
-          "vaccine hesitancy",
-          "antibiotic resistance",
-          "opioid crisis",
-          "mental health stigma",
-          "chronic disease management",
-          "healthcare access",
-          "medical misinformation",
-          "patient advocacy",
-          "health disparities",
-          "emerging infectious disease"
+          "vaccine logistics",
+          "cold chain management",
+          "transportation issues",
+          "public health"
         ],
         "hashtags": [
-          "#PatientSafety",
-          "#MedSafety",
-          "#DrugSafety",
-          "#Healthcare",
-          "#PublicHealth",
-          "#MedicalErrors",
-          "#AdverseEvents",
-          "#ClinicalTrials",
-          "#FDA",
-          "#HealthTech"
+          "#VaccineColdChain",
+          "#ColdChainLogistics",
+          "#VaccineTransport"
         ],
         "max_results_per_instance": 20,
         "note": "Decentralized social network - tech community sentiment, no API approval needed"
@@ -203,16 +146,10 @@
       "hackernews": {
         "enabled": true,
         "keywords": [
-          "vaccine hesitancy",
-          "antibiotic resistance",
-          "opioid crisis",
-          "mental health stigma",
-          "chronic disease management",
-          "healthcare access",
-          "medical misinformation",
-          "patient advocacy",
-          "health disparities",
-          "emerging infectious disease"
+          "vaccine logistics",
+          "cold chain management",
+          "transportation issues",
+          "public health"
         ],
         "max_results": 50,
         "min_comments": 5,
@@ -221,7 +158,7 @@
     }
   },
   "output": {
-    "domain": "medicine",
+    "domain": "vaccine_cold_chain_risk",
     "formats": [
       "json",
       "csv"
@@ -230,55 +167,85 @@
   },
   "logging": {
     "level": "INFO",
-    "log_file": "medicine_data_collection.log"
+    "log_file": "vaccine_cold_chain_risk_data_collection.log"
   },
   "domain_profile": {
-    "name": "medicine",
-    "slug": "medicine",
-    "description": "Risk analysis in medicine quantifies the probability and severity of adverse events associated with medical interventions, diagnostic procedures, and pharmaceutical products to inform decision-making and optimize patient safety. It involves systematic identification, assessment, and prioritization of potential hazards to mitigate harm and improve clinical outcomes.",
+    "name": "vaccine_cold_chain_risk",
+    "slug": "vaccine_cold_chain_risk",
+    "description": "Analyzes the risks associated with maintaining the cold chain during vaccine transportation. This includes potential disruptions, temperature excursions, and their impact on vaccine efficacy and safety.",
     "keywords": [
-      "medical risk assessment",
-      "adverse event probability",
-      "patient safety analysis",
-      "clinical outcome optimization",
-      "hazard identification medicine",
-      "intervention risk quantification"
+      "vaccine transport",
+      "cold chain integrity",
+      "refrigeration failure",
+      "temperature monitoring",
+      "supply chain risks",
+      "vaccine spoilage",
+      "logistics challenges"
     ],
-    "news_keywords": [
-      "drug recall",
-      "adverse event",
-      "medical error",
-      "patient safety",
-      "FDA warning",
-      "clinical trial failure",
-      "medication side effect",
-      "healthcare fraud",
-      "medical malpractice",
-      "public health crisis"
-    ],
-    "job_keywords": [
-      "pharmacist",
-      "physician",
-      "nurse",
-      "medical researcher",
-      "clinical trial manager",
-      "regulatory affairs specialist",
-      "healthcare administrator",
-      "biostatistician",
-      "epidemiologist",
-      "medical device engineer"
-    ],
-    "social_keywords": [
-      "vaccine hesitancy",
-      "antibiotic resistance",
-      "opioid crisis",
-      "mental health stigma",
-      "chronic disease management",
-      "healthcare access",
-      "medical misinformation",
-      "patient advocacy",
-      "health disparities",
-      "emerging infectious disease"
-    ]
+    "source_usage": {
+      "news": {
+        "enabled": true,
+        "methods": {
+          "newsapi": true,
+          "gnews": true,
+          "rss": true
+        },
+        "keywords": [
+          "vaccine cold chain",
+          "transportation risks",
+          "supply chain disruption",
+          "public health logistics"
+        ]
+      },
+      "financial": {
+        "enabled": true,
+        "methods": {
+          "alpha_vantage": true,
+          "fred": true
+        },
+        "tickers": [],
+        "indicators": []
+      },
+      "jobs": {
+        "enabled": false,
+        "methods": {
+          "adzuna": false,
+          "usajobs": false
+        }
+      },
+      "social": {
+        "enabled": true,
+        "methods": {
+          "pushshift": true,
+          "youtube": true,
+          "mastodon": true,
+          "hackernews": true
+        },
+        "keywords": [
+          "vaccine logistics",
+          "cold chain management",
+          "transportation issues",
+          "public health"
+        ],
+        "hashtags": [
+          "#VaccineColdChain",
+          "#ColdChainLogistics",
+          "#VaccineTransport"
+        ]
+      },
+      "weather": {
+        "enabled": true,
+        "methods": {
+          "openweather": true
+        },
+        "keywords": [
+          "temperature",
+          "weather conditions",
+          "climate impact"
+        ],
+        "cities": [],
+        "locations": []
+      }
+    }
   }
 }
