@@ -1,135 +1,134 @@
 {
-  "analysed_at": "2026-04-23T22:07:21.802333Z",
-  "domain": "ai_job_risk",
+  "analysed_at": "2026-05-03T14:30:00Z",
+  "domain": "medicine",
   "top_risks": [
     {
       "rank": 1,
-      "category": "Job Displacement Risk",
-      "title": "AI-driven job cuts",
+      "category": "Healthcare Access",
+      "title": "MEDISEP Claims Rejection",
       "severity": "HIGH",
-      "confidence": 0.8,
+      "confidence": 0.85,
       "probability_next_30d": 0.7,
       "evidence": [
-        "Meta Plans 8,000 Job Cuts in May",
-        "Stanford\u2019s AI Index finds China has nearly closed the performance gap with the US"
+        "1.25 lakh MEDISEP claims rejected",
+        "Negligible amounts sanctioned for approved claims"
       ],
       "affected_entities": [
-        "Meta Platforms Inc.",
-        "US tech industry"
+        "MEDISEP",
+        "Kerala Health Insurance"
       ],
       "affected_geo": [
-        "US",
-        "China"
+        "Kerala"
       ],
-      "causal_chain": "Advancements in AI lead to increased automation, resulting in job displacement.",
-      "recommended_action": "Invest in retraining and upskilling programs for workers at risk of displacement."
+      "causal_chain": "MEDISEP claims rejection \u2192 Reduced healthcare access for beneficiaries",
+      "recommended_action": "Review and revise MEDISEP claims processing"
     },
     {
       "rank": 2,
-      "category": "Skills Obsolescence Risk",
-      "title": "Outdated skills due to AI",
-      "severity": "MEDIUM",
-      "confidence": 0.6,
-      "probability_next_30d": 0.5,
+      "category": "Pharmaceutical Safety",
+      "title": "Xanax Recall",
+      "severity": "HIGH",
+      "confidence": 0.8,
+      "probability_next_30d": 0.6,
       "evidence": [
-        "Stanford\u2019s AI Index finds China has nearly closed the performance gap with the US"
+        "Xanax recall due to dosing error",
+        "FDA Class II designation"
       ],
       "affected_entities": [
-        "US workforce",
-        "Global tech industry"
+        "Xanax manufacturer"
       ],
       "affected_geo": [
-        "US",
-        "China",
-        "India"
+        "US"
       ],
-      "causal_chain": "Rapid advancements in AI lead to outdated skills, making workers less competitive.",
-      "recommended_action": "Encourage continuous learning and professional development to stay up-to-date with AI-driven changes."
+      "causal_chain": "Xanax dosing error \u2192 Patient harm",
+      "recommended_action": "Monitor Xanax recall and patient reports"
     },
     {
       "rank": 3,
-      "category": "Wage Suppression Risk",
-      "title": "AI-driven wage stagnation",
+      "category": "Vaccine Hesitancy",
+      "title": "Vaccine Trust Issues",
       "severity": "MEDIUM",
-      "confidence": 0.5,
-      "probability_next_30d": 0.4,
+      "confidence": 0.7,
+      "probability_next_30d": 0.5,
       "evidence": [
-        "Stanford\u2019s AI Index finds China has nearly closed the performance gap with the US"
+        "Social media posts expressing vaccine hesitancy",
+        "Concerns about rushed vaccine development"
       ],
       "affected_entities": [
-        "US workforce",
-        "Global tech industry"
+        "Vaccine manufacturers",
+        "Public health organizations"
       ],
       "affected_geo": [
-        "US",
-        "China",
-        "India"
+        "US"
       ],
-      "causal_chain": "Increased automation due to AI leads to wage stagnation as workers are replaced or see reduced hours.",
-      "recommended_action": "Monitor wage trends and consider implementing policies to mitigate wage suppression."
+      "causal_chain": "Vaccine hesitancy \u2192 Reduced vaccination rates",
+      "recommended_action": "Address vaccine concerns through public education"
     },
     {
       "rank": 4,
-      "category": "Hiring Slowdown Risk",
-      "title": "AI-driven hiring slowdown",
-      "severity": "LOW",
-      "confidence": 0.4,
-      "probability_next_30d": 0.3,
+      "category": "Antibiotic Resistance",
+      "title": "Rising Antibiotic Resistance",
+      "severity": "MEDIUM",
+      "confidence": 0.65,
+      "probability_next_30d": 0.4,
       "evidence": [
-        "Meta Plans 8,000 Job Cuts in May"
+        "Expert discussions on antibiotic resistance",
+        "Concerns about minor scratches becoming life-threatening"
       ],
       "affected_entities": [
-        "Meta Platforms Inc.",
-        "US tech industry"
+        "Healthcare systems",
+        "Pharmaceutical companies"
       ],
       "affected_geo": [
-        "US"
+        "Global"
       ],
-      "causal_chain": "Economic uncertainty and AI-driven job displacement lead to a hiring slowdown.",
-      "recommended_action": "Encourage companies to invest in AI-driven hiring tools to streamline the hiring process."
+      "causal_chain": "Antibiotic overuse \u2192 Rising resistance",
+      "recommended_action": "Promote antibiotic stewardship and research"
     },
     {
       "rank": 5,
-      "category": "Public Sector Workforce Transition Risk",
-      "title": "IRS workforce reduction",
+      "category": "Opioid Crisis",
+      "title": "Xylazine Fueling Opioid Crisis",
       "severity": "LOW",
-      "confidence": 0.3,
-      "probability_next_30d": 0.2,
+      "confidence": 0.55,
+      "probability_next_30d": 0.3,
       "evidence": [
-        "IRS Enforcement Takes Another Big Hit As Budget Request Shrinks"
+        "Reports of xylazine use in opioid crisis",
+        "Concerns about new drug trends"
       ],
       "affected_entities": [
-        "IRS",
-        "US public sector"
+        "Public health organizations",
+        "Law enforcement"
       ],
       "affected_geo": [
+        "Canada",
         "US"
       ],
-      "causal_chain": "Budget cuts lead to workforce reduction, potentially impacting public services.",
-      "recommended_action": "Invest in retraining and upskilling programs for public sector workers at risk of displacement."
+      "causal_chain": "Xylazine use \u2192 Exacerbating opioid crisis",
+      "recommended_action": "Monitor xylazine trends and adjust public health strategies"
     }
   ],
   "soft_risks": [
     {
-      "category": "Inequality Amplification Risk",
-      "title": "AI-driven inequality",
-      "note": "There is a potential risk of AI exacerbating existing social and economic inequalities, but more evidence is needed to confirm this."
+      "category": "Economic Impact",
+      "title": "Pharmaceutical Stock Volatility",
+      "note": "Negative sentiment and price changes in pharmaceutical stocks"
     },
     {
-      "category": "Regulatory Lag Risk",
-      "title": "Outdated regulations",
-      "note": "The rapid development of AI may outpace regulatory frameworks, potentially leading to unintended consequences."
+      "category": "Regulatory Environment",
+      "title": "FDA Recall Processes",
+      "note": "Xanax recall highlights need for efficient recall processes"
     },
     {
-      "category": "Education-Pipeline Mismatch Risk",
-      "title": "Education pipeline mismatch",
-      "note": "There may be a mismatch between the skills taught in educational institutions and the skills required for an AI-driven workforce, but more data is needed to confirm this."
+      "category": "Global Health",
+      "title": "Antibiotic Resistance Research",
+      "note": "Need for continued research and development of new antibiotics"
     }
   ],
-  "data_quality_note": "The data quality is generally good, with a high layer1_completeness score and a reliable average sentiment. However, some signals have low reliability scores, which may impact the accuracy of the analysis.",
+  "data_quality_note": "The intelligence bundle provides a good coverage of news and social media signals, but the reliability of some sources is relatively low (0.65-0.80). The data quality is generally good, but some signals may require additional verification.",
   "model_used": "llama-3.3-70b-versatile",
   "layer1_completeness": 1.0,
-  "layer2_enriched_at": "2026-04-23T22:07:21.802333",
+  "layer2_enriched_at": "2026-05-03T14:24:41.511710",
   "aggregate_sentiment": "neutral",
-  "avg_reliability": 0.7547
+  "avg_reliability": 0.826
 }

@@ -4,9 +4,15 @@
       "enabled": true,
       "methods": {
         "newsapi": {
-          "enabled": true,
-          "api_key": "3eca2036c90a426e9513d8b04ec70599",
+          "enabled": false,
           "note": "NewsAPI for AI workforce and job-risk news"
+        },
+        "gnews": {
+          "enabled": true,
+          "base_url": "https://gnews.io/api/v4/search",
+          "max_articles_per_request": 10,
+          "rate_limit_seconds": 1.0,
+          "note": "GNews for medicine domain"
         },
         "rss": {
           "enabled": true,
@@ -16,18 +22,22 @@
             "https://feeds.arstechnica.com/arstechnica/index",
             "https://www.wired.com/feed/rss",
             "https://rss.nytimes.com/services/xml/rss/nyt/Technology.xml",
-            "https://arxiv.org/rss/cs.AI",
-            "https://huggingface.co/blog/feed.xml"
-          ]
+            "https://arxiv.org/rss/cs.AI"
+          ],
+          "note": "RSS feeds for medicine domain"
         }
       },
       "keywords": [
-        "AI job displacement",
-        "automation layoffs",
-        "generative AI workforce impact",
-        "AI hiring trends",
-        "reskilling for AI",
-        "job cuts technology"
+        "drug recall",
+        "adverse event",
+        "medical error",
+        "patient safety",
+        "FDA warning",
+        "clinical trial failure",
+        "medication side effect",
+        "healthcare fraud",
+        "medical malpractice",
+        "public health crisis"
       ],
       "max_results_per_source": 50
     },
@@ -35,17 +45,36 @@
       "enabled": true,
       "alpha_vantage": {
         "enabled": true,
-        "api_key": "N4JMB7XG63V126PM",
         "outputsize": "compact",
-        "tickers": ["MSFT", "GOOGL", "AMZN", "META", "NVDA", "ADBE"],
+        "tickers": [
+          "PFE",
+          "MRK",
+          "JNJ",
+          "ABBV",
+          "BMY",
+          "LLY",
+          "AZN",
+          "NVS",
+          "ROG",
+          "GSK"
+        ],
         "note": "AI economy and labor-market proxy equities (compact mode for free tier)",
         "rate_limit_seconds": 1.5
       },
-
       "fred": {
         "enabled": true,
-        "api_key": "2027ed85461b99f7e41641fa767602f9",
-        "indicators": ["UNRATE", "ICSA", "PAYEMS", "JTSJOL"],
+        "indicators": [
+          "GDP",
+          "UNRATE",
+          "CPIAUCSL",
+          "MORTGAGE30US",
+          "FEDFUNDS",
+          "ICSA",
+          "HOUST",
+          "INDPRO",
+          "PPIACO",
+          "UNEMPLOY"
+        ],
         "note": "US labor market indicators from FRED (LNS13000000 removed - invalid series)"
       }
     },
@@ -54,18 +83,33 @@
       "usajobs": {
         "enabled": true,
         "base_url": "https://data.usajobs.gov/api/search",
-        "api_key": "",
-        "user_agent": "",
         "keywords": [
-          "artificial intelligence",
-          "machine learning",
-          "automation",
-          "data scientist",
-          "prompt engineer"
+          "pharmacist",
+          "physician",
+          "nurse",
+          "medical researcher",
+          "clinical trial manager",
+          "regulatory affairs specialist",
+          "healthcare administrator",
+          "biostatistician",
+          "epidemiologist",
+          "medical device engineer"
         ],
         "results_per_query": 25,
-        "note": "USAJOBS labor-demand and role-transition signals (credentials from .env preferred)"
-      }
+        "note": "USAJOBS signals for medicine domain"
+      },
+      "keywords": [
+        "pharmacist",
+        "physician",
+        "nurse",
+        "medical researcher",
+        "clinical trial manager",
+        "regulatory affairs specialist",
+        "healthcare administrator",
+        "biostatistician",
+        "epidemiologist",
+        "medical device engineer"
+      ]
     },
     "weather": {
       "enabled": false,
@@ -74,36 +118,102 @@
     "social": {
       "enabled": true,
       "pushshift": {
-        "enabled": true,
+        "enabled": false,
         "base_url": "https://api.pushshift.io/reddit/search/submission/",
         "fallback_urls": [
           "https://api.pullpush.io/reddit/search/submission/"
         ],
-        "subreddits": ["jobs", "careerguidance", "cscareerquestions", "datascience"],
-        "keywords": ["AI layoffs", "job displacement", "automation", "hiring freeze", "reskilling"],
+        "subreddits": [
+          "jobs",
+          "careerguidance",
+          "cscareerquestions",
+          "datascience"
+        ],
+        "keywords": [
+          "vaccine hesitancy",
+          "antibiotic resistance",
+          "opioid crisis",
+          "mental health stigma",
+          "chronic disease management",
+          "healthcare access",
+          "medical misinformation",
+          "patient advocacy",
+          "health disparities",
+          "emerging infectious disease"
+        ],
         "max_results_per_query": 25,
         "days_back": 7,
         "note": "Social sentiment about AI and jobs"
       },
       "youtube": {
         "enabled": true,
-        "api_key": "YOUR_YOUTUBE_API_KEY",
-        "keywords": ["AI replacing jobs", "artificial intelligence jobs", "automation workforce", "AI job displacement"],
-        "max_results": 50,
+        "keywords": [
+          "vaccine hesitancy",
+          "antibiotic resistance",
+          "opioid crisis",
+          "mental health stigma",
+          "chronic disease management",
+          "healthcare access",
+          "medical misinformation",
+          "patient advocacy",
+          "health disparities",
+          "emerging infectious disease"
+        ],
+        "max_results": 700,
+        "videos_per_keyword": 5,
+        "comments_per_video": 30,
+        "comment_order": "time",
         "note": "Comments from AI/jobs impact videos - novel data source for conference papers",
         "order": "relevance"
       },
       "mastodon": {
         "enabled": true,
-        "instances": ["fosstodon.org", "techhub.social", "mstdn.social"],
-        "keywords": ["AI jobs", "automation", "tech layoffs", "artificial intelligence", "hiring freeze"],
-        "hashtags": ["ai", "jobs", "automation", "techcommunity"],
+        "instances": [
+          "fosstodon.org",
+          "techhub.social",
+          "mstdn.social"
+        ],
+        "keywords": [
+          "vaccine hesitancy",
+          "antibiotic resistance",
+          "opioid crisis",
+          "mental health stigma",
+          "chronic disease management",
+          "healthcare access",
+          "medical misinformation",
+          "patient advocacy",
+          "health disparities",
+          "emerging infectious disease"
+        ],
+        "hashtags": [
+          "#PatientSafety",
+          "#MedSafety",
+          "#DrugSafety",
+          "#Healthcare",
+          "#PublicHealth",
+          "#MedicalErrors",
+          "#AdverseEvents",
+          "#ClinicalTrials",
+          "#FDA",
+          "#HealthTech"
+        ],
         "max_results_per_instance": 20,
         "note": "Decentralized social network - tech community sentiment, no API approval needed"
       },
       "hackernews": {
         "enabled": true,
-        "keywords": ["AI jobs", "automation", "tech layoffs", "displacement", "hiring freeze"],
+        "keywords": [
+          "vaccine hesitancy",
+          "antibiotic resistance",
+          "opioid crisis",
+          "mental health stigma",
+          "chronic disease management",
+          "healthcare access",
+          "medical misinformation",
+          "patient advocacy",
+          "health disparities",
+          "emerging infectious disease"
+        ],
         "max_results": 50,
         "min_comments": 5,
         "note": "Tech worker sentiment on HackerNews - citable, live data, free access"
@@ -111,12 +221,64 @@
     }
   },
   "output": {
-    "domain": "ai_job_risk",
-    "formats": ["json", "csv"],
+    "domain": "medicine",
+    "formats": [
+      "json",
+      "csv"
+    ],
     "output_dir": "../data/"
   },
   "logging": {
     "level": "INFO",
-    "log_file": "data_collection.log"
+    "log_file": "medicine_data_collection.log"
+  },
+  "domain_profile": {
+    "name": "medicine",
+    "slug": "medicine",
+    "description": "Risk analysis in medicine quantifies the probability and severity of adverse events associated with medical interventions, diagnostic procedures, and pharmaceutical products to inform decision-making and optimize patient safety. It involves systematic identification, assessment, and prioritization of potential hazards to mitigate harm and improve clinical outcomes.",
+    "keywords": [
+      "medical risk assessment",
+      "adverse event probability",
+      "patient safety analysis",
+      "clinical outcome optimization",
+      "hazard identification medicine",
+      "intervention risk quantification"
+    ],
+    "news_keywords": [
+      "drug recall",
+      "adverse event",
+      "medical error",
+      "patient safety",
+      "FDA warning",
+      "clinical trial failure",
+      "medication side effect",
+      "healthcare fraud",
+      "medical malpractice",
+      "public health crisis"
+    ],
+    "job_keywords": [
+      "pharmacist",
+      "physician",
+      "nurse",
+      "medical researcher",
+      "clinical trial manager",
+      "regulatory affairs specialist",
+      "healthcare administrator",
+      "biostatistician",
+      "epidemiologist",
+      "medical device engineer"
+    ],
+    "social_keywords": [
+      "vaccine hesitancy",
+      "antibiotic resistance",
+      "opioid crisis",
+      "mental health stigma",
+      "chronic disease management",
+      "healthcare access",
+      "medical misinformation",
+      "patient advocacy",
+      "health disparities",
+      "emerging infectious disease"
+    ]
   }
 }

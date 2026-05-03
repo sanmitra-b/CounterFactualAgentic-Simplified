@@ -4,6 +4,7 @@ Fetches stock prices from Alpha Vantage and economic indicators from FRED.
 """
 
 import logging
+import os
 from typing import List, Dict
 from datetime import datetime, timedelta
 
@@ -34,9 +35,9 @@ class FinancialCollector:
             logger.info("Alpha Vantage disabled in config")
             return []
         
-        api_key = self.config["alpha_vantage"].get("api_key")
-        if not api_key or api_key == "YOUR_KEY_HERE":
-            logger.warning("Alpha Vantage API key not configured. Skipping Alpha Vantage.")
+        api_key = os.getenv("ALPHA_VANTAGE_KEY", "").strip()
+        if not api_key:
+            logger.warning("ALPHA_VANTAGE_KEY not set in .env. Skipping Alpha Vantage.")
             return []
         
         try:
@@ -124,9 +125,9 @@ class FinancialCollector:
             logger.info("FRED disabled in config")
             return []
         
-        api_key = self.config["fred"].get("api_key")
-        if not api_key or api_key == "YOUR_KEY_HERE":
-            logger.warning("FRED API key not configured. Skipping FRED collection.")
+        api_key = os.getenv("FRED_API_KEY", "").strip()
+        if not api_key:
+            logger.warning("FRED_API_KEY not set in .env. Skipping FRED collection.")
             return []
         
         try:

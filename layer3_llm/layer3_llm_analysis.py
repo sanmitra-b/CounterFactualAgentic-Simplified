@@ -36,27 +36,15 @@ FALLBACK_MODEL = "llama-3.1-8b-instant"
 MAX_CONTEXT_CHARS = 12_000               # safe token budget (~3 000 tokens)
 TOP_N_PER_CATEGORY = 3                   # max signals per category in prompt
  
-# Risk categories aligned with AI-driven job-risk domain
-RISK_CATEGORIES = [
-    "Job Displacement Risk",
-    "Skills Obsolescence Risk",
-    "Wage Suppression Risk",
-    "Hiring Slowdown Risk",
-    "Public Sector Workforce Transition Risk",
-    "Regional Employment Shock Risk",
-    "Inequality Amplification Risk",
-    "Regulatory Lag Risk",
-    "AI Governance and Trust Risk",
-    "Education-Pipeline Mismatch Risk",
-]
+RISK_CATEGORIES = []
  
 # ─────────────────────────────────────────────────────────────────────────────
 # PROMPT TEMPLATES
 # ─────────────────────────────────────────────────────────────────────────────
  
 SYSTEM_PROMPT = """\
-You are a world-class labor-market and workforce transition risk analyst with expertise in
-AI adoption, automation economics, hiring dynamics, and workforce policy.
+You are a world-class domain risk analyst with expertise in turning structured intelligence
+bundles into concise, evidence-backed risk assessments.
  
 Your task is to analyse a structured intelligence bundle collected from news feeds,
 social media, financial markets, and USAJOBS labor-demand signals.
@@ -131,8 +119,8 @@ HUMAN_PROMPT_TEMPLATE = """\
  
 </intelligence_bundle>
  
-Based on this intelligence bundle, identify the TOP 5 AI-driven job risks and 3-5 soft/emerging risks.
-Use categories from this set when possible: {risk_categories}.
+Based on this intelligence bundle, identify the TOP 5 risks for the active domain and 3-5 soft/emerging risks.
+Use concise, domain-appropriate category labels that reflect the observed evidence.
 Return ONLY the JSON object as specified.
 """
  
@@ -299,7 +287,7 @@ def build_prompt(bundle: dict) -> str:
         port_section       = port_section,
         weather_section    = weather_section,
         commodity_section  = commodity_section,
-        risk_categories    = ", ".join(RISK_CATEGORIES),
+        risk_categories    = ", ".join(RISK_CATEGORIES) if RISK_CATEGORIES else "domain-appropriate categories",
     )
  
     # Hard-trim to stay within token budget
@@ -318,7 +306,7 @@ def call_groq(prompt: str, domain: str) -> dict:
     Call Groq API with primary model; fall back to smaller model on quota error.
     Returns parsed JSON dict from LLaMA response.
     """
-    client = Groq(api_key=os.getenv("GROQ_API_KEY"))
+    client = Groq(api_key=os.getenv("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"))
  
     for model in [PRIMARY_MODEL, FALLBACK_MODEL]:
         try:
@@ -396,7 +384,7 @@ def parse_risk_report(raw: dict, bundle_meta: dict) -> RiskReport:
  
     return RiskReport(
         analysed_at          = raw.get("analysed_at", datetime.utcnow().isoformat()),
-        domain               = raw.get("domain", bundle_meta.get("domain", "ai_job_risk")),
+        domain               = raw.get("domain", bundle_meta.get("domain", "custom_domain")),
         top_risks            = top_risks,
         soft_risks           = soft_risks,
         data_quality_note    = raw.get("data_quality_note", ""),
@@ -446,7 +434,7 @@ def _print_summary(report: RiskReport) -> None:
             print(f"        {sr.note[:100]}")
  
     print("\n" + "=" * 65)
-    print("[→] Ready for Layer 4 (Counterfactual Simulation)\n")
+    print("[→] Ready for the next layer\n")
  
  
 # ─────────────────────────────────────────────────────────────────────────────
@@ -485,7 +473,7 @@ def run_layer3(
  
     # ── 3. Groq inference ─────────────────────────────────────────────────────
     print("\n[3/4] Running Groq inference …")
-    raw_output = call_groq(prompt, bundle.get("domain", "ai_job_risk"))
+    raw_output = call_groq(prompt, bundle.get("domain", "custom_domain"))
  
     # ── 4. Parse + persist ────────────────────────────────────────────────────
     print("\n[4/4] Parsing risk report and writing to JSON …")
