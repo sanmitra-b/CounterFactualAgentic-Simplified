@@ -1,0 +1,114 @@
+[
+  {
+    "id": "kb_001",
+    "tags": ["supply chain", "disruption", "inventory", "buffer stock"],
+    "title": "Strategic Buffer-Stock and Safety-Inventory Program",
+    "body": "Maintain 30-90 days of safety stock for critical inputs identified through demand-variability analysis. Segment SKUs via ABC-XYZ matrix. Use stochastic re-order point models to set dynamic safety levels. Works across pharmaceuticals, electronics, and FMCG sectors.",
+    "references": ["Chopra & Meindl, Supply Chain Management (6th ed.)", "APICS CPIM Body of Knowledge"]
+  },
+  {
+    "id": "kb_002",
+    "tags": ["supply chain", "supplier risk", "dual sourcing", "multi-sourcing"],
+    "title": "Dual / Multi-Sourcing Strategy",
+    "body": "Qualify at least two geographically diverse suppliers per critical component. Implement annual supplier scorecards covering quality, delivery, financial health, and geopolitical risk. Multi-sourcing reduces single-point-of-failure exposure by 40-60% in case studies.",
+    "references": ["MIT Sloan Management Review: Supply Chain Resilience 2023", "Deloitte Supply Chain Survey 2024"]
+  },
+  {
+    "id": "kb_003",
+    "tags": ["financial", "currency", "hedging", "forex risk"],
+    "title": "FX Hedging via Forward Contracts and Options",
+    "body": "Use rolling 3-6 month forward contracts to lock exchange rates for known future cash flows. Layer in vanilla options for upside participation. Align hedge ratio with revenue exposure; typical hedge ratios: 50-80% of 12-month forecast.",
+    "references": ["BIS Triennial Survey 2022", "CFA Institute Currency Risk Management"]
+  },
+  {
+    "id": "kb_004",
+    "tags": ["financial", "liquidity", "credit", "cash flow"],
+    "title": "Revolving Credit Facility and Liquidity Reserve",
+    "body": "Establish a revolving credit facility (RCF) equal to 3-6 months of operating expenses. Maintain a minimum cash buffer policy. Stress-test liquidity monthly against 3 scenarios: base, adverse, severe. Reduces insolvency risk during demand shocks.",
+    "references": ["Basel III Liquidity Coverage Ratio Guidelines", "IMF Working Paper: SME Liquidity Buffers"]
+  },
+  {
+    "id": "kb_005",
+    "tags": ["regulatory", "compliance", "policy", "FDA", "pharma", "clinical trial"],
+    "title": "Proactive Regulatory Engagement Program",
+    "body": "Schedule quarterly pre-submission meetings with regulators (FDA, EMA, CDSCO). Assign a dedicated regulatory affairs team to monitor guidance updates. Participate in industry comment periods. Companies with structured regulatory engagement programs experience 25% fewer enforcement actions.",
+    "references": ["FDA CDER Regulatory Guidance 2024", "RAPS Regulatory Affairs Professionals Survey"]
+  },
+  {
+    "id": "kb_006",
+    "tags": ["clinical trial", "biotech", "drug development", "failure", "portfolio"],
+    "title": "Clinical Portfolio Diversification and Adaptive Trial Design",
+    "body": "Diversify the pipeline across therapeutic areas, mechanism classes, and development stages. Adopt adaptive trial designs (Bayesian, seamless phase 2/3) to terminate failing assets early and reallocate budget. Reduces total programme NPV risk by 15-35%.",
+    "references": ["NEJM: Adaptive Clinical Trials 2023", "BCG Biopharma R&D Report 2024"]
+  },
+  {
+    "id": "kb_007",
+    "tags": ["drug shortage", "pharma", "manufacturing", "production"],
+    "title": "Drug Shortage Early Warning System and Surge Capacity Agreement",
+    "body": "Integrate real-time shortage alerts from FDA Drug Shortages database and ASHP. Pre-negotiate surge capacity contracts with contract manufacturing organisations (CMOs). Create a shortage response playbook covering substitution, rationing, and patient communication protocols.",
+    "references": ["FDA Drug Shortages Task Force Report 2023", "ASHP Drug Shortage Management Guidelines"]
+  },
+  {
+    "id": "kb_008",
+    "tags": ["AI", "automation", "workforce", "job displacement", "reskilling"],
+    "title": "Workforce Transition and AI Reskilling Framework",
+    "body": "Map job tasks to AI automation probability using O*NET skill profiles. Design targeted upskilling programmes (6-12 month cohorts) in data literacy, AI collaboration, and higher-order cognitive skills. Establish an internal talent marketplace to redeploy at-risk workers. McKinsey estimates 70% of displaced workers can be retrained within 12 months.",
+    "references": ["McKinsey Global Institute: Future of Work 2023", "OECD Employment Outlook 2024", "WEF Future of Jobs Report 2025"]
+  },
+  {
+    "id": "kb_009",
+    "tags": ["AI", "automation", "policy", "regulation", "governance"],
+    "title": "AI Governance and Responsible Deployment Policy",
+    "body": "Adopt an internal AI Ethics Charter aligned with EU AI Act and NIST AI RMF 1.0. Mandate impact assessments before deployment of high-risk AI systems. Create an AI Oversight Committee with cross-functional representation. Reduces reputational and regulatory exposure significantly.",
+    "references": ["EU AI Act 2024", "NIST AI Risk Management Framework 1.0", "IEEE Ethically Aligned Design"]
+  },
+  {
+    "id": "kb_010",
+    "tags": ["cybersecurity", "data breach", "IT risk", "zero trust"],
+    "title": "Zero-Trust Architecture and Continuous Threat Monitoring",
+    "body": "Implement Zero Trust Network Access (ZTNA): verify every user and device, enforce least-privilege, micro-segment networks. Deploy SIEM/SOAR with 24/7 SOC. Conduct quarterly red-team exercises. NIST CSF 2.0 compliance reduces breach probability by up to 60%.",
+    "references": ["NIST SP 800-207 Zero Trust Architecture", "IBM Cost of a Data Breach Report 2024"]
+  },
+  {
+    "id": "kb_011",
+    "tags": ["geopolitical", "trade", "sanctions", "export control"],
+    "title": "Trade Compliance and Geopolitical Risk Screening Program",
+    "body": "Implement automated export control screening (OFAC, BIS Entity List) in procurement and sales workflows. Conduct annual geopolitical risk heat-maps for top-50 suppliers. Diversify sourcing away from high-risk geographies using a Country Risk Index. Reduces sanctions exposure and supply disruptions.",
+    "references": ["BIS Export Administration Regulations", "Oxford Analytica Country Risk Index 2024"]
+  },
+  {
+    "id": "kb_012",
+    "tags": ["logistics", "port", "congestion", "shipping", "freight"],
+    "title": "Dynamic Freight Routing and Carrier Diversification",
+    "body": "Maintain contracts with 3+ ocean carriers across major trade lanes. Use real-time port congestion APIs (Marine Traffic, Freightos) to dynamically reroute shipments. Build air-freight escalation triggers for critical components. Dual-port strategies reduce average delay by 4-7 days during peak congestion events.",
+    "references": ["Freightos Baltic Index", "World Bank Logistics Performance Index 2023"]
+  },
+  {
+    "id": "kb_013",
+    "tags": ["healthcare", "patient safety", "staffing", "clinical"],
+    "title": "Clinical Staffing Resilience and Contingency Workforce Pool",
+    "body": "Partner with nurse staffing agencies and locum physician networks to create a flexible surge workforce. Implement evidence-based nurse-to-patient ratio monitoring systems. Cross-train staff across adjacent specialties. Proactive credentialing of contingency staff reduces time-to-deployment from 2 weeks to 48 hours.",
+    "references": ["Joint Commission Staffing Effectiveness Standards", "ANA Safe Staffing Guidelines 2023"]
+  },
+  {
+    "id": "kb_014",
+    "tags": ["macro", "inflation", "interest rate", "economic", "financial"],
+    "title": "Macro-Economic Scenario Planning and Cost-Pass-Through Mechanisms",
+    "body": "Conduct quarterly scenario planning (base, upside, downside) across 3-year horizon. Negotiate inflation adjustment clauses in multi-year supplier contracts. Use commodity indices as automatic price adjustment triggers. Dynamic pricing models can recover 60-80% of input cost increases.",
+    "references": ["Harvard Business Review: Inflation Playbook 2023", "Gartner Supply Chain Planning Survey 2024"]
+  },
+  {
+    "id": "kb_015",
+    "tags": ["ESG", "climate", "sustainability", "carbon", "physical risk"],
+    "title": "Climate Physical Risk Assessment and Adaptation Investment",
+    "body": "Map facilities and supply chains to IPCC climate hazard scenarios using TCFD framework. Prioritise capital investment in flood barriers, cooling systems, and backup power for high-risk sites. Develop climate-contingency sourcing agreements. Early adaptation investment delivers 3-8x ROI vs post-event response.",
+    "references": ["TCFD Recommendations 2023", "IPCC AR6 Physical Risk Report", "Swiss Re Institute Climate Risk Report 2024"]
+  },
+  {
+    "id": "kb_016",
+    "tags": ["reputation", "social media", "crisis communication", "PR"],
+    "title": "Crisis Communication and Reputational Risk Playbook",
+    "body": "Develop a tiered crisis communication playbook with pre-approved messaging for top-10 risk scenarios. Appoint a trained spokespersons committee. Establish a social listening dashboard (Brandwatch, Sprinklr) for early signal detection. Practice quarterly tabletop exercises. Companies with crisis playbooks recover brand trust 40% faster post-incident.",
+    "references": ["PRSA Crisis Communication Guidelines", "Edelman Trust Barometer 2024"]
+  }
+]

@@ -1,137 +1,134 @@
 {
-  "analysed_at": "2026-04-24T19:00:00Z",
-  "domain": "ai_job_risk",
+  "analysed_at": "2026-05-03T14:30:00Z",
+  "domain": "medicine",
   "top_risks": [
     {
       "rank": 1,
-      "category": "Job Displacement Risk",
-      "title": "AI-driven layoffs accelerate",
-      "severity": "CRITICAL",
+      "category": "Healthcare Access",
+      "title": "MEDISEP Claims Rejection",
+      "severity": "HIGH",
       "confidence": 0.85,
       "probability_next_30d": 0.7,
       "evidence": [
-        "Amazon, Citi, Dell lead fresh wave of layoffs as AI reshapes jobs in 2026",
-        "TCS' FY27 starts with 25,000 fresher offers, the lowest since FY20",
-        "Nike announced 1,400 job cuts in global operations"
+        "1.25 lakh MEDISEP claims rejected",
+        "Negligible amounts sanctioned for approved claims"
       ],
       "affected_entities": [
-        "Amazon",
-        "Citi",
-        "Dell",
-        "TCS",
-        "Nike"
+        "MEDISEP",
+        "Kerala Health Insurance"
       ],
       "affected_geo": [
-        "US",
-        "India",
-        "UK",
-        "Germany"
+        "Kerala"
       ],
-      "causal_chain": "AI adoption \u2192 automation \u2192 job displacement",
-      "recommended_action": "Upskill and reskill workforce to adapt to AI-driven changes"
+      "causal_chain": "MEDISEP claims rejection \u2192 Reduced healthcare access for beneficiaries",
+      "recommended_action": "Review and revise MEDISEP claims processing"
     },
     {
       "rank": 2,
-      "category": "Hiring Slowdown Risk",
-      "title": "Slowing campus recruitment",
+      "category": "Pharmaceutical Safety",
+      "title": "Xanax Recall",
       "severity": "HIGH",
       "confidence": 0.8,
       "probability_next_30d": 0.6,
       "evidence": [
-        "TCS rolls out 25,000 fresher offers for FY27, its slowest start in years"
+        "Xanax recall due to dosing error",
+        "FDA Class II designation"
       ],
       "affected_entities": [
-        "TCS"
+        "Xanax manufacturer"
       ],
       "affected_geo": [
-        "India"
+        "US"
       ],
-      "causal_chain": "AI-led skill gaps \u2192 cautious hiring \u2192 slowing recruitment",
-      "recommended_action": "Invest in AI-driven recruitment tools to improve hiring efficiency"
+      "causal_chain": "Xanax dosing error \u2192 Patient harm",
+      "recommended_action": "Monitor Xanax recall and patient reports"
     },
     {
       "rank": 3,
-      "category": "Skills Obsolescence Risk",
-      "title": "AI-led skill gaps widen",
-      "severity": "HIGH",
-      "confidence": 0.75,
-      "probability_next_30d": 0.55,
+      "category": "Vaccine Hesitancy",
+      "title": "Vaccine Trust Issues",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "probability_next_30d": 0.5,
       "evidence": [
-        "TCS rolls out 25,000 fresher offers for FY27, its slowest start in years, as AI-led skill gaps and cautious hiring reshape campus recruitment trends"
+        "Social media posts expressing vaccine hesitancy",
+        "Concerns about rushed vaccine development"
       ],
       "affected_entities": [
-        "TCS"
+        "Vaccine manufacturers",
+        "Public health organizations"
       ],
       "affected_geo": [
-        "India"
+        "US"
       ],
-      "causal_chain": "AI adoption \u2192 changing skill requirements \u2192 skill gaps",
-      "recommended_action": "Develop AI-driven training programs to address skill gaps"
+      "causal_chain": "Vaccine hesitancy \u2192 Reduced vaccination rates",
+      "recommended_action": "Address vaccine concerns through public education"
     },
     {
       "rank": 4,
-      "category": "Regional Employment Shock Risk",
-      "title": "Regional job market disruption",
+      "category": "Antibiotic Resistance",
+      "title": "Rising Antibiotic Resistance",
       "severity": "MEDIUM",
       "confidence": 0.65,
-      "probability_next_30d": 0.45,
+      "probability_next_30d": 0.4,
       "evidence": [
-        "Amazon, Citi, Dell lead fresh wave of layoffs as AI reshapes jobs in 2026"
+        "Expert discussions on antibiotic resistance",
+        "Concerns about minor scratches becoming life-threatening"
       ],
       "affected_entities": [
-        "Amazon",
-        "Citi",
-        "Dell"
-      ],
-      "affected_geo": [
-        "US",
-        "UK",
-        "Germany"
-      ],
-      "causal_chain": "AI-driven layoffs \u2192 regional job market disruption",
-      "recommended_action": "Implement regional job market support programs"
-    },
-    {
-      "rank": 5,
-      "category": "Inequality Amplification Risk",
-      "title": "Widening income inequality",
-      "severity": "LOW",
-      "confidence": 0.5,
-      "probability_next_30d": 0.35,
-      "evidence": [
-        "Social media posts expressing concern about job losses and economic instability"
-      ],
-      "affected_entities": [
-        "General public"
+        "Healthcare systems",
+        "Pharmaceutical companies"
       ],
       "affected_geo": [
         "Global"
       ],
-      "causal_chain": "AI-driven job displacement \u2192 income inequality",
-      "recommended_action": "Monitor and address income inequality through social welfare programs"
+      "causal_chain": "Antibiotic overuse \u2192 Rising resistance",
+      "recommended_action": "Promote antibiotic stewardship and research"
+    },
+    {
+      "rank": 5,
+      "category": "Opioid Crisis",
+      "title": "Xylazine Fueling Opioid Crisis",
+      "severity": "LOW",
+      "confidence": 0.55,
+      "probability_next_30d": 0.3,
+      "evidence": [
+        "Reports of xylazine use in opioid crisis",
+        "Concerns about new drug trends"
+      ],
+      "affected_entities": [
+        "Public health organizations",
+        "Law enforcement"
+      ],
+      "affected_geo": [
+        "Canada",
+        "US"
+      ],
+      "causal_chain": "Xylazine use \u2192 Exacerbating opioid crisis",
+      "recommended_action": "Monitor xylazine trends and adjust public health strategies"
     }
   ],
   "soft_risks": [
     {
-      "category": "AI Governance and Trust Risk",
-      "title": "Lack of transparency in AI decision-making",
-      "note": "Social media posts expressing concern about AI-driven decision-making and job losses"
+      "category": "Economic Impact",
+      "title": "Pharmaceutical Stock Volatility",
+      "note": "Negative sentiment and price changes in pharmaceutical stocks"
     },
     {
-      "category": "Education-Pipeline Mismatch Risk",
-      "title": "Insufficient AI-related education and training",
-      "note": "TCS' slowest start in years in campus recruitment may indicate a mismatch between education and industry needs"
+      "category": "Regulatory Environment",
+      "title": "FDA Recall Processes",
+      "note": "Xanax recall highlights need for efficient recall processes"
     },
     {
-      "category": "Regulatory Lag Risk",
-      "title": "Inadequate regulations for AI adoption",
-      "note": "The rapid pace of AI adoption may outpace regulatory frameworks, leading to potential risks and challenges"
+      "category": "Global Health",
+      "title": "Antibiotic Resistance Research",
+      "note": "Need for continued research and development of new antibiotics"
     }
   ],
-  "data_quality_note": "The intelligence bundle has a layer1 completeness of 75% and an average reliability of 0.80, indicating a moderate level of confidence in the data. However, the lack of data in certain sections, such as stocks and ports, may limit the comprehensiveness of the analysis.",
+  "data_quality_note": "The intelligence bundle provides a good coverage of news and social media signals, but the reliability of some sources is relatively low (0.65-0.80). The data quality is generally good, but some signals may require additional verification.",
   "model_used": "llama-3.3-70b-versatile",
-  "layer1_completeness": 0.75,
-  "layer2_enriched_at": "2026-04-24T18:58:57.050976",
+  "layer1_completeness": 1.0,
+  "layer2_enriched_at": "2026-05-03T14:24:41.511710",
   "aggregate_sentiment": "neutral",
-  "avg_reliability": 0.7987
+  "avg_reliability": 0.826
 }

@@ -61,6 +61,93 @@ def _fallback_keywords(domain: str, description: str) -> list[str]:
     return [f"{domain} risk", f"{domain} disruption", f"{domain} trend", f"{domain} outlook", f"{domain} impact"]
 
 
+def _auto_generate_description(domain: str) -> str:
+    """Auto-generate a description for the domain using Gemini."""
+    api_key = os.getenv("GEMINI_API_KEY", "").strip()
+    if not api_key:
+        # Fallback: return a generic description
+        return f"Risk signals and indicators for the {domain} domain"
+
+    import requests
+
+    prompt = {
+        "contents": [
+            {
+                "role": "user",
+                "parts": [
+                    {
+                        "text": (
+                            f"Generate a concise 1-2 sentence description for risk analysis in the {domain} domain. "
+                            "Be specific and technical. Return only the description text, no quotes."
+                        )
+                    }
+                ],
+            }
+        ],
+        "generationConfig": {"temperature": 0.7, "responseMimeType": "text/plain"},
+    }
+
+    url = (
+        "https://generativelanguage.googleapis.com/v1beta/models/"
+        f"{GEMINI_MODEL}:generateContent?key={api_key}"
+    )
+    try:
+        response = requests.post(url, json=prompt, timeout=30)
+        response.raise_for_status()
+        payload = response.json()
+        text = payload["candidates"][0]["content"]["parts"][0]["text"]
+        return text.strip()
+    except Exception:
+        return f"Risk signals and indicators for the {domain} domain"
+
+
+def _auto_generate_keywords(domain: str, description: str) -> list[str]:
+    """Auto-generate keywords for the domain using Gemini."""
+    api_key = os.getenv("GEMINI_API_KEY", "").strip()
+    if not api_key:
+        # Fallback to pattern-based keywords
+        return _fallback_keywords(domain, description)
+
+    import requests
+
+    prompt = {
+        "contents": [
+            {
+                "role": "user",
+                "parts": [
+                    {
+                        "text": (
+                            "Generate 5-7 concise keywords for risk analysis. "
+                            "Return as a JSON array of strings only. "
+                            f"Domain: {domain}. Description: {description}."
+                        )
+                    }
+                ],
+            }
+        ],
+        "generationConfig": {"temperature": 0.5, "responseMimeType": "application/json"},
+    }
+
+    url = (
+        "https://generativelanguage.googleapis.com/v1beta/models/"
+        f"{GEMINI_MODEL}:generateContent?key={api_key}"
+    )
+    try:
+        response = requests.post(url, json=prompt, timeout=30)
+        response.raise_for_status()
+        payload = response.json()
+        text = payload["candidates"][0]["content"]["parts"][0]["text"]
+        text = text.strip()
+        if text.startswith("```"):
+            text = text.split("```", 2)[1]
+            if text.startswith("json"):
+                text = text[4:]
+        keywords = json.loads(text)
+        return keywords if isinstance(keywords, list) else _fallback_keywords(domain, description)
+    except Exception:
+        return _fallback_keywords(domain, description)
+
+
 def _optional_gemini_suggestions(domain: str, description: str) -> dict[str, list[str]]:
     api_key = os.getenv("GEMINI_API_KEY", "").strip()
     if not api_key:
@@ -169,7 +256,8 @@ def run_pipeline() -> None:
     subprocess.run([sys.executable, str(LAYER1_DIR / "collect_data.py")], cwd=str(LAYER1_DIR), check=True)
     subprocess.run([sys.executable, str(ROOT_DIR / "layer2_nlp" / "layer2_nlp.py")], cwd=str(ROOT_DIR), check=True)
     subprocess.run([sys.executable, str(ROOT_DIR / "layer3_llm" / "layer3_llm_analysis.py")], cwd=str(ROOT_DIR), check=True)
-
+    subprocess.run([sys.executable, str(ROOT_DIR / "layer4_counterfactual" / "supervisor.py")], check=True)
+    subprocess.run([sys.executable, str(ROOT_DIR / "layer5_rag_solutions" / "supervisor.py")], check=True)
 
 def _parse_cli_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Layer 0 - Dynamic domain selector")
@@ -185,17 +273,30 @@ def main() -> None:
     load_dotenv(ENV_PATH)
     args = _parse_cli_args()
 
-    print("Layer 0 - Domain setup")
+    print("Layer 0 - Domain setup (Auto-generation mode)")
+    print("-" * 50)
+    
+    # ONLY manual input: domain name
     domain = args.domain or _prompt("Enter domain name", "Supply Chain")
-    description = args.description or _prompt("Enter domain description", "Risk signals for the selected domain")
-    default_keywords = _fallback_keywords(domain, description)
+    print(f"\n✓ Domain: {domain}")
+    
+    # Auto-generate description
+    print("\nGenerating description...")
+    if args.description:
+        description = args.description
+    else:
+        description = _auto_generate_description(domain)
+    print(f"✓ Description: {description}")
+    
+    # Auto-generate keywords
+    print("\nGenerating keywords...")
     if args.keywords:
         keywords = [item.strip() for item in args.keywords.split(",") if item.strip()]
-        if not keywords:
-            keywords = default_keywords
     else:
-        keywords = _prompt_list("Enter core keywords", default_keywords)
-
+        keywords = _auto_generate_keywords(domain, description)
+    print(f"✓ Keywords: {', '.join(keywords)}")
+    
+    # Determine if Gemini should be used for rest of config
     gemini_available = bool(os.getenv("GEMINI_API_KEY", "").strip())
     use_gemini = False
     if args.no_gemini:
@@ -203,8 +304,9 @@ def main() -> None:
     elif args.use_gemini:
         use_gemini = gemini_available
     elif gemini_available:
-        use_gemini = _prompt("Use Gemini to suggest additional config values?", "y").lower().startswith("y")
-
+        use_gemini = True  # Auto-enable Gemini if available
+    
+    print(f"\nGenerating configuration values {'with Gemini' if use_gemini else 'using fallback patterns'}...")
     config = build_domain_config(domain, description, keywords, use_gemini=use_gemini)
     write_config(config)
 
@@ -216,11 +318,9 @@ def main() -> None:
         config=config,
     )
 
-    print(f"Updated Layer 1 config for domain: {profile.slug}")
-    print(f"Config written to: {profile.config_path}")
-    if use_gemini:
-        print(f"Gemini suggestions were applied to the config using {GEMINI_MODEL}.")
-    print("Starting Layer 1 -> Layer 3 pipeline...")
+    print(f"\n✓ Updated Layer 1 config for domain: {profile.slug}")
+    print(f"✓ Config written to: {profile.config_path}")
+    print("\nStarting Layer 1 -> Layer 3 pipeline...")
     run_pipeline()
 
 

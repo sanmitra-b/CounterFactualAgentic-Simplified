@@ -306,7 +306,7 @@ def call_groq(prompt: str, domain: str) -> dict:
     Call Groq API with primary model; fall back to smaller model on quota error.
     Returns parsed JSON dict from LLaMA response.
     """
-    client = Groq(api_key=os.getenv("GROQ_API_KEY"))
+    client = Groq(api_key=os.getenv("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"))
  
     for model in [PRIMARY_MODEL, FALLBACK_MODEL]:
         try:

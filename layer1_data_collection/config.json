@@ -12,7 +12,7 @@
           "base_url": "https://gnews.io/api/v4/search",
           "max_articles_per_request": 10,
           "rate_limit_seconds": 1.0,
-          "note": "GNews for Jobs Impact domain"
+          "note": "GNews for medicine domain"
         },
         "rss": {
           "enabled": true,
@@ -24,12 +24,20 @@
             "https://rss.nytimes.com/services/xml/rss/nyt/Technology.xml",
             "https://arxiv.org/rss/cs.AI"
           ],
-          "note": "RSS feeds for Jobs Impact domain"
+          "note": "RSS feeds for medicine domain"
         }
       },
       "keywords": [
-        "AI job  disruption",
-        "AI taking jobs"
+        "drug recall",
+        "adverse event",
+        "medical error",
+        "patient safety",
+        "FDA warning",
+        "clinical trial failure",
+        "medication side effect",
+        "healthcare fraud",
+        "medical malpractice",
+        "public health crisis"
       ],
       "max_results_per_source": 50
     },
@@ -39,21 +47,16 @@
         "enabled": true,
         "outputsize": "compact",
         "tickers": [
-          "UPS",
-          "FDX",
-          "CHRW",
-          "JBHT",
-          "KNX",
-          "ODFL",
-          "XPO",
-          "GXO",
-          "DSX",
-          "RLI",
-          "CMG",
-          "COST",
-          "WMT",
-          "AMZN",
-          "MSFT"
+          "PFE",
+          "MRK",
+          "JNJ",
+          "ABBV",
+          "BMY",
+          "LLY",
+          "AZN",
+          "NVS",
+          "ROG",
+          "GSK"
         ],
         "note": "AI economy and labor-market proxy equities (compact mode for free tier)",
         "rate_limit_seconds": 1.5
@@ -61,21 +64,16 @@
       "fred": {
         "enabled": true,
         "indicators": [
-          "IPCN",
-          "PPIACO",
-          "CPIAUCSL",
-          "M2SL",
+          "GDP",
           "UNRATE",
+          "CPIAUCSL",
+          "MORTGAGE30US",
+          "FEDFUNDS",
           "ICSA",
-          "WPSID",
-          "TRF",
-          "T10Y2Y",
-          "VIXCLS",
-          "EXPINTS",
-          "IMPBO",
-          "EXPORTS",
-          "GDPC1",
-          "INDPRO"
+          "HOUST",
+          "INDPRO",
+          "PPIACO",
+          "UNEMPLOY"
         ],
         "note": "US labor market indicators from FRED (LNS13000000 removed - invalid series)"
       }
@@ -86,15 +84,31 @@
         "enabled": true,
         "base_url": "https://data.usajobs.gov/api/search",
         "keywords": [
-          "AI job  disruption",
-          "AI taking jobs"
+          "pharmacist",
+          "physician",
+          "nurse",
+          "medical researcher",
+          "clinical trial manager",
+          "regulatory affairs specialist",
+          "healthcare administrator",
+          "biostatistician",
+          "epidemiologist",
+          "medical device engineer"
         ],
         "results_per_query": 25,
-        "note": "USAJOBS signals for Jobs Impact domain"
+        "note": "USAJOBS signals for medicine domain"
       },
       "keywords": [
-        "AI job  disruption",
-        "AI taking jobs"
+        "pharmacist",
+        "physician",
+        "nurse",
+        "medical researcher",
+        "clinical trial manager",
+        "regulatory affairs specialist",
+        "healthcare administrator",
+        "biostatistician",
+        "epidemiologist",
+        "medical device engineer"
       ]
     },
     "weather": {
@@ -116,8 +130,16 @@
           "datascience"
         ],
         "keywords": [
-          "AI job  disruption",
-          "AI taking jobs"
+          "vaccine hesitancy",
+          "antibiotic resistance",
+          "opioid crisis",
+          "mental health stigma",
+          "chronic disease management",
+          "healthcare access",
+          "medical misinformation",
+          "patient advocacy",
+          "health disparities",
+          "emerging infectious disease"
         ],
         "max_results_per_query": 25,
         "days_back": 7,
@@ -126,8 +148,16 @@
       "youtube": {
         "enabled": true,
         "keywords": [
-          "AI job  disruption",
-          "AI taking jobs"
+          "vaccine hesitancy",
+          "antibiotic resistance",
+          "opioid crisis",
+          "mental health stigma",
+          "chronic disease management",
+          "healthcare access",
+          "medical misinformation",
+          "patient advocacy",
+          "health disparities",
+          "emerging infectious disease"
         ],
         "max_results": 700,
         "videos_per_keyword": 5,
@@ -144,12 +174,28 @@
           "mstdn.social"
         ],
         "keywords": [
-          "AI job  disruption",
-          "AI taking jobs"
+          "vaccine hesitancy",
+          "antibiotic resistance",
+          "opioid crisis",
+          "mental health stigma",
+          "chronic disease management",
+          "healthcare access",
+          "medical misinformation",
+          "patient advocacy",
+          "health disparities",
+          "emerging infectious disease"
         ],
         "hashtags": [
-          "aijobdisruption",
-          "aitakingjobs"
+          "#PatientSafety",
+          "#MedSafety",
+          "#DrugSafety",
+          "#Healthcare",
+          "#PublicHealth",
+          "#MedicalErrors",
+          "#AdverseEvents",
+          "#ClinicalTrials",
+          "#FDA",
+          "#HealthTech"
         ],
         "max_results_per_instance": 20,
         "note": "Decentralized social network - tech community sentiment, no API approval needed"
@@ -157,8 +203,16 @@
       "hackernews": {
         "enabled": true,
         "keywords": [
-          "AI job  disruption",
-          "AI taking jobs"
+          "vaccine hesitancy",
+          "antibiotic resistance",
+          "opioid crisis",
+          "mental health stigma",
+          "chronic disease management",
+          "healthcare access",
+          "medical misinformation",
+          "patient advocacy",
+          "health disparities",
+          "emerging infectious disease"
         ],
         "max_results": 50,
         "min_comments": 5,
@@ -167,7 +221,7 @@
     }
   },
   "output": {
-    "domain": "jobs_impact",
+    "domain": "medicine",
     "formats": [
       "json",
       "csv"
@@ -176,27 +230,55 @@
   },
   "logging": {
     "level": "INFO",
-    "log_file": "jobs_impact_data_collection.log"
+    "log_file": "medicine_data_collection.log"
   },
   "domain_profile": {
-    "name": "Jobs Impact",
-    "slug": "jobs_impact",
-    "description": "Risk signals for AI driven job impact",
+    "name": "medicine",
+    "slug": "medicine",
+    "description": "Risk analysis in medicine quantifies the probability and severity of adverse events associated with medical interventions, diagnostic procedures, and pharmaceutical products to inform decision-making and optimize patient safety. It involves systematic identification, assessment, and prioritization of potential hazards to mitigate harm and improve clinical outcomes.",
     "keywords": [
-      "AI job  disruption",
-      "AI taking jobs"
+      "medical risk assessment",
+      "adverse event probability",
+      "patient safety analysis",
+      "clinical outcome optimization",
+      "hazard identification medicine",
+      "intervention risk quantification"
     ],
     "news_keywords": [
-      "AI job  disruption",
-      "AI taking jobs"
+      "drug recall",
+      "adverse event",
+      "medical error",
+      "patient safety",
+      "FDA warning",
+      "clinical trial failure",
+      "medication side effect",
+      "healthcare fraud",
+      "medical malpractice",
+      "public health crisis"
     ],
     "job_keywords": [
-      "AI job  disruption",
-      "AI taking jobs"
+      "pharmacist",
+      "physician",
+      "nurse",
+      "medical researcher",
+      "clinical trial manager",
+      "regulatory affairs specialist",
+      "healthcare administrator",
+      "biostatistician",
+      "epidemiologist",
+      "medical device engineer"
     ],
     "social_keywords": [
-      "AI job  disruption",
-      "AI taking jobs"
+      "vaccine hesitancy",
+      "antibiotic resistance",
+      "opioid crisis",
+      "mental health stigma",
+      "chronic disease management",
+      "healthcare access",
+      "medical misinformation",
+      "patient advocacy",
+      "health disparities",
+      "emerging infectious disease"
     ]
   }
 }
