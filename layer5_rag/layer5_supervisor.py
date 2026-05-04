@@ -1,37 +1,3 @@
-"""
-layer5_rag_solutions/supervisor.py — Layer 5 Supervisor
-========================================================
-The Supervisor is the single point of authority for Layer 5.
-It enforces typed contracts at every boundary:
-
-  [RiskReport] ──► Supervisor builds LibrarianWorkOrder
-                        │
-                        ▼
-                  LibrarianAgent.execute()    ← READ-ONLY
-                        │
-                   LibrarianWorkResult (validated)
-                        │
-                        ▼
-                  Supervisor builds SolutionSynthesisOrder
-                        │
-                        ▼
-                  Groq LLM synthesis call
-                        │
-                   raw JSON (unvalidated)
-                        │
-                        ▼
-               Supervisor GUARDRAIL → SolutionMatch validation
-                        │                    ▲
-                        │   KILLED if invalid┘
-                        ▼
-                  SolutionMappingReport ──► disk
-
-What the Supervisor does NOT do:
-  ✗ Access the KB directly (delegates to LibrarianAgent only)
-  ✗ Trust LLM output without validation
-  ✗ Let any non-conforming SolutionMatch reach the report
-"""
-
 from __future__ import annotations
 
 import json
