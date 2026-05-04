@@ -110,5 +110,75 @@
     "title": "Crisis Communication and Reputational Risk Playbook",
     "body": "Develop a tiered crisis communication playbook with pre-approved messaging for top-10 risk scenarios. Appoint a trained spokespersons committee. Establish a social listening dashboard (Brandwatch, Sprinklr) for early signal detection. Practice quarterly tabletop exercises. Companies with crisis playbooks recover brand trust 40% faster post-incident.",
     "references": ["PRSA Crisis Communication Guidelines", "Edelman Trust Barometer 2024"]
+  },
+  {
+    "id": "kb_017",
+    "tags": ["cold chain", "vaccine", "temperature monitoring", "IoT", "real-time tracking"],
+    "title": "IoT-Enabled Cold Chain Temperature Monitoring System",
+    "body": "Deploy end-to-end IoT temperature loggers (e.g. Sensitech, Berlinger) at every cold chain node — warehouse, transport vehicle, last-mile health post. Set automated alerts at 2°C–8°C breach thresholds. Integrate with a central dashboard for real-time visibility. Studies show IoT monitoring reduces cold chain excursions by 35-50% and cuts vaccine wastage by up to 25% in LMIC settings.",
+    "references": ["WHO PQS Prequalification Standards for Cold Chain Equipment", "PATH Vaccine Cold Chain Technology Report 2023", "UNICEF Cold Chain Equipment Optimization Platform (CCEOP)"]
+  },
+  {
+    "id": "kb_018",
+    "tags": ["cold chain", "vaccine", "last mile", "India", "rural distribution", "infrastructure gap"],
+    "title": "Last-Mile Cold Chain Strengthening for Low-Resource Settings",
+    "body": "Address last-mile gaps using a hub-and-spoke model: solar-powered vaccine refrigerators (SDD) at primary health centres, vaccine carriers with ice packs for village-level outreach. Partner with government cold chain expansion programmes (India's eVIN system, GAVI Cold Chain Equipment Initiative). Pre-position buffer stock at district level to absorb transport delays. eVIN deployment across India's 28 states reduced stock-out events by 43%.",
+    "references": ["India eVIN Programme Evaluation 2023", "GAVI Cold Chain Equipment Initiative Report", "WHO Immunization Supply Chain Framework 2022"]
+  },
+  {
+    "id": "kb_019",
+    "tags": ["cold chain", "vaccine", "conflict zone", "humanitarian logistics", "West Asia", "geopolitical disruption"],
+    "title": "Humanitarian Cold Chain Continuity in Conflict-Affected Regions",
+    "body": "Establish pre-positioned buffer stocks at neutral third-party logistics hubs outside conflict zones (e.g., Jordan, UAE for West Asia). Use ICRC and MSF cold chain corridors for access negotiations. Maintain alternative routing via sea freight (Aqaba port) when air corridors are closed. Deploy passive cold boxes (72-hour autonomy) for areas with no power. ICRC data shows pre-positioned buffers reduce vaccine access disruption by 60% during active conflict phases.",
+    "references": ["ICRC Health Logistics in Conflict Manual 2023", "MSF Cold Chain in Emergencies Guidelines", "WHO Emergency Immunization Field Guide"]
+  },
+  {
+    "id": "kb_020",
+    "tags": ["vaccine hesitancy", "public health", "community engagement", "misinformation", "demand generation"],
+    "title": "Community-Led Vaccine Demand Generation Programme",
+    "body": "Engage trusted community intermediaries (ASHA workers, religious leaders, local NGOs) as vaccine champions. Deploy structured rumour-surveillance systems (e.g., WHO EARS platform) to detect and counter misinformation within 48 hours. Run community dialogue sessions using the SBCC (Social and Behaviour Change Communication) framework. UNICEF evidence shows community-led demand generation increases vaccination coverage by 15-30 percentage points in hesitancy-affected areas.",
+    "references": ["WHO SAGE Recommendations on Vaccine Hesitancy 2023", "UNICEF SBCC Evidence Base Report", "Lancet: Community Health Worker Vaccination Programmes Meta-Analysis 2024"]
+  },
+  {
+    "id": "kb_021",
+    "tags": ["vaccine hesitancy", "misinformation", "digital health", "social media", "public communication"],
+    "title": "Digital Misinformation Rapid Response System for Vaccine Programmes",
+    "body": "Build a dedicated social listening dashboard (using CrowdTangle, Brandwatch, or WHO's EARS) to detect vaccine misinformation trends within 24 hours. Pre-develop a library of evidence-based counter-narratives in local languages. Partner with platform trust-and-safety teams (WhatsApp, Facebook) for coordinated takedowns. Engage micro-influencers (10K–100K followers) for credible peer-to-peer messaging. Digital rapid-response campaigns have reduced misinformation spread by 30-40% within 2 weeks of deployment.",
+    "references": ["WHO Infodemic Management Framework 2023", "Johns Hopkins Bloomberg School: Vaccine Communication Playbook", "BMJ: Social Media Interventions on Vaccine Uptake 2024"]
+  },
+  {
+    "id": "kb_022",
+    "tags": ["cold chain", "technology", "passive cooling", "vaccine storage", "innovation", "solar refrigerator"],
+    "title": "Next-Generation Passive Cooling and Solar Cold Chain Technology Deployment",
+    "body": "Replace ageing ice-lined refrigerators (ILR) with solar direct-drive (SDD) refrigerators qualifying WHO PQS E003 standards — no grid electricity required, maintain 2°C–8°C for 10+ hours without solar input. Deploy passive cold boxes with Phase Change Material (PCM) for outreach sessions — 72-hour holdover with no ice. Conduct a cold chain equipment inventory (CCEI) audit to prioritise replacement. GAVI-funded SDD rollout in 3 Indian states reduced cold chain failure events by 58%.",
+    "references": ["WHO PQS E003/RF04 Solar Refrigerator Standards", "GAVI Cold Chain Technology Roadmap 2023", "PATH Cold Chain Equipment Optimisation Study 2024"]
+  },
+  {
+    "id": "kb_023",
+    "tags": ["cold chain", "network", "public private partnership", "3PL", "vaccine distribution", "capacity building"],
+    "title": "Public-Private Partnership for Cold Chain Network Expansion",
+    "body": "Structure PPP agreements with 3PL providers (DHL, Agility, Apollo LogiSolutions in India) to lease certified cold-storage capacity and reefer vehicles. Define SLA-backed temperature excursion penalties. Co-invest in cold chain infrastructure in underserved districts using blended finance (government + donor + private). McKinsey analysis shows PPP cold chain models reduce government capital expenditure by 40-60% while expanding network reach by 2-3x within 3 years.",
+    "references": ["IFC PPP in Health Logistics Toolkit 2023", "McKinsey: Private Sector Role in Vaccine Supply Chains", "USAID Global Health Supply Chain Programme Lessons Learned"]
+  },
+  {
+    "id": "kb_024",
+    "tags": ["vaccine", "raw material", "biologic", "shortage", "API", "manufacturing resilience"],
+    "title": "Vaccine Raw Material Supply Resilience Programme",
+    "body": "Map the full bill of materials for each vaccine (adjuvants, glass vials, stoppers, cold chain packaging, active pharmaceutical ingredients). Identify single-source dependencies and qualify alternative suppliers per material. Maintain 90-day strategic reserves of critical biologics and packaging components. Establish long-term supply agreements (3-5 year) with API manufacturers across geographically diverse regions (India, EU, USA). Serum Institute of India's multi-supplier strategy reduced raw material disruption risk by 45% during COVID-19.",
+    "references": ["WHO Vaccine Supply Security Report 2023", "BARDA Strategic Stockpile Guidelines", "McKinsey: Vaccine Manufacturing Resilience 2024"]
+  },
+  {
+    "id": "kb_025",
+    "tags": ["cold chain", "market growth", "capacity planning", "demand forecasting", "vaccine scale-up"],
+    "title": "Cold Chain Capacity Planning and Demand Forecasting for Market Growth",
+    "body": "Use immunisation coverage data and demographic projections to build 5-year cold chain demand forecasts at district level. Apply the WHO Forecasting and Supply Planning (FSP) tool. Pre-invest in cold chain capacity 18-24 months ahead of programme scale-up. Coordinate with GAVI and UNICEF Supply Division for bulk procurement co-ordination. Countries with proactive cold chain capacity planning absorb 2-3x demand spikes without vaccine wastage increases.",
+    "references": ["WHO FSP Tool User Guide", "UNICEF Supply Division Demand Planning Framework", "GAVI Programme and Policy Committee: Cold Chain Capacity Report 2023"]
+  },
+  {
+    "id": "kb_026",
+    "tags": ["vaccine", "regulatory", "WHO prequalification", "India CDSCO", "approval acceleration"],
+    "title": "Accelerated Vaccine Regulatory Pathway and WHO Prequalification Strategy",
+    "body": "Engage WHO Prequalification Programme (PQ) early — initiate pre-submission dialogues 12-18 months before dossier submission. Use rolling reviews for pandemic or priority vaccines to cut approval time by 40-60%. Align dossier format with ICMRA harmonised templates to enable simultaneous multi-country submissions. Assign a dedicated regulatory project manager per product. Serum Institute and Bharat Biotech reduced WHO PQ timelines by 8-12 months through early engagement.",
+    "references": ["WHO Prequalification Programme Vaccine Guidelines", "ICMRA Harmonisation Framework 2023", "CDSCO Fast-Track Approval Guidance for Vaccines 2024"]
   }
 ]

@@ -5,6 +5,8 @@ import logging
 import os
 import sys
 import argparse
+import time
+import random
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -88,18 +90,11 @@ CRITICAL RULES:
 - kpis: at least 2, each must be measurable (include thresholds or units).
 - Do NOT invent solutions not supported by the KB content.
 - If KB coverage is weak, lower relevance_score below 0.5 and say so in description.
-- If KB coverage is weak, lower relevance_score below 0.5 and say so in description.
-- Do NOT echo or repurpose the provided counterfactual numeric delta (e.g. "-16.13%") as
-    the `risk_reduction_estimate`. Instead, generate an independent, human-readable
-    `risk_reduction_estimate` string such as "10-20% probability reduction". If you
-    genuinely cannot estimate, return `null`.
-- `solution_type` selection guide:
-    * PROCESS: sourcing, procurement, operational workflow, staffing, training, execution playbooks.
-    * REGULATION: governance policy, compliance controls, legal or regulator-facing actions.
-    * TECHNOLOGY: software/systems/tools/automation are the primary mechanism.
-    * FRAMEWORK: structured methodology/reference architecture is the primary mechanism.
-    * PARTNERSHIP: explicit multi-organization collaboration is the primary mechanism.
-    Do NOT use Layer-4 intervention enums like SUPPLY/POLICY/OPERATIONAL as `solution_type`.
+- solution_index=1 means an OPERATIONAL / SHORT-TERM mitigation (tactical, fast to deploy).
+- solution_index=2 means a STRUCTURAL / LONG-TERM prevention (strategic, governance-level).
+  These two solutions MUST be meaningfully different — different solution_title, different
+  solution_type, different implementation_steps. Never produce two solutions with the same
+  or similar title for the same risk.
 """
 
 _HUMAN_TEMPLATE = """\
@@ -121,6 +116,7 @@ _HUMAN_TEMPLATE = """\
 </knowledge_base_chunks>
 
 Synthesise solution #{solution_index} (solution_id = "sol_{risk_rank}_{solution_index}").
+Role for this solution: {solution_role}.
 Return ONLY the JSON object.
 """
 
@@ -140,12 +136,26 @@ _SCENARIO_BLOCK = """\
 # HELPERS
 # ═══════════════════════════════════════════════════════════════════════════════
 
-def _build_query(domain: str, risk: dict, scenario: dict | None) -> str:
-    """Build the retrieval query sent to the Librarian."""
+def _build_query(domain: str, risk: dict, scenario: dict | None, solution_index: int = 1) -> str:
+    """
+    Build the retrieval query sent to the Librarian.
+
+    solution_index drives deliberate diversity:
+      sol 1 → focuses on immediate/operational mitigations
+      sol 2 → focuses on structural/long-term interventions
+    This ensures the two solutions for the same risk retrieve *different* KB chunks
+    and the LLM produces meaningfully distinct outputs.
+    """
+    focus = {
+        1: "immediate operational mitigation tactical response",
+        2: "long-term structural prevention strategic governance framework",
+    }.get(solution_index, "")
+
     parts = [
         domain,
         risk.get("category", ""),
         risk.get("title", ""),
+        focus,
         risk.get("causal_chain", "")[:150],
         risk.get("recommended_action", "")[:100],
     ]
@@ -180,6 +190,11 @@ def _build_human_prompt(order: SolutionSynthesisOrder) -> str:
             feasibility      = sc.get("feasibility", ""),
         )
 
+    SOLUTION_ROLES = {
+        1: "OPERATIONAL / SHORT-TERM: a tactical, fast-to-deploy mitigation (time_horizon=SHORT or MEDIUM, solution_type=PROCESS or TECHNOLOGY)",
+        2: "STRUCTURAL / LONG-TERM: a strategic, governance-level prevention (time_horizon=MEDIUM or LONG, solution_type=FRAMEWORK, REGULATION, or PARTNERSHIP)",
+    }
+
     return _HUMAN_TEMPLATE.format(
         domain           = order.domain,
         risk_rank        = order.risk_rank,
@@ -194,6 +209,7 @@ def _build_human_prompt(order: SolutionSynthesisOrder) -> str:
         scenario_block     = scenario_block,
         kb_chunks_xml      = _format_kb_chunks_xml(order.kb_chunks),
         solution_index     = order.solution_index,
+        solution_role      = SOLUTION_ROLES.get(order.solution_index, "GENERAL mitigation"),
     )
 
 
@@ -201,18 +217,31 @@ def _build_human_prompt(order: SolutionSynthesisOrder) -> str:
 # LLM SYNTHESIS CALL
 # ═══════════════════════════════════════════════════════════════════════════════
 
+def _is_rate_limit(err: str) -> bool:
+    return "rate_limit" in err.lower() or "429" in err or "quota" in err.lower()
+
+
 def _call_groq(human: str) -> tuple[dict[str, Any], str]:
+    """
+    Call Groq with exponential backoff + jitter.
+
+    Retry schedule (per model, across both models):
+      attempt 1 → immediate
+      attempt 2 → sleep 2s + jitter
+      attempt 3 → sleep 4s + jitter
+      attempt 4 → sleep 8s + jitter
+    Then switch model and repeat.
+    Total max wait before giving up: ~28s.
+    """
     api_key = os.getenv("GROQ_API_KEY", "").strip()
     if not api_key:
         raise EnvironmentError("GROQ_API_KEY not set — add it to .env")
-    # Disable SDK-level retries so only supervisor-level retry/backoff is active.
-    client = Groq(api_key=api_key, max_retries=0)
-    import time
 
-    # For robustness, attempt each model with modest in-process backoff
+    client = Groq(api_key=api_key)
+    MAX_ATTEMPTS_PER_MODEL = 4
+
     for model in [PRIMARY_MODEL, FALLBACK_MODEL]:
-        attempts = 0
-        while attempts < 3:
+        for attempt in range(1, MAX_ATTEMPTS_PER_MODEL + 1):
             try:
                 response = client.chat.completions.create(
                     model=model,
@@ -225,7 +254,6 @@ def _call_groq(human: str) -> tuple[dict[str, Any], str]:
                     response_format={"type": "json_object"},
                 )
                 raw = response.choices[0].message.content.strip()
-                # Strip any accidental markdown fences
                 if raw.startswith("```"):
                     raw = raw.split("```")[1]
                     if raw.startswith("json"):
@@ -234,14 +262,23 @@ def _call_groq(human: str) -> tuple[dict[str, Any], str]:
 
             except Exception as exc:
                 err = str(exc)
-                attempts += 1
-                if "rate_limit" in err.lower() or "too many requests" in err.lower() or "quota" in err.lower():
-                    wait = min(1 * attempts, 16)
-                    logger.warning("LLM %s rate-limited (attempt %d) — sleeping %ds then retrying.", model, attempts, wait)
-                    time.sleep(wait)
-                    continue
+                if _is_rate_limit(err):
+                    if attempt < MAX_ATTEMPTS_PER_MODEL:
+                        sleep = (2 ** attempt) + random.uniform(0.0, 1.0)
+                        logger.warning(
+                            "LLM %s rate-limited (attempt %d) — sleeping %.1fs then retrying.",
+                            model, attempt, sleep,
+                        )
+                        time.sleep(sleep)
+                    else:
+                        logger.warning(
+                            "LLM %s exhausted %d attempts — switching model.",
+                            model, MAX_ATTEMPTS_PER_MODEL,
+                        )
+                    continue   # next attempt (or outer loop switches model)
+                # Non-rate-limit error: log and try the other model
                 logger.error("LLM call failed (%s): %s", model, err)
-                break
+                break  # don't retry this model; fall through to next
 
     raise RuntimeError("Both Groq models failed in Layer 5 Supervisor.")
 
@@ -271,40 +308,6 @@ def _validate_solution(
     ]:
         if enum_field in raw:
             raw[enum_field] = str(raw[enum_field]).upper()
-
-    # Coerce common Layer-4 intervention enum leaks into valid Layer-5 solution enums.
-    # This prevents needless drops when the model emits values like SUPPLY/POLICY.
-    raw_solution_type = str(raw.get("solution_type", "")).upper().strip()
-    intervention_to_solution = {
-        "SUPPLY": "PROCESS",
-        "OPERATIONAL": "PROCESS",
-        "FINANCIAL": "PROCESS",
-        "POLICY": "REGULATION",
-        "REGULATORY": "REGULATION",
-    }
-    if raw_solution_type in intervention_to_solution:
-        raw["solution_type"] = intervention_to_solution[raw_solution_type]
-
-    # Additional semantic guardrail for mis-typed classes.
-    allowed_solution_types = {member.value for member in SolutionType}
-    if str(raw.get("solution_type", "")).upper() not in allowed_solution_types:
-        text_blob = " ".join(
-            [
-                str(raw.get("solution_title", "")),
-                str(raw.get("description", "")),
-                " ".join(str(x) for x in raw.get("implementation_steps", [])[:3]),
-            ]
-        ).lower()
-        if any(term in text_blob for term in ["supplier", "sourcing", "procure", "dual source", "inventory", "workflow", "process"]):
-            raw["solution_type"] = "PROCESS"
-        elif any(term in text_blob for term in ["policy", "regulation", "compliance", "governance", "mandate"]):
-            raw["solution_type"] = "REGULATION"
-        elif any(term in text_blob for term in ["platform", "system", "software", "automation", "tool"]):
-            raw["solution_type"] = "TECHNOLOGY"
-        elif any(term in text_blob for term in ["framework", "playbook", "methodology"]):
-            raw["solution_type"] = "FRAMEWORK"
-        else:
-            raw["solution_type"] = "PROCESS"
 
     # Override solution_id / risk_rank to ensure consistency
     raw["solution_id"] = raw.get("solution_id", f"sol_{risk_rank}_{sol_idx}")
@@ -374,7 +377,7 @@ def _print_summary(report: SolutionMappingReport) -> None:
         print(f"      Type          : {sol.solution_type}")
         print(f"      Time horizon  : {t_icon} {sol.time_horizon}")
         print(f"      Relevance     : {sol.relevance_score:.0%}")
-        print(f"      Reduction est.: {sol.risk_reduction_estimate or 'N/A'}")
+        print(f"      Reduction est.: {sol.risk_reduction_estimate}")
         print(f"      Cost ≈        : {sol.estimated_cost_usd or 'N/A'}")
         print(f"      KB sources    : {', '.join(sol.source_chunks)}")
         if sol.implementation_steps:
@@ -462,7 +465,7 @@ def run_layer5(
             scenario = linked_cfs[sol_idx - 1]
 
             # ── Step A: Build LibrarianWorkOrder ──────────────────────────────
-            query = _build_query(domain, risk, scenario)
+            query = _build_query(domain, risk, scenario, solution_index=sol_idx)
             lib_order = LibrarianWorkOrder(
                 request_id = f"l5_risk{rank}_sol{sol_idx}",
                 query      = query,
@@ -510,17 +513,6 @@ def run_layer5(
             except Exception as exc:
                 logger.error("LLM synthesis failed for Risk #%d sol %d: %s", rank, sol_idx, exc)
                 continue
-
-            # Ensure linked scenario ID is preserved even if the LLM omitted it
-            if scenario and isinstance(raw_solution, dict):
-                if not raw_solution.get("scenario_id"):
-                    raw_solution["scenario_id"] = scenario.get("scenario_id")
-
-            # Normalise risk_reduction_estimate: prefer a non-empty string or explicit 'N/A'
-            if isinstance(raw_solution, dict):
-                rre = raw_solution.get("risk_reduction_estimate")
-                if rre is None or str(rre).strip().lower() in ("null", "none", ""):
-                    raw_solution["risk_reduction_estimate"] = "N/A"
 
             # ── Step E: Supervisor Guardrail — validate LLM output ────────────
             solution = _validate_solution(

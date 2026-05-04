@@ -1,127 +1,127 @@
 {
-  "analysed_at": "2026-05-03T20:21:43.716896Z",
-  "domain": "healthcare_supply_chain_risk",
+  "analysed_at": "2026-05-04T06:00:00Z",
+  "domain": "vaccine_cold_chain_risk",
   "top_risks": [
     {
       "rank": 1,
-      "category": "Talent_Shortage",
-      "title": "Doctor and medical talent shortages in Nigeria, India, and globally",
+      "category": "Counterfeit Medication",
+      "title": "Fake Mounjaro Injections Seized",
       "severity": "HIGH",
       "confidence": 0.85,
-      "probability_next_30d": 0.7,
+      "probability_next_30d": 0.6,
       "evidence": [
-        "Nigeria's doctor shortage deepens as poor pay, migration strain health system",
-        "India's healthcare expansion faces a critical talent crunch, says Alisha Moopen"
+        "Rs 70,00,000 worth fake Mounjaro injections seized in Gurgaon",
+        "Police expose illegal weight-loss drug racket in NCR"
       ],
       "affected_entities": [
-        "Nigeria",
-        "India"
+        "Gurgaon",
+        "NCR"
       ],
       "affected_geo": [
-        "Nigeria",
         "India"
       ],
-      "causal_chain": "Talent shortages in key countries strain healthcare systems, impacting patient care and supply chain resilience.",
-      "recommended_action": "Develop targeted talent acquisition and retention strategies to mitigate shortages."
+      "causal_chain": "Counterfeit medication \u2192 Health risks \u2192 Economic losses",
+      "recommended_action": "Enhance surveillance and enforcement against counterfeit medication"
     },
     {
       "rank": 2,
-      "category": "Cybersecurity_Risk",
-      "title": "Medical device cyber-attacks on healthcare organizations",
+      "category": "Climate Change",
+      "title": "Net-Zero Commitments Abandoned",
       "severity": "MEDIUM",
-      "confidence": 0.8,
-      "probability_next_30d": 0.6,
+      "confidence": 0.7,
+      "probability_next_30d": 0.4,
       "evidence": [
-        "A Quarter of Healthcare Organizations Report Medical Device Cyber-Attacks"
+        "Countries and Industries Are Abandoning or Reducing Net-Zero Commitments"
       ],
       "affected_entities": [
-        "Healthcare Organizations"
+        "Heartland Institute"
       ],
       "affected_geo": [
         "Global"
       ],
-      "causal_chain": "Cyber-attacks on medical devices disrupt patient care and compromise supply chain security.",
-      "recommended_action": "Implement robust cybersecurity measures to protect medical devices and patient data."
+      "causal_chain": "Climate change \u2192 Abandoned commitments \u2192 Increased emissions",
+      "recommended_action": "Encourage renewed commitment to net-zero targets"
     },
     {
       "rank": 3,
-      "category": "Supply_Chain_Disruption",
-      "title": "Food supply chain breaking down, impacting healthcare",
+      "category": "Supply Chain Disruption",
+      "title": "7-Eleven Store Closures",
       "severity": "LOW",
-      "confidence": 0.7,
-      "probability_next_30d": 0.5,
+      "confidence": 0.6,
+      "probability_next_30d": 0.3,
       "evidence": [
-        "Tyson Foods takes out full-page ad: The food supply chain is breaking"
+        "7-ELEVEN shoppers will soon see new fountain areas that serve custom hot and cold coffee drinks",
+        "The convenience store chain is closing more sites"
       ],
       "affected_entities": [
-        "Food Supply Chain"
+        "7-Eleven"
       ],
       "affected_geo": [
-        "Global"
+        "US"
       ],
-      "causal_chain": "Supply chain disruptions impact healthcare organizations' ability to access essential goods and services.",
-      "recommended_action": "Monitor supply chain disruptions and develop contingency plans to mitigate their impact."
+      "causal_chain": "Store closures \u2192 Supply chain disruption \u2192 Customer inconvenience",
+      "recommended_action": "Monitor supply chain adjustments and customer impact"
     },
     {
       "rank": 4,
-      "category": "Regulatory_Risk",
-      "title": "Emerging regulatory challenges in healthcare",
+      "category": "Mental Health",
+      "title": "Mental Health Concerns",
       "severity": "LOW",
-      "confidence": 0.6,
-      "probability_next_30d": 0.4,
+      "confidence": 0.55,
+      "probability_next_30d": 0.25,
       "evidence": [
-        "No explicit evidence in the bundle"
+        "People sometimes become depressed, or develop other serious mental conditions"
       ],
       "affected_entities": [
-        "Healthcare Organizations"
+        "General public"
       ],
       "affected_geo": [
         "Global"
       ],
-      "causal_chain": "Emerging regulatory challenges impact healthcare organizations' compliance and risk management.",
-      "recommended_action": "Monitor regulatory developments and adapt to changing requirements."
+      "causal_chain": "Mental health concerns \u2192 Decreased well-being \u2192 Productivity losses",
+      "recommended_action": "Promote mental health awareness and support resources"
     },
     {
       "rank": 5,
-      "category": "Patient_Safety",
-      "title": "Pre-clinical hypertrophic cardiomyopathy (HCM) diagnosis and treatment",
+      "category": "Product Development",
+      "title": "Cold Start Problem",
       "severity": "LOW",
       "confidence": 0.5,
-      "probability_next_30d": 0.3,
+      "probability_next_30d": 0.2,
       "evidence": [
-        "Pre-clinical hypertrophic cardiomyopathy (HCM) diagnosis and treatment"
+        "Solo developer, no audience, no network, no community presence"
       ],
       "affected_entities": [
-        "Patients"
+        "Solo developers"
       ],
       "affected_geo": [
         "Global"
       ],
-      "causal_chain": "Pre-clinical hypertrophic cardiomyopathy (HCM) diagnosis and treatment impact patient safety and healthcare outcomes.",
-      "recommended_action": "Develop targeted patient safety initiatives to mitigate the impact of HCM."
+      "causal_chain": "Cold start problem \u2192 Limited traction \u2192 Reduced product success",
+      "recommended_action": "Foster community engagement and support for solo developers"
     }
   ],
   "soft_risks": [
     {
-      "category": "Economic_Risk",
-      "title": "Potential economic impact of talent shortages on healthcare",
-      "note": "Talent shortages in key countries may lead to economic losses for healthcare organizations and the broader economy."
+      "category": "Economic Instability",
+      "title": "Reduced Net-Zero Commitments",
+      "note": "Potential economic instability due to reduced net-zero commitments"
     },
     {
-      "category": "Operational_Risk",
-      "title": "Operational challenges in responding to medical device cyber-attacks",
-      "note": "Healthcare organizations may face operational challenges in responding to medical device cyber-attacks, impacting patient care and supply chain resilience."
+      "category": "Health Risks",
+      "title": "Counterfeit Medication",
+      "note": "Ongoing risk of counterfeit medication impacting public health"
     },
     {
-      "category": "Reputational_Risk",
-      "title": "Reputational risk associated with food supply chain disruptions",
-      "note": "Food supply chain disruptions may impact healthcare organizations' reputation and brand value."
+      "category": "Technological Challenges",
+      "title": "Cold Start Problem",
+      "note": "Solo developers facing challenges in gaining traction for their products"
     }
   ],
-  "data_quality_note": "Data completeness is 75%, with some gaps in sentiment analysis and reliability scores.",
-  "model_used": "llama-3.1-8b-instant",
-  "layer1_completeness": 0.75,
-  "layer2_enriched_at": "2026-05-03T20:21:43.716896",
+  "data_quality_note": "The intelligence bundle has limited data on stocks, ports, weather, and commodities, which may impact the completeness and reliability of the risk assessment",
+  "model_used": "llama-3.3-70b-versatile",
+  "layer1_completeness": 0.5,
+  "layer2_enriched_at": "2026-05-04T05:58:22.854007",
   "aggregate_sentiment": "neutral",
-  "avg_reliability": 0.8022
+  "avg_reliability": 0.8158
 }
