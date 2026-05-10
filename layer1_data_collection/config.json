@@ -5,17 +5,17 @@
       "methods": {
         "newsapi": {
           "enabled": true,
-          "note": "NewsAPI for Vaccine Cold Chain Risk domain"
+          "note": "NewsAPI for ai_automation_job_market domain"
         },
         "gnews": {
-          "enabled": true,
+          "enabled": false,
           "base_url": "https://gnews.io/api/v4/search",
           "max_articles_per_request": 10,
           "rate_limit_seconds": 1.0,
-          "note": "GNews for Vaccine Cold Chain Risk domain"
+          "note": "GNews for ai_automation_job_market domain"
         },
         "rss": {
-          "enabled": true,
+          "enabled": false,
           "feeds": [
             "https://www.technologyreview.com/feed/",
             "https://www.theverge.com/rss/index.xml",
@@ -24,16 +24,15 @@
             "https://rss.nytimes.com/services/xml/rss/nyt/Technology.xml",
             "https://arxiv.org/rss/cs.AI"
           ],
-          "note": "RSS feeds for Vaccine Cold Chain Risk domain"
+          "note": "RSS feeds for ai_automation_job_market domain"
         }
       },
       "keywords": [
-        "cold chain",
-        "vaccine transport",
-        "logistics",
-        "pharmaceuticals",
-        "supply chain disruption",
-        "temperature control"
+        "AI automation",
+        "job market",
+        "employment",
+        "future of work",
+        "labor"
       ],
       "max_results_per_source": 50
     },
@@ -43,52 +42,69 @@
         "enabled": true,
         "outputsize": "compact",
         "tickers": [],
-        "note": "Alpha Vantage for Vaccine Cold Chain Risk domain",
+        "note": "Alpha Vantage for ai_automation_job_market domain",
         "rate_limit_seconds": 1.5
       },
       "fred": {
         "enabled": true,
         "indicators": [
+          "CPIAUCSL",
+          "UNRATE",
           "PPIACO",
-          "INDPRO",
-          "WPU0561"
+          "INDPRO"
         ],
-        "note": "FRED indicators for Vaccine Cold Chain Risk domain"
+        "note": "FRED indicators for ai_automation_job_market domain"
       }
     },
     "jobs": {
-      "enabled": false,
+      "enabled": true,
       "adzuna": {
-        "enabled": false,
-        "keywords": [],
-        "note": "Disabled for this domain"
+        "enabled": true,
+        "keywords": [
+          "AI automation",
+          "job market",
+          "employment",
+          "workforce",
+          "labor demand"
+        ],
+        "note": "Adzuna signals for ai_automation_job_market domain"
       },
       "usajobs": {
         "enabled": false,
         "base_url": "https://data.usajobs.gov/api/search",
-        "keywords": [],
+        "keywords": [
+          "AI automation",
+          "job market",
+          "employment",
+          "workforce",
+          "labor demand"
+        ],
         "results_per_query": 25,
-        "note": "Disabled for this domain"
+        "note": "USAJOBS signals for ai_automation_job_market domain"
       },
-      "keywords": []
+      "keywords": [
+        "AI automation",
+        "job market",
+        "employment",
+        "workforce",
+        "labor demand"
+      ]
     },
     "weather": {
       "enabled": true,
-      "keywords": [
-        "temperature",
-        "extreme weather",
-        "cold wave",
-        "heat wave",
-        "storm",
-        "logistics disruption"
+      "keywords": [],
+      "cities": [
+        "New York",
+        "London",
+        "Tokyo",
+        "Singapore"
       ],
-      "cities": [],
       "openweather": {
         "enabled": true,
         "base_url": "https://api.openweathermap.org/data/2.5/weather",
         "units": "metric",
         "language": "en",
-        "note": "OpenWeather signals for Vaccine Cold Chain Risk domain"
+        "note": "OpenWeather signals for ai_automation_job_market domain"
       },
       "note": "Disabled for AI job-risk mode"
     },
@@ -107,14 +123,10 @@
           "datascience"
         ],
         "keywords": [
-          "cold chain",
-          "vaccine transport",
-          "temperature control",
-          "logistics risk",
-          "supply chain",
-          "pharmaceuticals",
-          "storage",
-          "efficacy"
+          "AI automation",
+          "job market",
+          "future of work",
+          "automation impact"
         ],
         "max_results_per_query": 25,
         "days_back": 7,
@@ -123,14 +135,10 @@
       "youtube": {
         "enabled": true,
         "keywords": [
-          "cold chain",
-          "vaccine transport",
-          "temperature control",
-          "logistics risk",
-          "supply chain",
-          "pharmaceuticals",
-          "storage",
-          "efficacy"
+          "AI automation",
+          "job market",
+          "future of work",
+          "automation impact"
         ],
         "max_results": 700,
         "videos_per_keyword": 5,
@@ -147,14 +155,10 @@
           "mstdn.social"
         ],
         "keywords": [
-          "cold chain",
-          "vaccine transport",
-          "temperature control",
-          "logistics risk",
-          "supply chain",
-          "pharmaceuticals",
-          "storage",
-          "efficacy"
+          "AI automation",
+          "job market",
+          "future of work",
+          "automation impact"
         ],
         "hashtags": [],
         "max_results_per_instance": 20,
@@ -163,14 +167,10 @@
       "hackernews": {
         "enabled": true,
         "keywords": [
-          "cold chain",
-          "vaccine transport",
-          "temperature control",
-          "logistics risk",
-          "supply chain",
-          "pharmaceuticals",
-          "storage",
-          "efficacy"
+          "AI automation",
+          "job market",
+          "future of work",
+          "automation impact"
         ],
         "max_results": 50,
         "min_comments": 5,
@@ -179,7 +179,7 @@
     }
   },
   "output": {
-    "domain": "vaccine_cold_chain_risk",
+    "domain": "ai_automation_job_market",
     "formats": [
       "json",
       "csv"
@@ -188,37 +188,35 @@
   },
   "logging": {
     "level": "INFO",
-    "log_file": "vaccine_cold_chain_risk_data_collection.log"
+    "log_file": "ai_automation_job_market_data_collection.log"
   },
   "domain_profile": {
-    "name": "Vaccine Cold Chain Risk",
-    "slug": "vaccine_cold_chain_risk",
-    "description": "Analyzes risks associated with maintaining required temperature ranges for vaccines during storage and transport. Focuses on ensuring product efficacy and safety through robust cold chain logistics.",
+    "name": "ai_automation_job_market",
+    "slug": "ai_automation_job_market",
+    "description": "Analyzes the potential risks and impacts of artificial intelligence automation on the job market, including job displacement, skill requirements, and wage changes.",
     "keywords": [
-      "cold chain",
-      "vaccine transport",
-      "temperature control",
-      "logistics risk",
-      "supply chain",
-      "pharmaceuticals",
-      "storage",
-      "efficacy"
+      "AI automation",
+      "job market risks",
+      "future of work",
+      "employment impact",
+      "workforce automation",
+      "AI and jobs",
+      "labor market disruption"
     ],
     "source_usage": {
       "news": {
         "enabled": true,
         "methods": {
           "newsapi": true,
-          "gnews": true,
-          "rss": true
+          "gnews": false,
+          "rss": false
         },
         "keywords": [
-          "cold chain",
-          "vaccine transport",
-          "logistics",
-          "pharmaceuticals",
-          "supply chain disruption",
-          "temperature control"
+          "AI automation",
+          "job market",
+          "employment",
+          "future of work",
+          "labor"
         ]
       },
       "financial": {
@@ -228,49 +226,50 @@
           "fred": true
         },
         "tickers": [],
-        "indicators": [
-          "PPIACO",
-          "INDPRO",
-          "WPU0561"
-        ]
+        "indicators": []
       },
       "jobs": {
-        "enabled": false
+        "enabled": true,
+        "methods": {
+          "adzuna": true,
+          "usajobs": false
+        },
+        "keywords": [
+          "AI automation",
+          "job market",
+          "employment",
+          "workforce",
+          "labor demand"
+        ]
       },
       "social": {
         "enabled": true,
-        "keywords": [
-          "cold chain",
-          "vaccine transport",
-          "temperature control",
-          "logistics risk",
-          "supply chain",
-          "pharmaceuticals",
-          "storage",
-          "efficacy"
-        ],
-        "hashtags": [],
         "methods": {
           "pushshift": false,
           "youtube": true,
           "mastodon": true,
           "hackernews": true
-        }
+        },
+        "keywords": [
+          "AI automation",
+          "job market",
+          "future of work",
+          "automation impact"
+        ],
+        "hashtags": []
       },
       "weather": {
         "enabled": true,
         "methods": {
           "openweather": true
         },
-        "keywords": [
-          "temperature",
-          "extreme weather",
-          "cold wave",
-          "heat wave",
-          "storm",
-          "logistics disruption"
+        "cities": [
+          "New York",
+          "London",
+          "Tokyo",
+          "Singapore"
         ],
-        "locations": []
+        "keywords": []
       }
     }
   }

@@ -51,7 +51,7 @@ ROOT_DIR = Path(__file__).resolve().parent.parent
 LAYER1_DIR = ROOT_DIR / "layer1_data_collection"
 BASE_CONFIG_PATH = LAYER1_DIR / "config.json"
 ENV_PATH = ROOT_DIR / ".env"
-GEMINI_MODEL = "gemini-2.5-flash"
+GEMINI_MODEL = "gemini-2.5-flash-lite"
 
 # Default FRED series IDs used when extracted indicators are not valid series codes.
 DEFAULT_FRED_SERIES_IDS = ["CPIAUCSL", "UNRATE", "PPIACO", "INDPRO"]
