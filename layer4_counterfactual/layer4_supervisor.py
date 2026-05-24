@@ -65,6 +65,51 @@ def _build_work_order(risk: dict, domain: str, n_scenarios: int) -> AnalystWorkO
 
 
 # ═══════════════════════════════════════════════════════════════════════════════
+# EVALUATION METRICS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+def _calculate_mitigation_efficiency(scenarios: list[CounterfactualScenario]) -> float:
+    """
+    Calculate the Macro Counterfactual Mitigation Efficiency (η_mitigation).
+    
+    Formula:
+        η_mitigation = (1/M) * Σ(|Δ_m| / R_base,m)
+    
+    Where:
+        M = number of active scenarios
+        Δ_m = Individual Treatment Effect = baseline_probability - counterfactual_probability
+              (absolute value to capture risk reduction as positive)
+        R_base,m = baseline probability for scenario m
+    
+    Interprets delta_probability (counterfactual - baseline, typically negative)
+    as a risk reduction by taking its absolute value.
+    
+    Returns:
+        Average percentage reduction in risk scores across all scenarios.
+        Range: [0.0, 1.0] where 1.0 = 100% average mitigation
+    """
+    if not scenarios:
+        return 0.0
+    
+    mitigation_ratios: list[float] = []
+    for scenario in scenarios:
+        # Avoid division by zero; skip scenarios with near-zero baseline
+        if scenario.baseline_probability > 0.001:
+            # Use absolute value of delta since it's typically negative (reduction)
+            # This represents the magnitude of risk reduction
+            ratio = abs(scenario.delta_probability) / scenario.baseline_probability
+            # Clamp to [0, 1] to handle edge cases
+            mitigation_ratios.append(max(0.0, min(1.0, ratio)))
+    
+    if not mitigation_ratios:
+        return 0.0
+    
+    # Return the average mitigation ratio across all scenarios
+    efficiency = sum(mitigation_ratios) / len(mitigation_ratios)
+    return round(efficiency, 4)
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
 # RESULT VALIDATOR  (the Guardrail)
 # ═══════════════════════════════════════════════════════════════════════════════
 
@@ -115,6 +160,7 @@ def _print_summary(bundle: CounterfactualBundle) -> None:
     print(f"  Scenarios     : {bundle.total_scenarios}")
     print(f"  Avg Δ P(30d)  : {bundle.avg_delta:+.2%}")
     print(f"  Feasibility   : {bundle.feasibility_dist}")
+    print(f"  η_mitigation  : {bundle.mitigation_efficiency:.2%}  (Macro Counterfactual Mitigation Efficiency)")
     print()
 
     current_risk = None
@@ -240,6 +286,9 @@ def run_layer4(
         sum(sc.delta_probability for sc in all_scenarios) / len(all_scenarios)
         if all_scenarios else 0.0
     )
+    
+    # Calculate Macro Counterfactual Mitigation Efficiency
+    mitigation_efficiency = _calculate_mitigation_efficiency(all_scenarios)
 
     note_parts = [
         f"Supervisor dispatched {len(top_risks)} WorkOrders; "
@@ -263,6 +312,7 @@ def run_layer4(
         total_scenarios    = len(all_scenarios),
         feasibility_dist   = feasibility_dist,
         avg_delta          = round(avg_delta, 4),
+        mitigation_efficiency = mitigation_efficiency,
     )
 
     # Persist

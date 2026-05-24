@@ -828,6 +828,45 @@ elif page == "Counterfactuals":
         st.info("No counterfactual results found. Run Layer 4 first.")
         st.stop()
 
+    # Load bundle to get mitigation efficiency metric
+    cf_bundle = load_counterfactuals(DATA_DIR / "counterfactual_bundle.json")
+    if isinstance(cf_bundle, dict) and "mitigation_efficiency" in cf_bundle:
+        mitigation_eff = cf_bundle.get("mitigation_efficiency", 0)
+        avg_delta = cf_bundle.get("avg_delta", 0)
+        total_scenarios = cf_bundle.get("total_scenarios", 0)
+        
+        # Display key metrics
+        col1, col2, col3 = st.columns(3)
+        with col1:
+            st.markdown(
+                f'<div class="metric-card">'
+                f'<div class="metric-label">η_mitigation (Macro Efficiency)</div>'
+                f'<div class="metric-value" style="color:#34d399;">{mitigation_eff*100:.2f}%</div>'
+                f'<div class="metric-delta">avg % risk reduction</div>'
+                f'</div>',
+                unsafe_allow_html=True,
+            )
+        with col2:
+            st.markdown(
+                f'<div class="metric-card">'
+                f'<div class="metric-label">Avg Delta P(30d)</div>'
+                f'<div class="metric-value" style="color:#60a5fa;">{abs(avg_delta)*100:.2f}%</div>'
+                f'<div class="metric-delta">risk reduction per scenario</div>'
+                f'</div>',
+                unsafe_allow_html=True,
+            )
+        with col3:
+            st.markdown(
+                f'<div class="metric-card">'
+                f'<div class="metric-label">Total Scenarios</div>'
+                f'<div class="metric-value" style="color:#a78bfa;">{total_scenarios}</div>'
+                f'<div class="metric-delta">generated interventions</div>'
+                f'</div>',
+                unsafe_allow_html=True,
+            )
+        
+        st.markdown("---")
+
     # ITE bar chart
     titles  = [r.get("risk_title", r.get("title",""))[:35] for r in cf_results_norm]
     ite_vals= [r.get("ite_mean", 0) for r in cf_results_norm]

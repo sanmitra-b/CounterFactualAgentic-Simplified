@@ -372,6 +372,48 @@ def add_counterfactual_section(elements, styles):
     ))
     elements.append(Spacer(1, 0.1*inch))
     
+    # Extract and display key metrics
+    mitigation_efficiency = cf_bundle.get("mitigation_efficiency", 0)
+    total_scenarios = cf_bundle.get("total_scenarios", 0)
+    avg_delta = cf_bundle.get("avg_delta", 0)
+    total_risks = cf_bundle.get("total_risks", 0)
+    
+    # Create metrics table using Paragraphs to avoid rendering artefacts
+    metrics_rows = [
+        [Paragraph('<b>Metric</b>', styles['SmallText']), Paragraph('<b>Value</b>', styles['SmallText'])],
+        [Paragraph('Macro Counterfactual Mitigation Efficiency (η_mitigation)', styles['CustomBody']), Paragraph(f"{mitigation_efficiency*100:.2f}%", styles['SmallText'])],
+        [Paragraph('Average Risk Reduction per Scenario', styles['CustomBody']), Paragraph(f"{abs(avg_delta)*100:.2f}%", styles['SmallText'])],
+        [Paragraph('Total Scenarios Generated', styles['CustomBody']), Paragraph(str(total_scenarios), styles['SmallText'])],
+        [Paragraph('Total Risks Analyzed', styles['CustomBody']), Paragraph(str(total_risks), styles['SmallText'])],
+    ]
+
+    metrics_table = Table(metrics_rows, colWidths=[4.0*inch, 1.0*inch], hAlign='LEFT')
+    metrics_table.setStyle(TableStyle([
+        ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor("#1e40af")),
+        ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
+        ('BACKGROUND', (0, 1), (0, -1), colors.HexColor("#eff6ff")),
+        ('BACKGROUND', (1, 1), (1, -1), colors.HexColor("#fafafa")),
+        ('ALIGN', (0, 0), (0, -1), 'LEFT'),
+        ('ALIGN', (1, 0), (1, -1), 'RIGHT'),
+        ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),
+        ('FONTSIZE', (0, 0), (-1, -1), 10),
+        ('ROWBACKGROUNDS', (0, 2), (-1, -1), [colors.white, colors.HexColor("#f9fafb")]),
+        ('GRID', (0, 0), (-1, -1), 1, colors.HexColor("#d1d5db")),
+        ('BOTTOMPADDING', (0, 0), (-1, -1), 8),
+        ('TOPPADDING', (0, 0), (-1, -1), 8),
+    ]))
+    elements.append(metrics_table)
+    elements.append(Spacer(1, 0.2*inch))
+    
+    # Interpretation box
+    interpretation_text = f"""
+    <b>Interpretation:</b> The Macro Counterfactual Mitigation Efficiency of <b>{mitigation_efficiency*100:.2f}%</b> 
+    indicates that, on average, the proposed interventions achieve a <b>{mitigation_efficiency*100:.2f}% reduction</b> in risk 
+    probability across all {total_scenarios} simulated scenarios. This is a key measure of global intervention effectiveness.
+    """
+    elements.append(Paragraph(interpretation_text, styles['CustomBody']))
+    elements.append(Spacer(1, 0.15*inch))
+    
     scenarios = cf_bundle.get("scenarios", [])
     
     # Group scenarios by risk rank
@@ -381,6 +423,9 @@ def add_counterfactual_section(elements, styles):
         if rank not in scenarios_by_rank:
             scenarios_by_rank[rank] = []
         scenarios_by_rank[rank].append(scenario)
+    
+    elements.append(Paragraph("Top Recommended Interventions by Risk:", styles['SubsectionHeading']))
+    elements.append(Spacer(1, 0.1*inch))
     
     # Show best scenario per risk rank
     for rank in sorted(scenarios_by_rank.keys())[:3]:  # Top 3 risks
