@@ -5,17 +5,17 @@
       "methods": {
         "newsapi": {
           "enabled": true,
-          "note": "NewsAPI for ai_automation_job_market domain"
+          "note": "NewsAPI for quantum_computing_cryptography_risk domain"
         },
         "gnews": {
           "enabled": false,
           "base_url": "https://gnews.io/api/v4/search",
           "max_articles_per_request": 10,
           "rate_limit_seconds": 1.0,
-          "note": "GNews for ai_automation_job_market domain"
+          "note": "GNews for quantum_computing_cryptography_risk domain"
         },
         "rss": {
-          "enabled": false,
+          "enabled": true,
           "feeds": [
             "https://www.technologyreview.com/feed/",
             "https://www.theverge.com/rss/index.xml",
@@ -24,15 +24,15 @@
             "https://rss.nytimes.com/services/xml/rss/nyt/Technology.xml",
             "https://arxiv.org/rss/cs.AI"
           ],
-          "note": "RSS feeds for ai_automation_job_market domain"
+          "note": "RSS feeds for quantum_computing_cryptography_risk domain"
         }
       },
       "keywords": [
-        "AI automation",
-        "job market",
-        "employment",
-        "future of work",
-        "labor"
+        "quantum computing",
+        "cryptography",
+        "cybersecurity",
+        "encryption",
+        "data security"
       ],
       "max_results_per_source": 50
     },
@@ -42,7 +42,7 @@
         "enabled": true,
         "outputsize": "compact",
         "tickers": [],
-        "note": "Alpha Vantage for ai_automation_job_market domain",
+        "note": "Alpha Vantage for quantum_computing_cryptography_risk domain",
         "rate_limit_seconds": 1.5
       },
       "fred": {
@@ -53,42 +53,24 @@
           "PPIACO",
           "INDPRO"
         ],
-        "note": "FRED indicators for ai_automation_job_market domain"
+        "note": "FRED indicators for quantum_computing_cryptography_risk domain"
       }
     },
     "jobs": {
-      "enabled": true,
+      "enabled": false,
       "adzuna": {
-        "enabled": true,
-        "keywords": [
-          "AI automation",
-          "job market",
-          "employment",
-          "workforce",
-          "labor demand"
-        ],
-        "note": "Adzuna signals for ai_automation_job_market domain"
+        "enabled": false,
+        "keywords": [],
+        "note": "Disabled for this domain"
       },
       "usajobs": {
         "enabled": false,
         "base_url": "https://data.usajobs.gov/api/search",
-        "keywords": [
-          "AI automation",
-          "job market",
-          "employment",
-          "workforce",
-          "labor demand"
-        ],
+        "keywords": [],
         "results_per_query": 25,
-        "note": "USAJOBS signals for ai_automation_job_market domain"
+        "note": "Disabled for this domain"
       },
-      "keywords": [
-        "AI automation",
-        "job market",
-        "employment",
-        "workforce",
-        "labor demand"
-      ]
+      "keywords": []
     },
     "weather": {
       "enabled": true,
@@ -104,7 +86,7 @@
         "base_url": "https://api.openweathermap.org/data/2.5/weather",
         "units": "metric",
         "language": "en",
-        "note": "OpenWeather signals for ai_automation_job_market domain"
+        "note": "OpenWeather signals for quantum_computing_cryptography_risk domain"
       },
       "note": "Disabled for AI job-risk mode"
     },
@@ -123,10 +105,10 @@
           "datascience"
         ],
         "keywords": [
-          "AI automation",
-          "job market",
-          "future of work",
-          "automation impact"
+          "quantum computing",
+          "cryptography",
+          "cybersecurity",
+          "encryption"
         ],
         "max_results_per_query": 25,
         "days_back": 7,
@@ -135,10 +117,10 @@
       "youtube": {
         "enabled": true,
         "keywords": [
-          "AI automation",
-          "job market",
-          "future of work",
-          "automation impact"
+          "quantum computing",
+          "cryptography",
+          "cybersecurity",
+          "encryption"
         ],
         "max_results": 700,
         "videos_per_keyword": 5,
@@ -155,10 +137,10 @@
           "mstdn.social"
         ],
         "keywords": [
-          "AI automation",
-          "job market",
-          "future of work",
-          "automation impact"
+          "quantum computing",
+          "cryptography",
+          "cybersecurity",
+          "encryption"
         ],
         "hashtags": [],
         "max_results_per_instance": 20,
@@ -167,10 +149,10 @@
       "hackernews": {
         "enabled": true,
         "keywords": [
-          "AI automation",
-          "job market",
-          "future of work",
-          "automation impact"
+          "quantum computing",
+          "cryptography",
+          "cybersecurity",
+          "encryption"
         ],
         "max_results": 50,
         "min_comments": 5,
@@ -179,7 +161,7 @@
     }
   },
   "output": {
-    "domain": "ai_automation_job_market",
+    "domain": "quantum_computing_cryptography_risk",
     "formats": [
       "json",
       "csv"
@@ -188,20 +170,20 @@
   },
   "logging": {
     "level": "INFO",
-    "log_file": "ai_automation_job_market_data_collection.log"
+    "log_file": "quantum_computing_cryptography_risk_data_collection.log"
   },
   "domain_profile": {
-    "name": "ai_automation_job_market",
-    "slug": "ai_automation_job_market",
-    "description": "Analyzes the potential risks and impacts of artificial intelligence automation on the job market, including job displacement, skill requirements, and wage changes.",
+    "name": "quantum_computing_cryptography_risk",
+    "slug": "quantum_computing_cryptography_risk",
+    "description": "Examines the potential systemic risks posed by quantum computing to current cryptographic systems and modern infrastructure. Focuses on the threat to data security and the need for quantum-resistant cryptography.",
     "keywords": [
-      "AI automation",
-      "job market risks",
-      "future of work",
-      "employment impact",
-      "workforce automation",
-      "AI and jobs",
-      "labor market disruption"
+      "quantum computing",
+      "cryptography",
+      "cybersecurity",
+      "encryption",
+      "data security",
+      "post-quantum cryptography",
+      "infrastructure risk"
     ],
     "source_usage": {
       "news": {
@@ -209,14 +191,14 @@
         "methods": {
           "newsapi": true,
           "gnews": false,
-          "rss": false
+          "rss": true
         },
         "keywords": [
-          "AI automation",
-          "job market",
-          "employment",
-          "future of work",
-          "labor"
+          "quantum computing",
+          "cryptography",
+          "cybersecurity",
+          "encryption",
+          "data security"
         ]
       },
       "financial": {
@@ -229,18 +211,12 @@
         "indicators": []
       },
       "jobs": {
-        "enabled": true,
+        "enabled": false,
         "methods": {
-          "adzuna": true,
+          "adzuna": false,
           "usajobs": false
         },
-        "keywords": [
-          "AI automation",
-          "job market",
-          "employment",
-          "workforce",
-          "labor demand"
-        ]
+        "keywords": []
       },
       "social": {
         "enabled": true,
@@ -251,10 +227,10 @@
           "hackernews": true
         },
         "keywords": [
-          "AI automation",
-          "job market",
-          "future of work",
-          "automation impact"
+          "quantum computing",
+          "cryptography",
+          "cybersecurity",
+          "encryption"
         ],
         "hashtags": []
       },
@@ -263,13 +239,13 @@
         "methods": {
           "openweather": true
         },
+        "keywords": [],
         "cities": [
           "New York",
           "London",
           "Tokyo",
           "Singapore"
-        ],
-        "keywords": []
+        ]
       }
     }
   }

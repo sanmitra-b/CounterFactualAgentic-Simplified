@@ -382,43 +382,48 @@ def add_counterfactual_section(elements, styles):
             scenarios_by_rank[rank] = []
         scenarios_by_rank[rank].append(scenario)
     
-    # Show best scenario per risk rank
-    for rank in sorted(scenarios_by_rank.keys())[:3]:  # Top 3 risks
+    # Show all generated scenarios grouped by risk rank
+    for rank in sorted(scenarios_by_rank.keys()):
+        # Sort scenarios for the rank by absolute delta (largest impact first)
         scenarios_for_rank = sorted(
             scenarios_by_rank[rank],
             key=lambda x: abs(x.get("delta_probability", 0)),
             reverse=True
         )
-        
-        best_scenario = scenarios_for_rank[0]
-        risk_title = best_scenario.get("risk_title", "Unknown Risk")
-        intervention = best_scenario.get("intervention", "")
-        intervention_type = best_scenario.get("intervention_type", "UNKNOWN")
-        baseline_prob = best_scenario.get("baseline_probability", 0)
-        counterfactual_prob = best_scenario.get("counterfactual_probability", 0)
-        delta_prob = best_scenario.get("delta_probability", 0)
-        feasibility = best_scenario.get("feasibility", "UNKNOWN")
-        cost = best_scenario.get("estimated_cost_usd", "TBD")
-        time_to_impact = best_scenario.get("time_to_impact_days", 0)
-        
+
+        # Use the risk title from the first scenario as the heading
+        risk_title = scenarios_for_rank[0].get("risk_title", "Unknown Risk")
         elements.append(Paragraph(f"<b>Risk #{rank}: {risk_title}</b>", styles['SubsectionHeading']))
-        
-        # Truncate intervention text only if very long
-        intervention_display = intervention[:500] if len(intervention) > 500 else intervention
-        
-        scenario_text = f"""
-        <b>Intervention Type:</b> {intervention_type}<br/>
-        <b>Strategy:</b> {intervention_display}<br/>
-        <b>Baseline Risk Probability:</b> {baseline_prob*100:.0f}%<br/>
-        <b>After Intervention:</b> {counterfactual_prob*100:.0f}% (↓ {abs(delta_prob)*100:.0f}%)<br/>
-        <b>Implementation Feasibility:</b> {feasibility}<br/>
-        <b>Estimated Cost:</b> {cost}<br/>
-        <b>Time to Impact:</b> {time_to_impact} days
-        """
-        elements.append(Paragraph(scenario_text, styles['CustomBody']))
-        elements.append(Spacer(1, 0.15*inch))
-    
-    elements.append(PageBreak())
+
+        # Render every scenario produced for this risk
+        for idx, sc in enumerate(scenarios_for_rank, start=1):
+            scenario_id = sc.get("scenario_id", "?")
+            intervention = sc.get("intervention", "")
+            intervention_type = sc.get("intervention_type", "UNKNOWN")
+            baseline_prob = sc.get("baseline_probability", 0)
+            counterfactual_prob = sc.get("counterfactual_probability", 0)
+            delta_prob = sc.get("delta_probability", 0)
+            feasibility = sc.get("feasibility", "UNKNOWN")
+            cost = sc.get("estimated_cost_usd", "TBD")
+            time_to_impact = sc.get("time_to_impact_days", 0)
+
+            # Truncate intervention text only if very long
+            intervention_display = intervention[:500] if len(intervention) > 500 else intervention
+
+            scenario_text = f"""
+            <b>{idx}. Scenario ID:</b> {scenario_id}<br/>
+            <b>Intervention Type:</b> {intervention_type}<br/>
+            <b>Strategy:</b> {intervention_display}<br/>
+            <b>Baseline Risk Probability:</b> {baseline_prob*100:.0f}%<br/>
+            <b>After Intervention:</b> {counterfactual_prob*100:.0f}% (↓ {abs(delta_prob)*100:.0f}%)<br/>
+            <b>Implementation Feasibility:</b> {feasibility}<br/>
+            <b>Estimated Cost:</b> {cost}<br/>
+            <b>Time to Impact:</b> {time_to_impact} days
+            """
+            elements.append(Paragraph(scenario_text, styles['CustomBody']))
+            elements.append(Spacer(1, 0.15*inch))
+
+        elements.append(PageBreak())
 
 
 def add_solutions_section(elements, styles):
