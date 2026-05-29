@@ -56,7 +56,8 @@ CFASimplified/
 │   ├── librarian_agent.py
 │   └── __init__.py
 ├── layer6/
-│   └── layer6_dashboard.py
+│   ├── layer6_dashboard.py         # Streamlit interactive dashboard
+│   └── layer6_pdf.py               # PDF report generator (easy-to-understand format)
 └── requirements.txt
 ```
 
@@ -64,6 +65,26 @@ CFASimplified/
 
 - Python 3.11+
 - Conda or venv for environment management
+
+### Recommended package versions
+
+For reproducible runs in the `Counterfactual` environment the project was tested with the
+following pinned/compatible versions. Use these if you encounter dependency errors when
+running the pipeline end-to-end:
+
+- `groq==0.10.0`
+- `anyio==3.7.1`
+- `httpx==0.24.1`
+- `httpcore==0.17.3`
+- `h11==0.14.0`
+- `pyyaml>=6.0`
+- `reportlab>=4.0.0`
+
+Install the pinned set by updating `requirements.txt` and running:
+
+```bash
+pip install -r requirements.txt
+```
 
 ## Step 1: Clone the Repository
 
@@ -205,9 +226,13 @@ python layer5_rag/layer5_supervisor.py --input data/counterfactual_bundle.json -
 Expected Layer 5 output:
 - `data/solution_mapping_report.json`
 
-### Layer 6 (Dashboard)
+### Layer 6 (Dashboard & PDF Report)
 
-Run the Streamlit dashboard after Layers 1-5 outputs are available.
+After Layers 1-5 outputs are available, you can generate visualizations using either the Streamlit dashboard or a comprehensive PDF report.
+
+#### Option A: Streamlit Dashboard
+
+Run the interactive web-based dashboard:
 
 ```bash
 streamlit run layer6/layer6_dashboard.py
@@ -221,6 +246,28 @@ Layer 6 reads only pipeline outputs from `data/` (no demo fallback data):
 - `data/solution_mapping_report.json`
 
 If a required file is missing, the relevant page shows an empty-state message.
+
+#### Option B: PDF Report (Recommended for Sharing & Print)
+
+Generate a comprehensive, easy-to-understand PDF report containing all pipeline outputs:
+
+```bash
+# Generate PDF with default output path (data/risk_intelligence_report.pdf)
+python layer6/layer6_pdf.py
+
+# Or specify custom output path
+python layer6/layer6_pdf.py --output reports/custom_report.pdf
+```
+
+**PDF Contents:**
+- **Cover Page**: Domain, keywords, quick facts
+- **Data Collection Summary**: Total records collected, breakdown by source (news, financial, jobs, social, weather, commodities)
+- **Risk Analysis**: Top 5 identified risks with severity, confidence, probability, and recommended actions
+- **Counterfactual Analysis**: What-if scenarios testing interventions to reduce each risk; shows baseline vs. counterfactual probability, feasibility, and estimated cost
+- **Solutions & Mitigations**: Practical, ranked solutions mapped to each risk with implementation steps and KPIs
+- **Executive Summary**: Report overview and next steps
+
+The PDF is designed for **naive users** (non-technical stakeholders) while still showing all required technical details. Perfect for executive briefings, decision support, and archival.
 
 ## End-to-End Data Flow (Simple)
 

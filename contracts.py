@@ -127,6 +127,7 @@ class CounterfactualBundle(BaseModel):
     total_scenarios:     int
     feasibility_dist:    dict[str, int]
     avg_delta:           float
+    mitigation_efficiency: float = Field(..., ge=0.0, le=1.0, description="Macro Counterfactual Mitigation Efficiency (η_mitigation): average % reduction in risk across all scenarios")
     model_config = {"protected_namespaces": ()}
 
 

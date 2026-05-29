@@ -1,127 +1,133 @@
 {
-  "analysed_at": "2026-05-04T06:00:00Z",
-  "domain": "vaccine_cold_chain_risk",
+  "analysed_at": "2026-05-24T04:35:00Z",
+  "domain": "cold_chain_logistics_risk",
   "top_risks": [
     {
       "rank": 1,
-      "category": "Counterfeit Medication",
-      "title": "Fake Mounjaro Injections Seized",
-      "severity": "HIGH",
-      "confidence": 0.85,
-      "probability_next_30d": 0.6,
+      "category": "Market Expansion Risk",
+      "title": "Rapid Cold Chain Monitoring Growth",
+      "severity": "MEDIUM",
+      "confidence": 0.8,
+      "probability_next_30d": 0.7,
       "evidence": [
-        "Rs 70,00,000 worth fake Mounjaro injections seized in Gurgaon",
-        "Police expose illegal weight-loss drug racket in NCR"
+        "Cold Chain Monitoring Market Expands Rapidly as Pharma, Vaccine, and Food Logistics Demand Advanced Monitoring Solutions",
+        "The global Cold Chain Monitoring market was valued at USD 7414 Million"
       ],
       "affected_entities": [
-        "Gurgaon",
-        "NCR"
+        "Pharma",
+        "Vaccine",
+        "Food Logistics"
       ],
       "affected_geo": [
-        "India"
+        "India",
+        "US",
+        "China"
       ],
-      "causal_chain": "Counterfeit medication \u2192 Health risks \u2192 Economic losses",
-      "recommended_action": "Enhance surveillance and enforcement against counterfeit medication"
+      "causal_chain": "Increased demand for advanced monitoring solutions \u2192 Rapid market expansion \u2192 Potential logistical challenges",
+      "recommended_action": "Monitor market trends and adjust logistics strategies accordingly"
     },
     {
       "rank": 2,
-      "category": "Climate Change",
-      "title": "Net-Zero Commitments Abandoned",
-      "severity": "MEDIUM",
-      "confidence": 0.7,
-      "probability_next_30d": 0.4,
-      "evidence": [
-        "Countries and Industries Are Abandoning or Reducing Net-Zero Commitments"
-      ],
-      "affected_entities": [
-        "Heartland Institute"
-      ],
-      "affected_geo": [
-        "Global"
-      ],
-      "causal_chain": "Climate change \u2192 Abandoned commitments \u2192 Increased emissions",
-      "recommended_action": "Encourage renewed commitment to net-zero targets"
-    },
-    {
-      "rank": 3,
-      "category": "Supply Chain Disruption",
-      "title": "7-Eleven Store Closures",
+      "category": "Technological Risk",
+      "title": "AI Safeguards Uncertainty",
       "severity": "LOW",
       "confidence": 0.6,
-      "probability_next_30d": 0.3,
+      "probability_next_30d": 0.4,
       "evidence": [
-        "7-ELEVEN shoppers will soon see new fountain areas that serve custom hot and cold coffee drinks",
-        "The convenience store chain is closing more sites"
+        "Executive Order on AI safeguards was not signed"
       ],
       "affected_entities": [
-        "7-Eleven"
+        "AI Developers",
+        "Logistics Companies"
       ],
       "affected_geo": [
         "US"
       ],
-      "causal_chain": "Store closures \u2192 Supply chain disruption \u2192 Customer inconvenience",
-      "recommended_action": "Monitor supply chain adjustments and customer impact"
+      "causal_chain": "Uncertainty around AI safeguards \u2192 Potential impact on logistics technology \u2192 Limited adoption",
+      "recommended_action": "Stay informed about AI regulatory developments"
+    },
+    {
+      "rank": 3,
+      "category": "Network Risk",
+      "title": "Cold Start Problem",
+      "severity": "LOW",
+      "confidence": 0.5,
+      "probability_next_30d": 0.3,
+      "evidence": [
+        "Solo developer, no audience, no network, no community presence",
+        "Every distribution channel has a cold start problem"
+      ],
+      "affected_entities": [
+        "Solo Developers",
+        "New Logistics Companies"
+      ],
+      "affected_geo": [
+        "Global"
+      ],
+      "causal_chain": "Lack of network and audience \u2192 Cold start problem \u2192 Limited product adoption",
+      "recommended_action": "Develop strategies to build network and audience"
     },
     {
       "rank": 4,
-      "category": "Mental Health",
-      "title": "Mental Health Concerns",
+      "category": "Mental Health Risk",
+      "title": "Depression and Mental Health",
       "severity": "LOW",
-      "confidence": 0.55,
-      "probability_next_30d": 0.25,
+      "confidence": 0.4,
+      "probability_next_30d": 0.2,
       "evidence": [
         "People sometimes become depressed, or develop other serious mental conditions"
       ],
       "affected_entities": [
-        "General public"
+        "Logistics Workers",
+        "General Public"
       ],
       "affected_geo": [
         "Global"
       ],
-      "causal_chain": "Mental health concerns \u2192 Decreased well-being \u2192 Productivity losses",
-      "recommended_action": "Promote mental health awareness and support resources"
+      "causal_chain": "Mental health issues \u2192 Decreased productivity \u2192 Logistical challenges",
+      "recommended_action": "Promote mental health awareness and support"
     },
     {
       "rank": 5,
-      "category": "Product Development",
-      "title": "Cold Start Problem",
+      "category": "Geopolitical Risk",
+      "title": "Global Tensions",
       "severity": "LOW",
-      "confidence": 0.5,
-      "probability_next_30d": 0.2,
+      "confidence": 0.3,
+      "probability_next_30d": 0.1,
       "evidence": [
-        "Solo developer, no audience, no network, no community presence"
+        "Top geo tags include Iran, Democratic Republic of Congo, and Strait of Hormuz"
       ],
       "affected_entities": [
-        "Solo developers"
+        "Global Logistics Companies"
       ],
       "affected_geo": [
-        "Global"
+        "Global Hotspots"
       ],
-      "causal_chain": "Cold start problem \u2192 Limited traction \u2192 Reduced product success",
-      "recommended_action": "Foster community engagement and support for solo developers"
+      "causal_chain": "Global tensions \u2192 Trade disruptions \u2192 Logistical challenges",
+      "recommended_action": "Monitor global events and adjust logistics strategies accordingly"
     }
   ],
   "soft_risks": [
     {
-      "category": "Economic Instability",
-      "title": "Reduced Net-Zero Commitments",
-      "note": "Potential economic instability due to reduced net-zero commitments"
+      "category": "Emerging Technology",
+      "title": "AI Adoption in Logistics",
+      "note": "Potential for AI to improve logistics efficiency, but uncertainty around safeguards"
     },
     {
-      "category": "Health Risks",
-      "title": "Counterfeit Medication",
-      "note": "Ongoing risk of counterfeit medication impacting public health"
+      "category": "Market Trends",
+      "title": "Growing Demand for Cold Chain Monitoring",
+      "note": "Increasing demand for advanced monitoring solutions, but potential logistical challenges"
     },
     {
-      "category": "Technological Challenges",
-      "title": "Cold Start Problem",
-      "note": "Solo developers facing challenges in gaining traction for their products"
+      "category": "Network Effects",
+      "title": "Building Network and Audience",
+      "note": "Importance of building network and audience for logistics companies, especially solo developers"
     }
   ],
-  "data_quality_note": "The intelligence bundle has limited data on stocks, ports, weather, and commodities, which may impact the completeness and reliability of the risk assessment",
+  "data_quality_note": "The intelligence bundle has a moderate level of completeness (75%) and reliability (0.88), but some data sources are sparse or lacking, which may impact the accuracy of the risk assessment",
   "model_used": "llama-3.3-70b-versatile",
-  "layer1_completeness": 0.5,
-  "layer2_enriched_at": "2026-05-04T05:58:22.854007",
+  "layer1_completeness": 0.75,
+  "layer2_enriched_at": "2026-05-24T04:34:38.609807",
   "aggregate_sentiment": "neutral",
-  "avg_reliability": 0.8158
+  "avg_reliability": 0.8834
 }

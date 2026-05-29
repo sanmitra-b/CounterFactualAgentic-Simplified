@@ -5,17 +5,17 @@
       "methods": {
         "newsapi": {
           "enabled": true,
-          "note": "NewsAPI for Vaccine Cold Chain Risk domain"
+          "note": "NewsAPI for cold_chain_logistics_risk domain"
         },
         "gnews": {
-          "enabled": true,
+          "enabled": false,
           "base_url": "https://gnews.io/api/v4/search",
           "max_articles_per_request": 10,
           "rate_limit_seconds": 1.0,
-          "note": "GNews for Vaccine Cold Chain Risk domain"
+          "note": "GNews for cold_chain_logistics_risk domain"
         },
         "rss": {
-          "enabled": true,
+          "enabled": false,
           "feeds": [
             "https://www.technologyreview.com/feed/",
             "https://www.theverge.com/rss/index.xml",
@@ -24,16 +24,15 @@
             "https://rss.nytimes.com/services/xml/rss/nyt/Technology.xml",
             "https://arxiv.org/rss/cs.AI"
           ],
-          "note": "RSS feeds for Vaccine Cold Chain Risk domain"
+          "note": "RSS feeds for cold_chain_logistics_risk domain"
         }
       },
       "keywords": [
         "cold chain",
-        "vaccine transport",
+        "vaccine",
+        "transport",
         "logistics",
-        "pharmaceuticals",
-        "supply chain disruption",
-        "temperature control"
+        "disruption"
       ],
       "max_results_per_source": 50
     },
@@ -43,17 +42,18 @@
         "enabled": true,
         "outputsize": "compact",
         "tickers": [],
-        "note": "Alpha Vantage for Vaccine Cold Chain Risk domain",
+        "note": "Alpha Vantage for cold_chain_logistics_risk domain",
         "rate_limit_seconds": 1.5
       },
       "fred": {
         "enabled": true,
         "indicators": [
+          "CPIAUCSL",
+          "UNRATE",
           "PPIACO",
-          "INDPRO",
-          "WPU0561"
+          "INDPRO"
         ],
-        "note": "FRED indicators for Vaccine Cold Chain Risk domain"
+        "note": "FRED indicators for cold_chain_logistics_risk domain"
       }
     },
     "jobs": {
@@ -76,11 +76,8 @@
       "enabled": true,
       "keywords": [
         "temperature",
-        "extreme weather",
-        "cold wave",
-        "heat wave",
-        "storm",
-        "logistics disruption"
+        "climate",
+        "extreme weather"
       ],
       "cities": [],
       "openweather": {
@@ -88,7 +85,7 @@
         "base_url": "https://api.openweathermap.org/data/2.5/weather",
         "units": "metric",
         "language": "en",
-        "note": "OpenWeather signals for Vaccine Cold Chain Risk domain"
+        "note": "OpenWeather signals for cold_chain_logistics_risk domain"
       },
       "note": "Disabled for AI job-risk mode"
     },
@@ -109,12 +106,11 @@
         "keywords": [
           "cold chain",
           "vaccine transport",
-          "temperature control",
           "logistics risk",
+          "temperature control",
           "supply chain",
-          "pharmaceuticals",
-          "storage",
-          "efficacy"
+          "refrigeration failure",
+          "transportation security"
         ],
         "max_results_per_query": 25,
         "days_back": 7,
@@ -125,12 +121,11 @@
         "keywords": [
           "cold chain",
           "vaccine transport",
-          "temperature control",
           "logistics risk",
+          "temperature control",
           "supply chain",
-          "pharmaceuticals",
-          "storage",
-          "efficacy"
+          "refrigeration failure",
+          "transportation security"
         ],
         "max_results": 700,
         "videos_per_keyword": 5,
@@ -149,12 +144,11 @@
         "keywords": [
           "cold chain",
           "vaccine transport",
-          "temperature control",
           "logistics risk",
+          "temperature control",
           "supply chain",
-          "pharmaceuticals",
-          "storage",
-          "efficacy"
+          "refrigeration failure",
+          "transportation security"
         ],
         "hashtags": [],
         "max_results_per_instance": 20,
@@ -165,12 +159,11 @@
         "keywords": [
           "cold chain",
           "vaccine transport",
-          "temperature control",
           "logistics risk",
+          "temperature control",
           "supply chain",
-          "pharmaceuticals",
-          "storage",
-          "efficacy"
+          "refrigeration failure",
+          "transportation security"
         ],
         "max_results": 50,
         "min_comments": 5,
@@ -179,7 +172,7 @@
     }
   },
   "output": {
-    "domain": "vaccine_cold_chain_risk",
+    "domain": "cold_chain_logistics_risk",
     "formats": [
       "json",
       "csv"
@@ -188,37 +181,35 @@
   },
   "logging": {
     "level": "INFO",
-    "log_file": "vaccine_cold_chain_risk_data_collection.log"
+    "log_file": "cold_chain_logistics_risk_data_collection.log"
   },
   "domain_profile": {
-    "name": "Vaccine Cold Chain Risk",
-    "slug": "vaccine_cold_chain_risk",
-    "description": "Analyzes risks associated with maintaining required temperature ranges for vaccines during storage and transport. Focuses on ensuring product efficacy and safety through robust cold chain logistics.",
+    "name": "cold_chain_logistics_risk",
+    "slug": "cold_chain_logistics_risk",
+    "description": "Analyzes the risks associated with maintaining a specific temperature range for vaccines during transportation. This includes potential disruptions due to equipment failure, power outages, or environmental factors affecting the cold chain integrity.",
     "keywords": [
       "cold chain",
       "vaccine transport",
-      "temperature control",
       "logistics risk",
+      "temperature control",
       "supply chain",
-      "pharmaceuticals",
-      "storage",
-      "efficacy"
+      "refrigeration failure",
+      "transportation security"
     ],
     "source_usage": {
       "news": {
         "enabled": true,
         "methods": {
           "newsapi": true,
-          "gnews": true,
-          "rss": true
+          "gnews": false,
+          "rss": false
         },
         "keywords": [
           "cold chain",
-          "vaccine transport",
+          "vaccine",
+          "transport",
           "logistics",
-          "pharmaceuticals",
-          "supply chain disruption",
-          "temperature control"
+          "disruption"
         ]
       },
       "financial": {
@@ -228,34 +219,33 @@
           "fred": true
         },
         "tickers": [],
-        "indicators": [
-          "PPIACO",
-          "INDPRO",
-          "WPU0561"
-        ]
+        "indicators": []
       },
       "jobs": {
-        "enabled": false
+        "enabled": false,
+        "methods": {
+          "adzuna": false,
+          "usajobs": false
+        }
       },
       "social": {
         "enabled": true,
-        "keywords": [
-          "cold chain",
-          "vaccine transport",
-          "temperature control",
-          "logistics risk",
-          "supply chain",
-          "pharmaceuticals",
-          "storage",
-          "efficacy"
-        ],
-        "hashtags": [],
         "methods": {
           "pushshift": false,
           "youtube": true,
           "mastodon": true,
           "hackernews": true
-        }
+        },
+        "hashtags": [],
+        "keywords": [
+          "cold chain",
+          "vaccine transport",
+          "logistics risk",
+          "temperature control",
+          "supply chain",
+          "refrigeration failure",
+          "transportation security"
+        ]
       },
       "weather": {
         "enabled": true,
@@ -264,13 +254,10 @@
         },
         "keywords": [
           "temperature",
-          "extreme weather",
-          "cold wave",
-          "heat wave",
-          "storm",
-          "logistics disruption"
+          "climate",
+          "extreme weather"
         ],
-        "locations": []
+        "cities": []
       }
     }
   }

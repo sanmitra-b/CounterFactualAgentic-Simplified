@@ -16,7 +16,7 @@ torch>=2.1.0
 transformers>=4.40.0
 
 # Layer 3 LLM + schema validation
-groq>=0.9.0
+groq==0.10.0
 pydantic>=2.7.0
 regex>=2024.9.11,<2025.0.0
 
@@ -24,6 +24,17 @@ regex>=2024.9.11,<2025.0.0
 networkx>=3.2.0
 dowhy>=0.11.0
 cloudpickle>=3.0.0
+
+# Layer 6 PDF generation
+reportlab>=4.0.0
+
+# Compatibility pins (recommended for Counterfactual environment)
+# These versions were validated together during development and pipeline runs
+anyio==3.7.1
+httpx==0.24.1
+httpcore==0.17.3
+h11==0.14.0
+pyyaml>=6.0
 
 # Optional development tools
 pytest>=7.0.0
