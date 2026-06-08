@@ -1,134 +1,133 @@
 {
-  "analysed_at": "2026-05-29T09:43:48.756175Z",
-  "domain": "quantum_computing_cryptography_risk",
+  "analysed_at": "2026-05-29T17:20:00Z",
+  "domain": "cold_chain_logistics",
   "top_risks": [
     {
       "rank": 1,
-      "category": "Quantum Cryptography Vulnerability",
-      "title": "Post-Quantum Key Exchange Risks",
+      "category": "Supply Chain Disruption",
+      "title": "Cold Chain Monitoring Failures",
       "severity": "HIGH",
       "confidence": 0.8,
       "probability_next_30d": 0.6,
       "evidence": [
-        "Red Hat Enterprise Linux post-quantum key exchange algorithms",
-        "Importance of randomness in encryption"
+        "Cold Chain Monitoring Market Expands Rapidly",
+        "Pharma, Vaccine, and Food Logistics Demand Advanced Monitoring Solutions"
       ],
       "affected_entities": [
-        "Red Hat",
-        "RHEL Users"
+        "Pharmaceutical Companies",
+        "Food Logistics Providers"
       ],
       "affected_geo": [
+        "India",
         "US"
       ],
-      "causal_chain": "Quantum computing advancements \u2192 Increased risk of classical encryption being cracked \u2192 Need for post-quantum cryptography",
-      "recommended_action": "Implement post-quantum key exchange algorithms"
+      "causal_chain": "Inadequate cold chain monitoring \u2192 Supply chain disruptions \u2192 Loss of perishable goods",
+      "recommended_action": "Implement advanced cold chain monitoring solutions"
     },
     {
       "rank": 2,
-      "category": "Quantum Computing Misinformation",
-      "title": "Misunderstanding Quantum Computing",
+      "category": "Infrastructure Limitations",
+      "title": "Inadequate Cold Storage Capacity",
       "severity": "MEDIUM",
       "confidence": 0.7,
       "probability_next_30d": 0.5,
       "evidence": [
-        "Negative social media posts about quantum computing explanations",
-        "Lack of understanding of quantum computing principles"
+        "Solar Cold Rooms for Avocados to Bolster Kenya\u2019s Export Earnings"
       ],
       "affected_entities": [
-        "General Public",
-        "Quantum Computing Enthusiasts"
+        "Produce Exporters",
+        "Cold Storage Providers"
       ],
       "affected_geo": [
-        "Global"
+        "Kenya",
+        "Africa"
       ],
-      "causal_chain": "Lack of understanding \u2192 Misinformation \u2192 Delayed adoption of quantum computing",
-      "recommended_action": "Improve quantum computing education and awareness"
+      "causal_chain": "Inadequate cold storage capacity \u2192 Reduced export earnings \u2192 Economic losses",
+      "recommended_action": "Invest in solar-powered cold storage solutions"
     },
     {
       "rank": 3,
-      "category": "Cryptography Security",
-      "title": "Randomness in Encryption",
+      "category": "Technological Limitations",
+      "title": "Inefficient Cold Chain Technologies",
       "severity": "MEDIUM",
       "confidence": 0.6,
       "probability_next_30d": 0.4,
       "evidence": [
-        "Importance of randomness in encryption",
-        "Quantum computing's potential to generate perfect randomness"
+        "Condensing gas boiler performance issues"
       ],
       "affected_entities": [
-        "Encryption Users",
-        "Security Experts"
+        "Cold Chain Technology Providers",
+        "Logistics Companies"
       ],
       "affected_geo": [
-        "Global"
+        "US",
+        "Europe"
       ],
-      "causal_chain": "Quantum computing \u2192 Perfect randomness \u2192 Improved encryption security",
-      "recommended_action": "Explore quantum computing-based randomness generation for encryption"
+      "causal_chain": "Inefficient cold chain technologies \u2192 Increased energy consumption \u2192 Higher costs",
+      "recommended_action": "Develop and adopt more efficient cold chain technologies"
     },
     {
       "rank": 4,
-      "category": "Quantum Computing Adoption",
-      "title": "Slow Adoption of Quantum Computing",
+      "category": "Regulatory Challenges",
+      "title": "Lack of Standardization in Cold Chain Regulations",
       "severity": "LOW",
       "confidence": 0.5,
       "probability_next_30d": 0.3,
       "evidence": [
-        "Limited social media posts about quantum computing",
-        "Lack of mainstream quantum computing applications"
+        "No explicit regulatory mentions in the intelligence bundle"
       ],
       "affected_entities": [
-        "Quantum Computing Startups",
-        "Research Institutions"
+        "Regulatory Bodies",
+        "Cold Chain Operators"
       ],
       "affected_geo": [
         "Global"
       ],
-      "causal_chain": "Lack of awareness \u2192 Slow adoption \u2192 Delayed innovation",
-      "recommended_action": "Increase quantum computing awareness and education"
+      "causal_chain": "Lack of standardization \u2192 Confusion and non-compliance \u2192 Regulatory issues",
+      "recommended_action": "Establish and promote standardized cold chain regulations"
     },
     {
       "rank": 5,
-      "category": "Quantum Computing Research",
-      "title": "Limited Quantum Computing Research",
+      "category": "Environmental Concerns",
+      "title": "Cold Chain's Environmental Impact",
       "severity": "LOW",
       "confidence": 0.4,
       "probability_next_30d": 0.2,
       "evidence": [
-        "Limited research papers on quantum computing",
-        "Few social media posts about quantum computing research"
+        "No explicit environmental concerns mentioned in the intelligence bundle"
       ],
       "affected_entities": [
-        "Research Institutions",
-        "Quantum Computing Experts"
+        "Cold Chain Operators",
+        "Environmental Organizations"
       ],
       "affected_geo": [
         "Global"
       ],
-      "causal_chain": "Limited research \u2192 Slow innovation \u2192 Delayed breakthroughs",
-      "recommended_action": "Increase funding and support for quantum computing research"
+      "causal_chain": "Cold chain operations \u2192 Environmental degradation \u2192 Reputation damage",
+      "recommended_action": "Implement sustainable and environmentally friendly cold chain practices"
     }
   ],
   "soft_risks": [
     {
-      "category": "Quantum Computing Talent Acquisition",
-      "title": "Attracting Quantum Computing Talent",
-      "note": "There is a need to attract and retain talent in the field of quantum computing to drive innovation and adoption."
+      "category": "Emerging Technologies",
+      "title": "Residential Heat Pump Systems",
+      "note": "Electric Air's residential heat pump system may have implications for cold chain logistics"
     },
     {
-      "category": "Quantum Computing Standardization",
-      "title": "Standardizing Quantum Computing",
-      "note": "Standardization of quantum computing protocols and algorithms is necessary for widespread adoption and interoperability."
+      "category": "Alternative Energy",
+      "title": "Solar-Powered Cold Storage",
+      "note": "Solar-powered cold storage solutions like SokoFresh's may become more prevalent"
     },
     {
-      "category": "Quantum Computing Ethics",
-      "title": "Ethical Considerations in Quantum Computing",
-      "note": "As quantum computing advances, there is a need to consider the ethical implications of its applications and ensure responsible development and use."
+      "category": "Market Trends",
+      "title": "Growing Demand for Advanced Monitoring Solutions",
+      "note": "The cold chain monitoring market is expanding rapidly, driven by demand from pharma, vaccine, and food logistics"
     }
   ],
-  "data_quality_note": "The intelligence bundle has a moderate level of completeness (75%) and reliability (0.76), but the data is somewhat sparse, particularly in the stocks, ports, weather, and commodities sections.",
+  "data_quality_note": "The intelligence bundle has a moderate level of completeness (75%) and reliability (0.80), but some data points are missing or have low reliability scores, which may impact the accuracy of the risk assessment",
   "model_used": "llama-3.3-70b-versatile",
   "layer1_completeness": 0.75,
-  "layer2_enriched_at": "2026-05-29T09:43:48.756175",
+  "layer2_enriched_at": "2026-05-29T17:19:40.409143",
   "aggregate_sentiment": "neutral",
-  "avg_reliability": 0.7626
+  "avg_reliability": 0.8048
 }
