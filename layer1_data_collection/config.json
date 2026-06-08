@@ -5,17 +5,17 @@
       "methods": {
         "newsapi": {
           "enabled": true,
-          "note": "NewsAPI for quantum_computing_cryptography_risk domain"
+          "note": "NewsAPI for cold_chain_logistics domain"
         },
         "gnews": {
           "enabled": false,
           "base_url": "https://gnews.io/api/v4/search",
           "max_articles_per_request": 10,
           "rate_limit_seconds": 1.0,
-          "note": "GNews for quantum_computing_cryptography_risk domain"
+          "note": "GNews for cold_chain_logistics domain"
         },
         "rss": {
-          "enabled": true,
+          "enabled": false,
           "feeds": [
             "https://www.technologyreview.com/feed/",
             "https://www.theverge.com/rss/index.xml",
@@ -24,15 +24,13 @@
             "https://rss.nytimes.com/services/xml/rss/nyt/Technology.xml",
             "https://arxiv.org/rss/cs.AI"
           ],
-          "note": "RSS feeds for quantum_computing_cryptography_risk domain"
+          "note": "RSS feeds for cold_chain_logistics domain"
         }
       },
       "keywords": [
-        "quantum computing",
-        "cryptography",
-        "cybersecurity",
-        "encryption",
-        "data security"
+        "cold chain",
+        "vaccine logistics",
+        "transportation risk"
       ],
       "max_results_per_source": 50
     },
@@ -42,7 +40,7 @@
         "enabled": true,
         "outputsize": "compact",
         "tickers": [],
-        "note": "Alpha Vantage for quantum_computing_cryptography_risk domain",
+        "note": "Alpha Vantage for cold_chain_logistics domain",
         "rate_limit_seconds": 1.5
       },
       "fred": {
@@ -53,7 +51,7 @@
           "PPIACO",
           "INDPRO"
         ],
-        "note": "FRED indicators for quantum_computing_cryptography_risk domain"
+        "note": "FRED indicators for cold_chain_logistics domain"
       }
     },
     "jobs": {
@@ -74,19 +72,18 @@
     },
     "weather": {
       "enabled": true,
-      "keywords": [],
-      "cities": [
-        "New York",
-        "London",
-        "Tokyo",
-        "Singapore"
+      "keywords": [
+        "temperature",
+        "climate",
+        "weather events"
       ],
+      "cities": [],
       "openweather": {
         "enabled": true,
         "base_url": "https://api.openweathermap.org/data/2.5/weather",
         "units": "metric",
         "language": "en",
-        "note": "OpenWeather signals for quantum_computing_cryptography_risk domain"
+        "note": "OpenWeather signals for cold_chain_logistics domain"
       },
       "note": "Disabled for AI job-risk mode"
     },
@@ -105,10 +102,13 @@
           "datascience"
         ],
         "keywords": [
-          "quantum computing",
-          "cryptography",
-          "cybersecurity",
-          "encryption"
+          "cold chain risk",
+          "vaccine transport",
+          "temperature control",
+          "logistics failure",
+          "supply chain disruption",
+          "refrigerated transport",
+          "vaccine integrity"
         ],
         "max_results_per_query": 25,
         "days_back": 7,
@@ -117,10 +117,13 @@
       "youtube": {
         "enabled": true,
         "keywords": [
-          "quantum computing",
-          "cryptography",
-          "cybersecurity",
-          "encryption"
+          "cold chain risk",
+          "vaccine transport",
+          "temperature control",
+          "logistics failure",
+          "supply chain disruption",
+          "refrigerated transport",
+          "vaccine integrity"
         ],
         "max_results": 700,
         "videos_per_keyword": 5,
@@ -137,10 +140,13 @@
           "mstdn.social"
         ],
         "keywords": [
-          "quantum computing",
-          "cryptography",
-          "cybersecurity",
-          "encryption"
+          "cold chain risk",
+          "vaccine transport",
+          "temperature control",
+          "logistics failure",
+          "supply chain disruption",
+          "refrigerated transport",
+          "vaccine integrity"
         ],
         "hashtags": [],
         "max_results_per_instance": 20,
@@ -149,10 +155,13 @@
       "hackernews": {
         "enabled": true,
         "keywords": [
-          "quantum computing",
-          "cryptography",
-          "cybersecurity",
-          "encryption"
+          "cold chain risk",
+          "vaccine transport",
+          "temperature control",
+          "logistics failure",
+          "supply chain disruption",
+          "refrigerated transport",
+          "vaccine integrity"
         ],
         "max_results": 50,
         "min_comments": 5,
@@ -161,7 +170,7 @@
     }
   },
   "output": {
-    "domain": "quantum_computing_cryptography_risk",
+    "domain": "cold_chain_logistics",
     "formats": [
       "json",
       "csv"
@@ -170,20 +179,20 @@
   },
   "logging": {
     "level": "INFO",
-    "log_file": "quantum_computing_cryptography_risk_data_collection.log"
+    "log_file": "cold_chain_logistics_data_collection.log"
   },
   "domain_profile": {
-    "name": "quantum_computing_cryptography_risk",
-    "slug": "quantum_computing_cryptography_risk",
-    "description": "Examines the potential systemic risks posed by quantum computing to current cryptographic systems and modern infrastructure. Focuses on the threat to data security and the need for quantum-resistant cryptography.",
+    "name": "cold_chain_logistics",
+    "slug": "cold_chain_logistics",
+    "description": "Assesses the risks associated with maintaining a specific temperature range for vaccines during transportation. This involves evaluating potential disruptions and their impact on vaccine efficacy and safety.",
     "keywords": [
-      "quantum computing",
-      "cryptography",
-      "cybersecurity",
-      "encryption",
-      "data security",
-      "post-quantum cryptography",
-      "infrastructure risk"
+      "cold chain risk",
+      "vaccine transport",
+      "temperature control",
+      "logistics failure",
+      "supply chain disruption",
+      "refrigerated transport",
+      "vaccine integrity"
     ],
     "source_usage": {
       "news": {
@@ -191,14 +200,12 @@
         "methods": {
           "newsapi": true,
           "gnews": false,
-          "rss": true
+          "rss": false
         },
         "keywords": [
-          "quantum computing",
-          "cryptography",
-          "cybersecurity",
-          "encryption",
-          "data security"
+          "cold chain",
+          "vaccine logistics",
+          "transportation risk"
         ]
       },
       "financial": {
@@ -215,8 +222,7 @@
         "methods": {
           "adzuna": false,
           "usajobs": false
-        },
-        "keywords": []
+        }
       },
       "social": {
         "enabled": true,
@@ -226,26 +232,28 @@
           "mastodon": true,
           "hackernews": true
         },
+        "hashtags": [],
         "keywords": [
-          "quantum computing",
-          "cryptography",
-          "cybersecurity",
-          "encryption"
-        ],
-        "hashtags": []
+          "cold chain risk",
+          "vaccine transport",
+          "temperature control",
+          "logistics failure",
+          "supply chain disruption",
+          "refrigerated transport",
+          "vaccine integrity"
+        ]
       },
       "weather": {
         "enabled": true,
         "methods": {
           "openweather": true
         },
-        "keywords": [],
-        "cities": [
-          "New York",
-          "London",
-          "Tokyo",
-          "Singapore"
-        ]
+        "keywords": [
+          "temperature",
+          "climate",
+          "weather events"
+        ],
+        "cities": []
       }
     }
   }
