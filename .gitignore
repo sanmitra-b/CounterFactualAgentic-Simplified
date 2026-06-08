@@ -17,3 +17,6 @@ data/numpy_index.pkl
 
 # Cache
 .cache/
+
+#Docs
+docs/
